@@ -29,9 +29,9 @@ using System.Runtime.CompilerServices;
 [assembly: AssemblyTitle("Allberg WinShooter (GUI Tester)")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("Allberg Konsult")]
+[assembly: AssemblyCompany("Allberg Konsult AB")]
 [assembly: AssemblyProduct("WinShooter")]
-[assembly: AssemblyCopyright("Allberg Konsult")]
+[assembly: AssemblyCopyright("Allberg Konsult AB")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]		
 

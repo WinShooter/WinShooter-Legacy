@@ -32,9 +32,9 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyTitle("AutoUpdaterGui")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("Allberg Konsult")]
+[assembly: AssemblyCompany("Allberg Konsult AB")]
 [assembly: AssemblyProduct("AutoUpdater")]
-[assembly: AssemblyCopyright("Allberg Konsult")]
+[assembly: AssemblyCopyright("Allberg Konsult AB")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]		
 
