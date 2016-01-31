@@ -1255,7 +1255,7 @@ namespace Allberg.Shooter.Windows
 			// menuHelpInternetAllberg
 			// 
 			this.menuHelpInternetAllberg.Index = 1;
-			this.menuHelpInternetAllberg.Text = "Allberg Konsult";
+			this.menuHelpInternetAllberg.Text = "Allberg Konsult AB";
 			this.menuHelpInternetAllberg.Click += new System.EventHandler(this.menuHelpInternetAllberg_Click);
 			// 
 			// menuItem3
