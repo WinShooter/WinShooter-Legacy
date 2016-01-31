@@ -4,3 +4,4 @@ backup
 *.suo
 packages
 *.user
+stylecop.cache
