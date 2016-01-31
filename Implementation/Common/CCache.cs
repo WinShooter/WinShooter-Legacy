@@ -40,9 +40,10 @@ namespace Allberg.Shooter.Common
 			//myInterface = callerInterface;
 			// Init cache from embedded file
 			_startup = new DSStartupResources();
-			_startup.ReadXml(
+			/* TODO: Enable reading file.
+             * _startup.ReadXml(
 				CEmbeddedResources.GetEmbeddedXmlFile(
-					"Allberg.Shooter.Common.DSStartupResources.xml"));
+					"Allberg.Shooter.Common.DSStartupResources.xml"));*/
 
 			// init cache from local file
 			_localCacheFilename = CreateLocalFilename();
