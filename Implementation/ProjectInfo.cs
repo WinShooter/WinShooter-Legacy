@@ -19,7 +19,6 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 #endregion
 // $Id: ProjectInfo.cs 113 2009-05-11 03:55:57Z smuda $
 using System.Reflection;
-using System.Runtime.CompilerServices;
 
 //
 // Version information for an assembly consists of the following four values:
@@ -29,5 +28,5 @@ using System.Runtime.CompilerServices;
 //      Build Number
 //      Revision
 //
-[assembly: AssemblyVersion("1.6.8")]
+[assembly: AssemblyVersion("2.0.0")]
 
