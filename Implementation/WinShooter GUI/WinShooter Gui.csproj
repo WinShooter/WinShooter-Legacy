@@ -1,0 +1,559 @@
+﻿<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="3.5">
+  <PropertyGroup>
+    <ProjectType>Local</ProjectType>
+    <ProductVersion>9.0.21022</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{DCBBBE84-6554-45D2-A370-B60AC43BC937}</ProjectGuid>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ApplicationIcon>App.ico</ApplicationIcon>
+    <AssemblyKeyContainerName>
+    </AssemblyKeyContainerName>
+    <AssemblyName>WinShooter</AssemblyName>
+    <AssemblyOriginatorKeyFile>
+    </AssemblyOriginatorKeyFile>
+    <DefaultClientScript>JScript</DefaultClientScript>
+    <DefaultHTMLPageLayout>Flow</DefaultHTMLPageLayout>
+    <DefaultTargetSchema>IE50</DefaultTargetSchema>
+    <DelaySign>false</DelaySign>
+    <OutputType>WinExe</OutputType>
+    <RootNamespace>Allberg.Shooter.Windows</RootNamespace>
+    <RunPostBuildEvent>OnBuildSuccess</RunPostBuildEvent>
+    <StartupObject>Allberg.Shooter.Windows.Program</StartupObject>
+    <FileUpgradeFlags>
+    </FileUpgradeFlags>
+    <UpgradeBackupLocation>
+    </UpgradeBackupLocation>
+    <TargetZone>LocalIntranet</TargetZone>
+    <GenerateManifests>false</GenerateManifests>
+    <OldToolsVersion>2.0</OldToolsVersion>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <OutputPath>bin\Debug\</OutputPath>
+    <AllowUnsafeBlocks>false</AllowUnsafeBlocks>
+    <BaseAddress>285212672</BaseAddress>
+    <CheckForOverflowUnderflow>false</CheckForOverflowUnderflow>
+    <ConfigurationOverrideFile>
+    </ConfigurationOverrideFile>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <DocumentationFile>
+    </DocumentationFile>
+    <DebugSymbols>true</DebugSymbols>
+    <FileAlignment>4096</FileAlignment>
+    <NoStdLib>false</NoStdLib>
+    <NoWarn>
+    </NoWarn>
+    <Optimize>false</Optimize>
+    <RegisterForComInterop>false</RegisterForComInterop>
+    <RemoveIntegerChecks>false</RemoveIntegerChecks>
+    <TreatWarningsAsErrors>false</TreatWarningsAsErrors>
+    <WarningLevel>4</WarningLevel>
+    <DebugType>full</DebugType>
+    <ErrorReport>prompt</ErrorReport>
+    <RunCodeAnalysis>false</RunCodeAnalysis>
+    <PlatformTarget>x86</PlatformTarget>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <OutputPath>bin\Release\</OutputPath>
+    <AllowUnsafeBlocks>false</AllowUnsafeBlocks>
+    <BaseAddress>285212672</BaseAddress>
+    <CheckForOverflowUnderflow>false</CheckForOverflowUnderflow>
+    <ConfigurationOverrideFile>
+    </ConfigurationOverrideFile>
+    <DefineConstants>TRACE</DefineConstants>
+    <DocumentationFile>
+    </DocumentationFile>
+    <DebugSymbols>false</DebugSymbols>
+    <FileAlignment>4096</FileAlignment>
+    <NoStdLib>false</NoStdLib>
+    <NoWarn>
+    </NoWarn>
+    <Optimize>true</Optimize>
+    <RegisterForComInterop>false</RegisterForComInterop>
+    <RemoveIntegerChecks>false</RemoveIntegerChecks>
+    <TreatWarningsAsErrors>false</TreatWarningsAsErrors>
+    <WarningLevel>4</WarningLevel>
+    <DebugType>none</DebugType>
+    <ErrorReport>prompt</ErrorReport>
+    <PlatformTarget>x86</PlatformTarget>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="ICSharpCode.SharpZipLib, Version=0.84.0.0, Culture=neutral, PublicKeyToken=1b03e6acf1164f73">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\Lib\ICSharpCode.SharpZipLib.dll</HintPath>
+    </Reference>
+    <Reference Include="System">
+      <Name>System</Name>
+    </Reference>
+    <Reference Include="System.Configuration.Install">
+      <Name>System.Configuration.Install</Name>
+    </Reference>
+    <Reference Include="System.Data">
+      <Name>System.Data</Name>
+    </Reference>
+    <Reference Include="System.Design">
+      <Name>System.Design</Name>
+    </Reference>
+    <Reference Include="System.Drawing">
+      <Name>System.Drawing</Name>
+    </Reference>
+    <Reference Include="System.EnterpriseServices" />
+    <Reference Include="System.Management">
+      <Name>System.Management</Name>
+    </Reference>
+    <Reference Include="System.Web.Services" />
+    <Reference Include="System.Windows.Forms">
+      <Name>System.Windows.Forms</Name>
+    </Reference>
+    <Reference Include="System.Xml">
+      <Name>System.XML</Name>
+    </Reference>
+    <Reference Include="UnhandledExceptionSender, Version=1.1.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\Lib\UnhandledExceptionSender\UnhandledExceptionSender.dll</HintPath>
+    </Reference>
+    <ProjectReference Include="..\AutoUpdater.UpdaterLib\AutoUpdater.UpdaterLib.csproj">
+      <Project>{FACDB98B-B3E9-4EDA-97AB-59F9F98E4EA7}</Project>
+      <Name>AutoUpdater.UpdaterLib</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Common\WinShooter Common.csproj">
+      <Name>WinShooter Common</Name>
+      <Project>{572554B0-94E2-4EB3-B0C1-A34E3A4D0025}</Project>
+      <Package>{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</Package>
+    </ProjectReference>
+    <ProjectReference Include="..\Shooter.Windows.Forms\Shooter.Windows.Forms.csproj">
+      <Project>{DAFBBCF5-D787-441E-B519-8BD24FD64DBE}</Project>
+      <Name>Shooter.Windows.Forms</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\WinShooter Server Remoting\WinShooter Server Remoting.csproj">
+      <Name>WinShooter Server Remoting</Name>
+      <Project>{AF7536C4-FBFA-4D77-BFCA-85CC9E2655A4}</Project>
+      <Package>{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</Package>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="App.ico" />
+    <Content Include="AppUnInstall.ico" />
+    <Content Include="BAbout.bmp" />
+    <Content Include="CirkelRed.bmp" />
+    <Content Include="CountryDataset.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>CountryDataset.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="DatasetCompetitors.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>DatasetCompetitors.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="DatasetPatrol.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>DatasetPatrol.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="DatasetPatrols.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>DatasetPatrols.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="DatasetResults.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>DatasetResults.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="DatasetTeams.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>DatasetTeams.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="HelpFiles\FClubs.htm" />
+    <Content Include="HelpFiles\FCompetition.htm" />
+    <Content Include="HelpFiles\FImport.htm" />
+    <Content Include="HelpFiles\FMain.htm" />
+    <Content Include="HelpFiles\FPatrol.htm" />
+    <Content Include="HelpFiles\FPatrols.htm" />
+    <Content Include="HelpFiles\FResults.htm" />
+    <Content Include="HelpFiles\FResultsView.htm" />
+    <Content Include="HelpFiles\FStations.htm" />
+    <Content Include="HelpFiles\FWeapons.htm" />
+    <Content Include="Html\FAQ.htm" />
+    <Content Include="Html\minus.gif" />
+    <Content Include="Html\plus.gif" />
+    <Content Include="Html\Readme.htm" />
+    <Content Include="Html\Standard.css" />
+    <Content Include="Html\top.png" />
+    <Content Include="IEicon.ico" />
+    <Content Include="InstallationBg.bmp" />
+    <Content Include="Licensvillkor.rtf" />
+    <Content Include="Manual.ico" />
+    <None Include="Web References\UpdateCache\Reference.map">
+      <Generator>MSDiscoCodeGenerator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+    <None Include="Web References\UpdateCache\UpdateCache.disco" />
+    <None Include="app.config" />
+    <None Include="DatasetResults.xsc">
+      <DependentUpon>DatasetResults.xsd</DependentUpon>
+    </None>
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="Web References\ErrorReporter\Reference.map">
+      <Generator>MSDiscoCodeGenerator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+    <None Include="Web References\ErrorReporter\Service.disco" />
+    <Compile Include="AssemblyInfo.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="CPrintPrinterTest.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="CPrintResultLabels.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="CountryDataset.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>CountryDataset.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="CPrintFollowup.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="CPrintMirrorLabels.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="CPrintPatrollistByClub.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="CPrintPatrollistByPatrol.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="CPrintPatrollistByUser.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="CPrintResultlist.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="CPrintResultlistByPatrol.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="DatasetCompetitors.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DatasetCompetitors.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="DatasetPatrol.cs">
+      <SubType>code</SubType>
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+    </Compile>
+    <Compile Include="DatasetPatrol.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DatasetPatrol.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="DatasetPatrols.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DatasetPatrols.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="DatasetResults.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DatasetResults.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="DatasetTeams.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DatasetTeams.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="FAbout.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FClubs.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FCompetitionField.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FCompetitionPrecision.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FCompetitionWizard.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FCompetitors.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FImport.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FMain.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormatGiro.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="FPatrol.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FPatrols.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FPrintSelection.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FResults.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FResultsView.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FServerConnect.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FSettings.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FSplash.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FStationsField.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FStationsPrecision.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FTeams.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FWeapons.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="InstallerWinShooter.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Program.cs" />
+    <Compile Include="..\ProjectInfo.cs" />
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+      <DependentUpon>Settings.settings</DependentUpon>
+    </Compile>
+    <Compile Include="RemotingCallback.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="ScreenEffect.cs" />
+    <Compile Include="ScreenEffectForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ScreenEffectForm.Designer.cs">
+      <DependentUpon>ScreenEffectForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="TraceListenerConsole.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Web References\ErrorReporter\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.map</DependentUpon>
+    </Compile>
+    <Compile Include="Web References\UpdateCache\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.map</DependentUpon>
+    </Compile>
+    <None Include="CountryDataset.xsx">
+      <DependentUpon>CountryDataset.xsd</DependentUpon>
+    </None>
+    <None Include="DatasetCompetitors.xsx">
+      <DependentUpon>DatasetCompetitors.xsd</DependentUpon>
+    </None>
+    <None Include="DatasetPatrol.xsc">
+      <DependentUpon>DatasetPatrol.xsd</DependentUpon>
+    </None>
+    <None Include="DatasetPatrol.xss">
+      <DependentUpon>DatasetPatrol.xsd</DependentUpon>
+    </None>
+    <None Include="DatasetPatrol.xsx" />
+    <None Include="DatasetPatrols.xsc">
+      <DependentUpon>DatasetPatrols.xsd</DependentUpon>
+    </None>
+    <None Include="DatasetPatrols.xss">
+      <DependentUpon>DatasetPatrols.xsd</DependentUpon>
+    </None>
+    <None Include="DatasetPatrols.xsx">
+      <DependentUpon>DatasetPatrols.xsd</DependentUpon>
+    </None>
+    <None Include="DatasetResults.xsx">
+      <DependentUpon>DatasetResults.xsd</DependentUpon>
+    </None>
+    <None Include="DatasetTeams.xsx">
+      <DependentUpon>DatasetTeams.xsd</DependentUpon>
+    </None>
+    <None Include="Manual.pdf" />
+    <None Include="Web References\ErrorReporter\Service.wsdl" />
+    <None Include="Web References\UpdateCache\UpdateCache.wsdl" />
+    <BaseApplicationManifest Include="Properties\app.manifest" />
+    <EmbeddedResource Include="CPrintResultLabels.resx">
+      <DependentUpon>CPrintResultLabels.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="CPrintMirrorLabels.resx">
+      <DependentUpon>CPrintMirrorLabels.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="CPrintPatrollistByClub.resx">
+      <DependentUpon>CPrintPatrollistByClub.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="CPrintPatrollistByPatrol.resx">
+      <DependentUpon>CPrintPatrollistByPatrol.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="CPrintPatrollistByUser.resx">
+      <DependentUpon>CPrintPatrollistByUser.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="CPrintResultlist.resx">
+      <DependentUpon>CPrintResultlist.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="CPrintResultlistByPatrol.resx">
+      <DependentUpon>CPrintResultlistByPatrol.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FAbout.resx">
+      <DependentUpon>FAbout.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FClubs.resx">
+      <DependentUpon>FClubs.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FCompetitionField.resx">
+      <DependentUpon>FCompetitionField.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FCompetitionPrecision.resx">
+      <DependentUpon>FCompetitionPrecision.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FCompetitionWizard.resx">
+      <DependentUpon>FCompetitionWizard.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FCompetitors.resx">
+      <DependentUpon>FCompetitors.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FImport.resx">
+      <DependentUpon>FImport.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FMain.resx">
+      <DependentUpon>FMain.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FPatrol.resx">
+      <DependentUpon>FPatrol.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FPatrols.resx">
+      <DependentUpon>FPatrols.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FPrintSelection.resx">
+      <DependentUpon>FPrintSelection.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FResults.resx">
+      <DependentUpon>FResults.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FResultsView.resx">
+      <DependentUpon>FResultsView.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FServerConnect.resx">
+      <DependentUpon>FServerConnect.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FSettings.resx">
+      <DependentUpon>FSettings.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FSplash.resx">
+      <DependentUpon>FSplash.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FStationsField.resx">
+      <DependentUpon>FStationsField.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FStationsPrecision.resx">
+      <DependentUpon>FStationsPrecision.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FTeams.resx">
+      <DependentUpon>FTeams.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FWeapons.resx">
+      <DependentUpon>FWeapons.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="InstallerWinShooter.resx">
+      <DependentUpon>InstallerWinShooter.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <SubType>Designer</SubType>
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Splash-org.bmp" />
+    <EmbeddedResource Include="Splash.bmp" />
+  </ItemGroup>
+  <ItemGroup>
+    <WebReferences Include="Web References\" />
+  </ItemGroup>
+  <ItemGroup>
+    <WebReferenceUrl Include="http://www.winshooter.se/Upload/UpdateCache.asmx">
+      <UrlBehavior>Dynamic</UrlBehavior>
+      <RelPath>Web References\UpdateCache\</RelPath>
+      <UpdateFromURL>http://www.winshooter.se/Upload/UpdateCache.asmx</UpdateFromURL>
+      <ServiceLocationURL>
+      </ServiceLocationURL>
+      <CachedDynamicPropName>
+      </CachedDynamicPropName>
+      <CachedAppSettingsObjectName>Settings</CachedAppSettingsObjectName>
+      <CachedSettingsPropName>WinShooter_UpdateCache_UpdateCache</CachedSettingsPropName>
+    </WebReferenceUrl>
+    <WebReferenceUrl Include="http://www.winshooter.se/Errorreport/service.asmx">
+      <UrlBehavior>Dynamic</UrlBehavior>
+      <RelPath>Web References\ErrorReporter\</RelPath>
+      <UpdateFromURL>http://www.winshooter.se/Errorreport/service.asmx</UpdateFromURL>
+      <ServiceLocationURL>
+      </ServiceLocationURL>
+      <CachedDynamicPropName>
+      </CachedDynamicPropName>
+      <CachedAppSettingsObjectName>Settings</CachedAppSettingsObjectName>
+      <CachedSettingsPropName>WinShooter_ErrorReporter_Service</CachedSettingsPropName>
+    </WebReferenceUrl>
+  </ItemGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <PropertyGroup>
+    <PreBuildEvent>
+    </PreBuildEvent>
+    <PostBuildEvent>
+    </PostBuildEvent>
+  </PropertyGroup>
+</Project>

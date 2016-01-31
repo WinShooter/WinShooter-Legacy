@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<xs:schema id="DSResults" targetNamespace="http://tempuri.org/DSResults.xsd" elementFormDefault="qualified"
+	attributeFormDefault="qualified" xmlns="http://tempuri.org/DSResults.xsd" xmlns:mstns="http://tempuri.org/DSResults.xsd"
+	xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+	<xs:element name="DSResults" msdata:IsDataSet="true" msdata:Locale="sv">
+		<xs:complexType>
+			<xs:choice maxOccurs="unbounded">
+				<xs:element name="Results">
+					<xs:complexType>
+						<xs:sequence>
+							<xs:element name="CompetitorId" type="xs:int" minOccurs="0" />
+							<xs:element name="ShooterName" type="xs:string" minOccurs="0" />
+							<xs:element name="ClubId" type="xs:string" minOccurs="0" />
+							<xs:element name="Hits" type="xs:int" minOccurs="0" />
+							<xs:element name="FigureHits" type="xs:int" minOccurs="0" />
+							<xs:element name="Points" type="xs:int" minOccurs="0" />
+							<xs:element name="NorwPoints" type="xs:int" minOccurs="0" />
+							<xs:element name="Medal" type="xs:int" minOccurs="0" />
+							<xs:element name="HitsPerStn" type="xs:string" minOccurs="0" />
+							<xs:element name="FinalShootingPlace" type="xs:int" minOccurs="0" />
+							<xs:element name="PriceMoney" type="xs:int" minOccurs="0" />
+						</xs:sequence>
+					</xs:complexType>
+				</xs:element>
+				<xs:element name="TeamResults">
+					<xs:complexType>
+						<xs:sequence>
+							<xs:element name="TeamId" type="xs:int" minOccurs="0" />
+							<xs:element name="TeamName" type="xs:string" minOccurs="0" />
+							<xs:element name="ClubId" type="xs:string" minOccurs="0" />
+							<xs:element name="Hits" type="xs:int" minOccurs="0" />
+							<xs:element name="FigureHits" type="xs:int" minOccurs="0" />
+							<xs:element name="Points" type="xs:int" minOccurs="0" />
+							<xs:element name="NorwPoints" type="xs:int" minOccurs="0" />
+							<xs:element name="HitsPerStn" type="xs:string" minOccurs="0" />
+						</xs:sequence>
+					</xs:complexType>
+				</xs:element>
+			</xs:choice>
+		</xs:complexType>
+	</xs:element>
+</xs:schema>

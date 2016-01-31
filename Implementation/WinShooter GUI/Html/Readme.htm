@@ -1,0 +1,880 @@
+<!-- $Id: Readme.htm 117 2009-06-14 01:38:24Z smuda $ -->
+<!--
+Copyright ©2009 John Allberg
+
+This program is free software; you can redistribute it and/or
+modify it under the terms of the GNU General Public License
+as published by the Free Software Foundation; either version 2
+of the License, or (at your option) any later version.
+
+This program is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY OR FITNESS FOR A PARTICULAR PURPOSE. See the
+GNU General Public License for more details.
+
+You should have received a copy of the GNU General Public License
+along with this program; if not, write to the Free Software
+Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
+ -->
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN" >
+<html>
+<head>
+	<title>Läs mig (ReadMe)</title>
+	<link href="Standard.css" type="text/css" rel="stylesheet" />
+</head>
+<body class="main" >
+	<a href="http://www.WinShooter.se">
+		<img alt="Allberg WinShooter" src="top.png" width="604"
+			border="0" /></a>
+	<table class="main">
+		<tr>
+			<td class="main">
+				<h1 class="heading">
+					WinShooter Readme</h1>
+				<p>
+					Tack för att du har använder WinShooter!</p>
+				<p>
+					WinShooter är ett program för förberedelse och resultat av en pistolskyttetävling
+					i fältskytte och banskytte.</p>
+				<p>
+					<strong>Kända fel och begränsningar vid publicering</strong></p>
+				<ul>
+					<li>
+						<div class="text">
+							Ett flertal fel kan uppstå vid installation, framför allt på Windows 98/Me. Samtliga dessa löses genom att installera
+							Internet Explorer 6.0.</div>
+					</li>
+					<li>
+						<div class="text">
+							På 64-bitars maskiner fungerar inte alls installationen av .Net framework, eftersom
+							det är ett särskilt paket för detta. Installera för hand ifrån <a href="http://windowsupdate.microsoft.com">
+								WindowsUpdate</a>.</div>
+					</li>
+				</ul>
+				<p>
+					<strong>Nya buggar</strong></p>
+				<p>
+					Om du hittar buggar, fel, eller har åsikter så kan dessa rapporteras på <a href="http://sourceforge.net/tracker/?group_id=201506&atid=977835">
+						http://sourceforge.net/projects/winshooter</a>.</p>
+				<p>
+					Du kan också ansluta dig till e-postlistan genom att gå till <a href="https://lists.sourceforge.net/lists/listinfo/winshooter-users">https://lists.sourceforge.net/lists/listinfo/winshooter-users</a> och där välja att gå med i listan. Efter det kan du skicka e-post till <a href="mailto:winshooter-users@lists.sourceforge.net">
+						winshooter-users@lists.sourceforge.net</a>
+					som då skickas till alla användare av winshooter.</p>
+				<p>
+					<strong>Start av WinShooter i felsökningsläge</strong></p>
+				<p>
+					När du får något problem med WinShooter som du misstänker är en bugg (felaktighet
+					i programmet) så ska du starta WinShooter i felsökningsläge.</p>
+				<p>
+					Både WinShooter och WinShooter Server kan startas i ett så kallat felsökningsläge.
+					Det gör att det skapas en fil på skrivbordet som heter AllbergWinShooter.log eller AllbergWinShooterServer.log.</p>
+				<p>
+					Den fil som skapas ska du skicka in tillsammans med din felrapport.</p>
+				<p>
+					<strong>Historik</strong></p>
+				<p>
+					<u>1.6.8 (2009-xx-xx)</u></p>
+				<p>
+					- Bugg: Ändrade rubriken för Patrulltyper när det gäller precision till Skjutlagstyp.</p>
+                <p>
+					- Bugg vid export till PDF: Om det blev sidbrytning vid export av lagresultat så 
+                    såg exporten helt galen ut. Tack till Claes Isacsson, Skövde Sportskytteklubb.</p>
+                <p>
+					- Bugg: Den femte deltagaren i ett lag sparades inte till filen. Tack till 
+                    Stefan Anderberg, Mjölby PK.</p>
+                <p>
+					- Bugg: Den femte deltagaren i ett lag användes inte vid beräkning av resultatet. Tack till 
+                    Stefan Anderberg, Mjölby PK.</p>
+				<p>
+					- Ändrad funktionalitet: Sparar senast använt bibliotek och använder det vid öppnande av fil.</p>
+				<p>
+					<u>1.6.7 (2009-04-26)</u></p>
+				<p>
+					- Bugg: Alla 0-skyttar (t.ex. de som inte skjutit än) syntes på resultatlistan. 
+					Dessa är nu borttagna. Tack till Salems PK.</p>
+				<p>
+					- Bugg: I resultatutskrifterna är nu mellanslagen mellan antalet träffar, 
+					snedstrecken och antalet träffade tavlor borttagna. Tack till Salems PK.</p>
+				<p>
+					- Bugg: Vid resultatutskrift kunde det skrivas ut flera dubletter på t.ex. 
+					A-klassen. Tack till Salems PK</p>
+				<p>
+					- Bugg: Vid resultatutskrift när det finns skyttar i en klass, t.ex. B, men det 
+					inte fanns några resultat för den klassen så skrevs det ut en blank sida. Tack 
+					till Salems PK.</p>
+				<p>
+					- Bugg: Vid felsökning på servern så skapades inte någon loggfil. Tack till 
+					Katarina PSK.</p>
+				<p>
+					- Ändrad funktionalitet: Gjorde förhandsgranskning av resultat betydligt 
+					snabbare.</p>
+				<p>
+					- Ändrad funktionalitet: Ökade maxantalet för precisionsserier till 20.</p>
+				<p>
+					- Ändrad funktionalitet: Flyttade utskrifter till en egen tråd vilket kommer att 
+					upplevas som att Winshooter är snabbare med utskrifter.</p>
+				<p>
+					<u>1.6.6 (2008-09-22)</u></p>
+				<p>
+					- Bugg: Utskrift och export av resultat fungerade inte när man körde med en klient och 
+					server. Tack till Peter & Pelle, Lövsta.</p>
+				<p>
+					- Bugg: Resultatberäkning på fältskytte tog inte hänsyn till antalet träffade 
+					figurer utan gick direkt på poängträffarna.</p>
+				<p>
+					- Bugg: Resultatberäkning på fältskytte, poängfältskytte och precisionsskytte 
+					när det var krets-, landsdels- eller svenskt mästerskap hanterade inte 
+					särskjutning på ett korrekt sätt.</p>
+				<p>
+					- Bugg: Standardmedaljberäkning gjordes inte korrekt på SM och 
+					landsdelsmästerskap. Beräkning av STM på kretsmästerskap gjordes på samma sätt 
+					som landsdelsmästerskap.</p>
+				<p>
+					- Bugg: Visning av resultat för poängfältskjutning fungerade inte, varken på 
+					skärmen, till pdf, till Excel eller till webb.</p>
+				<p>
+					<u>1.6.5 (2008-09-13)</u></p>
+				<p>
+					- Bugg: När man automatuppgraderade Winshooter så uppgraderades endast de filer som endera 
+					inte fanns eller som var samma som innan uppgraderingen. Det fungerade därmed inte alls.</p>
+				<p>
+					- Bugg: På Vista så fick man konstiga fel när man försökte uppgradera och inte 
+					körde som administratör, vilket så klart inte någon gör. Nu får man information 
+					om detta och webbläsaren öppnas mot korrekt address.</p><p>
+					<u>1.6.4 (2008-09-12)</u></p>
+				<p>
+					- Bugg: Fixade texten i varningen som kommer upp när man ska automatgenerera patruller.
+					Lade till ett "t"...</p>
+				<p>
+					- Bugg: Om man hade skapat en särskjutningsstation så kunde man inte skriva ut 
+					patrullpärmar.</p>
+				<p>
+					- Bugg: I vissa lägen krashade resultatvisningen om två skyttar hade 0 träffar.</p>
+				<p>
+					<u>1.6.3 (2008-08-26)</u></p>
+				<p>
+					- Bugg: Det gick inte att spara inställningar, t.ex. en ny logo. Tack till 
+					Pelle Carlsson, Lövsta SKF.</p>
+				<p>
+					- Bugg: Vid visning av patruller (fälttävlan) eller lag (precisionstävlan) via 
+					webbservern så visades inte den sista patrullen/laget. Tack till Pelle Carlsson, 
+					Lövsta SKF.</p>
+				<p>
+					- Bugg: Vid visning av resultat genom att klicka på resultat i huvudmenyn så 
+					stod det &quot;per station&quot; som rubrik på en av kolumnerna även vid precisionsskytte. 
+					Detta är ändrat till &quot;per serie&quot;. Tack till Pelle Carlsson, Lövsta SKF. </p>
+				<p>
+					- Bugg: Vid visning vilka skyttar som finns i ett skjutlag/patrull så visades 
+					den utökade vapenklassen, t.ex. A1. Särskilt för okända A-vapen (som i 
+					bakgrunden har den utökade vapenklassen A1) blir detta förvirrande. Ändrade så 
+					att endast första tecknet (&quot;A&quot;) i den utökade vapenklassen skrivs ut. 
+					Tack till Pelle Carlsson, Lövsta SKF. </p>
+				<p>
+					- Bugg: Vid skapande av precisionsstävling gick inte alla patrulltyper att 
+					välja i guiden.</p>
+				<p>
+					- Bugg: Om man vid precisionstävling hade även lagtävlan gick inte resultaten 
+					att skriva ut.</p>
+				<p>
+					- Bugg: Vid skapande av en ny precisionstävling så uppdaterades inte knappar och 
+					menyer korrekt i huvudbilden.</p>
+				<p>
+				- Bugg: Om man ändrade ett vapen som redan användes av en skytt så krashade 
+					programmet.</p>
+				<p>
+					- Bugg: Om man vid precisionstävling använde &quot;Öppen&quot; klass så gick det inte att 
+					skriva ut resultat.</p>
+				<p>
+					- Ändrad funktionalitet: Flyttade loggfilerna från C:\ till skrivbordet eftersom 
+					det inte fungerade på Vista.</p>
+				<p>
+					- Ändrad funktionalitet: Snabbade på de interna förberedelserna inför utskrift 
+					av alla klassers resultat. Motsvarande ändringar ska läggas in på lite fler 
+					ställen, men det stora jobbet är klart.</p>
+				<p>
+					<u>1.6.2 (2008-08-07)</u></p>
+				<p>
+					- Ändrad funktionalitet: Ändrade felmeddelandet när man försöker importera en skytt med fler än 4 
+					rundor så att det inkluderar skyttens namn.</p>
+				<p>
+					- Ny funktionalitet: Nu går det att bestämma fonter och fontstorlekar vid 
+					utskrift av resultat. Detta ligger under Verktyg-&gt; Inställningar-&gt; Utskrifter.</p>
+				<p>
+					- Ny funktionalitet: Nu går det att ändra kolumnstorlekarna vid utskrift av 
+					resultat. Detta ligger under Verktyg-&gt; Inställningar-&gt; Utskrifter.</p>
+				<p>
+					- Ny funktionalitet: Nu kan du lägga in en station som ska användas för 
+					särskjutning.</p>
+				<p>
+					- Ny funktionalitet: En ny patrulltyp som inkluderar alla skyttar har lagts 
+					till.</p>
+				<p>
+					- Bugg: Microsoft JET finns inte för 64-bitars processorer, alltså är WinShooter
+					ändrat för att enbart köras på x86-processorer vilket gör att en 64-bitars processor
+					kommer att emulera en x86-processor. Tack till Kristian Hammarström, Pk-Ena.</p>
+				<p>
+					- Bugg: Om man inte angav skyttekortsnummer vid inskrivning av skytt får man en fråga
+					om man verkligen inte vill ange ett sådant. Om man svarar "ja" så krashade WinShooter.
+					Fixat. Tack till Kristian Hammarström, Pk-Ena.</p>
+				<p>
+					- Bugg: Etikettarket Avery 6150 har inte de storlekar som programmet trodde att det
+					hade vilket gör att den fjärde etiketten på varje rad hamnar utanför papperet.
+				</p>
+				<p>
+					- Vista: När man använda Vista så krashade det bl.a. när man försökte spara nya 
+					skyttar. Flyttade de filerna som uppdateras av WinShooter till profilen. Tack 
+					till Lena Sjögren, Dalarnas pistolskyttekrets.</p>
+				<p>
+					- Uppgraderat till Visual Studio 2008, dock stannat kvar på .Net 2.0 för att 
+					fortsätta stödja W98/Me.</p>
+				<p>
+					- Gjort om stora delar av resultatsorteringen för att i senare versioner få 
+					större flexibillitet.</p>
+				<p>
+					<u>1.6.1 (2007-08-04)</u></p>
+				<p>
+					- Ändrade licenstexten eftersom det numera är GPL som gäller.</p>
+				<p>
+					- Lade in licens-text i samtliga källkodsfiler.</p>
+				<p>
+					<u>1.6.0 (2007-08-03)</u></p>
+				<p>
+					- Tog bort allt som hade med licenshanteringen att göra eftersom winshooter nu är
+					gratis och öppen källkod.</p>
+				<p>
+					- Lade till möjligheten att exportera ut vapen och klubbar till textfil för att
+					kunna användas vid anmälan på en webbsida.</p>
+				<p>
+					- Lade till en kolumn i bilden för patruller som visar hur många skyttar i patrullen
+					som anmält sig själva som ankomna. På så vis kan man precis innan patrullen går
+					ut ta bort skyttar som inte ankommit och lägga in andra skyttar.</p>
+				<p>
+					- Det finns sedan tidigare en lokal cache för skyttar som man skriver in. Den skrivs
+					på samma ställe som Winshooter är installerat i en fil vid namn "LocalCache.xml".
+					Nu finns möjlighet att skicka denna till mig för central uppdatering.</p>
+				<p>
+					- Tog bort sparande av skyttar som inte har något pistolskyttekortsnummer i den
+					lokala cachen.</p>
+				<p>
+					- När en skytt ska hämtas från cache så hämtas numera den som är uppdaterad senast,
+					oavsett om det är den lokala cachen eller den som följer med WinShooter.</p>
+				<p>
+					- När man skrivit in result för alla skyttar i en patrull får man nu en fråga om
+					man vill skriva ut resutet för denna patrull.</p>
+				<p>
+					- Lade till möjligheten att skriva ut etiketter för resultat.</p>
+				<p>
+					- Tog bort WinShooter-skärmsläckaren, det är säkert inte någon som använder den
+					ändå...</p>
+				<p>
+					- Vid uppdatering visas nu status på hur många bytes som laddats ner istället
+					för hur många filer som tidigare var fallet.</p>
+				<p>
+					- Lade till möjligheten att ha olika anmälningsavgifter för 1, 2, 3 och fyra varv.</p>
+				<p>
+					- Flyttade ut generering av PDF till en egen tråd, vilket innebär att man kan fortsätta
+					att använda WinShooter medan PDF'n skapas i bakgrunden.</p>
+				<p>
+					- Lade till en mästerskapstyp till, nämligen klubb-mästerskap, vilken inte har standardmedaljer.</p>
+				<p>
+					- Lade till ett litet 1:a april-skämt.</p>
+				<p>
+					- Bugg: Vid vissa lägen så krashade WinShooter när man sparade ett vapen. Sparandet
+					gick dock bra, så det var bara att starta om WinShooter. Fixat.</p>
+				<p>
+					- Bugg: Om en skytt hade 0 träffar så kom man inte med i resultatlistan. Fixat.</p>
+				<p>
+					<u>1.5.9 (2007-04-16)</u></p>
+				<p>
+					- Bugg: Vid import av fil så krashade programmet om patrull-kolumnen är tom (till
+					skillnad från saknas). Fixat.
+					Tack till Jan Jorsäter.</p>
+				<p>
+					- Bugg: Vid import av fil så krashade programmet om bana-kolumnen är tom (till skillnad
+					från saknas). Fixat.</p>
+				<p>
+					- Bugg: När man i patrullfönstret försökte lägga till ytterligare en skytt i en
+					patrull som redan var full så fick man två stycken felmeddelanden, varav det senare
+					var både fult och missvisande.</p>
+				<p>
+					- Om man på något sätt lyckas få fler än 4 varv för en skytt (t.ex. genom att ha
+					en import som importerar flera varv) så krashade WinShooter och man kunde inte åtgärda
+					problemet. Nu kommer det upp en varning om att det finns för många varv på skytten
+					och att de överstickande (senaste sparade) kommer att automatiskt raderas. Vid import
+					så kontrolleras också detta.</p>
+				<p>
+					- Lade till ytterligare felhantering vid import från fil, specifikt när man inte har skrivit
+					siffror där det ska vara siffror så som pistolskyttekortsnummer, patrullnummer och
+					bana. (Automatisk felrapport)</p>
+				<p>
+					- Lade till felhantering när man försöker importera en fil som redan är öppen av
+					ett annat program, t.ex. Excel. (Automatisk felrapport)</p>
+				<p>
+					- Ytterliggare felhantering är inlagt vid sparande av ny skytt. (Automatisk felrapport)</p>
+				<p>
+					- Fixade så att felrapporteringsdelen ser ut som att den är aktiv när den skickar
+					den automatiska felrapporten.</p>
+				<p>
+					<u>1.5.8 (2007-03-03)</u></p>
+				<p>
+					- Bugg: Vid utskrift av resultatet av en poängfältskjutning med lag så krashade
+					programmet. Fixat.</p>
+				<p>
+					- Bugg: Vid export av resultat till PDF så kom det ett antal konstiga, mer eller
+					mindre blanka sidor innan resultatet visades. Fixat.</p>
+				<p>
+					- Bugg: I resultatvisningsbilden stod det "Vapengrup" istället för "Vapengrupp".
+					Fixat</p>
+				<p>
+					- Bytte ut några ikoner.</p>
+				<p>
+					- Fixade så att man vid import kan använda små bokstäver för skytteklasserna, t.ex
+					vy istället för VY.</p>
+				<p>
+					- Lade till en kontroll vid import från fil att inte skyttekortet innehåller bokstäver
+					utan endast siffror.</p>
+				<p>
+					- Lade till felhantering om filen redan är öppnad av endera Access eller WinShooter.</p>
+				<p>
+					- Manualen: Lade in två tips vid import av fil.</p>
+				<p>
+					- Manualen: Lade in information för den som vill bygga specialhantering av resultat.</p>
+				<p>
+					<u>1.5.7 (2007-02-24)</u></p>
+				<p>
+					- Lade till ytterliggare en gruppering av vapenklasser i patruller.</p>
+				<p>
+					- Importen är säkrare, men tyvärr långsammare.</p>
+				<p>
+					- Bugg: Om man importerade en fil med personer som också fanns för-inlagda i WinShooter
+					och klassen eller namnet inte stämde överrens så var det de förinlagda värdena som
+					gällde. Numera gäller filen.</p>
+				<p>
+					- Bugg: Vid export av patrullista till PDF så kunde man få klassen 3A1 istället
+					för 3A. Fixat.</p>
+				<p>
+					- Bugg: Om man importerade personer utan klass (t.ex. genom att bara ange "VÄ")
+					så fick personerna inte någon klass och det gick inte heller att sätta någon.</p>
+				<p>
+					<u>1.5.6 (2007-02-05)</u></p>
+				<p>
+					Denna version innehåller databasförändringar.</p>
+				<p>
+					- Bugg: Den öppna klassen (oavsett vapenklass) kom inte med vid export av resultat
+					till Excel.</p>
+				<p>
+					- Lade till funktionalitet för att kunna välja hur vapenklasser får samsas i patruller.</p>
+				<p>
+					- Lade till funktionalitet som gjorde att inskrivningen av en skytts varv också
+					påverkar den automatiska patrullindelningen. I klartext, om man skriver in att en
+					skytts varv nr 1 är ett C-vapen och varv nr 2 är ett A-vapen och sedan använder
+					den automatiska patrullfördelningen så blir faktiskt varv nr 1 ett C-vapen och nr
+					2 ett A-vapen.</p>
+					<p>- För precisionstävling ändrade jag en av ledtexterna från "tid mellan patruller" till "tid mellan skjutlag".</p>
+				<p>
+					- Lade till funktionalitet för att kunna "spärra" en patrull från att automatiskt
+					få tilldelning av skyttar.</p>
+				<p>
+					<u>1.5.5 (2007-01-07)</u></p>
+				<p>
+					- Ändrade benämning av vapenklasser till vapengrupper i enlighet med SHB.</p>
+				<p>
+					- Bugg: Fixade så att exporten till Excel även fungerar för magnumfältskytte och precisionsskytte.</p>
+				<p>
+					- Bugg: Lade till en kontroll att vapen som importeras via importfunktionen verkligen
+					är Magnum-vapen när det är en magnum-tävling. (Automatisk felrapport)</p>
+				<p>
+					- Bugg: Lade in en kontroll att inte vald skytt i skyttebilden kan vara "ingenting". (Automatisk
+					felrapport)</p>
+				<p>
+					- Bugg: Fixade ett fel vid utskrift av resultat på Magnumfältskytte.</p>
+				<p>
+					<u>1.5.4 (2006-11-24)</u></p>
+				<p>
+					- Lade tillbaka antalet träffade figurer i pdf-exporten av resultat.</p>
+				<p>
+					- Lade till skyttens klass för det aktuella varvet i pdf-exporten av patrullistan
+					sorterad efter klubb.</p>
+				<p>
+					- Bugg: Fixade ett fel som gjorde att banskytte inte längre kunde exportera resultatet
+					till PDF. (automatiskt inskickat fel)</p>
+				<p>
+					- Bugg: Fixade ett fel som gjorde att om man klickade ur ett varv på en skytt som hade
+					resultat för det varvet så krashade WinShooter. (automatiskt inskickat fel)</p>
+				<p>
+					- Bugg: Fixade ett fel vid utskrift av resultat vid banskytte som gjorde att utskriften
+					inte kom ut alls.</p>
+				<p>
+					- Bugg: Fixade ett fel vid PDF-export vid banskytte som gjorde att exporten inte fungerade
+					alls.</p>
+				<p>
+					- Vid banskytte kan man ange att sammanräkning sker på station. Dock var det svårt
+					att skriva in t.ex. 47 vid inmatningen eftersom så fort inmataren skrev en fyra
+					så hoppade man vidare till nästa inmatningsfält.</p>
+				<p>
+					<u>1.5.3 (2006-10-08)</u></p>
+				<p>
+					- Lade till "Ankommit" på patrullpärmen så man kan se vid upprop om skytten har
+					prickat av sig.</p>
+				<p>
+					- Snyggade till serverns lista över klienterna.</p>
+				<p>
+					- Ökade minimi-marginalen till vänster på uppföljningslistan.</p>
+				<p>
+					- Ändrade resultatpdfexporten så att antalet träffade tavlor inte längre syns på
+					de enskilda stationerna.</p>
+				<p>
+					- Bugg: Vid export till PDF av startlista, ordnad per klubb, så fick vissa vapen dubbel
+					klassbeteckning. Tog bort den ena.</p>
+				<p>
+					- Bugg: Vid export till PDF av startalista, ordnad per klubb, så blev sidbrytningen ibland
+					direkt efter ett klubbnamn. Flyttade ner klubbnamnet till nästa sida.</p>
+				<p>
+					- Bugg: Fixade ett fel i uppföljningsutskriften som gjorde att den första skytten i den
+					första klubben räknat i bokstavsordning alltid kom längst upp på samtliga sidor.</p>
+				<p>
+					- Bugg: Fixade ett fel som gjorde att man om man raderade en station som det fanns resultat för och samtidigt körde via servern så fick man först ett meddelande om att det fanns resultat för stationen och frågan om man verkligen ville radera. Om man då valde "ja" så krashade WinShooter.</p>
+				<p>
+					- Fixade en massa detaljer i kommunikationen mellan servern och klient som hängde
+					ihop med att när en klient stängde ner så hängde andra anslutna klienter. I samband med
+					detta ökades också prestandan i kommunikationen med servern, vilket märks framför
+					allt för "trötta" datorer.</p>
+				<p>
+					- Bugg: Om man hade exakt 1 skytt i en viss klass och det inte fanns något resultat på
+					den skytten så krashade WinShooter när man skapade resultat med prispengar, endera
+					export eller utskrift. (automatiskt inskickat fel)</p>
+				<p>
+					- Bugg: Fixade ett installationsfel på Windows Me som gjorde att MSJet aldrig installerades
+					korrekt.</p>
+				<p>
+					<u>1.5.2 (2006-09-27)</u></p>
+				<p>
+					- Bugg: Fixade ett fel som gjorde att man fick fel numrering på skyttarna på resultatutskriften
+					när utskriften var mer än en sida.</p>
+				<p>
+					- Ändrade resultatutskriften så att antalet träffade tavlor inte längre syns på
+					de enskilda stationerna och ökade utskriftsfonten.</p>
+				<p>
+					- Bugg: Fixade ett fel som gjorde att man valde att inte skapa tävlingen när man skapar
+					en ny fil och sedan öppnar filen igen så krashade WinShooter eftersom det inte fanns
+					någon definierad tävling. Nu meddelas man att det inte finns någon tävling definierad
+					och WinShooter stängs.</p>
+				<p>
+					<u>1.5.1 (2006-09-19)</u></p>
+				<p>
+					- Bugg: Fixade ett fel som gjorde att man inte kunde starta servern på Windows Vista.</p>
+				<p>
+					- Bugg: Fixade ett stabilitetsproblem som gjorde att servern krashade vid första skrivningen
+					efter mer en 5 minuters inaktivitet.</p>
+				<p>
+					<u>1.5.0 (2006-09-03)</u></p>
+				<p>
+					- Bugg: Fixade ett fel vid installation på Windows XP SP2 och Windows 2000 som gjorde att
+					installationen felaktigt försökte installera Microsoft Jet 4.0 SP8, trots att det
+					redan fanns installerat. (Tack till Tobbe Kjellvestad)</p>
+				<p>
+					- Bugg: Fixade ett fel som gjorde att WinShooter krashade när man importerade skyttar
+					från fil med patrullnummer men utan figurnummer.</p>
+				<p>
+					- Bugg: Fixade ett fel som gjorde att man fick samma namn på alla importerade människor
+					om man inte angav ett pistolskyttekortsnummer.</p>
+				<p>
+					- Bugg: Fixade ett fel som gjorde att WinShooter krashade vid import av skyttar med en klubb, vapen eller patrull som inte finns.</p>
+				<p>
+					- Bugg: Fixade ett fel som gjorde att om man hade detalj-vyn för en patrull uppe samtidigt
+					som man tog bort den patrullen i från patrullerbilden så krashade WinShooter.</p>
+				<p>
+					- Vid installation är nu standardvärdet att WinShooter installeras för alla användare
+					och valet syns inte heller.</p>
+				<p>
+					- Lade till möjlighet att exportera resultat till Excel.</p>
+				<p>
+					- Nu kan man sätta en separat tid på en patrull/skjutlag så att t.ex. tre patruller/skjutlag
+					kan ha samma starttid.</p>
+				<p>
+					- Fixade så att installationen av IE från CD-skiva fungerar som den ska.</p>
+				<p>
+					- Lade till en allmän felhantering som gör att man kan skicka automatiska felrapporter
+					till mig. Det gör också att krascher numera ser bättre ut... ;-)</p>
+				<p>
+					- Ändrade modellen för hantering av inställningar från registret till en fil.</p>
+				<p>
+					- Lagt till en lokal cache av skyttar och klubbar.</p>
+				<p>
+					- Fixade ytterligare trådsäkerhet för menyerna.</p>
+				<p>
+					- Förbättrat felhantering vid anslutning till server, speciellt när det inte finns
+					några nätverkskort.</p>
+				<p>
+					- Fixat ett problem med anslutning till server som endast visade sig på Windows
+					2000 med brandväggen ZoneAlarm. Utan ZoneAlarm eller på XP så fungerade allting.</p>
+				<p>
+					<u>1.4.0 (2006-07-15)</u></p>
+				<p>
+					- Uppgraderat till .Net Framework 2.0. Som ett resultat av det finns det många förändringar
+					som inte påverkar programmet i sig, men som ger lite snyggare och lättare kod att
+					underhålla för mig. Bl.a. så kan jag göra en mer automatisk installation för den
+					som inte har t.ex. .Net Framework men som har tillgång till Internet.</p>
+				<p>
+					- Lade till en skytt till i lag-hanteringen så att max antal skyttar i ett skyttelag
+					nu är fem.</p>
+				<p>
+					- Lagt till export till text- och xml-filer.</p>
+				<p>
+					- Lade till patrullnummer på export till pdf av patrullista efter klubb.</p>
+				<p>
+					- Lade till ett fält för att kunna fylla i hur mycket en skytt har betalat.</p>
+				<p>
+					- Lade till ett fält för att kunna pricka av att en skytt har ankommit.</p>
+				<p>
+					- Lade till utskriftsdatum och tid för preliminära resultatlistor.</p>
+				<p>
+					- Vid export till PDF så lade jag till lagdeltagarna i lagtävlingen på samma sätt
+					som vid utskrift.</p>
+				<p>- Bugg: När man exporterar patrullista till PDF så kunde "klubb" bli för bred. Fixat</p>
+				<p>- Bugg: När man skriver ut resultat för en enskild patrull så kunde "klubb" bli för bred. Fixat.</p>
+				<p>
+					- Bugg: Fixat till problemet med att klienten inte uppdateras efter ett tag (tror jag).</p>
+				<p>
+					- Bugg: Fixade ett fel som gjorde att inte några resultat kom med på utskriften av klubbmästerskap
+					inuti en större tävling.</p>
+				<p>
+					- Flyttade om menyerna så att det finns en meny för export och en för import. Inställningarna
+					hamnade under "Verktyg" på samma sätt som i Microsoft Office.</p>
+				<p>
+					- Lade till en kolumn ("resultat finns") i "Patruller-bilden" som gör att man kan
+					se hur många av skyttarna i alla patruller som har inmatade resultat. På så sätt
+					kan man se vilka patruller som man har matat in respektive inte matat in.</p>
+				<p>
+					- Hämtar numera marginalen vid utskrift av patrullpärm från skrivaren så att när
+					man skriver ut på A5 så får man plats med 9 stationer på papperet. Dessutom lade
+					jag till en streckad linje under varje skytt så att man inte tror att poängfältet
+					tillhör nästa skytt.</p>
+				<p>
+					- När det gäller stora mästerskap, SM och kretsmästerskap, gäller det särskilda
+					regler för standardmedaljer. Därför är man numera tvungen att ange om det är ett
+					stort mästerskap och standardmedaljerna beräknas utifrån detta.</p>
+				<p>
+					- Fixade så att man kan ha flera servrar för olika tävlingar på samma dator, inklusive
+					att man kan välja port-nummer för webbservern.</p>
+				<p>
+					- När man på stora precisionstävlingar skriver in resultaten så gör man det ibland
+					omgång för omgång. Då vill man, när man har fyllt i resultaten för en omgång för
+					en skytt, att man automatiskt hamnar på nästa skytt på nästa omgång. Det finns numera
+					en option på bilden för resultatinmatning som åstadkommer just detta.</p>
+				<p>
+					- Bugg: Om en skytt var med i ett lag så gick det inte att radera honom/henne utan att
+					ta bort personen ur laget först för hand, vilket jag har fixat nu.</p>
+				<p>
+					- Bytt ut nästan alla bilder i manualen. Överhuvudtaget, ett rejält jobb är nerlagt
+					på att fräsha till manualen och rätta upp texterna.</p>
+				<p>
+					- Vid export av resultat till pdf och man inte hade valt att använda prispengar
+					så kom det ändå en rubrik "Pris". Fixat.</p>
+				<p>
+					- Förtydligat licensvillkoren genom att explicit säga att om en skyttekrets köper
+					in WinShooter så gäller den licensen endast för tävlingar som anordnas av kretsen,
+					t.ex. landsdelsmästerskap eller SM. Den gäller alltså inte för tävlingar som anordnas
+					av klubbar som är medlemmar i kretsen.</p>
+				<p>
+					<u>1.3.2 (2006-06-23)</u></p>
+				<p>
+					- Fixade ett stabilitetsproblem när man körde med många klienter samtidigt.</p>
+				<p>
+					- Lade in "Okänt"-vapen för magnumfältskytte.</p>
+				<p>
+					<u>1.3.0 (2006-05-30)</u></p>
+				<p>
+					- Magnumfältskytte är nu inlagt. Kommentarer mottages tacksamt!</p>
+				<p>
+					- I lagbilden så rensas inte lagbilden korrekt. Fixat.</p>
+				<p>
+					- Standardmedaljer beräknades inte korrekt under vissa omständigheter. Fixat.</p>
+				<p>
+					- Tidigare har uppdateringsfunktionen fungerat så att man (om det funnits en ny
+					version av WinShooter) fått upp Internet Explorer mot <a href="http://www.winshooter.se">
+						www.winshooter.se</a>. Det har jag ändrat på så att man istället automatiskt
+					börjar ladda ner den nya versionen. Under tiden nerladdningen pågår kan man fortsätta
+					jobba med WinShooter. När nerladdningen är klar får man ett meddelande om detta
+					och när man svarar OK på det meddelandet så stängs WinShooter, uppdateringen installeras
+					och WinShooter startar igen.</p>
+				<p>
+					- Vid utskrift av patrullpärm på A5 så sidbröts sidan för långt ner, vilket ibland
+					gjorde att slutet av en deltagare hamnade ovanpå texten "WinShooter är registrerad
+					till...". Fixat.</p>
+				<p>
+					- När man väl lagt in en egen logo så gick det inte att få tillbaka standardlogon.
+					Fixat.</p>
+				<p>
+					- Jag har tagit bort kontrollen om Acrobat Reader är installerat eller inte vid
+					uppstart av WinShooter eftersom den irriterade vissa användare.</p>
+				<p>
+					- Om man inom två sekunder skriver nästa bokstav i en lista för att välja så antas
+					det vara nästa bokstav i ordet. (T.ex. S-A-L gör att man hamnar på Salems PK som
+					klubb). När man skriver första bokstaven så visas också innehållet i dropdown.</p>
+				<p>
+					<u>1.2.6</u></p>
+				<p>
+					- Om man skapade en poängfälttävlan med lag så fungerade inte utskriften. Tack till
+					Barbro Arvidsson för rapporten. Det är nu fixat.</p>
+				<p>
+					- När man sparade/uppdaterade lag så uppdaterades inte bilden. Det gjorde att man
+					lätt kunde råka skapa samma lag många gånger.</p>
+				<p>
+					- Jag fick en lista från Katarina PSF med alla deras skyttar som jag lade in som
+					fördefinierade.</p>
+				<p>
+					<u>1.2.4</u></p>
+				<p>
+					- Jag har efter önskemål tagit bort kravet på pistolskyttekort. I de fall när man
+					inte anger ett pistolskyttekort så tilldelas man ett slumpmässigt negativt pistolskyttekortsnummer
+					som inte ska synas någonstans. Jag kan ha missat någon del, så bli inte förvånad
+					om det dyker upp ett negativt tal någonstans...</p>
+				<p>
+					- Efter att fått ett antal supportmail om hur man från klienten hittar igen servern
+					så har jag lagt till funktionalitet som gör att klienten hittar igen servern automatiskt.
+					Teknisk information: Detta görs med broadcast via UDP.</p>
+				<p>
+					- Jag har lagt till en kryssruta om man vill spara automatiskt vid inskrivande av
+					resultat.</p>
+				<p>
+					- Jag har lagt till en "är du säker"-fråga när man stänger ner WinShooter Server.</p>
+				<p>
+					- När man installerade så kom det upp en ruta "Server Installer". Den är numera
+					borttagen.</p>
+				<p>
+					- Fixade till så att datumet för installation numera sparas för att kunna sätta
+					utvärderingstiden korrekt.</p>
+				<p>
+					- Fixade så att inte WinShooter krashar om man exporterar till PDF och filen redan
+					är öppen, t.ex. av Acrobat Reader.</p>
+				<p>
+					<u>1.2.3</u></p>
+				<p>
+					Två allvarliga fel har hittats till denna version.</p>
+				<p>
+					- Vid export av resultat till PDF så sidbryts inte informationen vilket gör att
+					texten fortsatte utanför sidan som därmed blev "svårläst". Det är fixat. Tack till
+					Johan Melvinsson för rapporten.</p>
+				<p>
+					- Vid skapande av lag så blev det, om man hade tur, fel deltagare i laget,
+					annars krashade WinShooter. Det är fixat.</p>
+				<p>
+					<u>1.2.2</u></p>
+				<p>
+					- Uppdaterade manualen med hur man gör en felsökningslogg.</p>
+				<p>
+					- Vid installation så hade jag försökt göra radbrytningar i meddelanden om att .Net
+					framework, IE och MDAC saknades. Dessa fungerade inte och är borttagna.</p>
+				<p>
+					- Om man försökte ta bort en skytts varv som var med i ett lag så krashade programmet.</p>
+				<p>
+					- Uppdaterade de förinmatade skyttarna ifrån Höstsaluten 2005.</p>
+				<p>
+					- Ändrade så att även servern är giltig i 6 månader från när jag bygger istället
+					för en månad.</p>
+				<p>
+					<u>1.2.1</u></p>
+				<p>
+					- Lade till möjligheten att radera ett lag i lagtävlingen.</p>
+				<p>
+					- Fixade så att man inte längre är tvungen att välja skrivare lika många gånger
+					som det finns Vapengrupper representerade i tävlingen när man väljer att skriva
+					ut samtliga klasser.</p>
+				<p>
+					- I "mini-installationen" så har jag tagit bort kravet på Adobe Acrobat Reader.
+					Istället så varnar Winshooter varje gång den startas att Readern krävs för att kunna
+					läsa manualen och att titta på exporter.</p>
+				<p>
+					- Ändrade felmeddelandet för att inte .Net Framework är installerat till svenska
+					vid installation.</p>
+				<p>
+					- Fixade ett fel som gjorde att om man använde en egen logo så kunde man bara exportera
+					till PDF en gång, andra gången så krashade programmet.</p>
+				<p>
+					- Fixade så att även .Net Framework 2.0 är godkänt vid installation.</p>
+				<p>
+					- Fixade ett fel i installationen som, om man inte hade Acrobat Reader installerat,
+					felaktigt gav ett felmeddelande om att installationen av WinShooter hade misslyckats.</p>
+				<p>
+					<u>1.2.0</u></p>
+				<p>
+					Version 1.2 är en stor förändring. Dels har jag lagt in banskytte, dels har jag
+					städat upp en hel del. Som resultat av det kommer det att komma en rad förändringar/nya
+					funktioner i de närmaste versionerna, även om inte allt finns med i denna version.</p>
+				<p>
+					Den första förändringen som du kommer att upptäcka är att när man skapar en ny tävling
+					så får man upp en wizard. Jag har observerat hur användare har reagerat på programmet
+					och man behöver uppenbarligen en liten knuff i rätt riktning. Jag trodde att manualen
+					skulle lösa detta, men ingen läser ju manualen... ;-)</p>
+				<p>
+					Nu kan WinShooter hantera precisionsskytte. Dock, Skyttehandboken fick 2005 ett
+					tillägg om hur man ska hantera standardmedaljer i precisionsskytte som är så otydligt
+					att det är ett under om någon förstår vad som avses utan tilläggsinformation. Min
+					implementation blir därför under reserveration.</p>
+				<p>
+					Jag har upptäckt och åtgärdat ett fel som gjorde att namnet på en klubb inte gick
+					att ändra efter att det lagts in skyttar för den klubben.</p>
+				<p>
+					Jag har fått in åsikter om att resultatlistorna är för stora och att man ska kunna
+					lägga in sin egen logotype i utskrifter och exporter. Jag ser inte någon annan modell
+					för detta än att byta exportformat från html till pdf, vilket jag också gjort nu.</p>
+				<p>
+					Jag har också implementerat "XP Visual Styles" så att det blir lite fina effekter
+					på knappar o.dyl.</p>
+				<p>
+					Jag har fått klagomål på att klubbarnas namn är för långa. Jag har därför gått in
+					och lagt in förkortningarna på vanliga namn. Pistolklubb blir PK, Pistolskytteklubb
+					blir PSK osv.</p>
+				<p>
+					Önskemål kom in om att man måste kunna radera en station under fältskyttetävling.
+					För att kunna åstadkomma det så har jag gjort om uppsättningen av stationer helt.
+					Nu får man en bättre överblick över vilka stationer som finns och hur de är konfigurerade.
+					All kod som hanterade uppsättningen av stationer är helt ny, mer flexibel och till
+					och med lite snabbare. Men framför allt, användarupplevelsen är en dröm i jämförelse
+					med den gamla. Just den delen var nästan två år gammal, så det var på tiden att
+					den uppdaterades.</p>
+				<p>
+					<u>1.1.1</u></p>
+				<p>
+					Fixade en bugg som gjorde att demoversionerna var giltiga 30 dagar efter att jag
+					skapade dem, instället för 30 dagar efter installation. Tack till Håkan Malmqvist.</p>
+				<p>
+					<u>1.1.0</u></p>
+				<p>
+					I denna version lade till hantering av lag, en efterlängtad funktion.
+				</p>
+				<p>
+					Detta ändrade tyvärr databasen på ett sådant sätt att äldre databaser måste uppgraderas
+					när de öppnas i version 1.1.0, vilket sker med automatik.</p>
+				<p>
+					Dock, om tävlingen sedan öppnas i en äldre version av WinShooter så kan det innebära
+					att man t.ex. inte kan radera en skytt (all läsning från databasen fungerar dock
+					som den ska).</p>
+				<p>
+					- Eftersom jag ändå var tvungen att ändra databasen och bygga en uppgraderingsfunktion
+					så lade jag till databas-delarna för att kunna pricka av att en skytt ankommit samt
+					att en skytt ska kunna be om resultat via e-post.</p>
+				<p>
+					- Lade till funktionen att skriva ut resultat för en enskild patrull. Den är tänkt
+					att användas på stora tävlingar när man inte vill skriva ut den stora resultatlistan
+					efter inskrivning av resultat för varje patrull.</p>
+				<p>
+					<u>1.0.5</u></p>
+				<p>
+					- Fixade ett fel vid import som gjorde att om skytten fanns fördefinierad så krashade
+					importen.</p>
+				<p>
+					- Lade till funktionen att skriva ut en resultatlista för ett klubbmästerskap som
+					har skett inuti en annan tävling.</p>
+				<p>
+					<u>1.0.4</u></p>
+				<p>
+					- Tidigare när man fyllde i poängtavlor så var man tvungen att använda tab för att
+					komma vidare till nästa ruta. Nu när man skriver 2 siffror (t.ex. "09") så kommer
+					man vidare med automatik.</p>
+				<p>
+					- Fixade att om man välde ett nytt vapen i skyttebilden med samma klass så tappades
+					vilken patrull man är med i. Numera sparas patrullen innan. Endast om den gamla
+					patrullen inte är valbar, dvs att det nya vapnet inte får skjuta i den gamla patrullen,
+					kommer patrullinnehavet att glömmas bort.</p>
+				<p>
+					- Fixade så att om det finns poängtavlor konfigurerade så finns det också ett fält
+					för ifyllnad i den utskrivna patrullpärmen.</p>
+				<p>
+					- Fixade ett fel vid utskrift och export till html som gjorde att när inskrivning
+					av särskjutning resulterade i 0-resultat så skrevs det ändå ut.</p>
+				<p>
+					- Fixade en tankevurpa som gjorde att en utskriven patrullpärm inte hade exakt samma
+					utseence som inskrivningen av resultat för 4 och 5-figursmål.</p>
+				<p>
+					- Breddade ifyllnadsfälten på utskriven patrullpärm.</p>
+				<p>
+					- Lade till en timer som håller kommunikationen öppen mellan server och klient för
+					att se om det hjälper till med att minska problemet med tappade callbacks.</p>
+				<p>
+					- Lade in ett antal begränsningar för att inte göra slut på antalet worker threads
+					på servern.</p>
+				<p>
+					- Om placering efter särskjutning är 0 så räknas det på samma sätt som om man inte
+					skrivit in något alls.</p>
+				<p>
+					<u>1.0.3</u></p>
+				<p>
+					- Vid utskrift av patrullpärmar så var default att alla patruller skulle skrivas
+					ut. Tog bort bort det, eftersom erfarenheten från Höstsaluten visade att man normalt
+					skrev ut enstaka patruller.</p>
+				<p>
+					- Vid utskrift av patrullpärmar så var texten när man skulle välja patrull "Selection".
+					Ändrade det till "Patrull".</p>
+				<p>
+					- När man plockade fram en ny skytt i resultatinmatningsbilden så nollställdes inte
+					resultatet. Fixat.</p>
+				<p>
+					- Förra årets modell för poängsortering användes, alltså att antalet träffar på
+					sista station hanterades före poängtavlorna. Fixade så att poängtavlorna hanteras
+					före sista station.</p>
+				<p>
+					<u>1.0.2</u></p>
+				<p>
+					- När man försökte radera alla resultat för en skytt (t.ex. om man testat något
+					och försökte o-göra det) så när man plockade upp skytten igen så var allting ifyllt
+					med nollor. Vid utskrift så skrevs också den aktuella klassen ut, även om den inte
+					innehöll någonting, vilket resulterade i ett tomt blad. Fixade det.</p>
+				<p>
+					- Fixade en bugg i Skyttar-bilden som gjorde att det inte gick att spara varken
+					nya eller ändrade skyttar.</p>
+				<p>
+					- Fixade så att 9 stationer går in på en rad vid utskrift av resultat.</p>
+				<p>
+					- Fixade en del fel i skyttar-bilden + ett fel i SafeComboBox.</p>
+				<p>
+					- Fixade så att export av patruller till webbsida fick headers för respektive klubb.</p>
+				<p>
+					- Fixade sortering vid export av patrull till webbsida så att den är svensk, dvs
+					att åäö kommer sist i listan.</p>
+				<p>
+					- Fixade så att B och C-vapen skjuter i samma patrull.</p>
+				<p>
+					- Fixade en bugg vid utskrifter som gjorde att om man skulle skriva ut patruller
+					och man hade en skytt som inte tillhörde någon patrull så fallerade utskriften.</p>
+				<p>
+					- Fixade ett fel som gjorde att inte licensfiler kunde läsas in utan installationen
+					blev alltid "Utvärderingsversion".</p>
+				<p>
+					<u>1.0.1</u></p>
+				<p>
+					- Lade till möjligheten att avinstallera WinShooter från Start-knappen.</p>
+				<p>
+					- Diverse förändringar för att göra WinShooter mono-kompatibelt (alltså så att den
+					ska kunna köras på Linux). I mono-versionen stöds inte access-databasen, vilket
+					gör att den bara kan användas för att ansluta till en server. Förutom det så stöds
+					inte utskrifter. Detta beror på brister i mono och därmed inte något som jag råder
+					över. När mono stöder utskrifter så kommer också WinShooter på linux att göra det.
+					Just nu så är inte Monos implementation av DataGrid färdig, vilket gör att WinShooter
+					krashar när den försöker skapa bilden för patruller.</p>
+				<p>
+					- Påbörjade laghanteringen. Funktionaliteten ligger dock gömd.</p>
+				<p>
+					- Fixade en bugg (tack till Jonas för bra buggrapport) där en skytt kunde få bana
+					-1 om man lade till flera skyttar samtidigt till patrullen.</p>
+				<p>
+					- Lade till så att man ser Vapengrupp innan vapen i bilden där man lägger till skyttar
+					till respektive patrull.</p>
+				<p>
+					- Fixade en bugg (tack till Martin) som, vid uppläggning av ny skytt, "tappade
+					bort" de patruller stämde överrens med valt vapen.</p>
+				<p>
+					- Fixade en bugg (tack till Lasse) när inte programmet kunde hitta Internet Explorer
+					så krashade det. Nu lägger det upp en felruta.</p>
+				<p>
+					- Fixade en bugg i skyttar-bilden som gjorde att förändringar av dropdownboxen för
+					vapen2 gjordes från fel tråd, vilket krashade programmet. Eventuellt kan det göra
+					att programmet hänger ibland. Det måste felsökas till v1.0.2.</p>
+				<p>
+					- Fixade så att inte B och C-vapen skjuter i samma patrull.</p>
+			</td>
+		</tr>
+	</table>
+</body>
+</html>

@@ -1,0 +1,190 @@
+<!-- $Id: FAQ.htm 107 2009-02-01 06:25:33Z smuda $ -->
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN" >
+<html>
+	<head>
+		<title>Vanliga frågor (FAQ)</title><link href="Standard.css" type="text/css" rel="stylesheet">
+			<script language="javascript" type="text/javascript">
+
+function Toggle( secid )
+{
+	var sectionId = document.getElementById(secid);
+	if (sectionId == null) return;
+	if (sectionId.style.display == '') 
+	{
+		sectionId.style.display = 'none';
+		var ImgSrc = document.getElementById("i" + secid);
+		ImgSrc.src = "plus.gif";
+	}
+	else
+	{
+		sectionId.style.display = '';
+		var ImgSrc = document.getElementById("i" + secid);
+		ImgSrc.src = "minus.gif";
+	}
+}
+
+function onLoad()
+{
+	for(i=1 ; i<100 ; i=i+1)
+	{
+		Toggle('general' + i)
+	}
+	for(i=1 ; i<100 ; i=i+1)
+	{
+		Toggle('server' + i)
+	}
+	for(i=1 ; i<100 ; i=i+1)
+	{
+		Toggle('license' + i)
+	}
+}
+</script>
+	</head>
+	<body class="main" leftMargin="10" topMargin="0" onload="javascript:onLoad()">
+		<a href="http://www.allberg.se/WinShooter"><img alt="Allberg WinShooter" src="top.png" width="604"
+				border="0" height="112"></a>
+		<table id="Table1" cellSpacing="0" cellPadding="0" border="0">
+			<tr>
+				<td>
+					<table class="mainouter" id="Table2">
+						<tr>
+							<td class="mainouter">
+								<table class="main" id="tablemain">
+									<tr>
+										<td class="mainmargin"></td>
+										<td class="main" id="MainText" vAlign="top">
+											<h1 class="heading">Vanliga frågor &amp; svar (FAQ)</h1>
+											<H2 class="text">Allmänna frågor</H2>
+											<p><A href="javascript:Toggle('general1')"><img id="igeneral1" src="plus.gif" alt="+" border="0">Vad 
+													är WinShooter?</A></p>
+											<P class="text" id="general1">WinShooter är ett program för förberedelse och 
+												resultat av en pistolskyttetävling i fältskytte, magnumfältskytte och 
+												banskytte.</p>
+											<p><A href="javascript:Toggle('general2')"><img id="igeneral2" src="plus.gif" alt="+" border="0">Vem 
+													utvecklar WinShooter?</A></p>
+											<P class="text" id="general2">WinShooter utvecklas av John Allberg men den som vill kan också hjälpa till. All
+												källkod finns på sourceforge.</p>
+											<p><A href="javascript:Toggle('general3')"><img id="igeneral3" src="plus.gif" alt="+" border="0">Var 
+													får jag tag i WinShooter?</A></p>
+											<P class="text" id="general3">
+												WinShooter kan laddas ner från <a href="http://sourceforge.net/projects/winshooter">http://sourceforge.net/projects/winshooter</a>.</p>
+											<p><A href="javascript:Toggle('general5')"><img id="igeneral5" src="plus.gif" alt="+" border="0">Jag 
+													har hittat en bugg (felaktighet i programmet), hur anmäler jag den?</A></p>
+											<P class="text" id="general5">Kontrollera först att det är den senaste versionen 
+												som du kör. Den senaste versionen kan laddas ner från <A href="http://sourceforge.net/projects/winshooter/" target="_blank">
+													http://sourceforge.net/projects/winshooter/</A>.<BR>
+												<BR>
+												Därefter ska du skapa en loggfil genom att starta programmet i felsökningsläge.<BR>
+												<BR>
+												Både WinShooter och WinShooter Server kan startas i ett så kallat 
+												felsökningsläge. Det gör att det skapas en fil på C:\ som heter 
+												AllbergWinShooter.log eller AllbergWinShooterServer.log.<BR>
+												<BR>
+												Den fil som skapas ska du skicka in tillsammans med din felrapport. 
+												Felrapporten skapar du på <A href="http://sourceforge.net/projects/winshooter/" target="_blank">http://sourceforge.net/projects/winshooter/</A>.</p>
+											<p><A href="javascript:Toggle('general6')"><img id="igeneral6" src="plus.gif" alt="+" border="0">
+													Hur fungerar prispengsfördelningen?</A></p>
+											<P class="text" id="general6">I programmet kan man per tävling ställa in hur många 
+												som ska få prispengar (default 25%), vilken summa vinnaren ska få (default 
+												250kr), anmälningsavgift (default 100kr) samt hur mycket av inkomsten som ska 
+												gå till prispengar (default 40%).
+												<BR>
+												<BR>
+												1. Den gemensamma prissumman (antalet skyttar * anmälningsavgiften) beräknas.
+												<BR>
+												<BR>
+												2. 1:a placeringen ges sin peng (ställs in för tävlingen).
+												<BR>
+												<BR>
+												3. 2:a priset beräknas som 1:a-placeringen minus 10 kr.
+												<BR>
+												<BR>
+												4. Resten av de som ska ha prispengar beräknas enligt 
+												(NrOfShooterWithPrice-i)*(secondPrice-ShooterFee)/(NrOfShooterWithPrice+1)+ShooterFee 
+												vilket blir en rak linje från 2:a-placeringen till anmälningsavgiften. Summan 
+												avrundas till jämnt 10-tal kronor.
+												<BR>
+												<BR>
+												5. En kontroll sker om summan av de utdelade prispengarna överstiger 40% 
+												(ställs in för tävlingen) av den totala inkomsten. Om så är fallet så 
+												minskas 2:a priset med 10 kr och en ny beräkning sker (punkt 4). Om 2:a-priset 
+												efter minskning understiger anmälningsavgiften så minskas 1:a placeringen med 
+												10 kr och en ny beräkning sker från punkt 3.<BR>
+											</p>
+											<p><A href="javascript:Toggle('general7')"><img id="igeneral7" src="plus.gif" alt="+" border="0">
+													WinShooters automatiska utläggning av patruller tar inte hänsyn till att jag 
+													vill ha lunch-paus! Hur fixar jag det?</A></p>
+											<P class="text" id="general7">Gör så här:<BR>
+												1. För tävlingen, ställ in så många minuter som du vill ha mellan patrullerna 
+												på förmiddagen.<BR>
+												2. Skapa så många patruller som du ska ha på förmiddagen.<BR>
+												3. För tävlingen, ställ in så många minuter som du vill ha lunchpaus.<BR>
+												4. Lägg till en patrull.<BR>
+												5. För tävlingen, ställ in så många minuter som du vill ha mellan patrullerna 
+												på eftermiddagen.<BR>
+												6. Lägg till återstående patruller.
+											</p>
+											<p><A href="javascript:Toggle('general8')"><img id="igeneral8" src="plus.gif" alt="+" border="0">
+													Hur kan jag sätta min egen logga på alla utskrifter och exporter?</A></p>
+											<p>Gör så här:<br>
+												1. Starta Winshooter på den dator du ska göra utskriften/exporten.<BR>
+												2. Öppna menyn inställningar (Hantera-&gt;Inställningar).<BR>
+												3. Under fliken "Logga" så väljer du din egen logo.
+											</p>
+											<H2 class="text">Server/Klient-frågor</H2>
+											<p><A href="javascript:Toggle('server1')"><img id="iserver1" src="plus.gif" alt="+" border="0">Hur 
+													startar jag servern?</A></p>
+											<P class="text" id="server1">Börja med att skapa en tävling som vanligt med 
+												WinShooter. Stäng sedan ner WinShooter.
+												<br>
+												<br>
+												Starta WinShooter Server från start-menyn och välj den tävling som du nyss 
+												skapat i WinShooter.
+												<br>
+												<br>
+												Starta nu WinShooter och välj Arkiv-Anslut till server och serveradressen ska 
+												automatiskt dyka upp. Mer information finns i manualen.</p>
+											<p><A href="javascript:Toggle('server2')"><img id="iserver2" src="plus.gif" alt="+" border="0">Jag 
+													kan inte ansluta till servern. Vad är det för fel?</A></p>
+											<P class="text" id="server2">1. Om du kör har en brandvägg på servern och/eller 
+												klienten, kontrollera att du inte är ansluten till Internet och slå sedan av 
+												brandväggen på båda datorerna. Om det då fungerar att ansluta så måste 
+												brandväggen ställas in så att den accepterar anslutningar till och från 
+												WinShooter och WinShooter Server.<br>
+												<br>
+												2. Om det fortfarande inte går att ansluta, kontrollera att du på servern kan 
+												starta klienten och ansluta. Om det inte går, starta om WinShooter Server och 
+												prova igen.<br>
+												<br>
+												3. Kontrollera anslutningen mellan de båda datorerna genom att köra kommandot 
+												"ping". Det gör du så här:<br>
+												<br>
+												+ Klicka på start-Program-Tillbehör-Kommandotolk.
+												<br>
+												+ skriv "ping &lt;serveradressen&gt;"
+												<br>
+												+ nu ska du få fyra rader som endera står "svar från" eller "begäran gjorde 
+												time-out". Om det står time-out så är det ett nätverksfel som måste felsökas.</p>
+											<H2 class="text">Licens-frågor</H2>
+											<p><A href="javascript:Toggle('license1')"><img id="ilicense1" src="plus.gif" alt="+" border="0">Hur 
+													licensieras WinShooter?</A></p>
+											<P class="text" id="license1">WinShooter licensiceras under GPL, GNU Public License. <strong>Det innebär att du får använda
+												WinShooter hur mycket som helst alldeles gratis.</strong> Du får också modifiera WinShooter
+												för att passa dina egna önskemål.
+												<br /><br />
+												Du får dock inte sälja WinShooter och när du distribuerar WinShooter, endera den
+												ursprungliga eller din egen modifierade variant så måste du alltid skicka med källkoden
+												eller tala om var man kan få tag i den.</p>
+											
+										</td>
+									</tr>
+								</table>
+							</td>
+						</tr>
+					</table>
+				</td>
+				<td class="mainouter" vAlign="top"></td>
+			</tr>
+		</table>
+	</body>
+</html>

@@ -1,0 +1,2 @@
+-1234;01-417;Allberg;John;1;john@allberg.se;Un (C)
+-1234;01-417;Allberg;John;1;john@allberg.se;Un (C)

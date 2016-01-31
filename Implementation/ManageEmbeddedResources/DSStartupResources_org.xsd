@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<xs:schema id="DSStartupResources" targetNamespace="http://tempuri.org/DSStartupResources.xsd"
+	elementFormDefault="qualified" attributeFormDefault="qualified" xmlns="http://tempuri.org/DSStartupResources.xsd"
+	xmlns:mstns="http://tempuri.org/DSStartupResources.xsd" xmlns:xs="http://www.w3.org/2001/XMLSchema"
+	xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+	<xs:element name="DSStartupResources" msdata:IsDataSet="true">
+		<xs:complexType>
+			<xs:choice maxOccurs="unbounded">
+				<xs:element name="Clubs">
+					<xs:complexType>
+						<xs:sequence>
+							<xs:element name="ClubId" type="xs:string" minOccurs="1" nillable="false" />
+							<xs:element name="Name" type="xs:string" minOccurs="0" />
+							<xs:element name="Country" type="xs:string" minOccurs="0" />
+							<xs:element name="Plusgiro" type="xs:string" minOccurs="0" />
+							<xs:element name="Email" type="xs:string" minOccurs="0" />
+							<xs:element name="Bankgiro" type="xs:string" minOccurs="0" />
+						</xs:sequence>
+					</xs:complexType>
+				</xs:element>
+				<xs:element name="Weapons">
+					<xs:complexType>
+						<xs:sequence>
+							<xs:element name="WeaponId" type="xs:string" minOccurs="0" />
+							<xs:element name="Manufacturer" type="xs:string" minOccurs="0" />
+							<xs:element name="Model" type="xs:string" minOccurs="0" />
+							<xs:element name="Caliber" type="xs:string" minOccurs="0" />
+							<xs:element name="Class" type="xs:int" minOccurs="0" />
+						</xs:sequence>
+					</xs:complexType>
+				</xs:element>
+				<xs:element name="Shooters">
+					<xs:complexType>
+						<xs:sequence>
+							<xs:element name="Cardnr" type="xs:string" minOccurs="0" />
+							<xs:element name="Surname" type="xs:string" minOccurs="0" />
+							<xs:element name="Givenname" type="xs:string" minOccurs="0" />
+							<xs:element name="Email" type="xs:string" minOccurs="0" />
+							<xs:element name="ClubId" type="xs:string" minOccurs="0" />
+							<xs:element name="Class" type="xs:int" minOccurs="0" />
+						</xs:sequence>
+					</xs:complexType>
+				</xs:element>
+			</xs:choice>
+		</xs:complexType>
+		<xs:key name="StartupResourcesClubId">
+			<xs:selector xpath=".//mstns:Clubs" />
+			<xs:field xpath="mstns:ClubId" />
+		</xs:key>
+		<xs:key name="StartupResourcesWeaponId">
+			<xs:selector xpath=".//mstns:Weapons" />
+			<xs:field xpath="mstns:WeaponId" />
+		</xs:key>
+		<xs:keyref name="ClubsShooters" refer="StartupResourcesClubId">
+			<xs:selector xpath=".//mstns:Shooters" />
+			<xs:field xpath="mstns:ClubId" />
+		</xs:keyref>
+		<xs:key name="DSStartupResourcesCardnr">
+			<xs:selector xpath=".//mstns:Shooters" />
+			<xs:field xpath="mstns:Cardnr" />
+		</xs:key>
+	</xs:element>
+</xs:schema>

@@ -1,0 +1,52 @@
+<?xml version="1.0" standalone="yes" ?>
+<xs:schema id="DataSetWinShooter" targetNamespace="http://www.tempuri.org/DataSetWinShooter.xsd"
+	xmlns:mstns="http://www.tempuri.org/DataSetWinShooter.xsd" xmlns="http://www.tempuri.org/DataSetWinShooter.xsd"
+	xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata"
+	attributeFormDefault="qualified" elementFormDefault="qualified">
+	<xs:element name="DataSetWinShooter" msdata:IsDataSet="true" msdata:Locale="sv-SE">
+		<xs:complexType>
+			<xs:choice maxOccurs="unbounded">
+				<xs:element name="Shooters">
+					<xs:complexType>
+						<xs:sequence>
+							<xs:element name="Arrived" type="xs:boolean" minOccurs="0" nillable="true" />
+							<xs:element name="Automatic" type="xs:boolean" minOccurs="0" nillable="true" />
+							<xs:element name="Cardnr" type="xs:string" minOccurs="0" nillable="true" />
+							<xs:element name="Class" type="xs:int" minOccurs="0" />
+							<xs:element name="ClubId" type="xs:string" minOccurs="0" />
+							<xs:element name="Email" type="xs:string" minOccurs="0" />
+							<xs:element name="EmailResult" type="xs:boolean" minOccurs="0" nillable="true" />
+							<xs:element name="Givenname" type="xs:string" minOccurs="0" />
+							<xs:element name="Payed" type="xs:int" minOccurs="0" />
+							<xs:element name="ShooterId" msdata:AutoIncrement="true" type="xs:int" />
+							<xs:element name="Surname" type="xs:string" minOccurs="0" />
+							<xs:element name="ToAutomatic" type="xs:boolean" minOccurs="0" />
+						</xs:sequence>
+					</xs:complexType>
+				</xs:element>
+				<xs:element name="Clubs">
+					<xs:complexType>
+						<xs:sequence>
+							<xs:element name="Automatic" type="xs:boolean" minOccurs="0" />
+							<xs:element name="Bankgiro" type="xs:string" minOccurs="0" />
+							<xs:element name="ClubId" type="xs:string" />
+							<xs:element name="Country" type="xs:string" minOccurs="0" />
+							<xs:element name="Email" type="xs:string" minOccurs="0" />
+							<xs:element name="Name" type="xs:string" minOccurs="0" />
+							<xs:element name="Plusgiro" type="xs:string" minOccurs="0" />
+							<xs:element name="ToAutomatic" type="xs:boolean" minOccurs="0" />
+						</xs:sequence>
+					</xs:complexType>
+				</xs:element>
+			</xs:choice>
+		</xs:complexType>
+		<xs:unique name="Constraint1" msdata:PrimaryKey="true">
+			<xs:selector xpath=".//mstns:Shooters" />
+			<xs:field xpath="mstns:ShooterId" />
+		</xs:unique>
+		<xs:unique name="Clubs_Constraint1" msdata:ConstraintName="Constraint1" msdata:PrimaryKey="true">
+			<xs:selector xpath=".//mstns:Clubs" />
+			<xs:field xpath="mstns:ClubId" />
+		</xs:unique>
+	</xs:element>
+</xs:schema>

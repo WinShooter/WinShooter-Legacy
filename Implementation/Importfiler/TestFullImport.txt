@@ -1,0 +1,8 @@
+29502;02-295;Svahn      ;Daniel ;3C ;daniel.svahn@bredband.com;Bn (C) ;1;1
+29505;02-295;Önerud     ;Kent   ;3C ;;Bn (C) ;2;2
+29508;02-295;Eriksson   ;Mikael ;3C ;;Bn (C) ;3;3
+00102;01-001;Nordlund   ;Sverker;3C ;;Bn (C) ;4;4
+67702;01-677;Bjerkeng   ;Conny  ;3C ;;Bn (C) ;5;5
+73701;01-737;Lund       ;Björn  ;2C ;;Bn (C) ;6;6
+19805;01-198;Falkenström;Patrik ;2C ;;Bn (C) ;7;7
+29501;02-295;Dahlgren   ;Camilla;D3C;;Bn (C) ;8;8

@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:tns="http://www.winshooter.se/UpdateCache" xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" targetNamespace="http://www.winshooter.se/UpdateCache" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <s:schema elementFormDefault="qualified" targetNamespace="http://www.winshooter.se/UpdateCache">
+      <s:element name="FromLocalFile">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="fileContent" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="FromLocalFileResponse">
+        <s:complexType />
+      </s:element>
+    </s:schema>
+  </wsdl:types>
+  <wsdl:message name="FromLocalFileSoapIn">
+    <wsdl:part name="parameters" element="tns:FromLocalFile" />
+  </wsdl:message>
+  <wsdl:message name="FromLocalFileSoapOut">
+    <wsdl:part name="parameters" element="tns:FromLocalFileResponse" />
+  </wsdl:message>
+  <wsdl:portType name="UpdateCacheSoap">
+    <wsdl:operation name="FromLocalFile">
+      <wsdl:input message="tns:FromLocalFileSoapIn" />
+      <wsdl:output message="tns:FromLocalFileSoapOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="UpdateCacheSoap" type="tns:UpdateCacheSoap">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="FromLocalFile">
+      <soap:operation soapAction="http://www.winshooter.se/UpdateCache/FromLocalFile" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="UpdateCacheSoap12" type="tns:UpdateCacheSoap">
+    <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="FromLocalFile">
+      <soap12:operation soapAction="http://www.winshooter.se/UpdateCache/FromLocalFile" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="UpdateCache">
+    <wsdl:port name="UpdateCacheSoap" binding="tns:UpdateCacheSoap">
+      <soap:address location="http://www.winshooter.se/Upload/UpdateCache.asmx" />
+    </wsdl:port>
+    <wsdl:port name="UpdateCacheSoap12" binding="tns:UpdateCacheSoap12">
+      <soap12:address location="http://www.winshooter.se/Upload/UpdateCache.asmx" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

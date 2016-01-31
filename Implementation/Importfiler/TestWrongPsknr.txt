@@ -1,0 +1,6 @@
+2;01-417;Fredriksson;Jonas;3J;jonas_fredriksson@email.com;Un (C)
+2;01-417;Fredriksson;Jonas;3;jonas_fredriksson@email.com;Ad
+2;01-417;Fredriksson;Jonas;3;jonas_fredriksson@email.com;_OkäntB
+3;01-417;Selander;Martin;3;martin_selander@email.com;M40
+3;01-417;Selander;Martin;3;martin_selander@email.com;C45 (C)
+?;01-417;Allberg;John;1;john@allberg.se;Un (C)

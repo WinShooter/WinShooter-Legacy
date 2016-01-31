@@ -1,0 +1,182 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<xs:schema id="DatabaseDataset" targetNamespace="http://www.allberg.se/Skytte/Databas.org/DatabaseDataset.xsd"
+	elementFormDefault="qualified" attributeFormDefault="qualified" xmlns="http://www.allberg.se/Skytte/Databas.org/DatabaseDataset.xsd"
+	xmlns:mstns="http://www.allberg.se/Skytte/Databas.org/DatabaseDataset.xsd" xmlns:xs="http://www.w3.org/2001/XMLSchema"
+	xmlns:msdata="urn:schemas-microsoft-com:xml-msdata" xmlns:msprop="urn:schemas-microsoft-com:xml-msprop">
+	<xs:element name="DatabaseDataset" msdata:IsDataSet="true">
+		<xs:complexType>
+			<xs:choice maxOccurs="unbounded">
+				<xs:element name="Competition">
+					<xs:complexType>
+						<xs:sequence>
+							<xs:element name="CompetitionId" type="xs:int" minOccurs="0" msdata:AutoIncrement="true" msdata:AutoIncrementStep="1"
+								msdata:AutoIncrementSeed="1" />
+							<xs:element name="Name" type="xs:string" minOccurs="0" />
+							<xs:element name="StartTime" type="xs:dateTime" minOccurs="0" />
+							<xs:element name="NorwegianCount" type="xs:boolean" minOccurs="0" />
+							<xs:element name="PatrolTime" type="xs:int" minOccurs="0" />
+							<xs:element name="PatrolTimeBetween" type="xs:int" minOccurs="0" />
+							<xs:element name="PatrolTimeRest" type="xs:int" minOccurs="0" />
+							<xs:element name="PatrolSize" type="xs:int" minOccurs="0" />
+						</xs:sequence>
+					</xs:complexType>
+				</xs:element>
+				<xs:element name="Clubs">
+					<xs:complexType>
+						<xs:sequence>
+							<xs:element name="ClubId" type="xs:string" minOccurs="1" nillable="false" />
+							<xs:element name="Name" type="xs:string" minOccurs="0" />
+							<xs:element name="Country" type="xs:string" minOccurs="0" />
+							<xs:element name="Automatic" type="xs:boolean" minOccurs="0" />
+							<xs:element name="ToAutomatic" type="xs:boolean" minOccurs="0" />
+						</xs:sequence>
+					</xs:complexType>
+				</xs:element>
+				<xs:element name="Competitors">
+					<xs:complexType>
+						<xs:sequence>
+							<xs:element name="CompetitorId" type="xs:int" minOccurs="0" msdata:AutoIncrement="true" msdata:AutoIncrementSeed="1"
+								msdata:AutoIncrementStep="1" />
+							<xs:element name="ShooterId" type="xs:int" minOccurs="0" msprop:nullValue="_throw" nillable="false" />
+							<xs:element name="WeaponId" type="xs:string" minOccurs="0" />
+							<xs:element name="CompetitionId" type="xs:int" minOccurs="0" />
+							<xs:element name="PatrolId" type="xs:int" minOccurs="0" />
+							<xs:element name="Lane" type="xs:int" minOccurs="0" />
+						</xs:sequence>
+					</xs:complexType>
+				</xs:element>
+				<xs:element name="Patrols">
+					<xs:complexType>
+						<xs:sequence>
+							<xs:element name="PatrolId" type="xs:int" minOccurs="1" nillable="false" />
+							<xs:element name="StartDateTime" type="xs:dateTime" minOccurs="0" />
+							<xs:element name="CompetitionId" type="xs:int" minOccurs="0" />
+							<xs:element name="Automatic" type="xs:boolean" minOccurs="0" />
+							<xs:element name="PClass" type="xs:int" minOccurs="0" />
+						</xs:sequence>
+					</xs:complexType>
+				</xs:element>
+				<xs:element name="CompetitorResults">
+					<xs:complexType>
+						<xs:sequence>
+							<xs:element name="ResultId" type="xs:int" minOccurs="0" msdata:AutoIncrement="true" />
+							<xs:element name="CompetitorId" type="xs:int" minOccurs="0" />
+							<xs:element name="StationId" type="xs:int" minOccurs="0" />
+							<xs:element name="TargetHits" type="xs:int" minOccurs="0" />
+							<xs:element name="Hits" type="xs:int" minOccurs="0" />
+							<xs:element name="Points" type="xs:int" minOccurs="0" />
+						</xs:sequence>
+					</xs:complexType>
+				</xs:element>
+				<xs:element name="Weapons">
+					<xs:complexType>
+						<xs:sequence>
+							<xs:element name="WeaponId" type="xs:string" minOccurs="0" />
+							<xs:element name="Name" type="xs:string" minOccurs="0" />
+							<xs:element name="Class" type="xs:int" minOccurs="0" />
+							<xs:element name="Automatic" type="xs:boolean" minOccurs="0" />
+							<xs:element name="ToAutomatic" type="xs:boolean" minOccurs="0" />
+						</xs:sequence>
+					</xs:complexType>
+				</xs:element>
+				<xs:element name="Shooters">
+					<xs:complexType>
+						<xs:sequence>
+							<xs:element name="ShooterId" type="xs:int" minOccurs="0" msdata:AutoIncrementSeed="1" msdata:AutoIncrementStep="1"
+								msdata:AutoIncrement="true" nillable="false" msprop:nullValue="_throw" />
+							<xs:element name="Cardnr" type="xs:string" minOccurs="0" />
+							<xs:element name="Surname" type="xs:string" minOccurs="0" />
+							<xs:element name="Givenname" type="xs:string" minOccurs="0" />
+							<xs:element name="Email" type="xs:string" minOccurs="0" />
+							<xs:element name="ClubId" type="xs:string" minOccurs="0" />
+							<xs:element name="Payed" type="xs:int" minOccurs="0" />
+							<xs:element name="ToAutomatic" type="xs:boolean" minOccurs="0" />
+							<xs:element name="Automatic" type="xs:boolean" minOccurs="0" />
+						</xs:sequence>
+					</xs:complexType>
+				</xs:element>
+				<xs:element name="Stations">
+					<xs:complexType>
+						<xs:sequence>
+							<xs:element name="StationId" type="xs:int" minOccurs="0" msdata:AutoIncrement="true" msdata:AutoIncrementSeed="1"
+								msdata:AutoIncrementStep="1" />
+							<xs:element name="StationNr" type="xs:int" minOccurs="0" />
+							<xs:element name="Figures" type="xs:int" minOccurs="0" />
+							<xs:element name="Shoots" type="xs:int" minOccurs="0" />
+							<xs:element name="Points" type="xs:boolean" minOccurs="0" />
+							<xs:element name="CompetitionId" type="xs:int" minOccurs="0" />
+						</xs:sequence>
+					</xs:complexType>
+				</xs:element>
+			</xs:choice>
+		</xs:complexType>
+		<xs:key name="CompetitionId">
+			<xs:selector xpath=".//mstns:Competition" />
+			<xs:field xpath="mstns:CompetitionId" />
+		</xs:key>
+		<xs:key name="ClubsId">
+			<xs:selector xpath=".//mstns:Clubs" />
+			<xs:field xpath="mstns:ClubId" />
+		</xs:key>
+		<xs:key name="CompetitorsId">
+			<xs:selector xpath=".//mstns:Competitors" />
+			<xs:field xpath="mstns:CompetitorId" />
+		</xs:key>
+		<xs:keyref name="CompetitionCompetitors" refer="CompetitionId">
+			<xs:selector xpath=".//mstns:Competitors" />
+			<xs:field xpath="mstns:CompetitionId" />
+		</xs:keyref>
+		<xs:key name="PatrolsId">
+			<xs:selector xpath=".//mstns:Patrols" />
+			<xs:field xpath="mstns:PatrolId" />
+		</xs:key>
+		<xs:keyref name="PatrolsCompetitors" refer="PatrolsId">
+			<xs:selector xpath=".//mstns:Competitors" />
+			<xs:field xpath="mstns:PatrolId" />
+		</xs:keyref>
+		<xs:keyref name="CompetitionPatrols" refer="CompetitionId">
+			<xs:selector xpath=".//mstns:Patrols" />
+			<xs:field xpath="mstns:CompetitionId" />
+		</xs:keyref>
+		<xs:key name="CompetitorResults">
+			<xs:selector xpath=".//mstns:CompetitorResults" />
+			<xs:field xpath="mstns:ResultId" />
+		</xs:key>
+		<xs:key name="WeaponsId">
+			<xs:selector xpath=".//mstns:Weapons" />
+			<xs:field xpath="mstns:WeaponId" />
+		</xs:key>
+		<xs:keyref name="WeaponsCompetitors" refer="WeaponsId">
+			<xs:selector xpath=".//mstns:Competitors" />
+			<xs:field xpath="mstns:WeaponId" />
+		</xs:keyref>
+		<xs:key name="ShootersId">
+			<xs:selector xpath=".//mstns:Shooters" />
+			<xs:field xpath="mstns:ShooterId" />
+		</xs:key>
+		<xs:keyref name="ClubsShooters" refer="ClubsId">
+			<xs:selector xpath=".//mstns:Shooters" />
+			<xs:field xpath="mstns:ClubId" />
+		</xs:keyref>
+		<xs:keyref name="ShootersCompetitors" refer="ShootersId">
+			<xs:selector xpath=".//mstns:Competitors" />
+			<xs:field xpath="mstns:ShooterId" />
+		</xs:keyref>
+		<xs:key name="DatabaseDatasetKey1">
+			<xs:selector xpath=".//mstns:Stations" />
+			<xs:field xpath="mstns:StationId" />
+		</xs:key>
+		<xs:keyref name="CompetitionLanes" refer="CompetitionId">
+			<xs:selector xpath=".//mstns:Stations" />
+			<xs:field xpath="mstns:CompetitionId" />
+		</xs:keyref>
+		<xs:keyref name="StationsCompetitorResults" refer="DatabaseDatasetKey1">
+			<xs:selector xpath=".//mstns:CompetitorResults" />
+			<xs:field xpath="mstns:StationId" />
+		</xs:keyref>
+		<xs:keyref name="CompetitorsCompetitorResults" refer="CompetitorsId">
+			<xs:selector xpath=".//mstns:CompetitorResults" />
+			<xs:field xpath="mstns:CompetitorId" />
+		</xs:keyref>
+	</xs:element>
+</xs:schema>

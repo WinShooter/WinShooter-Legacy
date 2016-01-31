@@ -1,0 +1,2033 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<dataroot xmlns:od="urn:schemas-microsoft-com:officedata" xmlns:xsi="http://www.w3.org/2000/10/XMLSchema-instance"  xsi:noNamespaceSchemaLocation="tblVapen.xsd">
+<tblVapen>
+<idV>1</idV>
+<Vapennamn>AMT 9 mm</Vapennamn>
+<Vapen>AMT9</Vapen>
+<A1>0</A1>
+<A2>0</A2>
+<A3>1</A3>
+<B>1</B>
+<C>0</C>
+</tblVapen>
+<tblVapen>
+<idV>2</idV>
+<Vapennamn>AMT .40</Vapennamn>
+<Vapen>AMT40</Vapen>
+<A1>0</A1>
+<A2>0</A2>
+<A3>1</A3>
+<B>1</B>
+<C>0</C>
+</tblVapen>
+<tblVapen>
+<idV>3</idV>
+<Vapennamn>AMT 10 mm</Vapennamn>
+<Vapen>AMT10</Vapen>
+<A1>0</A1>
+<A2>0</A2>
+<A3>1</A3>
+<B>1</B>
+<C>0</C>
+</tblVapen>
+<tblVapen>
+<idV>4</idV>
+<Vapennamn>Astra 9 mm</Vapennamn>
+<Vapen>As9</Vapen>
+<A1>0</A1>
+<A2>0</A2>
+<A3>1</A3>
+<B>1</B>
+<C>0</C>
+</tblVapen>
+<tblVapen>
+<idV>5</idV>
+<Vapennamn>Auto-Ordnance .45</Vapennamn>
+<Vapen>AO45</Vapen>
+<A1>0</A1>
+<A2>0</A2>
+<A3>1</A3>
+<B>1</B>
+<C>0</C>
+</tblVapen>
+<tblVapen>
+<idV>6</idV>
+<Vapennamn>Beretta 9 mm</Vapennamn>
+<Vapen>Be9</Vapen>
+<A1>0</A1>
+<A2>0</A2>
+<A3>1</A3>
+<B>1</B>
+<C>0</C>
+</tblVapen>
+<tblVapen>
+<idV>7</idV>
+<Vapennamn>Beretta .40</Vapennamn>
+<Vapen>Be40</Vapen>
+<A1>0</A1>
+<A2>0</A2>
+<A3>1</A3>
+<B>1</B>
+<C>0</C>
+</tblVapen>
+<tblVapen>
+<idV>8</idV>
+<Vapennamn>Bernardelli 9 mm</Vapennamn>
+<Vapen>Bd9</Vapen>
+<A1>0</A1>
+<A2>0</A2>
+<A3>1</A3>
+<B>1</B>
+<C>0</C>
+</tblVapen>
+<tblVapen>
+<idV>9</idV>
+<Vapennamn>BUL 9 mm</Vapennamn>
+<Vapen>BUL9</Vapen>
+<A1>0</A1>
+<A2>0</A2>
+<A3>1</A3>
+<B>1</B>
+<C>0</C>
+</tblVapen>
+<tblVapen>
+<idV>10</idV>
+<Vapennamn>BUL .40</Vapennamn>
+<Vapen>BUL40</Vapen>
+<A1>0</A1>
+<A2>0</A2>
+<A3>1</A3>
+<B>1</B>
+<C>0</C>
+</tblVapen>
+<tblVapen>
+<idV>11</idV>
+<Vapennamn>BUL .45</Vapennamn>
+<Vapen>BUL45</Vapen>
+<A1>0</A1>
+<A2>0</A2>
+<A3>1</A3>
+<B>1</B>
+<C>0</C>
+</tblVapen>
+<tblVapen>
+<idV>12</idV>
+<Vapennamn>Caspian 9 mm</Vapennamn>
+<Vapen>Ca9</Vapen>
+<A1>0</A1>
+<A2>0</A2>
+<A3>1</A3>
+<B>1</B>
+<C>0</C>
+</tblVapen>
+<tblVapen>
+<idV>13</idV>
+<Vapennamn>Caspian .38</Vapennamn>
+<Vapen>Ca38</Vapen>
+<A1>0</A1>
+<A2>0</A2>
+<A3>1</A3>
+<B>1</B>
+<C>0</C>
+</tblVapen>
+<tblVapen>
+<idV>14</idV>
+<Vapennamn>Caspian 10 mm</Vapennamn>
+<Vapen>Ca10</Vapen>
+<A1>0</A1>
+<A2>0</A2>
+<A3>1</A3>
+<B>1</B>
+<C>0</C>
+</tblVapen>
+<tblVapen>
+<idV>15</idV>
+<Vapennamn>Caspian .45</Vapennamn>
+<Vapen>Ca45</Vapen>
+<A1>0</A1>
+<A2>0</A2>
+<A3>1</A3>
+<B>1</B>
+<C>0</C>
+</tblVapen>
+<tblVapen>
+<idV>16</idV>
+<Vapennamn>Colt 9 mm</Vapennamn>
+<Vapen>C9</Vapen>
+<A1>0</A1>
+<A2>0</A2>
+<A3>1</A3>
+<B>1</B>
+<C>0</C>
+</tblVapen>
+<tblVapen>
+<idV>17</idV>
+<Vapennamn>Colt .40</Vapennamn>
+<Vapen>C40</Vapen>
+<A1>0</A1>
+<A2>0</A2>
+<A3>1</A3>
+<B>1</B>
+<C>0</C>
+</tblVapen>
+<tblVapen>
+<idV>18</idV>
+<Vapennamn>Colt .45</Vapennamn>
+<Vapen>C45</Vapen>
+<A1>0</A1>
+<A2>0</A2>
+<A3>1</A3>
+<B>1</B>
+<C>0</C>
+</tblVapen>
+<tblVapen>
+<idV>19</idV>
+<Vapennamn>CZ 9 mm</Vapennamn>
+<Vapen>CZ9</Vapen>
+<A1>0</A1>
+<A2>0</A2>
+<A3>1</A3>
+<B>1</B>
+<C>0</C>
+</tblVapen>
+<tblVapen>
+<idV>20</idV>
+<Vapennamn>CZ .40</Vapennamn>
+<Vapen>CZ40</Vapen>
+<A1>0</A1>
+<A2>0</A2>
+<A3>1</A3>
+<B>1</B>
+<C>0</C>
+</tblVapen>
+<tblVapen>
+<idV>21</idV>
+<Vapennamn>Detonics .45</Vapennamn>
+<Vapen>De45</Vapen>
+<A1>0</A1>
+<A2>0</A2>
+<A3>1</A3>
+<B>1</B>
+<C>0</C>
+</tblVapen>
+<tblVapen>
+<idV>22</idV>
+<Vapennamn>Fèg 9 mm</Vapennamn>
+<Vapen>F9</Vapen>
+<A1>0</A1>
+<A2>0</A2>
+<A3>1</A3>
+<B>1</B>
+<C>0</C>
+</tblVapen>
+<tblVapen>
+<idV>23</idV>
+<Vapennamn>Husqvarna/Browning m/07</Vapennamn>
+<Vapen>m/07</Vapen>
+<A1>1</A1>
+<A2>0</A2>
+<A3>0</A3>
+<B>1</B>
+<C>0</C>
+</tblVapen>
+<tblVapen>
+<idV>24</idV>
+<Vapennamn>Browning High Power</Vapennamn>
+<Vapen>BHP</Vapen>
+<A1>0</A1>
+<A2>0</A2>
+<A3>1</A3>
+<B>1</B>
+<C>0</C>
+</tblVapen>
+<tblVapen>
+<idV>25</idV>
+<Vapennamn>Browning High Power .40</Vapennamn>
+<Vapen>BHP40</Vapen>
+<A1>0</A1>
+<A2>0</A2>
+<A3>1</A3>
+<B>1</B>
+<C>0</C>
+</tblVapen>
+<tblVapen>
+<idV>26</idV>
+<Vapennamn>Fratelli Tanfoglio 9 mm</Vapennamn>
+<Vapen>FT9</Vapen>
+<A1>0</A1>
+<A2>0</A2>
+<A3>1</A3>
+<B>1</B>
+<C>0</C>
+</tblVapen>
+<tblVapen>
+<idV>27</idV>
+<Vapennamn>Fratelli Tanfoglio .40</Vapennamn>
+<Vapen>FT40</Vapen>
+<A1>0</A1>
+<A2>0</A2>
+<A3>1</A3>
+<B>1</B>
+<C>0</C>
+</tblVapen>
+<tblVapen>
+<idV>28</idV>
+<Vapennamn>Glock 17 (m88), 19 (m88B)</Vapennamn>
+<Vapen>m/88</Vapen>
+<A1>1</A1>
+<A2>0</A2>
+<A3>0</A3>
+<B>1</B>
+<C>0</C>
+</tblVapen>
+<tblVapen>
+<idV>29</idV>
+<Vapennamn>Glock 9 mm</Vapennamn>
+<Vapen>G9</Vapen>
+<A1>0</A1>
+<A2>0</A2>
+<A3>1</A3>
+<B>1</B>
+<C>0</C>
+</tblVapen>
+<tblVapen>
+<idV>30</idV>
+<Vapennamn>Glock 10 mm</Vapennamn>
+<Vapen>G10</Vapen>
+<A1>0</A1>
+<A2>0</A2>
+<A3>1</A3>
+<B>1</B>
+<C>0</C>
+</tblVapen>
+<tblVapen>
+<idV>31</idV>
+<Vapennamn>Glock .40</Vapennamn>
+<Vapen>G40</Vapen>
+<A1>0</A1>
+<A2>0</A2>
+<A3>1</A3>
+<B>1</B>
+<C>0</C>
+</tblVapen>
+<tblVapen>
+<idV>32</idV>
+<Vapennamn>Glock .45</Vapennamn>
+<Vapen>G45</Vapen>
+<A1>0</A1>
+<A2>0</A2>
+<A3>1</A3>
+<B>1</B>
+<C>0</C>
+</tblVapen>
+<tblVapen>
+<idV>33</idV>
+<Vapennamn><![CDATA[Heckler & Koch 9 mm]]></Vapennamn>
+<Vapen>HK9</Vapen>
+<A1>0</A1>
+<A2>0</A2>
+<A3>1</A3>
+<B>1</B>
+<C>0</C>
+</tblVapen>
+<tblVapen>
+<idV>34</idV>
+<Vapennamn><![CDATA[Heckler & Koch .40]]></Vapennamn>
+<Vapen>HK40</Vapen>
+<A1>0</A1>
+<A2>0</A2>
+<A3>1</A3>
+<B>1</B>
+<C>0</C>
+</tblVapen>
+<tblVapen>
+<idV>35</idV>
+<Vapennamn><![CDATA[Heckler & Koch .45]]></Vapennamn>
+<Vapen>HK45</Vapen>
+<A1>0</A1>
+<A2>0</A2>
+<A3>1</A3>
+<B>1</B>
+<C>0</C>
+</tblVapen>
+<tblVapen>
+<idV>36</idV>
+<Vapennamn>High Standard .45</Vapennamn>
+<Vapen>HS45</Vapen>
+<A1>0</A1>
+<A2>0</A2>
+<A3>1</A3>
+<B>1</B>
+<C>0</C>
+</tblVapen>
+<tblVapen>
+<idV>37</idV>
+<Vapennamn>Husqvarna/Lahti m/40</Vapennamn>
+<Vapen>m/40</Vapen>
+<A1>1</A1>
+<A2>0</A2>
+<A3>0</A3>
+<B>1</B>
+<C>0</C>
+</tblVapen>
+<tblVapen>
+<idV>38</idV>
+<Vapennamn>IMI 9 mm</Vapennamn>
+<Vapen>IMI9</Vapen>
+<A1>0</A1>
+<A2>0</A2>
+<A3>1</A3>
+<B>1</B>
+<C>0</C>
+</tblVapen>
+<tblVapen>
+<idV>39</idV>
+<Vapennamn>IMI .41</Vapennamn>
+<Vapen>IMI41</Vapen>
+<A1>0</A1>
+<A2>0</A2>
+<A3>1</A3>
+<B>1</B>
+<C>0</C>
+</tblVapen>
+<tblVapen>
+<idV>40</idV>
+<Vapennamn>Kimber .40</Vapennamn>
+<Vapen>Ki40</Vapen>
+<A1>0</A1>
+<A2>0</A2>
+<A3>1</A3>
+<B>1</B>
+<C>0</C>
+</tblVapen>
+<tblVapen>
+<idV>41</idV>
+<Vapennamn>Kimber .45</Vapennamn>
+<Vapen>Ki45</Vapen>
+<A1>0</A1>
+<A2>0</A2>
+<A3>1</A3>
+<B>1</B>
+<C>0</C>
+</tblVapen>
+<tblVapen>
+<idV>42</idV>
+<Vapennamn>Kongsberg .45</Vapennamn>
+<Vapen>Ko45</Vapen>
+<A1>0</A1>
+<A2>0</A2>
+<A3>1</A3>
+<B>1</B>
+<C>0</C>
+</tblVapen>
+<tblVapen>
+<idV>43</idV>
+<Vapennamn>KPS 9 mm</Vapennamn>
+<Vapen>KPS9</Vapen>
+<A1>0</A1>
+<A2>0</A2>
+<A3>1</A3>
+<B>1</B>
+<C>0</C>
+</tblVapen>
+<tblVapen>
+<idV>44</idV>
+<Vapennamn>KPS .45</Vapennamn>
+<Vapen>KPS45</Vapen>
+<A1>0</A1>
+<A2>0</A2>
+<A3>1</A3>
+<B>1</B>
+<C>0</C>
+</tblVapen>
+<tblVapen>
+<idV>45</idV>
+<Vapennamn>Llama 9 mm</Vapennamn>
+<Vapen>L9</Vapen>
+<A1>0</A1>
+<A2>0</A2>
+<A3>1</A3>
+<B>1</B>
+<C>0</C>
+</tblVapen>
+<tblVapen>
+<idV>46</idV>
+<Vapennamn>Llama .45</Vapennamn>
+<Vapen>L45</Vapen>
+<A1>0</A1>
+<A2>0</A2>
+<A3>1</A3>
+<B>1</B>
+<C>0</C>
+</tblVapen>
+<tblVapen>
+<idV>47</idV>
+<Vapennamn>MAS 9 mm</Vapennamn>
+<Vapen>MAS9</Vapen>
+<A1>0</A1>
+<A2>0</A2>
+<A3>1</A3>
+<B>1</B>
+<C>0</C>
+</tblVapen>
+<tblVapen>
+<idV>48</idV>
+<Vapennamn>Mauser 7,63 mm</Vapennamn>
+<Vapen>M7</Vapen>
+<A1>0</A1>
+<A2>0</A2>
+<A3>1</A3>
+<B>1</B>
+<C>0</C>
+</tblVapen>
+<tblVapen>
+<idV>49</idV>
+<Vapennamn>Mauser 9 mm</Vapennamn>
+<Vapen>M9</Vapen>
+<A1>0</A1>
+<A2>0</A2>
+<A3>1</A3>
+<B>1</B>
+<C>0</C>
+</tblVapen>
+<tblVapen>
+<idV>50</idV>
+<Vapennamn>Mauser .40</Vapennamn>
+<Vapen>M40</Vapen>
+<A1>0</A1>
+<A2>0</A2>
+<A3>1</A3>
+<B>1</B>
+<C>0</C>
+</tblVapen>
+<tblVapen>
+<idV>51</idV>
+<Vapennamn>Mauser .45</Vapennamn>
+<Vapen>M45</Vapen>
+<A1>0</A1>
+<A2>0</A2>
+<A3>1</A3>
+<B>1</B>
+<C>0</C>
+</tblVapen>
+<tblVapen>
+<idV>52</idV>
+<Vapennamn>Norinco 9 mm</Vapennamn>
+<Vapen>No9</Vapen>
+<A1>0</A1>
+<A2>0</A2>
+<A3>1</A3>
+<B>1</B>
+<C>0</C>
+</tblVapen>
+<tblVapen>
+<idV>53</idV>
+<Vapennamn>Norinco .45</Vapennamn>
+<Vapen>No45</Vapen>
+<A1>0</A1>
+<A2>0</A2>
+<A3>1</A3>
+<B>1</B>
+<C>0</C>
+</tblVapen>
+<tblVapen>
+<idV>54</idV>
+<Vapennamn>Para-Ordnance 9 mm</Vapennamn>
+<Vapen>PO9</Vapen>
+<A1>0</A1>
+<A2>0</A2>
+<A3>1</A3>
+<B>1</B>
+<C>0</C>
+</tblVapen>
+<tblVapen>
+<idV>55</idV>
+<Vapennamn>Para-Ordnance .40</Vapennamn>
+<Vapen>PO40</Vapen>
+<A1>0</A1>
+<A2>0</A2>
+<A3>1</A3>
+<B>1</B>
+<C>0</C>
+</tblVapen>
+<tblVapen>
+<idV>56</idV>
+<Vapennamn>Para-Ordnance .45</Vapennamn>
+<Vapen>PO45</Vapen>
+<A1>0</A1>
+<A2>0</A2>
+<A3>1</A3>
+<B>1</B>
+<C>0</C>
+</tblVapen>
+<tblVapen>
+<idV>57</idV>
+<Vapennamn>Pardini 9 mm</Vapennamn>
+<Vapen>Pa9</Vapen>
+<A1>0</A1>
+<A2>0</A2>
+<A3>1</A3>
+<B>1</B>
+<C>0</C>
+</tblVapen>
+<tblVapen>
+<idV>58</idV>
+<Vapennamn>Pardini .40</Vapennamn>
+<Vapen>Pa40</Vapen>
+<A1>0</A1>
+<A2>0</A2>
+<A3>1</A3>
+<B>1</B>
+<C>0</C>
+</tblVapen>
+<tblVapen>
+<idV>59</idV>
+<Vapennamn>Pardini .45</Vapennamn>
+<Vapen>Pa45</Vapen>
+<A1>0</A1>
+<A2>0</A2>
+<A3>1</A3>
+<B>1</B>
+<C>0</C>
+</tblVapen>
+<tblVapen>
+<idV>60</idV>
+<Vapennamn>Parabellum (Luger) 7,65 mm</Vapennamn>
+<Vapen>P7</Vapen>
+<A1>1</A1>
+<A2>0</A2>
+<A3>0</A3>
+<B>1</B>
+<C>0</C>
+</tblVapen>
+<tblVapen>
+<idV>61</idV>
+<Vapennamn>Parabellum (Luger) 9 mm</Vapennamn>
+<Vapen>P9</Vapen>
+<A1>1</A1>
+<A2>0</A2>
+<A3>0</A3>
+<B>1</B>
+<C>0</C>
+</tblVapen>
+<tblVapen>
+<idV>62</idV>
+<Vapennamn>Peters Stahl 9 mm</Vapennamn>
+<Vapen>PS9</Vapen>
+<A1>0</A1>
+<A2>0</A2>
+<A3>1</A3>
+<B>1</B>
+<C>0</C>
+</tblVapen>
+<tblVapen>
+<idV>63</idV>
+<Vapennamn>Peters Stahl .45</Vapennamn>
+<Vapen>PS45</Vapen>
+<A1>0</A1>
+<A2>0</A2>
+<A3>1</A3>
+<B>1</B>
+<C>0</C>
+</tblVapen>
+<tblVapen>
+<idV>64</idV>
+<Vapennamn>Ruger 9 mm</Vapennamn>
+<Vapen>Ru9</Vapen>
+<A1>0</A1>
+<A2>0</A2>
+<A3>1</A3>
+<B>1</B>
+<C>0</C>
+</tblVapen>
+<tblVapen>
+<idV>65</idV>
+<Vapennamn>Ruger .40</Vapennamn>
+<Vapen>Ru40</Vapen>
+<A1>0</A1>
+<A2>0</A2>
+<A3>1</A3>
+<B>1</B>
+<C>0</C>
+</tblVapen>
+<tblVapen>
+<idV>66</idV>
+<Vapennamn>Ruger .45</Vapennamn>
+<Vapen>Ru45</Vapen>
+<A1>0</A1>
+<A2>0</A2>
+<A3>1</A3>
+<B>1</B>
+<C>0</C>
+</tblVapen>
+<tblVapen>
+<idV>67</idV>
+<Vapennamn>SIG P210 (Neuhausen) 7,65 mm</Vapennamn>
+<Vapen>N7</Vapen>
+<A1>0</A1>
+<A2>0</A2>
+<A3>1</A3>
+<B>1</B>
+<C>0</C>
+</tblVapen>
+<tblVapen>
+<idV>68</idV>
+<Vapennamn>SIG P210 (Neuhausen) 9 mm</Vapennamn>
+<Vapen>N9</Vapen>
+<A1>0</A1>
+<A2>0</A2>
+<A3>1</A3>
+<B>1</B>
+<C>0</C>
+</tblVapen>
+<tblVapen>
+<idV>69</idV>
+<Vapennamn>SIG-Sauer 9 mm</Vapennamn>
+<Vapen>SIG9</Vapen>
+<A1>0</A1>
+<A2>1</A2>
+<A3>0</A3>
+<B>1</B>
+<C>0</C>
+</tblVapen>
+<tblVapen>
+<idV>70</idV>
+<Vapennamn>SIG-Sauer .40</Vapennamn>
+<Vapen>SIG40</Vapen>
+<A1>0</A1>
+<A2>0</A2>
+<A3>1</A3>
+<B>1</B>
+<C>0</C>
+</tblVapen>
+<tblVapen>
+<idV>71</idV>
+<Vapennamn>SIG-Sauer .45</Vapennamn>
+<Vapen>SIG45</Vapen>
+<A1>0</A1>
+<A2>0</A2>
+<A3>1</A3>
+<B>1</B>
+<C>0</C>
+</tblVapen>
+<tblVapen>
+<idV>72</idV>
+<Vapennamn><![CDATA[Smith & Wesson 9 mm]]></Vapennamn>
+<Vapen>SW9</Vapen>
+<A1>0</A1>
+<A2>0</A2>
+<A3>1</A3>
+<B>1</B>
+<C>0</C>
+</tblVapen>
+<tblVapen>
+<idV>73</idV>
+<Vapennamn><![CDATA[Smith & Wesson .40]]></Vapennamn>
+<Vapen>SW40</Vapen>
+<A1>0</A1>
+<A2>0</A2>
+<A3>1</A3>
+<B>1</B>
+<C>0</C>
+</tblVapen>
+<tblVapen>
+<idV>74</idV>
+<Vapennamn><![CDATA[Smith & Wesson .45]]></Vapennamn>
+<Vapen>SW45</Vapen>
+<A1>0</A1>
+<A2>0</A2>
+<A3>1</A3>
+<B>1</B>
+<C>0</C>
+</tblVapen>
+<tblVapen>
+<idV>75</idV>
+<Vapennamn>Sphinx 9 mm</Vapennamn>
+<Vapen>Sx9</Vapen>
+<A1>0</A1>
+<A2>0</A2>
+<A3>1</A3>
+<B>1</B>
+<C>0</C>
+</tblVapen>
+<tblVapen>
+<idV>76</idV>
+<Vapennamn>Sphinx .40</Vapennamn>
+<Vapen>Sx40</Vapen>
+<A1>0</A1>
+<A2>0</A2>
+<A3>1</A3>
+<B>1</B>
+<C>0</C>
+</tblVapen>
+<tblVapen>
+<idV>77</idV>
+<Vapennamn>Springfield 9 mm</Vapennamn>
+<Vapen>Sp9</Vapen>
+<A1>0</A1>
+<A2>0</A2>
+<A3>1</A3>
+<B>1</B>
+<C>0</C>
+</tblVapen>
+<tblVapen>
+<idV>78</idV>
+<Vapennamn>Springfield .40</Vapennamn>
+<Vapen>Sp40</Vapen>
+<A1>0</A1>
+<A2>0</A2>
+<A3>1</A3>
+<B>1</B>
+<C>0</C>
+</tblVapen>
+<tblVapen>
+<idV>79</idV>
+<Vapennamn>Springfield .45</Vapennamn>
+<Vapen>Sp45</Vapen>
+<A1>0</A1>
+<A2>0</A2>
+<A3>1</A3>
+<B>1</B>
+<C>0</C>
+</tblVapen>
+<tblVapen>
+<idV>80</idV>
+<Vapennamn>S.P.S. 9 mm</Vapennamn>
+<Vapen>SPS9</Vapen>
+<A1>0</A1>
+<A2>0</A2>
+<A3>1</A3>
+<B>1</B>
+<C>0</C>
+</tblVapen>
+<tblVapen>
+<idV>81</idV>
+<Vapennamn>S.P.S. .38</Vapennamn>
+<Vapen>SPS38</Vapen>
+<A1>0</A1>
+<A2>0</A2>
+<A3>1</A3>
+<B>1</B>
+<C>0</C>
+</tblVapen>
+<tblVapen>
+<idV>82</idV>
+<Vapennamn>S.P.S. .40</Vapennamn>
+<Vapen>SPS40</Vapen>
+<A1>0</A1>
+<A2>0</A2>
+<A3>1</A3>
+<B>1</B>
+<C>0</C>
+</tblVapen>
+<tblVapen>
+<idV>83</idV>
+<Vapennamn>S.P.S. .45</Vapennamn>
+<Vapen>SPS45</Vapen>
+<A1>0</A1>
+<A2>0</A2>
+<A3>1</A3>
+<B>1</B>
+<C>0</C>
+</tblVapen>
+<tblVapen>
+<idV>84</idV>
+<Vapennamn>Star 9 mm</Vapennamn>
+<Vapen>St9</Vapen>
+<A1>0</A1>
+<A2>0</A2>
+<A3>1</A3>
+<B>1</B>
+<C>0</C>
+</tblVapen>
+<tblVapen>
+<idV>85</idV>
+<Vapennamn>Star .40</Vapennamn>
+<Vapen>St40</Vapen>
+<A1>0</A1>
+<A2>0</A2>
+<A3>1</A3>
+<B>1</B>
+<C>0</C>
+</tblVapen>
+<tblVapen>
+<idV>86</idV>
+<Vapennamn>Star .45</Vapennamn>
+<Vapen>St45</Vapen>
+<A1>0</A1>
+<A2>0</A2>
+<A3>1</A3>
+<B>1</B>
+<C>0</C>
+</tblVapen>
+<tblVapen>
+<idV>87</idV>
+<Vapennamn>Steyr 9 mm</Vapennamn>
+<Vapen>Se9</Vapen>
+<A1>0</A1>
+<A2>0</A2>
+<A3>1</A3>
+<B>1</B>
+<C>0</C>
+</tblVapen>
+<tblVapen>
+<idV>88</idV>
+<Vapennamn>Steyr .357</Vapennamn>
+<Vapen>Se357</Vapen>
+<A1>0</A1>
+<A2>0</A2>
+<A3>1</A3>
+<B>1</B>
+<C>0</C>
+</tblVapen>
+<tblVapen>
+<idV>89</idV>
+<Vapennamn>Steyr .40</Vapennamn>
+<Vapen>Se40</Vapen>
+<A1>0</A1>
+<A2>0</A2>
+<A3>1</A3>
+<B>1</B>
+<C>0</C>
+</tblVapen>
+<tblVapen>
+<idV>90</idV>
+<Vapennamn>STI 9 mm</Vapennamn>
+<Vapen>STI9</Vapen>
+<A1>0</A1>
+<A2>0</A2>
+<A3>1</A3>
+<B>1</B>
+<C>0</C>
+</tblVapen>
+<tblVapen>
+<idV>91</idV>
+<Vapennamn>STI .38</Vapennamn>
+<Vapen>STI38</Vapen>
+<A1>0</A1>
+<A2>0</A2>
+<A3>1</A3>
+<B>1</B>
+<C>0</C>
+</tblVapen>
+<tblVapen>
+<idV>92</idV>
+<Vapennamn>STI .40</Vapennamn>
+<Vapen>STI40</Vapen>
+<A1>0</A1>
+<A2>0</A2>
+<A3>1</A3>
+<B>1</B>
+<C>0</C>
+</tblVapen>
+<tblVapen>
+<idV>93</idV>
+<Vapennamn>STI .45</Vapennamn>
+<Vapen>STI45</Vapen>
+<A1>0</A1>
+<A2>0</A2>
+<A3>1</A3>
+<B>1</B>
+<C>0</C>
+</tblVapen>
+<tblVapen>
+<idV>94</idV>
+<Vapennamn>Taurus 9 mm</Vapennamn>
+<Vapen>T9</Vapen>
+<A1>0</A1>
+<A2>0</A2>
+<A3>1</A3>
+<B>1</B>
+<C>0</C>
+</tblVapen>
+<tblVapen>
+<idV>95</idV>
+<Vapennamn>Taurus .40</Vapennamn>
+<Vapen>T40</Vapen>
+<A1>0</A1>
+<A2>0</A2>
+<A3>1</A3>
+<B>1</B>
+<C>0</C>
+</tblVapen>
+<tblVapen>
+<idV>96</idV>
+<Vapennamn>Taurus .45</Vapennamn>
+<Vapen>T45</Vapen>
+<A1>0</A1>
+<A2>0</A2>
+<A3>1</A3>
+<B>1</B>
+<C>0</C>
+</tblVapen>
+<tblVapen>
+<idV>97</idV>
+<Vapennamn>Vektor 9 mm</Vapennamn>
+<Vapen>Ve9</Vapen>
+<A1>0</A1>
+<A2>0</A2>
+<A3>1</A3>
+<B>1</B>
+<C>0</C>
+</tblVapen>
+<tblVapen>
+<idV>98</idV>
+<Vapennamn>Walther P38, HP (m/39)</Vapennamn>
+<Vapen>m/39</Vapen>
+<A1>1</A1>
+<A2>0</A2>
+<A3>0</A3>
+<B>1</B>
+<C>0</C>
+</tblVapen>
+<tblVapen>
+<idV>99</idV>
+<Vapennamn>Walther 9 mm</Vapennamn>
+<Vapen>W9</Vapen>
+<A1>0</A1>
+<A2>0</A2>
+<A3>1</A3>
+<B>1</B>
+<C>0</C>
+</tblVapen>
+<tblVapen>
+<idV>100</idV>
+<Vapennamn>PP</Vapennamn>
+<Vapen>PP</Vapen>
+<A1>0</A1>
+<A2>1</A2>
+<A3>0</A3>
+<B>1</B>
+<C>0</C>
+</tblVapen>
+<tblVapen>
+<idV>101</idV>
+<Vapennamn>PPK</Vapennamn>
+<Vapen>PPK</Vapen>
+<A1>0</A1>
+<A2>1</A2>
+<A3>0</A3>
+<B>1</B>
+<C>0</C>
+</tblVapen>
+<tblVapen>
+<idV>102</idV>
+<Vapennamn>Benelli .32</Vapennamn>
+<Vapen>Bn</Vapen>
+<A1>0</A1>
+<A2>0</A2>
+<A3>0</A3>
+<B>1</B>
+<C>0</C>
+</tblVapen>
+<tblVapen>
+<idV>103</idV>
+<Vapennamn>Colt .38 (Gold Cup)</Vapennamn>
+<Vapen>C38</Vapen>
+<A1>0</A1>
+<A2>0</A2>
+<A3>0</A3>
+<B>1</B>
+<C>0</C>
+</tblVapen>
+<tblVapen>
+<idV>104</idV>
+<Vapennamn>Erma .32</Vapennamn>
+<Vapen>Er</Vapen>
+<A1>0</A1>
+<A2>0</A2>
+<A3>0</A3>
+<B>1</B>
+<C>0</C>
+</tblVapen>
+<tblVapen>
+<idV>105</idV>
+<Vapennamn>F.A.S. .32</Vapennamn>
+<Vapen>FAS</Vapen>
+<A1>0</A1>
+<A2>0</A2>
+<A3>0</A3>
+<B>1</B>
+<C>0</C>
+</tblVapen>
+<tblVapen>
+<idV>106</idV>
+<Vapennamn>Hämmerli .32</Vapennamn>
+<Vapen>Hä</Vapen>
+<A1>0</A1>
+<A2>0</A2>
+<A3>0</A3>
+<B>1</B>
+<C>0</C>
+</tblVapen>
+<tblVapen>
+<idV>107</idV>
+<Vapennamn>Hämmerli .38</Vapennamn>
+<Vapen>Hä38</Vapen>
+<A1>0</A1>
+<A2>0</A2>
+<A3>0</A3>
+<B>1</B>
+<C>0</C>
+</tblVapen>
+<tblVapen>
+<idV>108</idV>
+<Vapennamn>Morini .32</Vapennamn>
+<Vapen>Mo</Vapen>
+<A1>0</A1>
+<A2>0</A2>
+<A3>0</A3>
+<B>1</B>
+<C>0</C>
+</tblVapen>
+<tblVapen>
+<idV>109</idV>
+<Vapennamn>SAKO .32</Vapennamn>
+<Vapen>SAKO</Vapen>
+<A1>0</A1>
+<A2>0</A2>
+<A3>0</A3>
+<B>1</B>
+<C>0</C>
+</tblVapen>
+<tblVapen>
+<idV>110</idV>
+<Vapennamn><![CDATA[Smith & Wesson .38 (m/52)]]></Vapennamn>
+<Vapen>SW38</Vapen>
+<A1>0</A1>
+<A2>0</A2>
+<A3>0</A3>
+<B>1</B>
+<C>0</C>
+</tblVapen>
+<tblVapen>
+<idV>111</idV>
+<Vapennamn>Unique .32</Vapennamn>
+<Vapen>Un</Vapen>
+<A1>0</A1>
+<A2>0</A2>
+<A3>0</A3>
+<B>1</B>
+<C>0</C>
+</tblVapen>
+<tblVapen>
+<idV>112</idV>
+<Vapennamn>Walther GSP .32</Vapennamn>
+<Vapen>GSP</Vapen>
+<A1>0</A1>
+<A2>0</A2>
+<A3>0</A3>
+<B>1</B>
+<C>0</C>
+</tblVapen>
+<tblVapen>
+<idV>113</idV>
+<Vapennamn>Advantage Arms (Glock) .22</Vapennamn>
+<Vapen>Ad</Vapen>
+<A1>0</A1>
+<A2>0</A2>
+<A3>0</A3>
+<B>0</B>
+<C>1</C>
+</tblVapen>
+<tblVapen>
+<idV>114</idV>
+<Vapennamn>Astra .22</Vapennamn>
+<Vapen>As</Vapen>
+<A1>0</A1>
+<A2>0</A2>
+<A3>0</A3>
+<B>0</B>
+<C>1</C>
+</tblVapen>
+<tblVapen>
+<idV>115</idV>
+<Vapennamn>Baikal .22</Vapennamn>
+<Vapen>Ba</Vapen>
+<A1>0</A1>
+<A2>0</A2>
+<A3>0</A3>
+<B>0</B>
+<C>1</C>
+</tblVapen>
+<tblVapen>
+<idV>116</idV>
+<Vapennamn>Benelli .22</Vapennamn>
+<Vapen>Bn</Vapen>
+<A1>0</A1>
+<A2>0</A2>
+<A3>0</A3>
+<B>0</B>
+<C>1</C>
+</tblVapen>
+<tblVapen>
+<idV>117</idV>
+<Vapennamn>Beretta .22</Vapennamn>
+<Vapen>Be</Vapen>
+<A1>0</A1>
+<A2>0</A2>
+<A3>0</A3>
+<B>0</B>
+<C>1</C>
+</tblVapen>
+<tblVapen>
+<idV>118</idV>
+<Vapennamn>Britarms .22</Vapennamn>
+<Vapen>Br</Vapen>
+<A1>0</A1>
+<A2>0</A2>
+<A3>0</A3>
+<B>0</B>
+<C>1</C>
+</tblVapen>
+<tblVapen>
+<idV>119</idV>
+<Vapennamn>Browning .22</Vapennamn>
+<Vapen>Bw</Vapen>
+<A1>0</A1>
+<A2>0</A2>
+<A3>0</A3>
+<B>0</B>
+<C>1</C>
+</tblVapen>
+<tblVapen>
+<idV>120</idV>
+<Vapennamn>Colt .22</Vapennamn>
+<Vapen>C</Vapen>
+<A1>0</A1>
+<A2>0</A2>
+<A3>0</A3>
+<B>0</B>
+<C>1</C>
+</tblVapen>
+<tblVapen>
+<idV>121</idV>
+<Vapennamn>CZ .22</Vapennamn>
+<Vapen>CZ</Vapen>
+<A1>0</A1>
+<A2>0</A2>
+<A3>0</A3>
+<B>0</B>
+<C>1</C>
+</tblVapen>
+<tblVapen>
+<idV>122</idV>
+<Vapennamn>Domino .22</Vapennamn>
+<Vapen>Do</Vapen>
+<A1>0</A1>
+<A2>0</A2>
+<A3>0</A3>
+<B>0</B>
+<C>1</C>
+</tblVapen>
+<tblVapen>
+<idV>123</idV>
+<Vapennamn>Erma .22</Vapennamn>
+<Vapen>Er</Vapen>
+<A1>0</A1>
+<A2>0</A2>
+<A3>0</A3>
+<B>0</B>
+<C>1</C>
+</tblVapen>
+<tblVapen>
+<idV>124</idV>
+<Vapennamn>F.A.S. .22</Vapennamn>
+<Vapen>FAS</Vapen>
+<A1>0</A1>
+<A2>0</A2>
+<A3>0</A3>
+<B>0</B>
+<C>1</C>
+</tblVapen>
+<tblVapen>
+<idV>125</idV>
+<Vapennamn>Feinwerkbau .22</Vapennamn>
+<Vapen>Fe</Vapen>
+<A1>0</A1>
+<A2>0</A2>
+<A3>0</A3>
+<B>0</B>
+<C>1</C>
+</tblVapen>
+<tblVapen>
+<idV>126</idV>
+<Vapennamn>FN-Browning .22</Vapennamn>
+<Vapen>FN</Vapen>
+<A1>0</A1>
+<A2>0</A2>
+<A3>0</A3>
+<B>0</B>
+<C>1</C>
+</tblVapen>
+<tblVapen>
+<idV>127</idV>
+<Vapennamn>High Standard .22</Vapennamn>
+<Vapen>HS</Vapen>
+<A1>0</A1>
+<A2>0</A2>
+<A3>0</A3>
+<B>0</B>
+<C>1</C>
+</tblVapen>
+<tblVapen>
+<idV>128</idV>
+<Vapennamn>Hämmerli .22</Vapennamn>
+<Vapen>Hä</Vapen>
+<A1>0</A1>
+<A2>0</A2>
+<A3>0</A3>
+<B>0</B>
+<C>1</C>
+</tblVapen>
+<tblVapen>
+<idV>129</idV>
+<Vapennamn>Norinco .22</Vapennamn>
+<Vapen>No</Vapen>
+<A1>0</A1>
+<A2>0</A2>
+<A3>0</A3>
+<B>0</B>
+<C>1</C>
+</tblVapen>
+<tblVapen>
+<idV>130</idV>
+<Vapennamn>Mitchell .22</Vapennamn>
+<Vapen>Mi</Vapen>
+<A1>0</A1>
+<A2>0</A2>
+<A3>0</A3>
+<B>0</B>
+<C>1</C>
+</tblVapen>
+<tblVapen>
+<idV>131</idV>
+<Vapennamn>Morini .22</Vapennamn>
+<Vapen>Mo</Vapen>
+<A1>0</A1>
+<A2>0</A2>
+<A3>0</A3>
+<B>0</B>
+<C>1</C>
+</tblVapen>
+<tblVapen>
+<idV>132</idV>
+<Vapennamn>Pardini .22</Vapennamn>
+<Vapen>Pa</Vapen>
+<A1>0</A1>
+<A2>0</A2>
+<A3>0</A3>
+<B>0</B>
+<C>1</C>
+</tblVapen>
+<tblVapen>
+<idV>133</idV>
+<Vapennamn>Peters Stahl .22</Vapennamn>
+<Vapen>PS</Vapen>
+<A1>0</A1>
+<A2>0</A2>
+<A3>0</A3>
+<B>0</B>
+<C>1</C>
+</tblVapen>
+<tblVapen>
+<idV>134</idV>
+<Vapennamn>Ruger .22</Vapennamn>
+<Vapen>Ru</Vapen>
+<A1>0</A1>
+<A2>0</A2>
+<A3>0</A3>
+<B>0</B>
+<C>1</C>
+</tblVapen>
+<tblVapen>
+<idV>135</idV>
+<Vapennamn>SAKO .22</Vapennamn>
+<Vapen>SAKO</Vapen>
+<A1>0</A1>
+<A2>0</A2>
+<A3>0</A3>
+<B>0</B>
+<C>1</C>
+</tblVapen>
+<tblVapen>
+<idV>136</idV>
+<Vapennamn>SIG P210 växelsats .22</Vapennamn>
+<Vapen>N</Vapen>
+<A1>0</A1>
+<A2>0</A2>
+<A3>0</A3>
+<B>0</B>
+<C>1</C>
+</tblVapen>
+<tblVapen>
+<idV>137</idV>
+<Vapennamn><![CDATA[Smith & Wesson .22]]></Vapennamn>
+<Vapen>SW</Vapen>
+<A1>0</A1>
+<A2>0</A2>
+<A3>0</A3>
+<B>0</B>
+<C>1</C>
+</tblVapen>
+<tblVapen>
+<idV>138</idV>
+<Vapennamn><![CDATA[Smith & Wesson revolver .22]]></Vapennamn>
+<Vapen>SW22R</Vapen>
+<A1>0</A1>
+<A2>0</A2>
+<A3>0</A3>
+<B>0</B>
+<C>1</C>
+</tblVapen>
+<tblVapen>
+<idV>139</idV>
+<Vapennamn>Unique .22</Vapennamn>
+<Vapen>Un</Vapen>
+<A1>0</A1>
+<A2>0</A2>
+<A3>0</A3>
+<B>0</B>
+<C>1</C>
+</tblVapen>
+<tblVapen>
+<idV>140</idV>
+<Vapennamn>Vostok .22</Vapennamn>
+<Vapen>Vo</Vapen>
+<A1>0</A1>
+<A2>0</A2>
+<A3>0</A3>
+<B>0</B>
+<C>1</C>
+</tblVapen>
+<tblVapen>
+<idV>141</idV>
+<Vapennamn>Walther GSP .22</Vapennamn>
+<Vapen>GSP</Vapen>
+<A1>0</A1>
+<A2>0</A2>
+<A3>0</A3>
+<B>0</B>
+<C>1</C>
+</tblVapen>
+<tblVapen>
+<idV>142</idV>
+<Vapennamn>Walther PP .22</Vapennamn>
+<Vapen>PP</Vapen>
+<A1>0</A1>
+<A2>0</A2>
+<A3>0</A3>
+<B>0</B>
+<C>1</C>
+</tblVapen>
+<tblVapen>
+<idV>143</idV>
+<Vapennamn>Walther .22</Vapennamn>
+<Vapen>W</Vapen>
+<A1>0</A1>
+<A2>0</A2>
+<A3>0</A3>
+<B>0</B>
+<C>1</C>
+</tblVapen>
+<tblVapen>
+<idV>144</idV>
+<Vapennamn>Arminius revolver .32</Vapennamn>
+<Vapen>Ar32R</Vapen>
+<A1>0</A1>
+<A2>0</A2>
+<A3>0</A3>
+<B>1</B>
+<C>0</C>
+</tblVapen>
+<tblVapen>
+<idV>145</idV>
+<Vapennamn>Charter Arms revolver .32</Vapennamn>
+<Vapen>Ch32R</Vapen>
+<A1>0</A1>
+<A2>0</A2>
+<A3>0</A3>
+<B>1</B>
+<C>0</C>
+</tblVapen>
+<tblVapen>
+<idV>146</idV>
+<Vapennamn>Charter Arms revolver .38</Vapennamn>
+<Vapen>Ch38R</Vapen>
+<A1>0</A1>
+<A2>0</A2>
+<A3>0</A3>
+<B>1</B>
+<C>0</C>
+</tblVapen>
+<tblVapen>
+<idV>147</idV>
+<Vapennamn>Charter Arms revolver .357</Vapennamn>
+<Vapen>Ch357</Vapen>
+<A1>0</A1>
+<A2>0</A2>
+<A3>0</A3>
+<B>1</B>
+<C>0</C>
+</tblVapen>
+<tblVapen>
+<idV>148</idV>
+<Vapennamn>Charter Arms revolver .44</Vapennamn>
+<Vapen>Ch44R</Vapen>
+<A1>0</A1>
+<A2>0</A2>
+<A3>0</A3>
+<B>1</B>
+<C>0</C>
+</tblVapen>
+<tblVapen>
+<idV>149</idV>
+<Vapennamn>Colt revolver .38</Vapennamn>
+<Vapen>C38R</Vapen>
+<A1>0</A1>
+<A2>0</A2>
+<A3>0</A3>
+<B>1</B>
+<C>0</C>
+</tblVapen>
+<tblVapen>
+<idV>150</idV>
+<Vapennamn>Colt revolver .357</Vapennamn>
+<Vapen>C357R</Vapen>
+<A1>0</A1>
+<A2>0</A2>
+<A3>0</A3>
+<B>1</B>
+<C>0</C>
+</tblVapen>
+<tblVapen>
+<idV>151</idV>
+<Vapennamn>Colt revolver .44</Vapennamn>
+<Vapen>C44R</Vapen>
+<A1>0</A1>
+<A2>0</A2>
+<A3>0</A3>
+<B>1</B>
+<C>0</C>
+</tblVapen>
+<tblVapen>
+<idV>152</idV>
+<Vapennamn>Colt revolver .45</Vapennamn>
+<Vapen>C45R</Vapen>
+<A1>0</A1>
+<A2>0</A2>
+<A3>0</A3>
+<B>1</B>
+<C>0</C>
+</tblVapen>
+<tblVapen>
+<idV>153</idV>
+<Vapennamn>Dan Wesson revolver .32</Vapennamn>
+<Vapen>DW32R</Vapen>
+<A1>0</A1>
+<A2>0</A2>
+<A3>0</A3>
+<B>1</B>
+<C>0</C>
+</tblVapen>
+<tblVapen>
+<idV>154</idV>
+<Vapennamn>Dan Wesson revolver .357</Vapennamn>
+<Vapen>DW357</Vapen>
+<A1>0</A1>
+<A2>0</A2>
+<A3>0</A3>
+<B>1</B>
+<C>0</C>
+</tblVapen>
+<tblVapen>
+<idV>155</idV>
+<Vapennamn>Dan Wesson revolver .44</Vapennamn>
+<Vapen>DW44R</Vapen>
+<A1>0</A1>
+<A2>0</A2>
+<A3>0</A3>
+<B>1</B>
+<C>0</C>
+</tblVapen>
+<tblVapen>
+<idV>156</idV>
+<Vapennamn>Freedom Arms revolver .357</Vapennamn>
+<Vapen>Fr357</Vapen>
+<A1>0</A1>
+<A2>0</A2>
+<A3>0</A3>
+<B>1</B>
+<C>0</C>
+</tblVapen>
+<tblVapen>
+<idV>157</idV>
+<Vapennamn>Korth revolver .32</Vapennamn>
+<Vapen>K32R</Vapen>
+<A1>0</A1>
+<A2>0</A2>
+<A3>0</A3>
+<B>1</B>
+<C>0</C>
+</tblVapen>
+<tblVapen>
+<idV>158</idV>
+<Vapennamn>Korth revolver .357</Vapennamn>
+<Vapen>K357R</Vapen>
+<A1>0</A1>
+<A2>0</A2>
+<A3>0</A3>
+<B>1</B>
+<C>0</C>
+</tblVapen>
+<tblVapen>
+<idV>159</idV>
+<Vapennamn>Llama revolver .32</Vapennamn>
+<Vapen>L32R</Vapen>
+<A1>0</A1>
+<A2>0</A2>
+<A3>0</A3>
+<B>1</B>
+<C>0</C>
+</tblVapen>
+<tblVapen>
+<idV>160</idV>
+<Vapennamn>Llama revolver .357</Vapennamn>
+<Vapen>L357R</Vapen>
+<A1>0</A1>
+<A2>0</A2>
+<A3>0</A3>
+<B>1</B>
+<C>0</C>
+</tblVapen>
+<tblVapen>
+<idV>161</idV>
+<Vapennamn>Llama revolver .44</Vapennamn>
+<Vapen>L44R</Vapen>
+<A1>0</A1>
+<A2>0</A2>
+<A3>0</A3>
+<B>1</B>
+<C>0</C>
+</tblVapen>
+<tblVapen>
+<idV>162</idV>
+<Vapennamn>Manurhin revolver .32</Vapennamn>
+<Vapen>Ma32R</Vapen>
+<A1>0</A1>
+<A2>0</A2>
+<A3>0</A3>
+<B>1</B>
+<C>0</C>
+</tblVapen>
+<tblVapen>
+<idV>163</idV>
+<Vapennamn>Manurhin revolver .38</Vapennamn>
+<Vapen>Ma38R</Vapen>
+<A1>0</A1>
+<A2>0</A2>
+<A3>0</A3>
+<B>1</B>
+<C>0</C>
+</tblVapen>
+<tblVapen>
+<idV>164</idV>
+<Vapennamn>Manurhin revolver .357</Vapennamn>
+<Vapen>Ma357</Vapen>
+<A1>0</A1>
+<A2>0</A2>
+<A3>0</A3>
+<B>1</B>
+<C>0</C>
+</tblVapen>
+<tblVapen>
+<idV>165</idV>
+<Vapennamn>Rossi revolver .32</Vapennamn>
+<Vapen>Ro32R</Vapen>
+<A1>0</A1>
+<A2>0</A2>
+<A3>0</A3>
+<B>1</B>
+<C>0</C>
+</tblVapen>
+<tblVapen>
+<idV>166</idV>
+<Vapennamn>Rossi revolver .38</Vapennamn>
+<Vapen>Ro38R</Vapen>
+<A1>0</A1>
+<A2>0</A2>
+<A3>0</A3>
+<B>1</B>
+<C>0</C>
+</tblVapen>
+<tblVapen>
+<idV>167</idV>
+<Vapennamn>Rossi revolver .357</Vapennamn>
+<Vapen>Ro357</Vapen>
+<A1>0</A1>
+<A2>0</A2>
+<A3>0</A3>
+<B>1</B>
+<C>0</C>
+</tblVapen>
+<tblVapen>
+<idV>168</idV>
+<Vapennamn>Rossi revolver .44</Vapennamn>
+<Vapen>Ro44R</Vapen>
+<A1>0</A1>
+<A2>0</A2>
+<A3>0</A3>
+<B>1</B>
+<C>0</C>
+</tblVapen>
+<tblVapen>
+<idV>169</idV>
+<Vapennamn>Ruger revolver .38</Vapennamn>
+<Vapen>Ru38R</Vapen>
+<A1>0</A1>
+<A2>0</A2>
+<A3>0</A3>
+<B>1</B>
+<C>0</C>
+</tblVapen>
+<tblVapen>
+<idV>170</idV>
+<Vapennamn>Ruger revolver .357</Vapennamn>
+<Vapen>Ru357</Vapen>
+<A1>0</A1>
+<A2>0</A2>
+<A3>0</A3>
+<B>1</B>
+<C>0</C>
+</tblVapen>
+<tblVapen>
+<idV>171</idV>
+<Vapennamn>Ruger revolver .44</Vapennamn>
+<Vapen>Ru44R</Vapen>
+<A1>0</A1>
+<A2>0</A2>
+<A3>0</A3>
+<B>1</B>
+<C>0</C>
+</tblVapen>
+<tblVapen>
+<idV>172</idV>
+<Vapennamn>Ruger revolver .45</Vapennamn>
+<Vapen>Ru45R</Vapen>
+<A1>0</A1>
+<A2>0</A2>
+<A3>0</A3>
+<B>1</B>
+<C>0</C>
+</tblVapen>
+<tblVapen>
+<idV>173</idV>
+<Vapennamn><![CDATA[Smith & Wesson revolver .32]]></Vapennamn>
+<Vapen>SW32R</Vapen>
+<A1>0</A1>
+<A2>0</A2>
+<A3>0</A3>
+<B>1</B>
+<C>0</C>
+</tblVapen>
+<tblVapen>
+<idV>174</idV>
+<Vapennamn><![CDATA[Smith & Wesson revolver .38]]></Vapennamn>
+<Vapen>SW38R</Vapen>
+<A1>0</A1>
+<A2>0</A2>
+<A3>0</A3>
+<B>1</B>
+<C>0</C>
+</tblVapen>
+<tblVapen>
+<idV>175</idV>
+<Vapennamn><![CDATA[Smith & Wesson revolver .357]]></Vapennamn>
+<Vapen>SW357</Vapen>
+<A1>0</A1>
+<A2>0</A2>
+<A3>0</A3>
+<B>1</B>
+<C>0</C>
+</tblVapen>
+<tblVapen>
+<idV>176</idV>
+<Vapennamn><![CDATA[Smith & Wesson revolver .41]]></Vapennamn>
+<Vapen>SW41R</Vapen>
+<A1>0</A1>
+<A2>0</A2>
+<A3>0</A3>
+<B>1</B>
+<C>0</C>
+</tblVapen>
+<tblVapen>
+<idV>177</idV>
+<Vapennamn><![CDATA[Smith & Wesson revolver .44]]></Vapennamn>
+<Vapen>SW44R</Vapen>
+<A1>0</A1>
+<A2>0</A2>
+<A3>0</A3>
+<B>1</B>
+<C>0</C>
+</tblVapen>
+<tblVapen>
+<idV>178</idV>
+<Vapennamn><![CDATA[Smith & Wesson revolver .45]]></Vapennamn>
+<Vapen>SW45R</Vapen>
+<A1>0</A1>
+<A2>0</A2>
+<A3>0</A3>
+<B>1</B>
+<C>0</C>
+</tblVapen>
+<tblVapen>
+<idV>179</idV>
+<Vapennamn>Taurus revolver .357</Vapennamn>
+<Vapen>T357R</Vapen>
+<A1>0</A1>
+<A2>0</A2>
+<A3>0</A3>
+<B>1</B>
+<C>0</C>
+</tblVapen>
+<tblVapen>
+<idV>180</idV>
+<Vapennamn>Uberti revolver .32</Vapennamn>
+<Vapen>Ub32R</Vapen>
+<A1>0</A1>
+<A2>0</A2>
+<A3>0</A3>
+<B>1</B>
+<C>0</C>
+</tblVapen>
+<tblVapen>
+<idV>181</idV>
+<Vapennamn>Uberti revolver .38</Vapennamn>
+<Vapen>Ub38R</Vapen>
+<A1>0</A1>
+<A2>0</A2>
+<A3>0</A3>
+<B>1</B>
+<C>0</C>
+</tblVapen>
+<tblVapen>
+<idV>182</idV>
+<Vapennamn>Uberti revolver .357</Vapennamn>
+<Vapen>Ub357</Vapen>
+<A1>0</A1>
+<A2>0</A2>
+<A3>0</A3>
+<B>1</B>
+<C>0</C>
+</tblVapen>
+<tblVapen>
+<idV>183</idV>
+<Vapennamn>Uberti revolver .44</Vapennamn>
+<Vapen>Ub44R</Vapen>
+<A1>0</A1>
+<A2>0</A2>
+<A3>0</A3>
+<B>1</B>
+<C>0</C>
+</tblVapen>
+<tblVapen>
+<idV>184</idV>
+<Vapennamn>Uberti revolver .45</Vapennamn>
+<Vapen>Ub45R</Vapen>
+<A1>0</A1>
+<A2>0</A2>
+<A3>0</A3>
+<B>1</B>
+<C>0</C>
+</tblVapen>
+<tblVapen>
+<idV>185</idV>
+<Vapennamn>Webley revolver .38</Vapennamn>
+<Vapen>We38R</Vapen>
+<A1>0</A1>
+<A2>0</A2>
+<A3>0</A3>
+<B>1</B>
+<C>0</C>
+</tblVapen>
+<tblVapen>
+<idV>186</idV>
+<Vapennamn>Webley revolver .455</Vapennamn>
+<Vapen>We455</Vapen>
+<A1>0</A1>
+<A2>0</A2>
+<A3>0</A3>
+<B>1</B>
+<C>0</C>
+</tblVapen>
+<tblVapen>
+<idV>187</idV>
+<Vapennamn>Pardini .32</Vapennamn>
+<Vapen>Pa</Vapen>
+<A1>0</A1>
+<A2>0</A2>
+<A3>0</A3>
+<B>1</B>
+<C>0</C>
+</tblVapen>
+<tblVapen>
+<idV>188</idV>
+<Vapennamn>Holek revolver .32</Vapennamn>
+<Vapen>Ho32R</Vapen>
+<A1>0</A1>
+<A2>0</A2>
+<A3>0</A3>
+<B>1</B>
+<C>0</C>
+</tblVapen>
+<tblVapen>
+<idV>189</idV>
+<Vapennamn>Holek revolver .38</Vapennamn>
+<Vapen>Ho38R</Vapen>
+<A1>0</A1>
+<A2>0</A2>
+<A3>0</A3>
+<B>1</B>
+<C>0</C>
+</tblVapen>
+<tblVapen>
+<idV>190</idV>
+<Vapennamn>Taurus revolver .32</Vapennamn>
+<Vapen>T32R</Vapen>
+<A1>0</A1>
+<A2>0</A2>
+<A3>0</A3>
+<B>1</B>
+<C>0</C>
+</tblVapen>
+<tblVapen>
+<idV>191</idV>
+<Vapennamn>Taurus revolver .44</Vapennamn>
+<Vapen>T44R</Vapen>
+<A1>0</A1>
+<A2>0</A2>
+<A3>0</A3>
+<B>1</B>
+<C>0</C>
+</tblVapen>
+<tblVapen>
+<idV>192</idV>
+<Vapennamn>Infinity .38</Vapennamn>
+<Vapen>In38</Vapen>
+<A1>0</A1>
+<A2>0</A2>
+<A3>1</A3>
+<B>1</B>
+<C>0</C>
+</tblVapen>
+<tblVapen>
+<idV>193</idV>
+<Vapennamn>Infinity .40</Vapennamn>
+<Vapen>In40</Vapen>
+<A1>0</A1>
+<A2>0</A2>
+<A3>1</A3>
+<B>1</B>
+<C>0</C>
+</tblVapen>
+<tblVapen>
+<idV>194</idV>
+<Vapennamn>Infinity .45</Vapennamn>
+<Vapen>In45</Vapen>
+<A1>0</A1>
+<A2>0</A2>
+<A3>1</A3>
+<B>1</B>
+<C>0</C>
+</tblVapen>
+<tblVapen>
+<idV>195</idV>
+<Vapennamn>Brno revolver .32</Vapennamn>
+<Vapen>Bo32R</Vapen>
+<A1>0</A1>
+<A2>0</A2>
+<A3>0</A3>
+<B>1</B>
+<C>0</C>
+</tblVapen>
+<tblVapen>
+<idV>196</idV>
+<Vapennamn>Brno revolver .38</Vapennamn>
+<Vapen>Bo38R</Vapen>
+<A1>0</A1>
+<A2>0</A2>
+<A3>0</A3>
+<B>1</B>
+<C>0</C>
+</tblVapen>
+<tblVapen>
+<idV>197</idV>
+<Vapennamn>Brno revolver .357</Vapennamn>
+<Vapen>Bo357</Vapen>
+<A1>0</A1>
+<A2>0</A2>
+<A3>0</A3>
+<B>1</B>
+<C>0</C>
+</tblVapen>
+<tblVapen>
+<idV>198</idV>
+<Vapennamn>Tesro .22</Vapennamn>
+<Vapen>Te</Vapen>
+<A1>0</A1>
+<A2>0</A2>
+<A3>0</A3>
+<B>0</B>
+<C>1</C>
+</tblVapen>
+<tblVapen>
+<idV>199</idV>
+<Vapennamn>Tesro .32</Vapennamn>
+<Vapen>Te</Vapen>
+<A1>0</A1>
+<A2>0</A2>
+<A3>0</A3>
+<B>1</B>
+<C>0</C>
+</tblVapen>
+<tblVapen>
+<idV>200</idV>
+<Vapennamn>Match Guns .22</Vapennamn>
+<Vapen>MG</Vapen>
+<A1>0</A1>
+<A2>0</A2>
+<A3>0</A3>
+<B>0</B>
+<C>1</C>
+</tblVapen>
+<tblVapen>
+<idV>201</idV>
+<Vapennamn>Match Guns .32</Vapennamn>
+<Vapen>MG</Vapen>
+<A1>0</A1>
+<A2>0</A2>
+<A3>0</A3>
+<B>1</B>
+<C>0</C>
+</tblVapen>
+<tblVapen>
+<idV>202</idV>
+<Vapennamn>R.B.A. .22</Vapennamn>
+<Vapen>RBA</Vapen>
+<A1>0</A1>
+<A2>0</A2>
+<A3>0</A3>
+<B>0</B>
+<C>1</C>
+</tblVapen>
+<tblVapen>
+<idV>203</idV>
+<Vapennamn>Frankonia .22</Vapennamn>
+<Vapen>Fa</Vapen>
+<A1>0</A1>
+<A2>0</A2>
+<A3>0</A3>
+<B>0</B>
+<C>1</C>
+</tblVapen>
+</dataroot>

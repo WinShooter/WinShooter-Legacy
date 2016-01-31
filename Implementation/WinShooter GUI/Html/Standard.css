@@ -1,0 +1,72 @@
+/* $Id: Standard.css 66 2008-08-18 07:35:42Z smuda $ */
+body.main
+{
+	color: #808080;
+	font-family: Verdana;
+	background-color: white;
+}
+
+div.main
+{
+	font-size:       14px;
+	font-family:     Verdana;
+	vertical-align:   text-top;
+	vertical-align:   baseline;
+	text-align:       left;
+	color:            Black;
+}
+
+h1.heading
+{
+	margin-top: 15px;
+	font-weight: normal;
+	font-size: 25px;
+	font-family: Verdana;
+}
+
+p.heading
+{
+	font-size:       25px;
+	font-family:     Verdana;
+	margin-top:      15px;
+}
+
+p.text
+{
+	font-size:       14px;
+	font-family:     Verdana;
+}
+
+p
+{
+	font-size:       14px;
+	font-family:     Verdana;
+}
+
+li.text
+{
+	font-size:       14px;
+	font-family:     Verdana;
+}
+
+
+div.text
+{
+	font-size:        14px;
+	font-family:      Verdana;
+	text-align:       left;
+	vertical-align:   top;
+}
+
+table.main
+{
+	background:       White;
+	border:           0;
+}
+
+td.main
+{
+	text-align:       left;
+	vertical-align:   top;
+	width:            600;
+}

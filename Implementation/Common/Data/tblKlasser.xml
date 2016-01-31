@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<dataroot xmlns:od="urn:schemas-microsoft-com:officedata" xmlns:xsi="http://www.w3.org/2000/10/XMLSchema-instance"  xsi:noNamespaceSchemaLocation="tblKlasser.xsd">
+<tblKlasser>
+<idK>1</idK>
+<Aar>2003</Aar>
+<Klassnamn>Riksmästare</Klassnamn>
+<Klass>3</Klass>
+</tblKlasser>
+<tblKlasser>
+<idK>2</idK>
+<Aar>2003</Aar>
+<Klassnamn>Guldmärke</Klassnamn>
+<Klass>2</Klass>
+</tblKlasser>
+<tblKlasser>
+<idK>3</idK>
+<Aar>2003</Aar>
+<Klassnamn>Silvermärke</Klassnamn>
+<Klass>1S</Klass>
+</tblKlasser>
+<tblKlasser>
+<idK>4</idK>
+<Aar>2003</Aar>
+<Klassnamn>Bronsmärke</Klassnamn>
+<Klass>1B</Klass>
+</tblKlasser>
+<tblKlasser>
+<idK>5</idK>
+<Aar>2003</Aar>
+<Klassnamn>Utan märke</Klassnamn>
+<Klass>1U</Klass>
+</tblKlasser>
+<tblKlasser>
+<idK>6</idK>
+<Aar>2002</Aar>
+<Klassnamn>Riksmästare Dam</Klassnamn>
+<Klass>3D</Klass>
+</tblKlasser>
+<tblKlasser>
+<idK>7</idK>
+<Aar>2003</Aar>
+<Klassnamn>Guldmärke Dam</Klassnamn>
+<Klass>2D</Klass>
+</tblKlasser>
+<tblKlasser>
+<idK>8</idK>
+<Aar>2003</Aar>
+<Klassnamn>Silvermärke Dam</Klassnamn>
+<Klass>1SD</Klass>
+</tblKlasser>
+<tblKlasser>
+<idK>9</idK>
+<Aar>2003</Aar>
+<Klassnamn>Bronsmärke Dam</Klassnamn>
+<Klass>1BD</Klass>
+</tblKlasser>
+<tblKlasser>
+<idK>10</idK>
+<Aar>2003</Aar>
+<Klassnamn>Utan märke Dam</Klassnamn>
+<Klass>1UD</Klass>
+</tblKlasser>
+<tblKlasser>
+<idK>11</idK>
+<Aar>2003</Aar>
+<Klassnamn>Riksmästare Junior</Klassnamn>
+<Klass>3J</Klass>
+</tblKlasser>
+<tblKlasser>
+<idK>12</idK>
+<Aar>2003</Aar>
+<Klassnamn>Guldmärke Junior</Klassnamn>
+<Klass>2J</Klass>
+</tblKlasser>
+<tblKlasser>
+<idK>13</idK>
+<Aar>2003</Aar>
+<Klassnamn>Silvermärke Junior</Klassnamn>
+<Klass>1SJ</Klass>
+</tblKlasser>
+<tblKlasser>
+<idK>14</idK>
+<Aar>2003</Aar>
+<Klassnamn>Bronsmärke Junior</Klassnamn>
+<Klass>1BJ</Klass>
+</tblKlasser>
+<tblKlasser>
+<idK>15</idK>
+<Aar>2003</Aar>
+<Klassnamn>Utan märke Junior</Klassnamn>
+<Klass>1UJ</Klass>
+</tblKlasser>
+<tblKlasser>
+<idK>16</idK>
+<Aar>2003</Aar>
+<Klassnamn>Veteran yngre</Klassnamn>
+<Klass>Vy</Klass>
+</tblKlasser>
+<tblKlasser>
+<idK>17</idK>
+<Aar>2003</Aar>
+<Klassnamn>Veteran äldre</Klassnamn>
+<Klass>Vä</Klass>
+</tblKlasser>
+<tblKlasser>
+<idK>18</idK>
+<Aar>2003</Aar>
+<Klassnamn>Veteran yngre Dam</Klassnamn>
+<Klass>VyD</Klass>
+</tblKlasser>
+<tblKlasser>
+<idK>19</idK>
+<Aar>2003</Aar>
+<Klassnamn>Veteran äldre Dam</Klassnamn>
+<Klass>VäD</Klass>
+</tblKlasser>
+</dataroot>

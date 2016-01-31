@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xs:schema id="DSExportExcel" targetNamespace="http://tempuri.org/DSExportExcel.xsd" xmlns:mstns="http://tempuri.org/DSExportExcel.xsd" xmlns="http://tempuri.org/DSExportExcel.xsd" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata" xmlns:msprop="urn:schemas-microsoft-com:xml-msprop" attributeFormDefault="qualified" elementFormDefault="qualified">
+  <xs:annotation>
+    <xs:appinfo source="urn:schemas-microsoft-com:xml-msdatasource">
+      <DataSource DefaultConnectionIndex="0" FunctionsComponentName="QueriesTableAdapter" Modifier="AutoLayout, AnsiClass, Class, Public" SchemaSerializationMode="IncludeSchema" xmlns="urn:schemas-microsoft-com:xml-msdatasource">
+        <Connections>
+        </Connections>
+        <Tables>
+        </Tables>
+        <Sources>
+        </Sources>
+      </DataSource>
+    </xs:appinfo>
+  </xs:annotation>
+  <xs:element name="DSExportExcel" msdata:IsDataSet="true" msdata:UseCurrentLocale="true" msprop:Generator_UserDSName="DSExportExcel" msprop:Generator_DataSetName="DSExportExcel">
+    <xs:complexType>
+      <xs:choice minOccurs="0" maxOccurs="unbounded">
+        <xs:element name="Results" msprop:Generator_UserTableName="Results" msprop:Generator_RowDeletedName="ResultsRowDeleted" msprop:Generator_TableClassName="ResultsDataTable" msprop:Generator_RowChangedName="ResultsRowChanged" msprop:Generator_RowClassName="ResultsRow" msprop:Generator_RowChangingName="ResultsRowChanging" msprop:Generator_RowEvArgName="ResultsRowChangeEvent" msprop:Generator_RowEvHandlerName="ResultsRowChangeEventHandler" msprop:Generator_TablePropName="Results" msprop:Generator_TableVarName="tableResults" msprop:Generator_RowDeletingName="ResultsRowDeleting">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="Place" msprop:Generator_UserColumnName="Place" msprop:Generator_ColumnPropNameInRow="Place" msprop:Generator_ColumnVarNameInTable="columnPlace" msprop:Generator_ColumnPropNameInTable="PlaceColumn" type="xs:string" minOccurs="0" />
+              <xs:element name="ShooterName" msprop:Generator_UserColumnName="ShooterName" msprop:Generator_ColumnPropNameInRow="ShooterName" msprop:Generator_ColumnVarNameInTable="columnShooterName" msprop:Generator_ColumnPropNameInTable="ShooterNameColumn" type="xs:string" minOccurs="0" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:choice>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>

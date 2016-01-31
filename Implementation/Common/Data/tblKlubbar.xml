@@ -1,0 +1,2315 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<dataroot xmlns:od="urn:schemas-microsoft-com:officedata" xmlns:xsi="http://www.w3.org/2000/10/XMLSchema-instance"  xsi:noNamespaceSchemaLocation="tblKlubbar.xsd">
+<tblKlubbar>
+<Klubbnr>1</Klubbnr>
+<Namn>Danderyds Pistolskytteklubb</Namn>
+</tblKlubbar>
+<tblKlubbar>
+<Klubbnr>2</Klubbnr>
+<Namn>Stockholms Amatör Förening, Pistolsekt.</Namn>
+</tblKlubbar>
+<tblKlubbar>
+<Klubbnr>3</Klubbnr>
+<Namn>Hedemora FBU-Förening</Namn>
+</tblKlubbar>
+<tblKlubbar>
+<Klubbnr>4</Klubbnr>
+<Namn>F 4 Skytteförening</Namn>
+</tblKlubbar>
+<tblKlubbar>
+<Klubbnr>5</Klubbnr>
+<Namn>Borås Pistolskyttar</Namn>
+</tblKlubbar>
+<tblKlubbar>
+<Klubbnr>10</Klubbnr>
+<Namn>Kungl.Flottans If Karlskrona P-Sekt</Namn>
+</tblKlubbar>
+<tblKlubbar>
+<Klubbnr>12</Klubbnr>
+<Namn>Livgardets Skytteförening</Namn>
+</tblKlubbar>
+<tblKlubbar>
+<Klubbnr>13</Klubbnr>
+<Namn>Örlogsberga Skytteförening</Namn>
+</tblKlubbar>
+<tblKlubbar>
+<Klubbnr>14</Klubbnr>
+<Namn>Officerarnes Målskjutningsförbund</Namn>
+</tblKlubbar>
+<tblKlubbar>
+<Klubbnr>15</Klubbnr>
+<Namn>Visborgs Skytteförening</Namn>
+</tblKlubbar>
+<tblKlubbar>
+<Klubbnr>16</Klubbnr>
+<Namn>Strängnäs Pistolklubb</Namn>
+</tblKlubbar>
+<tblKlubbar>
+<Klubbnr>17</Klubbnr>
+<Namn>Visbypolisens Idrotts- och Skytteklubb</Namn>
+</tblKlubbar>
+<tblKlubbar>
+<Klubbnr>18</Klubbnr>
+<Namn>Livregementets Grenadjärers Skf</Namn>
+</tblKlubbar>
+<tblKlubbar>
+<Klubbnr>19</Klubbnr>
+<Namn>Telia Idrottsförening  Jönköping</Namn>
+</tblKlubbar>
+<tblKlubbar>
+<Klubbnr>20</Klubbnr>
+<Namn>Gagnef-Mockfjärds Pistolklubb</Namn>
+</tblKlubbar>
+<tblKlubbar>
+<Klubbnr>21</Klubbnr>
+<Namn>K 3  IF Skyttesektion</Namn>
+</tblKlubbar>
+<tblKlubbar>
+<Klubbnr>22</Klubbnr>
+<Namn>I 2  Skf</Namn>
+</tblKlubbar>
+<tblKlubbar>
+<Klubbnr>25</Klubbnr>
+<Namn>Eksjö Garnison skf</Namn>
+</tblKlubbar>
+<tblKlubbar>
+<Klubbnr>26</Klubbnr>
+<Namn>Flisby Skytteförening</Namn>
+</tblKlubbar>
+<tblKlubbar>
+<Klubbnr>27</Klubbnr>
+<Namn>Akademiska Veteraners Pistolklubb</Namn>
+</tblKlubbar>
+<tblKlubbar>
+<Klubbnr>29</Klubbnr>
+<Namn>Hällefors Pistolskytteklubb</Namn>
+</tblKlubbar>
+<tblKlubbar>
+<Klubbnr>30</Klubbnr>
+<Namn>Ultuna Skf</Namn>
+</tblKlubbar>
+<tblKlubbar>
+<Klubbnr>31</Klubbnr>
+<Namn>Skarps Pistolklubb</Namn>
+</tblKlubbar>
+<tblKlubbar>
+<Klubbnr>32</Klubbnr>
+<Namn>Borlänge Pistolklubb</Namn>
+</tblKlubbar>
+<tblKlubbar>
+<Klubbnr>33</Klubbnr>
+<Namn>Trollhättans FBU-Förening</Namn>
+</tblKlubbar>
+<tblKlubbar>
+<Klubbnr>34</Klubbnr>
+<Namn>Unnaryds Pistolskytteklubb</Namn>
+</tblKlubbar>
+<tblKlubbar>
+<Klubbnr>35</Klubbnr>
+<Namn>Storumans Pistolklubb</Namn>
+</tblKlubbar>
+<tblKlubbar>
+<Klubbnr>36</Klubbnr>
+<Namn>Strömsholms Psk I Löten</Namn>
+</tblKlubbar>
+<tblKlubbar>
+<Klubbnr>39</Klubbnr>
+<Namn>P 7 skif/ p 7 skytte o idrottsför</Namn>
+</tblKlubbar>
+<tblKlubbar>
+<Klubbnr>40</Klubbnr>
+<Namn>Sportskytteföreningen I11</Namn>
+</tblKlubbar>
+<tblKlubbar>
+<Klubbnr>41</Klubbnr>
+<Namn>Sthlms Handikapptransportens Skf</Namn>
+</tblKlubbar>
+<tblKlubbar>
+<Klubbnr>42</Klubbnr>
+<Namn>Gripen Pistolklubb</Namn>
+</tblKlubbar>
+<tblKlubbar>
+<Klubbnr>45</Klubbnr>
+<Namn>Hammarstrands Pistolklubb</Namn>
+</tblKlubbar>
+<tblKlubbar>
+<Klubbnr>46</Klubbnr>
+<Namn>Aros Pistolskytteklubb</Namn>
+</tblKlubbar>
+<tblKlubbar>
+<Klubbnr>47</Klubbnr>
+<Namn>Lunds Fbu-Förening</Namn>
+</tblKlubbar>
+<tblKlubbar>
+<Klubbnr>48</Klubbnr>
+<Namn>Almundsryds Pistolklubb</Namn>
+</tblKlubbar>
+<tblKlubbar>
+<Klubbnr>49</Klubbnr>
+<Namn>Vimmerby Pistolskytteklubb</Namn>
+</tblKlubbar>
+<tblKlubbar>
+<Klubbnr>50</Klubbnr>
+<Namn>Pistolklubben Eken</Namn>
+</tblKlubbar>
+<tblKlubbar>
+<Klubbnr>51</Klubbnr>
+<Namn>Södra Jämtlands Fbu-Förening</Namn>
+</tblKlubbar>
+<tblKlubbar>
+<Klubbnr>53</Klubbnr>
+<Namn>Lima Skyttegille</Namn>
+</tblKlubbar>
+<tblKlubbar>
+<Klubbnr>54</Klubbnr>
+<Namn>I 15 If Pistolsektion</Namn>
+</tblKlubbar>
+<tblKlubbar>
+<Klubbnr>55</Klubbnr>
+<Namn>Västerås Pistolskyttar</Namn>
+</tblKlubbar>
+<tblKlubbar>
+<Klubbnr>56</Klubbnr>
+<Namn>Nyköpings Pistolklubb</Namn>
+</tblKlubbar>
+<tblKlubbar>
+<Klubbnr>57</Klubbnr>
+<Namn>Göteborgs Polismäns If Skyttesekt</Namn>
+</tblKlubbar>
+<tblKlubbar>
+<Klubbnr>58</Klubbnr>
+<Namn>Malmötullens Skytteklubb</Namn>
+</tblKlubbar>
+<tblKlubbar>
+<Klubbnr>59</Klubbnr>
+<Namn>Gotlands Kvinnliga Bilkår</Namn>
+</tblKlubbar>
+<tblKlubbar>
+<Klubbnr>60</Klubbnr>
+<Namn>S 3 Skytte O If</Namn>
+</tblKlubbar>
+<tblKlubbar>
+<Klubbnr>61</Klubbnr>
+<Namn>I 21/T3 Skytteförening</Namn>
+</tblKlubbar>
+<tblKlubbar>
+<Klubbnr>62</Klubbnr>
+<Namn>P 4 Idrottsförening Pistolsektionen</Namn>
+</tblKlubbar>
+<tblKlubbar>
+<Klubbnr>63</Klubbnr>
+<Namn>Lagadalens Pistolklubb</Namn>
+</tblKlubbar>
+<tblKlubbar>
+<Klubbnr>64</Klubbnr>
+<Namn>Pistolskytteklubben Frövi</Namn>
+</tblKlubbar>
+<tblKlubbar>
+<Klubbnr>65</Klubbnr>
+<Namn>Rosersberg Pistolklubb</Namn>
+</tblKlubbar>
+<tblKlubbar>
+<Klubbnr>66</Klubbnr>
+<Namn>Jönköpingspolisens Skytte- Och If</Namn>
+</tblKlubbar>
+<tblKlubbar>
+<Klubbnr>67</Klubbnr>
+<Namn>Kristianstads Pistolklubb</Namn>
+</tblKlubbar>
+<tblKlubbar>
+<Klubbnr>68</Klubbnr>
+<Namn>Gävlepolisens Idrottsförening</Namn>
+</tblKlubbar>
+<tblKlubbar>
+<Klubbnr>70</Klubbnr>
+<Namn>Pistolskytteklubben Svea Ing 1</Namn>
+</tblKlubbar>
+<tblKlubbar>
+<Klubbnr>71</Klubbnr>
+<Namn>Kalmar Pistolklubb</Namn>
+</tblKlubbar>
+<tblKlubbar>
+<Klubbnr>72</Klubbnr>
+<Namn>Lilla Beddinge Skyttegille</Namn>
+</tblKlubbar>
+<tblKlubbar>
+<Klubbnr>73</Klubbnr>
+<Namn>A 1 Skf</Namn>
+</tblKlubbar>
+<tblKlubbar>
+<Klubbnr>74</Klubbnr>
+<Namn>Pistolklubben Orion</Namn>
+</tblKlubbar>
+<tblKlubbar>
+<Klubbnr>75</Klubbnr>
+<Namn>Åkersberga Skytteförening</Namn>
+</tblKlubbar>
+<tblKlubbar>
+<Klubbnr>76</Klubbnr>
+<Namn>Västeråspolisens If Skyttesekt.</Namn>
+</tblKlubbar>
+<tblKlubbar>
+<Klubbnr>79</Klubbnr>
+<Namn>Hörby Pistolskytteklubb</Namn>
+</tblKlubbar>
+<tblKlubbar>
+<Klubbnr>81</Klubbnr>
+<Namn>Hudiksvalls Pistolskytteklubb</Namn>
+</tblKlubbar>
+<tblKlubbar>
+<Klubbnr>82</Klubbnr>
+<Namn>Landskrona Pistolklubb</Namn>
+</tblKlubbar>
+<tblKlubbar>
+<Klubbnr>83</Klubbnr>
+<Namn>Transtrands Skf Pistolsektion</Namn>
+</tblKlubbar>
+<tblKlubbar>
+<Klubbnr>84</Klubbnr>
+<Namn>S Kinds Fbu Pistolsektion</Namn>
+</tblKlubbar>
+<tblKlubbar>
+<Klubbnr>85</Klubbnr>
+<Namn>Dala-Floda Pistolskytteförening</Namn>
+</tblKlubbar>
+<tblKlubbar>
+<Klubbnr>87</Klubbnr>
+<Namn>Sportskyttarna Ljungby</Namn>
+</tblKlubbar>
+<tblKlubbar>
+<Klubbnr>88</Klubbnr>
+<Namn>Hässleholms Pistolskytteklubb</Namn>
+</tblKlubbar>
+<tblKlubbar>
+<Klubbnr>89</Klubbnr>
+<Namn>Stockholms Allmänna Pistolskytteklubb</Namn>
+</tblKlubbar>
+<tblKlubbar>
+<Klubbnr>90</Klubbnr>
+<Namn>Stockholms FBU-Förbunds Skf</Namn>
+</tblKlubbar>
+<tblKlubbar>
+<Klubbnr>91</Klubbnr>
+<Namn>Södra Älvsborgs Polis If</Namn>
+</tblKlubbar>
+<tblKlubbar>
+<Klubbnr>93</Klubbnr>
+<Namn>Mo Skytteförening</Namn>
+</tblKlubbar>
+<tblKlubbar>
+<Klubbnr>95</Klubbnr>
+<Namn>I 4 Pistolskytteklubb</Namn>
+</tblKlubbar>
+<tblKlubbar>
+<Klubbnr>96</Klubbnr>
+<Namn>Göteborgs Resoffsällskap</Namn>
+</tblKlubbar>
+<tblKlubbar>
+<Klubbnr>97</Klubbnr>
+<Namn>Degerfors Pistolskytteklubb</Namn>
+</tblKlubbar>
+<tblKlubbar>
+<Klubbnr>98</Klubbnr>
+<Namn>Visby Nationalbeväring/Dede Skyttegille</Namn>
+</tblKlubbar>
+<tblKlubbar>
+<Klubbnr>99</Klubbnr>
+<Namn>Pskf Magnus Stenbock</Namn>
+</tblKlubbar>
+<tblKlubbar>
+<Klubbnr>100</Klubbnr>
+<Namn>I 16/Lv 6 Skytteförening</Namn>
+</tblKlubbar>
+<tblKlubbar>
+<Klubbnr>101</Klubbnr>
+<Namn>Åby Skytteklubb</Namn>
+</tblKlubbar>
+<tblKlubbar>
+<Klubbnr>102</Klubbnr>
+<Namn>Umeåpolisens Skytte- Och Idrottskl</Namn>
+</tblKlubbar>
+<tblKlubbar>
+<Klubbnr>103</Klubbnr>
+<Namn>Arvika Pistolskytteklubb</Namn>
+</tblKlubbar>
+<tblKlubbar>
+<Klubbnr>104</Klubbnr>
+<Namn>Laxå Pistolskytteklubb</Namn>
+</tblKlubbar>
+<tblKlubbar>
+<Klubbnr>106</Klubbnr>
+<Namn>Falsterbonäsets Pistolskytteklubb</Namn>
+</tblKlubbar>
+<tblKlubbar>
+<Klubbnr>107</Klubbnr>
+<Namn>Umeå Pistolskytteklubb</Namn>
+</tblKlubbar>
+<tblKlubbar>
+<Klubbnr>108</Klubbnr>
+<Namn>Lycksele Pistolskytteklubb</Namn>
+</tblKlubbar>
+<tblKlubbar>
+<Klubbnr>109</Klubbnr>
+<Namn>Grängesbergs Pistolklubb</Namn>
+</tblKlubbar>
+<tblKlubbar>
+<Klubbnr>112</Klubbnr>
+<Namn>Helsingborgspolisens Skytteklubb</Namn>
+</tblKlubbar>
+<tblKlubbar>
+<Klubbnr>113</Klubbnr>
+<Namn>Bräcke Pistolskytteförening</Namn>
+</tblKlubbar>
+<tblKlubbar>
+<Klubbnr>114</Klubbnr>
+<Namn>Svartsjö Pistolskytteklubb</Namn>
+</tblKlubbar>
+<tblKlubbar>
+<Klubbnr>115</Klubbnr>
+<Namn>Forsa Pistolklubb</Namn>
+</tblKlubbar>
+<tblKlubbar>
+<Klubbnr>116</Klubbnr>
+<Namn>Orust Pistolskytteförening</Namn>
+</tblKlubbar>
+<tblKlubbar>
+<Klubbnr>117</Klubbnr>
+<Namn>Orsa Pistolskytteklubb</Namn>
+</tblKlubbar>
+<tblKlubbar>
+<Klubbnr>118</Klubbnr>
+<Namn>Sollebrunns Pistolskytteklubb</Namn>
+</tblKlubbar>
+<tblKlubbar>
+<Klubbnr>119</Klubbnr>
+<Namn>Hackås Pistolskytteklubb</Namn>
+</tblKlubbar>
+<tblKlubbar>
+<Klubbnr>120</Klubbnr>
+<Namn>Handens Pistolskytteklubb</Namn>
+</tblKlubbar>
+<tblKlubbar>
+<Klubbnr>121</Klubbnr>
+<Namn>Eslövs Skyttegilles Pistolklubb</Namn>
+</tblKlubbar>
+<tblKlubbar>
+<Klubbnr>122</Klubbnr>
+<Namn>Friskyttarnas Skytteförening</Namn>
+</tblKlubbar>
+<tblKlubbar>
+<Klubbnr>123</Klubbnr>
+<Namn>Landvetter Pistolskytteförening</Namn>
+</tblKlubbar>
+<tblKlubbar>
+<Klubbnr>124</Klubbnr>
+<Namn>Pistolklubben Vanäs</Namn>
+</tblKlubbar>
+<tblKlubbar>
+<Klubbnr>125</Klubbnr>
+<Namn>Valdemarsviks Pistolskytteklubb</Namn>
+</tblKlubbar>
+<tblKlubbar>
+<Klubbnr>126</Klubbnr>
+<Namn>Lunda Skf Pistolsektionen</Namn>
+</tblKlubbar>
+<tblKlubbar>
+<Klubbnr>127</Klubbnr>
+<Namn>Filipstads Pistolskytteklubb</Namn>
+</tblKlubbar>
+<tblKlubbar>
+<Klubbnr>129</Klubbnr>
+<Namn>Falköpings Jakt- O Sportskytteklubb</Namn>
+</tblKlubbar>
+<tblKlubbar>
+<Klubbnr>130</Klubbnr>
+<Namn>Ekeby Pistolskytteklubb</Namn>
+</tblKlubbar>
+<tblKlubbar>
+<Klubbnr>131</Klubbnr>
+<Namn>Pharmacia Psk Helsingborg        16</Namn>
+</tblKlubbar>
+<tblKlubbar>
+<Klubbnr>132</Klubbnr>
+<Namn>Röåns Sportskytteklubb</Namn>
+</tblKlubbar>
+<tblKlubbar>
+<Klubbnr>133</Klubbnr>
+<Namn>Öjaby Skytteförening</Namn>
+</tblKlubbar>
+<tblKlubbar>
+<Klubbnr>135</Klubbnr>
+<Namn>Borlängepolisens Idrottsklubb</Namn>
+</tblKlubbar>
+<tblKlubbar>
+<Klubbnr>136</Klubbnr>
+<Namn>Sevede Pk</Namn>
+</tblKlubbar>
+<tblKlubbar>
+<Klubbnr>139</Klubbnr>
+<Namn>Fältjägarnas Skytteförening</Namn>
+</tblKlubbar>
+<tblKlubbar>
+<Klubbnr>140</Klubbnr>
+<Namn>Riksbankens Skytteförening</Namn>
+</tblKlubbar>
+<tblKlubbar>
+<Klubbnr>141</Klubbnr>
+<Namn>Backe Pistolskytteklubb</Namn>
+</tblKlubbar>
+<tblKlubbar>
+<Klubbnr>142</Klubbnr>
+<Namn>Lunds Pistolklubb</Namn>
+</tblKlubbar>
+<tblKlubbar>
+<Klubbnr>143</Klubbnr>
+<Namn>Kalix Pistolskyttar</Namn>
+</tblKlubbar>
+<tblKlubbar>
+<Klubbnr>144</Klubbnr>
+<Namn>Uppsalapolisens Pistolskytteklubb</Namn>
+</tblKlubbar>
+<tblKlubbar>
+<Klubbnr>145</Klubbnr>
+<Namn>Frostvikens Pistolklubb</Namn>
+</tblKlubbar>
+<tblKlubbar>
+<Klubbnr>146</Klubbnr>
+<Namn>Sorsele Pistolklubb</Namn>
+</tblKlubbar>
+<tblKlubbar>
+<Klubbnr>147</Klubbnr>
+<Namn>Hallonbergens Pistolklubb</Namn>
+</tblKlubbar>
+<tblKlubbar>
+<Klubbnr>148</Klubbnr>
+<Namn>Hammenhögs Pistolklubb</Namn>
+</tblKlubbar>
+<tblKlubbar>
+<Klubbnr>149</Klubbnr>
+<Namn>Malmö Pistolklubb</Namn>
+</tblKlubbar>
+<tblKlubbar>
+<Klubbnr>150</Klubbnr>
+<Namn>Mölndals skytteförening</Namn>
+</tblKlubbar>
+<tblKlubbar>
+<Klubbnr>151</Klubbnr>
+<Namn>Åsele Pistolskytteklubb</Namn>
+</tblKlubbar>
+<tblKlubbar>
+<Klubbnr>152</Klubbnr>
+<Namn>Gideå Pistol</Namn>
+</tblKlubbar>
+<tblKlubbar>
+<Klubbnr>154</Klubbnr>
+<Namn>Karlskoga Pistolklubb</Namn>
+</tblKlubbar>
+<tblKlubbar>
+<Klubbnr>155</Klubbnr>
+<Namn>Ronneby F/17 Pistolskytteklubb</Namn>
+</tblKlubbar>
+<tblKlubbar>
+<Klubbnr>156</Klubbnr>
+<Namn>Örebro Poliskårs Pistolklubb</Namn>
+</tblKlubbar>
+<tblKlubbar>
+<Klubbnr>157</Klubbnr>
+<Namn>Klippans Pistolklubb</Namn>
+</tblKlubbar>
+<tblKlubbar>
+<Klubbnr>160</Klubbnr>
+<Namn>Finspångs Pistolskytteklubb</Namn>
+</tblKlubbar>
+<tblKlubbar>
+<Klubbnr>161</Klubbnr>
+<Namn>Trosa Pistolklubb</Namn>
+</tblKlubbar>
+<tblKlubbar>
+<Klubbnr>162</Klubbnr>
+<Namn>Silje Skytteförening</Namn>
+</tblKlubbar>
+<tblKlubbar>
+<Klubbnr>164</Klubbnr>
+<Namn>Östersunds Pistolskytteklubb</Namn>
+</tblKlubbar>
+<tblKlubbar>
+<Klubbnr>165</Klubbnr>
+<Namn>Piteåpolisens Idrotts O Skytteklubb</Namn>
+</tblKlubbar>
+<tblKlubbar>
+<Klubbnr>166</Klubbnr>
+<Namn>Scheele Sportskytteklubb</Namn>
+</tblKlubbar>
+<tblKlubbar>
+<Klubbnr>167</Klubbnr>
+<Namn>Ramsbergs Pistolskytteklubb</Namn>
+</tblKlubbar>
+<tblKlubbar>
+<Klubbnr>168</Klubbnr>
+<Namn>Teckomatorps Pistolskytteklubb</Namn>
+</tblKlubbar>
+<tblKlubbar>
+<Klubbnr>170</Klubbnr>
+<Namn>Pk Allskytte</Namn>
+</tblKlubbar>
+<tblKlubbar>
+<Klubbnr>171</Klubbnr>
+<Namn>Starrkärrs Skf</Namn>
+</tblKlubbar>
+<tblKlubbar>
+<Klubbnr>172</Klubbnr>
+<Namn>Vallentuna Pistolskytteklubb  Pk 90</Namn>
+</tblKlubbar>
+<tblKlubbar>
+<Klubbnr>173</Klubbnr>
+<Namn>Ballongbergets skytteförening</Namn>
+</tblKlubbar>
+<tblKlubbar>
+<Klubbnr>174</Klubbnr>
+<Namn>Reftele Pistolklubb</Namn>
+</tblKlubbar>
+<tblKlubbar>
+<Klubbnr>176</Klubbnr>
+<Namn>Tyresö Skytteförening</Namn>
+</tblKlubbar>
+<tblKlubbar>
+<Klubbnr>177</Klubbnr>
+<Namn>Kungsörs Skytteförening</Namn>
+</tblKlubbar>
+<tblKlubbar>
+<Klubbnr>178</Klubbnr>
+<Namn>Luftfartsverkets Fritidsförening</Namn>
+</tblKlubbar>
+<tblKlubbar>
+<Klubbnr>179</Klubbnr>
+<Namn>Blidö Skf</Namn>
+</tblKlubbar>
+<tblKlubbar>
+<Klubbnr>182</Klubbnr>
+<Namn>A 4 Skytteförening</Namn>
+</tblKlubbar>
+<tblKlubbar>
+<Klubbnr>185</Klubbnr>
+<Namn>Marieholms Bruks Pistolskyttefören</Namn>
+</tblKlubbar>
+<tblKlubbar>
+<Klubbnr>187</Klubbnr>
+<Namn>Norsjö Pistolskytteklubb</Namn>
+</tblKlubbar>
+<tblKlubbar>
+<Klubbnr>188</Klubbnr>
+<Namn>Roslagens Pistolskyttar</Namn>
+</tblKlubbar>
+<tblKlubbar>
+<Klubbnr>189</Klubbnr>
+<Namn>Täby Skytteförening, P-Sekt.</Namn>
+</tblKlubbar>
+<tblKlubbar>
+<Klubbnr>190</Klubbnr>
+<Namn>Boo Skytteförenings Pistolsekt</Namn>
+</tblKlubbar>
+<tblKlubbar>
+<Klubbnr>191</Klubbnr>
+<Namn>Mariestads Pistolklubb</Namn>
+</tblKlubbar>
+<tblKlubbar>
+<Klubbnr>192</Klubbnr>
+<Namn><![CDATA[Lerums Jaktvårds & Sportskyttefören]]></Namn>
+</tblKlubbar>
+<tblKlubbar>
+<Klubbnr>193</Klubbnr>
+<Namn>Skepplanda Skytteförening</Namn>
+</tblKlubbar>
+<tblKlubbar>
+<Klubbnr>195</Klubbnr>
+<Namn>Varbergs Pistolklubb</Namn>
+</tblKlubbar>
+<tblKlubbar>
+<Klubbnr>196</Klubbnr>
+<Namn>Gustavsbergs Pistolskytteklubb</Namn>
+</tblKlubbar>
+<tblKlubbar>
+<Klubbnr>197</Klubbnr>
+<Namn>Nybro Pistolskytteklubb</Namn>
+</tblKlubbar>
+<tblKlubbar>
+<Klubbnr>198</Klubbnr>
+<Namn>Hallstaviks Pistolskytteklubb</Namn>
+</tblKlubbar>
+<tblKlubbar>
+<Klubbnr>199</Klubbnr>
+<Namn>Norrköpings Pistolklubb</Namn>
+</tblKlubbar>
+<tblKlubbar>
+<Klubbnr>200</Klubbnr>
+<Namn>Hammars Pistolskytteklubb</Namn>
+</tblKlubbar>
+<tblKlubbar>
+<Klubbnr>201</Klubbnr>
+<Namn>Hornsbergs Psk</Namn>
+</tblKlubbar>
+<tblKlubbar>
+<Klubbnr>202</Klubbnr>
+<Namn>Venjans Pistolskytteförening</Namn>
+</tblKlubbar>
+<tblKlubbar>
+<Klubbnr>203</Klubbnr>
+<Namn>Västerviks Pistolskytteförening</Namn>
+</tblKlubbar>
+<tblKlubbar>
+<Klubbnr>204</Klubbnr>
+<Namn>Marks Pistolklubb</Namn>
+</tblKlubbar>
+<tblKlubbar>
+<Klubbnr>205</Klubbnr>
+<Namn>Fredrika Pistolskytteklubb</Namn>
+</tblKlubbar>
+<tblKlubbar>
+<Klubbnr>206</Klubbnr>
+<Namn>Limhamns Skf Pistolsektion</Namn>
+</tblKlubbar>
+<tblKlubbar>
+<Klubbnr>209</Klubbnr>
+<Namn>Lindesbergs Pistolskyttar</Namn>
+</tblKlubbar>
+<tblKlubbar>
+<Klubbnr>211</Klubbnr>
+<Namn>Sjuntorps Pistolskytteklubb</Namn>
+</tblKlubbar>
+<tblKlubbar>
+<Klubbnr>212</Klubbnr>
+<Namn>Stockholms Lv-Förenings Skk</Namn>
+</tblKlubbar>
+<tblKlubbar>
+<Klubbnr>214</Klubbnr>
+<Namn>Kopparbergs Pistolskytteklubb</Namn>
+</tblKlubbar>
+<tblKlubbar>
+<Klubbnr>215</Klubbnr>
+<Namn>Drevdagens Pistolsek Av Drev.Skf</Namn>
+</tblKlubbar>
+<tblKlubbar>
+<Klubbnr>216</Klubbnr>
+<Namn>Bolidens Pistolskytteklubb</Namn>
+</tblKlubbar>
+<tblKlubbar>
+<Klubbnr>217</Klubbnr>
+<Namn>F 16 Skytteförening</Namn>
+</tblKlubbar>
+<tblKlubbar>
+<Klubbnr>218</Klubbnr>
+<Namn>Össeby Pistolskytteklubb</Namn>
+</tblKlubbar>
+<tblKlubbar>
+<Klubbnr>219</Klubbnr>
+<Namn>Sundre-Vamlingbo Pistolklubb</Namn>
+</tblKlubbar>
+<tblKlubbar>
+<Klubbnr>221</Klubbnr>
+<Namn>Räddnings Skolans Idrottsförening</Namn>
+</tblKlubbar>
+<tblKlubbar>
+<Klubbnr>223</Klubbnr>
+<Namn>Målöga Skyttegille</Namn>
+</tblKlubbar>
+<tblKlubbar>
+<Klubbnr>224</Klubbnr>
+<Namn>Grästorps Pistolskytteklubb</Namn>
+</tblKlubbar>
+<tblKlubbar>
+<Klubbnr>225</Klubbnr>
+<Namn>Fagersta Pistolskytteklubb</Namn>
+</tblKlubbar>
+<tblKlubbar>
+<Klubbnr>226</Klubbnr>
+<Namn>Fjugesta Pistolskytteklubb</Namn>
+</tblKlubbar>
+<tblKlubbar>
+<Klubbnr>228</Klubbnr>
+<Namn>Hofors Pistolskytteklubb</Namn>
+</tblKlubbar>
+<tblKlubbar>
+<Klubbnr>229</Klubbnr>
+<Namn>Nysätra Pistolklubb</Namn>
+</tblKlubbar>
+<tblKlubbar>
+<Klubbnr>230</Klubbnr>
+<Namn>IBM-Klubben, Pistolsektionen</Namn>
+</tblKlubbar>
+<tblKlubbar>
+<Klubbnr>231</Klubbnr>
+<Namn>Färgklämman Psk</Namn>
+</tblKlubbar>
+<tblKlubbar>
+<Klubbnr>232</Klubbnr>
+<Namn>Skurups Pistolskytteförening</Namn>
+</tblKlubbar>
+<tblKlubbar>
+<Klubbnr>233</Klubbnr>
+<Namn>Tomelilla Pistolskytteklubb</Namn>
+</tblKlubbar>
+<tblKlubbar>
+<Klubbnr>234</Klubbnr>
+<Namn>Köpings Bf:s Pistolskytteklubb</Namn>
+</tblKlubbar>
+<tblKlubbar>
+<Klubbnr>235</Klubbnr>
+<Namn>Kalmar Fbu-Förening</Namn>
+</tblKlubbar>
+<tblKlubbar>
+<Klubbnr>236</Klubbnr>
+<Namn>Luleå Pistolklubb</Namn>
+</tblKlubbar>
+<tblKlubbar>
+<Klubbnr>237</Klubbnr>
+<Namn>Kiruna FBU-Förening</Namn>
+</tblKlubbar>
+<tblKlubbar>
+<Klubbnr>238</Klubbnr>
+<Namn>Kungsbacka-Wiske Sportskyttar</Namn>
+</tblKlubbar>
+<tblKlubbar>
+<Klubbnr>239</Klubbnr>
+<Namn>Husie Skytteförening</Namn>
+</tblKlubbar>
+<tblKlubbar>
+<Klubbnr>240</Klubbnr>
+<Namn>F 14 Skytteförening</Namn>
+</tblKlubbar>
+<tblKlubbar>
+<Klubbnr>241</Klubbnr>
+<Namn><![CDATA[Lunds Polismäns Skytte & Idrottskl]]></Namn>
+</tblKlubbar>
+<tblKlubbar>
+<Klubbnr>242</Klubbnr>
+<Namn>Smedjebackens Sportskytteklubb</Namn>
+</tblKlubbar>
+<tblKlubbar>
+<Klubbnr>243</Klubbnr>
+<Namn>Örebro Pistol- Och Sportskytteklubb</Namn>
+</tblKlubbar>
+<tblKlubbar>
+<Klubbnr>244</Klubbnr>
+<Namn>A3 Skytteförening</Namn>
+</tblKlubbar>
+<tblKlubbar>
+<Klubbnr>245</Klubbnr>
+<Namn>Ystads Pistolskytteklubb</Namn>
+</tblKlubbar>
+<tblKlubbar>
+<Klubbnr>246</Klubbnr>
+<Namn>S A S  Skytteklubb</Namn>
+</tblKlubbar>
+<tblKlubbar>
+<Klubbnr>247</Klubbnr>
+<Namn>Akademiska Pistolklubben</Namn>
+</tblKlubbar>
+<tblKlubbar>
+<Klubbnr>249</Klubbnr>
+<Namn>Stenberga Psf</Namn>
+</tblKlubbar>
+<tblKlubbar>
+<Klubbnr>252</Klubbnr>
+<Namn>Värnamopolisens Sportkl. Skyttesekt</Namn>
+</tblKlubbar>
+<tblKlubbar>
+<Klubbnr>253</Klubbnr>
+<Namn>Uppsala Handeldvapenförening</Namn>
+</tblKlubbar>
+<tblKlubbar>
+<Klubbnr>255</Klubbnr>
+<Namn>Färjenäs Skf Pistolklubb</Namn>
+</tblKlubbar>
+<tblKlubbar>
+<Klubbnr>256</Klubbnr>
+<Namn>Dellenbygdens Pistolskytteklubb</Namn>
+</tblKlubbar>
+<tblKlubbar>
+<Klubbnr>257</Klubbnr>
+<Namn>Artillerigårdens Psk</Namn>
+</tblKlubbar>
+<tblKlubbar>
+<Klubbnr>258</Klubbnr>
+<Namn>Valla Pistolskytteklubb</Namn>
+</tblKlubbar>
+<tblKlubbar>
+<Klubbnr>259</Klubbnr>
+<Namn>Pistolklubben Örnen</Namn>
+</tblKlubbar>
+<tblKlubbar>
+<Klubbnr>260</Klubbnr>
+<Namn>Lysekils Pistolskytteklubb</Namn>
+</tblKlubbar>
+<tblKlubbar>
+<Klubbnr>261</Klubbnr>
+<Namn>Torsbydistriktets Pistolskytteklubb</Namn>
+</tblKlubbar>
+<tblKlubbar>
+<Klubbnr>262</Klubbnr>
+<Namn>Lönsboda Pistolklubb</Namn>
+</tblKlubbar>
+<tblKlubbar>
+<Klubbnr>263</Klubbnr>
+<Namn>Sandvikens Pistolskytteklubb</Namn>
+</tblKlubbar>
+<tblKlubbar>
+<Klubbnr>264</Klubbnr>
+<Namn>Pk Hjorten</Namn>
+</tblKlubbar>
+<tblKlubbar>
+<Klubbnr>265</Klubbnr>
+<Namn>Pk Ena</Namn>
+</tblKlubbar>
+<tblKlubbar>
+<Klubbnr>266</Klubbnr>
+<Namn>Oxelösunds Pistolklubb</Namn>
+</tblKlubbar>
+<tblKlubbar>
+<Klubbnr>267</Klubbnr>
+<Namn>Lenhovda Pistolklubb</Namn>
+</tblKlubbar>
+<tblKlubbar>
+<Klubbnr>269</Klubbnr>
+<Namn>Halmstads Sportskytteklubb</Namn>
+</tblKlubbar>
+<tblKlubbar>
+<Klubbnr>270</Klubbnr>
+<Namn>Pistolklubben Elbogen</Namn>
+</tblKlubbar>
+<tblKlubbar>
+<Klubbnr>271</Klubbnr>
+<Namn>Leksands Pistolskytteförening</Namn>
+</tblKlubbar>
+<tblKlubbar>
+<Klubbnr>273</Klubbnr>
+<Namn>FOK Borås</Namn>
+</tblKlubbar>
+<tblKlubbar>
+<Klubbnr>274</Klubbnr>
+<Namn>Lödöse Pistolklubb</Namn>
+</tblKlubbar>
+<tblKlubbar>
+<Klubbnr>276</Klubbnr>
+<Namn>Uddevalla Pistolskytteklubb</Namn>
+</tblKlubbar>
+<tblKlubbar>
+<Klubbnr>277</Klubbnr>
+<Namn><![CDATA[Karlstadspolisens Idr-& Skf]]></Namn>
+</tblKlubbar>
+<tblKlubbar>
+<Klubbnr>278</Klubbnr>
+<Namn>L O S Fbu Skytteförening</Namn>
+</tblKlubbar>
+<tblKlubbar>
+<Klubbnr>279</Klubbnr>
+<Namn><![CDATA[Karlskrona Pistol- & Svartkrutsklubb]]></Namn>
+</tblKlubbar>
+<tblKlubbar>
+<Klubbnr>280</Klubbnr>
+<Namn>Svalövs Pistolklubb</Namn>
+</tblKlubbar>
+<tblKlubbar>
+<Klubbnr>281</Klubbnr>
+<Namn>Partille Pistolklubb</Namn>
+</tblKlubbar>
+<tblKlubbar>
+<Klubbnr>282</Klubbnr>
+<Namn>Härnösands pistolskytteklubb</Namn>
+</tblKlubbar>
+<tblKlubbar>
+<Klubbnr>283</Klubbnr>
+<Namn>Björlanda  Skytteförening</Namn>
+</tblKlubbar>
+<tblKlubbar>
+<Klubbnr>284</Klubbnr>
+<Namn>Falkenbergs Pistolklubb</Namn>
+</tblKlubbar>
+<tblKlubbar>
+<Klubbnr>285</Klubbnr>
+<Namn>Finnskoga Pistolskytteförening</Namn>
+</tblKlubbar>
+<tblKlubbar>
+<Klubbnr>286</Klubbnr>
+<Namn>Ängelholms Sportskytteklubb</Namn>
+</tblKlubbar>
+<tblKlubbar>
+<Klubbnr>288</Klubbnr>
+<Namn>Vedums Pistolskytteklubb</Namn>
+</tblKlubbar>
+<tblKlubbar>
+<Klubbnr>289</Klubbnr>
+<Namn>Vattenfalls If  Pistolsektion</Namn>
+</tblKlubbar>
+<tblKlubbar>
+<Klubbnr>291</Klubbnr>
+<Namn>Mälarhöjdens Pistolskyttar</Namn>
+</tblKlubbar>
+<tblKlubbar>
+<Klubbnr>292</Klubbnr>
+<Namn>Ik Lyrestad</Namn>
+</tblKlubbar>
+<tblKlubbar>
+<Klubbnr>294</Klubbnr>
+<Namn>KA 3 Skytteförening</Namn>
+</tblKlubbar>
+<tblKlubbar>
+<Klubbnr>295</Klubbnr>
+<Namn>Bålsta Skyttesällskap</Namn>
+</tblKlubbar>
+<tblKlubbar>
+<Klubbnr>299</Klubbnr>
+<Namn>Stockholmstullens Psk</Namn>
+</tblKlubbar>
+<tblKlubbar>
+<Klubbnr>300</Klubbnr>
+<Namn>Djuptjärns Pistolskytteklubb</Namn>
+</tblKlubbar>
+<tblKlubbar>
+<Klubbnr>301</Klubbnr>
+<Namn>Securitas Pistolskytteklubb</Namn>
+</tblKlubbar>
+<tblKlubbar>
+<Klubbnr>302</Klubbnr>
+<Namn>Katrineholms Skyttar</Namn>
+</tblKlubbar>
+<tblKlubbar>
+<Klubbnr>304</Klubbnr>
+<Namn>Gullspångs Skytteförening</Namn>
+</tblKlubbar>
+<tblKlubbar>
+<Klubbnr>305</Klubbnr>
+<Namn>Göteborgs Pistol-och Sportskk Pistolsektionen</Namn>
+</tblKlubbar>
+<tblKlubbar>
+<Klubbnr>306</Klubbnr>
+<Namn>Rönnskärs Pistolskytteklubb</Namn>
+</tblKlubbar>
+<tblKlubbar>
+<Klubbnr>307</Klubbnr>
+<Namn>Atlas Copco Pistolskytteklubb</Namn>
+</tblKlubbar>
+<tblKlubbar>
+<Klubbnr>308</Klubbnr>
+<Namn>Lesjöfors Pistoltskytteklubb</Namn>
+</tblKlubbar>
+<tblKlubbar>
+<Klubbnr>309</Klubbnr>
+<Namn>Pk Kornet</Namn>
+</tblKlubbar>
+<tblKlubbar>
+<Klubbnr>310</Klubbnr>
+<Namn>Trelleborgs Pistolskytteförening</Namn>
+</tblKlubbar>
+<tblKlubbar>
+<Klubbnr>311</Klubbnr>
+<Namn>Haparanda Pistolskytteklubb</Namn>
+</tblKlubbar>
+<tblKlubbar>
+<Klubbnr>313</Klubbnr>
+<Namn>Korsnäsverkens Pistolklubb</Namn>
+</tblKlubbar>
+<tblKlubbar>
+<Klubbnr>314</Klubbnr>
+<Namn>Telia IF Pss Stockholm</Namn>
+</tblKlubbar>
+<tblKlubbar>
+<Klubbnr>315</Klubbnr>
+<Namn>Mölndals Pistolskytteklubb</Namn>
+</tblKlubbar>
+<tblKlubbar>
+<Klubbnr>316</Klubbnr>
+<Namn>Sandhems Pistolskytteklubb</Namn>
+</tblKlubbar>
+<tblKlubbar>
+<Klubbnr>317</Klubbnr>
+<Namn>Gävle Pistolskytteklubb</Namn>
+</tblKlubbar>
+<tblKlubbar>
+<Klubbnr>318</Klubbnr>
+<Namn>Torups Pistolklubb</Namn>
+</tblKlubbar>
+<tblKlubbar>
+<Klubbnr>319</Klubbnr>
+<Namn>Bors Antikskytteklubb</Namn>
+</tblKlubbar>
+<tblKlubbar>
+<Klubbnr>322</Klubbnr>
+<Namn>Svenska Blå Stjärnans i Sthlm Psk</Namn>
+</tblKlubbar>
+<tblKlubbar>
+<Klubbnr>323</Klubbnr>
+<Namn>Stockholmspolisens Skytteförening</Namn>
+</tblKlubbar>
+<tblKlubbar>
+<Klubbnr>324</Klubbnr>
+<Namn>Ystadspolisens Skytte- O Idrottskl.</Namn>
+</tblKlubbar>
+<tblKlubbar>
+<Klubbnr>325</Klubbnr>
+<Namn>Pk Pricken</Namn>
+</tblKlubbar>
+<tblKlubbar>
+<Klubbnr>326</Klubbnr>
+<Namn>Stockholms Kvinnors Skf</Namn>
+</tblKlubbar>
+<tblKlubbar>
+<Klubbnr>327</Klubbnr>
+<Namn>Gyttorps Sportskytteklubb</Namn>
+</tblKlubbar>
+<tblKlubbar>
+<Klubbnr>328</Klubbnr>
+<Namn>F 7 Skf</Namn>
+</tblKlubbar>
+<tblKlubbar>
+<Klubbnr>329</Klubbnr>
+<Namn>Svegs Pistolskytteklubb</Namn>
+</tblKlubbar>
+<tblKlubbar>
+<Klubbnr>331</Klubbnr>
+<Namn>Telev.Idr- Och Fritidsf. Malmö</Namn>
+</tblKlubbar>
+<tblKlubbar>
+<Klubbnr>332</Klubbnr>
+<Namn>Mälardalens Skyttesällskap</Namn>
+</tblKlubbar>
+<tblKlubbar>
+<Klubbnr>333</Klubbnr>
+<Namn>Göteborgs Hv-Befäls Pk</Namn>
+</tblKlubbar>
+<tblKlubbar>
+<Klubbnr>335</Klubbnr>
+<Namn>Kristinehamnspolisens Sk- O Ik</Namn>
+</tblKlubbar>
+<tblKlubbar>
+<Klubbnr>336</Klubbnr>
+<Namn>Televerkets Psf Ii:a Distriktet</Namn>
+</tblKlubbar>
+<tblKlubbar>
+<Klubbnr>337</Klubbnr>
+<Namn>KA 1 Skytteförening</Namn>
+</tblKlubbar>
+<tblKlubbar>
+<Klubbnr>338</Klubbnr>
+<Namn>Säffle Pistolskytteklubb</Namn>
+</tblKlubbar>
+<tblKlubbar>
+<Klubbnr>339</Klubbnr>
+<Namn>Kinda Pistolskytteklubb</Namn>
+</tblKlubbar>
+<tblKlubbar>
+<Klubbnr>340</Klubbnr>
+<Namn>Örgryte Pistolklubb</Namn>
+</tblKlubbar>
+<tblKlubbar>
+<Klubbnr>341</Klubbnr>
+<Namn>Skellefteå Pistolskytteförening</Namn>
+</tblKlubbar>
+<tblKlubbar>
+<Klubbnr>344</Klubbnr>
+<Namn>Lidingö Sportskytteklubb</Namn>
+</tblKlubbar>
+<tblKlubbar>
+<Klubbnr>345</Klubbnr>
+<Namn>Kaknäs Pistolskytteklubb</Namn>
+</tblKlubbar>
+<tblKlubbar>
+<Klubbnr>347</Klubbnr>
+<Namn>Trollhättans Pistolklubb</Namn>
+</tblKlubbar>
+<tblKlubbar>
+<Klubbnr>348</Klubbnr>
+<Namn>Vindelns Pistolskytteklubb</Namn>
+</tblKlubbar>
+<tblKlubbar>
+<Klubbnr>349</Klubbnr>
+<Namn>Västjämtens Pistolskytteklubb</Namn>
+</tblKlubbar>
+<tblKlubbar>
+<Klubbnr>350</Klubbnr>
+<Namn>Kumla Sportskyttar</Namn>
+</tblKlubbar>
+<tblKlubbar>
+<Klubbnr>351</Klubbnr>
+<Namn>S:t Eriks Pistolklubb</Namn>
+</tblKlubbar>
+<tblKlubbar>
+<Klubbnr>352</Klubbnr>
+<Namn>Handelsbankens If. Skyttesekt.</Namn>
+</tblKlubbar>
+<tblKlubbar>
+<Klubbnr>353</Klubbnr>
+<Namn>Härlanda Pistolskytteklubb</Namn>
+</tblKlubbar>
+<tblKlubbar>
+<Klubbnr>354</Klubbnr>
+<Namn>Skillingaryds Pistolskytteklubb</Namn>
+</tblKlubbar>
+<tblKlubbar>
+<Klubbnr>356</Klubbnr>
+<Namn>Laholms Pistolskytteklubb</Namn>
+</tblKlubbar>
+<tblKlubbar>
+<Klubbnr>357</Klubbnr>
+<Namn>Bromma Pistolskytteklubb</Namn>
+</tblKlubbar>
+<tblKlubbar>
+<Klubbnr>358</Klubbnr>
+<Namn>Upsala Sportskyttklubb</Namn>
+</tblKlubbar>
+<tblKlubbar>
+<Klubbnr>359</Klubbnr>
+<Namn>Gnesta Pistolskytteklubb</Namn>
+</tblKlubbar>
+<tblKlubbar>
+<Klubbnr>360</Klubbnr>
+<Namn>Vetlanda Pistolklubb</Namn>
+</tblKlubbar>
+<tblKlubbar>
+<Klubbnr>361</Klubbnr>
+<Namn>Katarina Pistolskytteförening</Namn>
+</tblKlubbar>
+<tblKlubbar>
+<Klubbnr>362</Klubbnr>
+<Namn>Falu Sport-Och Pistolskytteklubb</Namn>
+</tblKlubbar>
+<tblKlubbar>
+<Klubbnr>363</Klubbnr>
+<Namn>Ljusdals Pistolskytteklubb</Namn>
+</tblKlubbar>
+<tblKlubbar>
+<Klubbnr>364</Klubbnr>
+<Namn>Bankeryds Pistolskytteförening</Namn>
+</tblKlubbar>
+<tblKlubbar>
+<Klubbnr>365</Klubbnr>
+<Namn>Malungs Pistolskytteklubb</Namn>
+</tblKlubbar>
+<tblKlubbar>
+<Klubbnr>366</Klubbnr>
+<Namn>Karlshamns Pistolskytteklubb</Namn>
+</tblKlubbar>
+<tblKlubbar>
+<Klubbnr>367</Klubbnr>
+<Namn>Charlottenbergs Pistolskytteklubb</Namn>
+</tblKlubbar>
+<tblKlubbar>
+<Klubbnr>369</Klubbnr>
+<Namn>Tidnings Tryckarnas Psk</Namn>
+</tblKlubbar>
+<tblKlubbar>
+<Klubbnr>370</Klubbnr>
+<Namn>Vittsjö Skytteförening Pistsek</Namn>
+</tblKlubbar>
+<tblKlubbar>
+<Klubbnr>372</Klubbnr>
+<Namn>F 10 Skytteförening</Namn>
+</tblKlubbar>
+<tblKlubbar>
+<Klubbnr>373</Klubbnr>
+<Namn>Söderhamns Pistolklubb</Namn>
+</tblKlubbar>
+<tblKlubbar>
+<Klubbnr>374</Klubbnr>
+<Namn>Saab -Pistolskytteklubb</Namn>
+</tblKlubbar>
+<tblKlubbar>
+<Klubbnr>375</Klubbnr>
+<Namn>Ålems Skytteförening</Namn>
+</tblKlubbar>
+<tblKlubbar>
+<Klubbnr>376</Klubbnr>
+<Namn>Alfa Laval Pistolskytteklubb</Namn>
+</tblKlubbar>
+<tblKlubbar>
+<Klubbnr>377</Klubbnr>
+<Namn>Fc If Pistolskytteförening</Namn>
+</tblKlubbar>
+<tblKlubbar>
+<Klubbnr>378</Klubbnr>
+<Namn>Luleåpolisens Skytte-O Idrottsklubb</Namn>
+</tblKlubbar>
+<tblKlubbar>
+<Klubbnr>379</Klubbnr>
+<Namn>T 2 If Skytte</Namn>
+</tblKlubbar>
+<tblKlubbar>
+<Klubbnr>380</Klubbnr>
+<Namn>Nynäshamns Allmänna Pistolklubb</Namn>
+</tblKlubbar>
+<tblKlubbar>
+<Klubbnr>381</Klubbnr>
+<Namn>Ekshärads Pistolskytteklubb</Namn>
+</tblKlubbar>
+<tblKlubbar>
+<Klubbnr>382</Klubbnr>
+<Namn>Bredareds Sportskytteklubb</Namn>
+</tblKlubbar>
+<tblKlubbar>
+<Klubbnr>383</Klubbnr>
+<Namn>Säve Pistolskytteklubb</Namn>
+</tblKlubbar>
+<tblKlubbar>
+<Klubbnr>384</Klubbnr>
+<Namn>Östervåla Skytteförening</Namn>
+</tblKlubbar>
+<tblKlubbar>
+<Klubbnr>385</Klubbnr>
+<Namn>Markaryds sportskytteklubb</Namn>
+</tblKlubbar>
+<tblKlubbar>
+<Klubbnr>386</Klubbnr>
+<Namn>Växjö pistolklubb</Namn>
+</tblKlubbar>
+<tblKlubbar>
+<Klubbnr>387</Klubbnr>
+<Namn>Slite Pistolskytteklubb</Namn>
+</tblKlubbar>
+<tblKlubbar>
+<Klubbnr>388</Klubbnr>
+<Namn>Vinslövs Pistolskytteklubb</Namn>
+</tblKlubbar>
+<tblKlubbar>
+<Klubbnr>389</Klubbnr>
+<Namn>Kiruna Pistolskytteförening</Namn>
+</tblKlubbar>
+<tblKlubbar>
+<Klubbnr>390</Klubbnr>
+<Namn>Linköpings Pistolskytteklubb</Namn>
+</tblKlubbar>
+<tblKlubbar>
+<Klubbnr>391</Klubbnr>
+<Namn>Nedansjö Idrottsklubb</Namn>
+</tblKlubbar>
+<tblKlubbar>
+<Klubbnr>392</Klubbnr>
+<Namn>Rättviks Pistolskytteklubb</Namn>
+</tblKlubbar>
+<tblKlubbar>
+<Klubbnr>393</Klubbnr>
+<Namn>Högsby Pistolklubb</Namn>
+</tblKlubbar>
+<tblKlubbar>
+<Klubbnr>395</Klubbnr>
+<Namn>Haparandapolisens Idr- Och Skf</Namn>
+</tblKlubbar>
+<tblKlubbar>
+<Klubbnr>396</Klubbnr>
+<Namn>Arbrå Pistolskytteklubb</Namn>
+</tblKlubbar>
+<tblKlubbar>
+<Klubbnr>397</Klubbnr>
+<Namn>Älvdalens Pistolklubb</Namn>
+</tblKlubbar>
+<tblKlubbar>
+<Klubbnr>398</Klubbnr>
+<Namn>Norrahammars Pistolskytteklubb</Namn>
+</tblKlubbar>
+<tblKlubbar>
+<Klubbnr>399</Klubbnr>
+<Namn>I 14 Skytteförening</Namn>
+</tblKlubbar>
+<tblKlubbar>
+<Klubbnr>400</Klubbnr>
+<Namn>Uppsala Fbu:s Skf</Namn>
+</tblKlubbar>
+<tblKlubbar>
+<Klubbnr>401</Klubbnr>
+<Namn>Norrköpings Poliskårs Skytteklubb</Namn>
+</tblKlubbar>
+<tblKlubbar>
+<Klubbnr>402</Klubbnr>
+<Namn>Procordia Food AB</Namn>
+</tblKlubbar>
+<tblKlubbar>
+<Klubbnr>403</Klubbnr>
+<Namn>Erkheikki-Juhonpieti Psk</Namn>
+</tblKlubbar>
+<tblKlubbar>
+<Klubbnr>404</Klubbnr>
+<Namn>Sollefteå Pistolskytteklubb</Namn>
+</tblKlubbar>
+<tblKlubbar>
+<Klubbnr>405</Klubbnr>
+<Namn>Lille Mats Pk Hässleholm</Namn>
+</tblKlubbar>
+<tblKlubbar>
+<Klubbnr>406</Klubbnr>
+<Namn>Kemiras Skyttesektion</Namn>
+</tblKlubbar>
+<tblKlubbar>
+<Klubbnr>407</Klubbnr>
+<Namn>Kristinehamns Pistolklubb</Namn>
+</tblKlubbar>
+<tblKlubbar>
+<Klubbnr>408</Klubbnr>
+<Namn>Hemse-Linde Pistolskytteklubb</Namn>
+</tblKlubbar>
+<tblKlubbar>
+<Klubbnr>410</Klubbnr>
+<Namn>Ka 2 Pistolskytteklubb</Namn>
+</tblKlubbar>
+<tblKlubbar>
+<Klubbnr>411</Klubbnr>
+<Namn>Norrköpings Skyttesällskap</Namn>
+</tblKlubbar>
+<tblKlubbar>
+<Klubbnr>412</Klubbnr>
+<Namn>Eds Pistolskytteklubb</Namn>
+</tblKlubbar>
+<tblKlubbar>
+<Klubbnr>413</Klubbnr>
+<Namn>Billesholm Ekeby Pistolskytteklubb</Namn>
+</tblKlubbar>
+<tblKlubbar>
+<Klubbnr>415</Klubbnr>
+<Namn>Rundviks Pistolskytteklubb</Namn>
+</tblKlubbar>
+<tblKlubbar>
+<Klubbnr>417</Klubbnr>
+<Namn>Salems Pistolklubb</Namn>
+</tblKlubbar>
+<tblKlubbar>
+<Klubbnr>418</Klubbnr>
+<Namn>Halmstadspolisens Idr- O Skf</Namn>
+</tblKlubbar>
+<tblKlubbar>
+<Klubbnr>420</Klubbnr>
+<Namn>F 21 Skytteförening</Namn>
+</tblKlubbar>
+<tblKlubbar>
+<Klubbnr>421</Klubbnr>
+<Namn>Ormen Skytteförening</Namn>
+</tblKlubbar>
+<tblKlubbar>
+<Klubbnr>422</Klubbnr>
+<Namn>Harplinge Pk</Namn>
+</tblKlubbar>
+<tblKlubbar>
+<Klubbnr>423</Klubbnr>
+<Namn>Ärla Skf</Namn>
+</tblKlubbar>
+<tblKlubbar>
+<Klubbnr>424</Klubbnr>
+<Namn>Hotings Pistolskytteklubb</Namn>
+</tblKlubbar>
+<tblKlubbar>
+<Klubbnr>425</Klubbnr>
+<Namn>Göteborgstullens Pistolskytteklubb</Namn>
+</tblKlubbar>
+<tblKlubbar>
+<Klubbnr>426</Klubbnr>
+<Namn>Håtuna Pistol- Och Sportskytteklubb</Namn>
+</tblKlubbar>
+<tblKlubbar>
+<Klubbnr>427</Klubbnr>
+<Namn>Grovskyttarna Luleå</Namn>
+</tblKlubbar>
+<tblKlubbar>
+<Klubbnr>428</Klubbnr>
+<Namn>Piteå Pistolklubb</Namn>
+</tblKlubbar>
+<tblKlubbar>
+<Klubbnr>429</Klubbnr>
+<Namn>Lv 3 Skytteförening</Namn>
+</tblKlubbar>
+<tblKlubbar>
+<Klubbnr>430</Klubbnr>
+<Namn>Åva Psk</Namn>
+</tblKlubbar>
+<tblKlubbar>
+<Klubbnr>431</Klubbnr>
+<Namn>LM Ericsson Pistolklubb</Namn>
+</tblKlubbar>
+<tblKlubbar>
+<Klubbnr>432</Klubbnr>
+<Namn>Torna Hällestads Psk</Namn>
+</tblKlubbar>
+<tblKlubbar>
+<Klubbnr>433</Klubbnr>
+<Namn>Katrineholms Psk</Namn>
+</tblKlubbar>
+<tblKlubbar>
+<Klubbnr>434</Klubbnr>
+<Namn>Edsvalla Skytteförening</Namn>
+</tblKlubbar>
+<tblKlubbar>
+<Klubbnr>435</Klubbnr>
+<Namn>Mönsterås Pistolklubb</Namn>
+</tblKlubbar>
+<tblKlubbar>
+<Klubbnr>436</Klubbnr>
+<Namn>Vallebygdens Pistolskytteförening</Namn>
+</tblKlubbar>
+<tblKlubbar>
+<Klubbnr>437</Klubbnr>
+<Namn>Västbo Pistolklubb</Namn>
+</tblKlubbar>
+<tblKlubbar>
+<Klubbnr>438</Klubbnr>
+<Namn>Silverstadens Pistolskytteförening</Namn>
+</tblKlubbar>
+<tblKlubbar>
+<Klubbnr>439</Klubbnr>
+<Namn>Timrå SkytteGille</Namn>
+</tblKlubbar>
+<tblKlubbar>
+<Klubbnr>440</Klubbnr>
+<Namn>Marinens Skytteförening I Gbg</Namn>
+</tblKlubbar>
+<tblKlubbar>
+<Klubbnr>441</Klubbnr>
+<Namn>Kalmar Hemvärns Pistolskyttefören</Namn>
+</tblKlubbar>
+<tblKlubbar>
+<Klubbnr>442</Klubbnr>
+<Namn>Hedemora Pistolskytteklubb</Namn>
+</tblKlubbar>
+<tblKlubbar>
+<Klubbnr>443</Klubbnr>
+<Namn>Dannemora Sportskytteklubb</Namn>
+</tblKlubbar>
+<tblKlubbar>
+<Klubbnr>444</Klubbnr>
+<Namn>Grödinge Pistolskytteklubb</Namn>
+</tblKlubbar>
+<tblKlubbar>
+<Klubbnr>445</Klubbnr>
+<Namn>Eskilstuna Pistolskytteklubb</Namn>
+</tblKlubbar>
+<tblKlubbar>
+<Klubbnr>446</Klubbnr>
+<Namn>Öckerö Skytteförening</Namn>
+</tblKlubbar>
+<tblKlubbar>
+<Klubbnr>447</Klubbnr>
+<Namn>Upplands Väsby Pistolskytteklubb</Namn>
+</tblKlubbar>
+<tblKlubbar>
+<Klubbnr>449</Klubbnr>
+<Namn>Fryksdalens Pistolskytteklubb</Namn>
+</tblKlubbar>
+<tblKlubbar>
+<Klubbnr>450</Klubbnr>
+<Namn>Stockholms Spårvägars Skyttesällsk</Namn>
+</tblKlubbar>
+<tblKlubbar>
+<Klubbnr>451</Klubbnr>
+<Namn>Arvidsjaurs Pistolskytteklubb</Namn>
+</tblKlubbar>
+<tblKlubbar>
+<Klubbnr>453</Klubbnr>
+<Namn>Södra VI Pistolskytteklubb</Namn>
+</tblKlubbar>
+<tblKlubbar>
+<Klubbnr>454</Klubbnr>
+<Namn>Sätila Pistolskytteklubb</Namn>
+</tblKlubbar>
+<tblKlubbar>
+<Klubbnr>456</Klubbnr>
+<Namn>Ka 5 Skytteförening, Pistolsekt</Namn>
+</tblKlubbar>
+<tblKlubbar>
+<Klubbnr>457</Klubbnr>
+<Namn>Larm Assistans Skf</Namn>
+</tblKlubbar>
+<tblKlubbar>
+<Klubbnr>458</Klubbnr>
+<Namn>Broby Pistolskytteklubb</Namn>
+</tblKlubbar>
+<tblKlubbar>
+<Klubbnr>459</Klubbnr>
+<Namn>Artemis Skytteförening</Namn>
+</tblKlubbar>
+<tblKlubbar>
+<Klubbnr>460</Klubbnr>
+<Namn>Vilhelmina Pistolskytteklubb</Namn>
+</tblKlubbar>
+<tblKlubbar>
+<Klubbnr>461</Klubbnr>
+<Namn>Telia Idrotts- O  Fritidsförening</Namn>
+</tblKlubbar>
+<tblKlubbar>
+<Klubbnr>462</Klubbnr>
+<Namn>Lycksele Polisens Idrottsförening</Namn>
+</tblKlubbar>
+<tblKlubbar>
+<Klubbnr>464</Klubbnr>
+<Namn>Falck F-Pk</Namn>
+</tblKlubbar>
+<tblKlubbar>
+<Klubbnr>465</Klubbnr>
+<Namn>Volvo Pistolklubb</Namn>
+</tblKlubbar>
+<tblKlubbar>
+<Klubbnr>466</Klubbnr>
+<Namn>Flens Pistolskytteklubb</Namn>
+</tblKlubbar>
+<tblKlubbar>
+<Klubbnr>469</Klubbnr>
+<Namn>Smedsbo Pistolklubb  Västerås</Namn>
+</tblKlubbar>
+<tblKlubbar>
+<Klubbnr>470</Klubbnr>
+<Namn>Djurö Hemvärns Skytteförening</Namn>
+</tblKlubbar>
+<tblKlubbar>
+<Klubbnr>471</Klubbnr>
+<Namn>Osby Pistolskytteklubb</Namn>
+</tblKlubbar>
+<tblKlubbar>
+<Klubbnr>472</Klubbnr>
+<Namn>Lillsjöns Pistolskytteklubb</Namn>
+</tblKlubbar>
+<tblKlubbar>
+<Klubbnr>473</Klubbnr>
+<Namn>Östgöta helikoperbataljons Soif Af2 Soif</Namn>
+</tblKlubbar>
+<tblKlubbar>
+<Klubbnr>474</Klubbnr>
+<Namn>Lilla Edets Psk</Namn>
+</tblKlubbar>
+<tblKlubbar>
+<Klubbnr>475</Klubbnr>
+<Namn>Hagfors-Uddeholms Pistolskytteklubb</Namn>
+</tblKlubbar>
+<tblKlubbar>
+<Klubbnr>476</Klubbnr>
+<Namn>Häktet Helsingborgs Pistolskytteför</Namn>
+</tblKlubbar>
+<tblKlubbar>
+<Klubbnr>477</Klubbnr>
+<Namn>Melleruds Pistolskytteklubb</Namn>
+</tblKlubbar>
+<tblKlubbar>
+<Klubbnr>478</Klubbnr>
+<Namn>Sikeå Pistolskytteklubb</Namn>
+</tblKlubbar>
+<tblKlubbar>
+<Klubbnr>479</Klubbnr>
+<Namn>Stuguns Pk</Namn>
+</tblKlubbar>
+<tblKlubbar>
+<Klubbnr>480</Klubbnr>
+<Namn>Roasjö Skf Pistolklubb</Namn>
+</tblKlubbar>
+<tblKlubbar>
+<Klubbnr>481</Klubbnr>
+<Namn>Nordölands Pk</Namn>
+</tblKlubbar>
+<tblKlubbar>
+<Klubbnr>482</Klubbnr>
+<Namn>Tierps Psk</Namn>
+</tblKlubbar>
+<tblKlubbar>
+<Klubbnr>483</Klubbnr>
+<Namn>Nässjö Pistolskytteklubb</Namn>
+</tblKlubbar>
+<tblKlubbar>
+<Klubbnr>485</Klubbnr>
+<Namn>Karlstads Pistol- och Sportskytteklubb</Namn>
+</tblKlubbar>
+<tblKlubbar>
+<Klubbnr>486</Klubbnr>
+<Namn>Vårgårda Psk</Namn>
+</tblKlubbar>
+<tblKlubbar>
+<Klubbnr>487</Klubbnr>
+<Namn>Skinnskattebergs Skytteförening</Namn>
+</tblKlubbar>
+<tblKlubbar>
+<Klubbnr>488</Klubbnr>
+<Namn>Västerås Fbu-Förening</Namn>
+</tblKlubbar>
+<tblKlubbar>
+<Klubbnr>489</Klubbnr>
+<Namn>Ulricehamns Pistolklubb</Namn>
+</tblKlubbar>
+<tblKlubbar>
+<Klubbnr>490</Klubbnr>
+<Namn>Tillberga Pistolskytteklubb</Namn>
+</tblKlubbar>
+<tblKlubbar>
+<Klubbnr>491</Klubbnr>
+<Namn>Borgholms Pistolklubb</Namn>
+</tblKlubbar>
+<tblKlubbar>
+<Klubbnr>492</Klubbnr>
+<Namn><![CDATA[Ljusterö Jakt & Sportskytteklubb]]></Namn>
+</tblKlubbar>
+<tblKlubbar>
+<Klubbnr>493</Klubbnr>
+<Namn>Bodens Sportskytteklubb</Namn>
+</tblKlubbar>
+<tblKlubbar>
+<Klubbnr>494</Klubbnr>
+<Namn>Olofströms Pistolskytteklubb</Namn>
+</tblKlubbar>
+<tblKlubbar>
+<Klubbnr>495</Klubbnr>
+<Namn>Hede Pistolklubb</Namn>
+</tblKlubbar>
+<tblKlubbar>
+<Klubbnr>496</Klubbnr>
+<Namn>SJ Pistolklubb Luleå</Namn>
+</tblKlubbar>
+<tblKlubbar>
+<Klubbnr>497</Klubbnr>
+<Namn>Alingsås Kortdistansskytteförening</Namn>
+</tblKlubbar>
+<tblKlubbar>
+<Klubbnr>498</Klubbnr>
+<Namn>Eskilstuna Handeldvapenförening</Namn>
+</tblKlubbar>
+<tblKlubbar>
+<Klubbnr>499</Klubbnr>
+<Namn>Skytteföreningen Skjutjärnet</Namn>
+</tblKlubbar>
+<tblKlubbar>
+<Klubbnr>500</Klubbnr>
+<Namn>Klinte Skyttegille Pistolsektion</Namn>
+</tblKlubbar>
+<tblKlubbar>
+<Klubbnr>501</Klubbnr>
+<Namn>Johannishus Pistolskytteklubb</Namn>
+</tblKlubbar>
+<tblKlubbar>
+<Klubbnr>503</Klubbnr>
+<Namn>Lövsta Skf</Namn>
+</tblKlubbar>
+<tblKlubbar>
+<Klubbnr>504</Klubbnr>
+<Namn>Perstorps Pistolskytteklubb</Namn>
+</tblKlubbar>
+<tblKlubbar>
+<Klubbnr>506</Klubbnr>
+<Namn>Munkfors Pistolskytteklubb</Namn>
+</tblKlubbar>
+<tblKlubbar>
+<Klubbnr>507</Klubbnr>
+<Namn>Lits Pistolskytteklubb</Namn>
+</tblKlubbar>
+<tblKlubbar>
+<Klubbnr>508</Klubbnr>
+<Namn>Televerkstadens Psk</Namn>
+</tblKlubbar>
+<tblKlubbar>
+<Klubbnr>509</Klubbnr>
+<Namn>Tornedalens Pistolklubb</Namn>
+</tblKlubbar>
+<tblKlubbar>
+<Klubbnr>510</Klubbnr>
+<Namn>Gällivare Pistolklubb</Namn>
+</tblKlubbar>
+<tblKlubbar>
+<Klubbnr>511</Klubbnr>
+<Namn>Jokkmokks Pistolklubb</Namn>
+</tblKlubbar>
+<tblKlubbar>
+<Klubbnr>512</Klubbnr>
+<Namn>Broaryds Pistolklubb</Namn>
+</tblKlubbar>
+<tblKlubbar>
+<Klubbnr>514</Klubbnr>
+<Namn>Torsås Pistolklubb</Namn>
+</tblKlubbar>
+<tblKlubbar>
+<Klubbnr>515</Klubbnr>
+<Namn>Örnsköldsviks Pistolklubb</Namn>
+</tblKlubbar>
+<tblKlubbar>
+<Klubbnr>517</Klubbnr>
+<Namn>Frösö Skans Skyttegille</Namn>
+</tblKlubbar>
+<tblKlubbar>
+<Klubbnr>518</Klubbnr>
+<Namn>Sundsvalls Pistolskytteklubb</Namn>
+</tblKlubbar>
+<tblKlubbar>
+<Klubbnr>519</Klubbnr>
+<Namn>Järnvägsfolkets Ff Pk Malmö</Namn>
+</tblKlubbar>
+<tblKlubbar>
+<Klubbnr>520</Klubbnr>
+<Namn>Överums Pistolklubb</Namn>
+</tblKlubbar>
+<tblKlubbar>
+<Klubbnr>521</Klubbnr>
+<Namn>Älvenäs Pistolskytteklubb</Namn>
+</tblKlubbar>
+<tblKlubbar>
+<Klubbnr>522</Klubbnr>
+<Namn>Överby Pistolklubb</Namn>
+</tblKlubbar>
+<tblKlubbar>
+<Klubbnr>524</Klubbnr>
+<Namn>Sveriges Radios Psk Malmö</Namn>
+</tblKlubbar>
+<tblKlubbar>
+<Klubbnr>526</Klubbnr>
+<Namn>Motala Pistolklubb</Namn>
+</tblKlubbar>
+<tblKlubbar>
+<Klubbnr>528</Klubbnr>
+<Namn>Tyringe Pistolklubb</Namn>
+</tblKlubbar>
+<tblKlubbar>
+<Klubbnr>529</Klubbnr>
+<Namn>Huddinge Jaktvårdsförening</Namn>
+</tblKlubbar>
+<tblKlubbar>
+<Klubbnr>530</Klubbnr>
+<Namn>Eksjöpolisens Idr.- Och Skf</Namn>
+</tblKlubbar>
+<tblKlubbar>
+<Klubbnr>531</Klubbnr>
+<Namn>Södra Kustdistriktets Idrotts Och</Namn>
+</tblKlubbar>
+<tblKlubbar>
+<Klubbnr>532</Klubbnr>
+<Namn>Östhammars Pistolklubb</Namn>
+</tblKlubbar>
+<tblKlubbar>
+<Klubbnr>534</Klubbnr>
+<Namn>Sjöormens Pistolklubb</Namn>
+</tblKlubbar>
+<tblKlubbar>
+<Klubbnr>535</Klubbnr>
+<Namn>Särna Pistolskytteförening</Namn>
+</tblKlubbar>
+<tblKlubbar>
+<Klubbnr>536</Klubbnr>
+<Namn>Sj-bv Idrottsförening Skytteför.</Namn>
+</tblKlubbar>
+<tblKlubbar>
+<Klubbnr>540</Klubbnr>
+<Namn>Sotholmens Pistolskytteklubb</Namn>
+</tblKlubbar>
+<tblKlubbar>
+<Klubbnr>543</Klubbnr>
+<Namn>Vännäs Pistolskytteklubb</Namn>
+</tblKlubbar>
+<tblKlubbar>
+<Klubbnr>546</Klubbnr>
+<Namn>Stockaryds Pistolklubb</Namn>
+</tblKlubbar>
+<tblKlubbar>
+<Klubbnr>548</Klubbnr>
+<Namn>Nordmarkens Psk</Namn>
+</tblKlubbar>
+<tblKlubbar>
+<Klubbnr>549</Klubbnr>
+<Namn>Sj Skyttarna Kristianstad</Namn>
+</tblKlubbar>
+<tblKlubbar>
+<Klubbnr>550</Klubbnr>
+<Namn>Upplands Regementes Skf</Namn>
+</tblKlubbar>
+<tblKlubbar>
+<Klubbnr>552</Klubbnr>
+<Namn>Sj Skytteklubb Hallsberg</Namn>
+</tblKlubbar>
+<tblKlubbar>
+<Klubbnr>554</Klubbnr>
+<Namn>Sj Pistolskytteklubb Ånge</Namn>
+</tblKlubbar>
+<tblKlubbar>
+<Klubbnr>555</Klubbnr>
+<Namn>Tornet Skytteförening</Namn>
+</tblKlubbar>
+<tblKlubbar>
+<Klubbnr>556</Klubbnr>
+<Namn>Sj Skytteklubb Falköping</Namn>
+</tblKlubbar>
+<tblKlubbar>
+<Klubbnr>557</Klubbnr>
+<Namn>Sj Ik Pistolskyttesektion</Namn>
+</tblKlubbar>
+<tblKlubbar>
+<Klubbnr>558</Klubbnr>
+<Namn>Donsö Pistolskytteförening</Namn>
+</tblKlubbar>
+<tblKlubbar>
+<Klubbnr>560</Klubbnr>
+<Namn>Umeå Fbu Pskf</Namn>
+</tblKlubbar>
+<tblKlubbar>
+<Klubbnr>561</Klubbnr>
+<Namn>Vellinge Pistolklubb</Namn>
+</tblKlubbar>
+<tblKlubbar>
+<Klubbnr>562</Klubbnr>
+<Namn>Stråtjära Pistolskytte Gille</Namn>
+</tblKlubbar>
+<tblKlubbar>
+<Klubbnr>563</Klubbnr>
+<Namn>Singeshults Pistolskytteklubb</Namn>
+</tblKlubbar>
+<tblKlubbar>
+<Klubbnr>564</Klubbnr>
+<Namn>Tranås Pistolklubb</Namn>
+</tblKlubbar>
+<tblKlubbar>
+<Klubbnr>565</Klubbnr>
+<Namn>Lidköpings Pistolskytteförening</Namn>
+</tblKlubbar>
+<tblKlubbar>
+<Klubbnr>567</Klubbnr>
+<Namn>Kullens Pistolskytteklubb</Namn>
+</tblKlubbar>
+<tblKlubbar>
+<Klubbnr>568</Klubbnr>
+<Namn>Västjämtens Jaktskytteklubb Psk</Namn>
+</tblKlubbar>
+<tblKlubbar>
+<Klubbnr>569</Klubbnr>
+<Namn>Österåkers Skytteförening</Namn>
+</tblKlubbar>
+<tblKlubbar>
+<Klubbnr>571</Klubbnr>
+<Namn>Skorpeds Pistolskytteförening</Namn>
+</tblKlubbar>
+<tblKlubbar>
+<Klubbnr>572</Klubbnr>
+<Namn>Surte Bohus Sportskyttegille</Namn>
+</tblKlubbar>
+<tblKlubbar>
+<Klubbnr>573</Klubbnr>
+<Namn>Frivilliga Automobilkåren i Sthlm</Namn>
+</tblKlubbar>
+<tblKlubbar>
+<Klubbnr>574</Klubbnr>
+<Namn>Arboga Pistolskytteklubb</Namn>
+</tblKlubbar>
+<tblKlubbar>
+<Klubbnr>575</Klubbnr>
+<Namn>Döderhults Pistolklubb</Namn>
+</tblKlubbar>
+<tblKlubbar>
+<Klubbnr>577</Klubbnr>
+<Namn>Sösdala Pistolklubb</Namn>
+</tblKlubbar>
+<tblKlubbar>
+<Klubbnr>578</Klubbnr>
+<Namn>Götebors Svartkruts Skyttar</Namn>
+</tblKlubbar>
+<tblKlubbar>
+<Klubbnr>579</Klubbnr>
+<Namn>Dorotea Pistolskytteklubb</Namn>
+</tblKlubbar>
+<tblKlubbar>
+<Klubbnr>581</Klubbnr>
+<Namn><![CDATA[Bromölla Pistol & Svartkrutsskytteför]]></Namn>
+</tblKlubbar>
+<tblKlubbar>
+<Klubbnr>582</Klubbnr>
+<Namn>Ljungbyheds Pistolklubb</Namn>
+</tblKlubbar>
+<tblKlubbar>
+<Klubbnr>584</Klubbnr>
+<Namn>Valvträsk Skytteförening</Namn>
+</tblKlubbar>
+<tblKlubbar>
+<Klubbnr>585</Klubbnr>
+<Namn>Hammerdals Pistolskytteklubb</Namn>
+</tblKlubbar>
+<tblKlubbar>
+<Klubbnr>586</Klubbnr>
+<Namn>LWAB skytteförening</Namn>
+</tblKlubbar>
+<tblKlubbar>
+<Klubbnr>587</Klubbnr>
+<Namn>Bispgårdens Pistolklubb</Namn>
+</tblKlubbar>
+<tblKlubbar>
+<Klubbnr>588</Klubbnr>
+<Namn>Jämjö Sportskytteklubb</Namn>
+</tblKlubbar>
+<tblKlubbar>
+<Klubbnr>589</Klubbnr>
+<Namn>Sj Sportsklubb</Namn>
+</tblKlubbar>
+<tblKlubbar>
+<Klubbnr>590</Klubbnr>
+<Namn>Älvsbyns Pistolklubb</Namn>
+</tblKlubbar>
+<tblKlubbar>
+<Klubbnr>591</Klubbnr>
+<Namn>S:t Eskils Skyttar</Namn>
+</tblKlubbar>
+<tblKlubbar>
+<Klubbnr>593</Klubbnr>
+<Namn>Österlens Pistolklubb</Namn>
+</tblKlubbar>
+<tblKlubbar>
+<Klubbnr>594</Klubbnr>
+<Namn>Malmö Hemvärn pistolskytteförening</Namn>
+</tblKlubbar>
+<tblKlubbar>
+<Klubbnr>596</Klubbnr>
+<Namn>Pistolklubben Härjulf</Namn>
+</tblKlubbar>
+<tblKlubbar>
+<Klubbnr>597</Klubbnr>
+<Namn>Falupolisens Idrottsklubb</Namn>
+</tblKlubbar>
+<tblKlubbar>
+<Klubbnr>598</Klubbnr>
+<Namn>Jonsgårdens Pistolskytteklubb</Namn>
+</tblKlubbar>
+<tblKlubbar>
+<Klubbnr>599</Klubbnr>
+<Namn>Bengtsfors Pistolskytteklubb</Namn>
+</tblKlubbar>
+<tblKlubbar>
+<Klubbnr>600</Klubbnr>
+<Namn>Ängelholms Pistolskytteklubb</Namn>
+</tblKlubbar>
+<tblKlubbar>
+<Klubbnr>601</Klubbnr>
+<Namn>Stockholm Enskede Pistolskytteklubb</Namn>
+</tblKlubbar>
+<tblKlubbar>
+<Klubbnr>602</Klubbnr>
+<Namn>Sjöbo Fbu-Förening</Namn>
+</tblKlubbar>
+<tblKlubbar>
+<Klubbnr>603</Klubbnr>
+<Namn>Rotebergs Skytteklubb Pistolsektion</Namn>
+</tblKlubbar>
+<tblKlubbar>
+<Klubbnr>604</Klubbnr>
+<Namn>Älvkarleby Pistolklubb</Namn>
+</tblKlubbar>
+<tblKlubbar>
+<Klubbnr>605</Klubbnr>
+<Namn>Tidaholms Pistolskytteklubb</Namn>
+</tblKlubbar>
+<tblKlubbar>
+<Klubbnr>606</Klubbnr>
+<Namn>Hästveda Pistolskytteklubb</Namn>
+</tblKlubbar>
+<tblKlubbar>
+<Klubbnr>607</Klubbnr>
+<Namn>Porjus skf</Namn>
+</tblKlubbar>
+<tblKlubbar>
+<Klubbnr>608</Klubbnr>
+<Namn><![CDATA[Härryda Pistol & Sportskyttar]]></Namn>
+</tblKlubbar>
+<tblKlubbar>
+<Klubbnr>610</Klubbnr>
+<Namn>Sörbygdens Pistolklubb</Namn>
+</tblKlubbar>
+<tblKlubbar>
+<Klubbnr>611</Klubbnr>
+<Namn>Telia If Pistilsekt</Namn>
+</tblKlubbar>
+<tblKlubbar>
+<Klubbnr>612</Klubbnr>
+<Namn>Pistolklubben Esss Bromma</Namn>
+</tblKlubbar>
+<tblKlubbar>
+<Klubbnr>613</Klubbnr>
+<Namn>Tingsryds Pistolskytteklubb</Namn>
+</tblKlubbar>
+<tblKlubbar>
+<Klubbnr>614</Klubbnr>
+<Namn>Malå Pistolskytteklubb</Namn>
+</tblKlubbar>
+<tblKlubbar>
+<Klubbnr>615</Klubbnr>
+<Namn>Ratan Djäkneboda Pistol Skf</Namn>
+</tblKlubbar>
+<tblKlubbar>
+<Klubbnr>616</Klubbnr>
+<Namn>Jävrebyns Pistolskytteförening</Namn>
+</tblKlubbar>
+<tblKlubbar>
+<Klubbnr>619</Klubbnr>
+<Namn>Degeberga Pistolklubb</Namn>
+</tblKlubbar>
+<tblKlubbar>
+<Klubbnr>620</Klubbnr>
+<Namn>Hallstahammars Pistolskytteklubb</Namn>
+</tblKlubbar>
+<tblKlubbar>
+<Klubbnr>621</Klubbnr>
+<Namn>Skövde Sportskytteklubb</Namn>
+</tblKlubbar>
+<tblKlubbar>
+<Klubbnr>622</Klubbnr>
+<Namn>Mora Skyttegille Pistolsektionen</Namn>
+</tblKlubbar>
+<tblKlubbar>
+<Klubbnr>623</Klubbnr>
+<Namn>Sundsvalls Sportskytteklubb</Namn>
+</tblKlubbar>
+<tblKlubbar>
+<Klubbnr>624</Klubbnr>
+<Namn>Tysslinge Skytteklubb</Namn>
+</tblKlubbar>
+<tblKlubbar>
+<Klubbnr>625</Klubbnr>
+<Namn>Habo Pistolskytteklubb</Namn>
+</tblKlubbar>
+<tblKlubbar>
+<Klubbnr>626</Klubbnr>
+<Namn>Vormsele Pistolskytteklubb</Namn>
+</tblKlubbar>
+<tblKlubbar>
+<Klubbnr>627</Klubbnr>
+<Namn>Västra Husby Skyttegille</Namn>
+</tblKlubbar>
+<tblKlubbar>
+<Klubbnr>628</Klubbnr>
+<Namn>Varpsunds pistolskytteförening</Namn>
+</tblKlubbar>
+<tblKlubbar>
+<Klubbnr>629</Klubbnr>
+<Namn>Bullmarks Skyttegille</Namn>
+</tblKlubbar>
+<tblKlubbar>
+<Klubbnr>630</Klubbnr>
+<Namn>Berga Pistolskytteklubb</Namn>
+</tblKlubbar>
+<tblKlubbar>
+<Klubbnr>634</Klubbnr>
+<Namn>S:t Olofs Fbu- Förening</Namn>
+</tblKlubbar>
+<tblKlubbar>
+<Klubbnr>635</Klubbnr>
+<Namn>Linköpingspolisens Skytteklubb</Namn>
+</tblKlubbar>
+<tblKlubbar>
+<Klubbnr>637</Klubbnr>
+<Namn>Brunflo Skytteförening</Namn>
+</tblKlubbar>
+<tblKlubbar>
+<Klubbnr>638</Klubbnr>
+<Namn>Långviksmons Jakt- Och Spk</Namn>
+</tblKlubbar>
+<tblKlubbar>
+<Klubbnr>639</Klubbnr>
+<Namn>Bollnäs Pistolskytteklubb</Namn>
+</tblKlubbar>
+<tblKlubbar>
+<Klubbnr>641</Klubbnr>
+<Namn>Borgens Skyttegille</Namn>
+</tblKlubbar>
+<tblKlubbar>
+<Klubbnr>647</Klubbnr>
+<Namn>Kälarne Psk</Namn>
+</tblKlubbar>
+<tblKlubbar>
+<Klubbnr>649</Klubbnr>
+<Namn>Nätra Skyttegille</Namn>
+</tblKlubbar>
+<tblKlubbar>
+<Klubbnr>650</Klubbnr>
+<Namn>Strömsunds Sportskytteklubb</Namn>
+</tblKlubbar>
+<tblKlubbar>
+<Klubbnr>651</Klubbnr>
+<Namn>Älmhults Pistolklubb</Namn>
+</tblKlubbar>
+<tblKlubbar>
+<Klubbnr>654</Klubbnr>
+<Namn>Södertälje Pistolklubb</Namn>
+</tblKlubbar>
+<tblKlubbar>
+<Klubbnr>655</Klubbnr>
+<Namn>Myresjö Pistolskytteklubb</Namn>
+</tblKlubbar>
+<tblKlubbar>
+<Klubbnr>656</Klubbnr>
+<Namn>Ölands Pistolklubb</Namn>
+</tblKlubbar>
+<tblKlubbar>
+<Klubbnr>658</Klubbnr>
+<Namn>Skytteföreningen Allians</Namn>
+</tblKlubbar>
+<tblKlubbar>
+<Klubbnr>661</Klubbnr>
+<Namn>Hultsfreds Pistolskytteklubb</Namn>
+</tblKlubbar>
+<tblKlubbar>
+<Klubbnr>662</Klubbnr>
+<Namn>Hjälmseryds Pistolklubb</Namn>
+</tblKlubbar>
+<tblKlubbar>
+<Klubbnr>665</Klubbnr>
+<Namn>Alvesta Pistolskytteklubb</Namn>
+</tblKlubbar>
+<tblKlubbar>
+<Klubbnr>670</Klubbnr>
+<Namn>Sj Pistolskytteförening Öxnered</Namn>
+</tblKlubbar>
+<tblKlubbar>
+<Klubbnr>672</Klubbnr>
+<Namn>Taxi Pistolskytteklubb</Namn>
+</tblKlubbar>
+<tblKlubbar>
+<Klubbnr>673</Klubbnr>
+<Namn>Säters Pistolskytteförening</Namn>
+</tblKlubbar>
+<tblKlubbar>
+<Klubbnr>676</Klubbnr>
+<Namn>Töreboda Pistolskytteklubb</Namn>
+</tblKlubbar>
+<tblKlubbar>
+<Klubbnr>677</Klubbnr>
+<Namn>Pistolklubben Haningeskyttar</Namn>
+</tblKlubbar>
+<tblKlubbar>
+<Klubbnr>679</Klubbnr>
+<Namn>Göteborgs Trängbefälsförening</Namn>
+</tblKlubbar>
+<tblKlubbar>
+<Klubbnr>680</Klubbnr>
+<Namn>Höörs Pistolskytteklubb</Namn>
+</tblKlubbar>
+<tblKlubbar>
+<Klubbnr>684</Klubbnr>
+<Namn>Stenungsunds Pistolklubb</Namn>
+</tblKlubbar>
+<tblKlubbar>
+<Klubbnr>686</Klubbnr>
+<Namn>Sävsjö pistolskytteklubb</Namn>
+</tblKlubbar>
+<tblKlubbar>
+<Klubbnr>689</Klubbnr>
+<Namn>Ankarsrums Pistolskytteförening</Namn>
+</tblKlubbar>
+<tblKlubbar>
+<Klubbnr>690</Klubbnr>
+<Namn>Emmaboda Pistolklubb</Namn>
+</tblKlubbar>
+<tblKlubbar>
+<Klubbnr>691</Klubbnr>
+<Namn>Sågmyra Pistolskytteklubb</Namn>
+</tblKlubbar>
+<tblKlubbar>
+<Klubbnr>692</Klubbnr>
+<Namn>Magnumsällskapet</Namn>
+</tblKlubbar>
+<tblKlubbar>
+<Klubbnr>693</Klubbnr>
+<Namn>Pistolskytteklubben Aga</Namn>
+</tblKlubbar>
+<tblKlubbar>
+<Klubbnr>694</Klubbnr>
+<Namn>Mjölby Pistolklubb</Namn>
+</tblKlubbar>
+<tblKlubbar>
+<Klubbnr>695</Klubbnr>
+<Namn>Norriåns Pistolskytteförening</Namn>
+</tblKlubbar>
+<tblKlubbar>
+<Klubbnr>696</Klubbnr>
+<Namn>Ramsjö Skytteförening</Namn>
+</tblKlubbar>
+<tblKlubbar>
+<Klubbnr>698</Klubbnr>
+<Namn>Gävunda Pistolskytteförening</Namn>
+</tblKlubbar>
+<tblKlubbar>
+<Klubbnr>699</Klubbnr>
+<Namn>Vargöns Pistolklubb</Namn>
+</tblKlubbar>
+<tblKlubbar>
+<Klubbnr>707</Klubbnr>
+<Namn>Sala Pistolklubb</Namn>
+</tblKlubbar>
+<tblKlubbar>
+<Klubbnr>708</Klubbnr>
+<Namn>Jönköpings Pistolskytteklubb</Namn>
+</tblKlubbar>
+<tblKlubbar>
+<Klubbnr>709</Klubbnr>
+<Namn>Kungshamns Pistolskytteklubb</Namn>
+</tblKlubbar>
+<tblKlubbar>
+<Klubbnr>710</Klubbnr>
+<Namn>Huskvarna Pistolskytteklubb</Namn>
+</tblKlubbar>
+<tblKlubbar>
+<Klubbnr>711</Klubbnr>
+<Namn>Storfors Pistolskytteklubb</Namn>
+</tblKlubbar>
+<tblKlubbar>
+<Klubbnr>712</Klubbnr>
+<Namn>Murjek-Vuollerims Pistolklubb</Namn>
+</tblKlubbar>
+<tblKlubbar>
+<Klubbnr>713</Klubbnr>
+<Namn>Järna Skytteförening</Namn>
+</tblKlubbar>
+<tblKlubbar>
+<Klubbnr>714</Klubbnr>
+<Namn>Pålsboda Pistolskytteklubb</Namn>
+</tblKlubbar>
+<tblKlubbar>
+<Klubbnr>715</Klubbnr>
+<Namn>Skarp 7 Pistolskytteklubb</Namn>
+</tblKlubbar>
+<tblKlubbar>
+<Klubbnr>718</Klubbnr>
+<Namn>Ockelbo Pistolskytteklubb</Namn>
+</tblKlubbar>
+<tblKlubbar>
+<Klubbnr>719</Klubbnr>
+<Namn>Södra Dals Pistolskytteförening</Namn>
+</tblKlubbar>
+<tblKlubbar>
+<Klubbnr>720</Klubbnr>
+<Namn>Närs Pistolskytteförening</Namn>
+</tblKlubbar>
+<tblKlubbar>
+<Klubbnr>722</Klubbnr>
+<Namn>Kävlinge Pistolklubb</Namn>
+</tblKlubbar>
+<tblKlubbar>
+<Klubbnr>723</Klubbnr>
+<Namn>Åmåls Pistolklubb</Namn>
+</tblKlubbar>
+<tblKlubbar>
+<Klubbnr>724</Klubbnr>
+<Namn>Kaflås Pistolklubb</Namn>
+</tblKlubbar>
+<tblKlubbar>
+<Klubbnr>727</Klubbnr>
+<Namn>Kramfors Pistolskytteklubb</Namn>
+</tblKlubbar>
+<tblKlubbar>
+<Klubbnr>730</Klubbnr>
+<Namn>Åtvidabergs Pf</Namn>
+</tblKlubbar>
+<tblKlubbar>
+<Klubbnr>731</Klubbnr>
+<Namn>Horns Skytteförenings Pistolsektion</Namn>
+</tblKlubbar>
+<tblKlubbar>
+<Klubbnr>732</Klubbnr>
+<Namn>Kallhälls Pistolklubb</Namn>
+</tblKlubbar>
+<tblKlubbar>
+<Klubbnr>733</Klubbnr>
+<Namn>Burträsk Pistolklubb</Namn>
+</tblKlubbar>
+<tblKlubbar>
+<Klubbnr>734</Klubbnr>
+<Namn>Råsbo Pistolskytteklubb</Namn>
+</tblKlubbar>
+<tblKlubbar>
+<Klubbnr>735</Klubbnr>
+<Namn>STAR Pistolsektionen</Namn>
+</tblKlubbar>
+<tblKlubbar>
+<Klubbnr>736</Klubbnr>
+<Namn>Varmvattnets psk</Namn>
+</tblKlubbar>
+<tblKlubbar>
+<Klubbnr>737</Klubbnr>
+<Namn>ESS, Elitskyttesällskapet</Namn>
+</tblKlubbar>
+</dataroot>

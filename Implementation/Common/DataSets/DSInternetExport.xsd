@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xs:schema id="DSInternetExport" targetNamespace="http://tempuri.org/DSInternetExport.xsd" elementFormDefault="qualified" attributeFormDefault="qualified" xmlns="http://tempuri.org/DSInternetExport.xsd" xmlns:mstns="http://tempuri.org/DSInternetExport.xsd" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xs:element name="DSInternetExport" msdata:IsDataSet="true">
+        <xs:complexType>
+            <xs:choice maxOccurs="unbounded">
+                <xs:element name="PatrolsByClub">
+                    <xs:complexType>
+                        <xs:sequence>
+                            <xs:element name="ClubName" type="xs:string" minOccurs="0" />
+                            <xs:element name="ClubId" type="xs:string" minOccurs="0" />
+                            <xs:element name="ShooterName" type="xs:string" minOccurs="0" />
+                            <xs:element name="ShooterClass" type="xs:string" minOccurs="0" />
+                            <xs:element name="PatrolId" type="xs:int" minOccurs="0" />
+                            <xs:element name="Lane" type="xs:int" minOccurs="0" />
+                            <xs:element name="Start" type="xs:dateTime" minOccurs="0" />
+                            <xs:element name="Weapon" type="xs:string" minOccurs="0" />
+                            <xs:element name="WeaponCaliber" type="xs:string" minOccurs="0" />
+                            <xs:element name="Payed" type="xs:int" minOccurs="0" />
+                        </xs:sequence>
+                    </xs:complexType>
+                </xs:element>
+            </xs:choice>
+        </xs:complexType>
+    </xs:element>
+</xs:schema>

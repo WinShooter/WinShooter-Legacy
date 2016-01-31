@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xs:schema id="DatasetPatrols" targetNamespace="http://tempuri.org/DatasetPatrols.xsd" xmlns:mstns="http://tempuri.org/DatasetPatrols.xsd" xmlns="http://tempuri.org/DatasetPatrols.xsd" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata" xmlns:msprop="urn:schemas-microsoft-com:xml-msprop" attributeFormDefault="qualified" elementFormDefault="qualified">
+  <xs:annotation>
+    <xs:appinfo source="urn:schemas-microsoft-com:xml-msdatasource">
+      <DataSource DefaultConnectionIndex="0" FunctionsComponentName="QueriesTableAdapter" Modifier="AutoLayout, AnsiClass, Class, Public" SchemaSerializationMode="IncludeSchema" xmlns="urn:schemas-microsoft-com:xml-msdatasource">
+        <Connections>
+        </Connections>
+        <Tables>
+        </Tables>
+        <Sources>
+        </Sources>
+      </DataSource>
+    </xs:appinfo>
+  </xs:annotation>
+  <xs:element name="DatasetPatrols" msdata:IsDataSet="true" msdata:Locale="en-US" msprop:Generator_UserDSName="DatasetPatrols" msprop:Generator_DataSetName="DatasetPatrols">
+    <xs:complexType>
+      <xs:choice minOccurs="0" maxOccurs="unbounded">
+        <xs:element name="Patrols" msprop:Generator_UserTableName="Patrols" msprop:Generator_RowDeletedName="PatrolsRowDeleted" msprop:Generator_RowChangedName="PatrolsRowChanged" msprop:Generator_RowClassName="PatrolsRow" msprop:Generator_RowChangingName="PatrolsRowChanging" msprop:Generator_RowEvArgName="PatrolsRowChangeEvent" msprop:Generator_RowEvHandlerName="PatrolsRowChangeEventHandler" msprop:Generator_TableClassName="PatrolsDataTable" msprop:Generator_TableVarName="tablePatrols" msprop:Generator_RowDeletingName="PatrolsRowDeleting" msprop:Generator_TablePropName="Patrols">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="Id" msprop:Generator_UserColumnName="Id" msprop:Generator_ColumnPropNameInRow="Id" msprop:Generator_ColumnVarNameInTable="columnId" msprop:Generator_ColumnPropNameInTable="IdColumn" type="xs:int" minOccurs="0" />
+              <xs:element name="Starttime" msprop:Generator_UserColumnName="Starttime" msprop:Generator_ColumnPropNameInRow="Starttime" msprop:Generator_ColumnVarNameInTable="columnStarttime" msprop:Generator_ColumnPropNameInTable="StarttimeColumn" type="xs:dateTime" minOccurs="0" />
+              <xs:element name="Class" msprop:Generator_UserColumnName="Class" msprop:Generator_ColumnPropNameInRow="Class" msprop:Generator_ColumnVarNameInTable="columnClass" msprop:Generator_ColumnPropNameInTable="ClassColumn" type="xs:string" minOccurs="0" />
+              <xs:element name="NumberOfCompetitors" msprop:Generator_UserColumnName="NumberOfCompetitors" msprop:Generator_ColumnPropNameInRow="NumberOfCompetitors" msprop:Generator_ColumnVarNameInTable="columnNumberOfCompetitors" msprop:Generator_ColumnPropNameInTable="NumberOfCompetitorsColumn" type="xs:int" minOccurs="0" />
+              <xs:element name="DisplayName" msprop:Generator_UserColumnName="DisplayName" msprop:Generator_ColumnPropNameInRow="DisplayName" msprop:Generator_ColumnVarNameInTable="columnDisplayName" msprop:Generator_ColumnPropNameInTable="DisplayNameColumn" type="xs:string" minOccurs="0" />
+              <xs:element name="NumberOfCompetitorsWithResult" msprop:Generator_UserColumnName="NumberOfCompetitorsWithResult" msprop:Generator_ColumnPropNameInRow="NumberOfCompetitorsWithResult" msprop:Generator_ColumnVarNameInTable="columnNumberOfCompetitorsWithResult" msprop:Generator_ColumnPropNameInTable="NumberOfCompetitorsWithResultColumn" type="xs:int" minOccurs="0" />
+              <xs:element name="StartTimeDisplay" msprop:Generator_UserColumnName="StartTimeDisplay" msprop:Generator_ColumnVarNameInTable="columnStartTimeDisplay" msprop:Generator_ColumnPropNameInRow="StartTimeDisplay" msprop:Generator_ColumnPropNameInTable="StartTimeDisplayColumn" type="xs:dateTime" minOccurs="0" />
+              <xs:element name="NrOfArrived" msprop:Generator_UserColumnName="NrOfArrived" msprop:Generator_ColumnPropNameInRow="NrOfArrived" msprop:Generator_ColumnVarNameInTable="columnNrOfArrived" msprop:Generator_ColumnPropNameInTable="NrOfArrivedColumn" type="xs:int" minOccurs="0" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:choice>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>
