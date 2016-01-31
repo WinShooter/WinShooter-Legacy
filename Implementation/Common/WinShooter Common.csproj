@@ -28,6 +28,8 @@
     </UpgradeBackupLocation>
     <SignAssembly>false</SignAssembly>
     <OldToolsVersion>3.5</OldToolsVersion>
+    <IsWebBootstrapper>false</IsWebBootstrapper>
+    <TargetFrameworkVersion>v2.0</TargetFrameworkVersion>
     <PublishUrl>publish\</PublishUrl>
     <Install>true</Install>
     <InstallFrom>Disk</InstallFrom>
@@ -40,10 +42,8 @@
     <MapFileExtensions>true</MapFileExtensions>
     <ApplicationRevision>0</ApplicationRevision>
     <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
-    <IsWebBootstrapper>false</IsWebBootstrapper>
     <UseApplicationTrust>false</UseApplicationTrust>
     <BootstrapperEnabled>true</BootstrapperEnabled>
-    <TargetFrameworkVersion>v2.0</TargetFrameworkVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <OutputPath>bin\Debug\</OutputPath>
@@ -99,9 +99,9 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\Lib\Interop.ADOX.dll</HintPath>
     </Reference>
-    <Reference Include="nunit.framework, Version=2.4.1.0, Culture=neutral, PublicKeyToken=96d09a1eb7f44a77, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\Lib\nunit.framework.dll</HintPath>
+    <Reference Include="nunit.framework, Version=3.0.5813.39033, Culture=neutral, PublicKeyToken=2638cd05610744eb, processorArchitecture=MSIL">
+      <HintPath>..\packages\NUnit.3.0.1\lib\net20\nunit.framework.dll</HintPath>
+      <Private>True</Private>
     </Reference>
     <Reference Include="sharpPDF, Version=1.0.2450.35397, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
@@ -343,6 +343,7 @@
       <LastGenOutput>DSStartupResources.Designer.cs</LastGenOutput>
       <SubType>Designer</SubType>
     </Content>
+    <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -370,6 +371,11 @@
     <WebReferences Include="Web References\" />
   </ItemGroup>
   <ItemGroup>
+    <BootstrapperPackage Include="Microsoft.Net.Client.3.5">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1 Client Profile</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
     <BootstrapperPackage Include="Microsoft.Net.Framework.2.0">
       <Visible>False</Visible>
       <ProductName>.NET Framework 2.0 %28x86%29</ProductName>
@@ -383,6 +389,11 @@
     <BootstrapperPackage Include="Microsoft.Net.Framework.3.5">
       <Visible>False</Visible>
       <ProductName>.NET Framework 3.5</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1</ProductName>
       <Install>false</Install>
     </BootstrapperPackage>
   </ItemGroup>
