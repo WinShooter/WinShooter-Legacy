@@ -1,8 +1,0 @@
-- Implement weapons in the local cache file
-- Use some label size that exists (Go buy som Avery labels)
-
-- Att det går att skriva ut lag-resultat separat.
-- Att programmet kan hålla isär C-lagen med avseende på junior, dam och veteran.
-- Möjlighet att skriva ut deltagarlista per klass med information om skytten har betalat,
-  ankommit, startat, och har resultat. På det sättet (eller annat sätt) kan man 
-  svara på frågor som "Hur många R-skyttar har vi?"
