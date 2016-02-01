@@ -1,139 +1,142 @@
-#region copyright
-/*
-Copyright ©2009 John Allberg
-
-This program is free software; you can redistribute it and/or
-modify it under the terms of the GNU General Public License
-as published by the Free Software Foundation; either version 2
-of the License, or (at your option) any later version.
-
-This program is distributed in the hope that it will be useful,
-but WITHOUT ANY WARRANTY; without even the implied warranty of
-MERCHANTABILITY OR FITNESS FOR A PARTICULAR PURPOSE. See the
-GNU General Public License for more details.
-
-You should have received a copy of the GNU General Public License
-along with this program; if not, write to the Free Software
-Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
-*/
-#endregion
-// $Id: UdpProcessor.cs 126 2011-05-28 16:41:26Z smuda $ 
-using System;
-using System.Diagnostics;
-using System.Net;
-using System.Net.Sockets;
-using System.Text;
-using Allberg.Shooter.WinShooterServerRemoting;
+// --------------------------------------------------------------------------------------------------------------------
+// <copyright file="UdpProcessor.cs" company="John Allberg">
+//   Copyright ©2001-2016 John Allberg
+//   
+//   This program is free software; you can redistribute it and/or
+//   modify it under the terms of the GNU General Public License
+//   as published by the Free Software Foundation; either version 2
+//   of the License, or (at your option) any later version.
+//   
+//   This program is distributed in the hope that it will be useful,
+//   but WITHOUT ANY WARRANTY; without even the implied warranty of
+//   MERCHANTABILITY OR FITNESS FOR A PARTICULAR PURPOSE. See the
+//   GNU General Public License for more details.
+//   
+//   You should have received a copy of the GNU General Public License
+//   along with this program; if not, write to the Free Software
+//   Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
+// </copyright>
+// <summary>
+//   Summary description for UdpProcessor.
+// </summary>
+// --------------------------------------------------------------------------------------------------------------------
 
 namespace Allberg.Shooter.WinShooterServer
 {
-	/// <summary>
-	/// Summary description for UdpProcessor.
-	/// </summary>
-	public class UdpProcessor
-	{
-		readonly IPHostEntry _localHostEntry;
+    using System;
+    using System.Diagnostics;
+    using System.Net;
+    using System.Net.Sockets;
+    using System.Text;
+    using Allberg.Shooter.WinShooterServerRemoting;
 
-		public UdpProcessor(string competitionName, int serverPort)
-		{
-			_localHostEntry = new IPHostEntry();
+    /// <summary>
+    /// Summary description for UdpProcessor.
+    /// </summary>
+    public class UdpProcessor
+    {
+        readonly IPHostEntry _localHostEntry;
 
-			try
-			{
-				_localHostEntry = Dns.GetHostEntry(Dns.GetHostName());
-			}
-			catch(Exception exc)
-			{
-				throw new ApplicationException("Local Host not found", exc); // fail
-			}
-			_competitionName = competitionName;
-			_winshooterServerPort = serverPort;
-		}
+        public UdpProcessor(string competitionName, int serverPort)
+        {
+            _localHostEntry = new IPHostEntry();
 
-		readonly int _winshooterServerPort;
-		readonly string _competitionName;
-		Socket _socketUdp;
-		EndPoint _remoteEp;
+            try
+            {
+                _localHostEntry = Dns.GetHostEntry(Dns.GetHostName());
+            }
+            catch(Exception exc)
+            {
+                throw new ApplicationException("Local Host not found", exc); // fail
+            }
+            _competitionName = competitionName;
+            _winshooterServerPort = serverPort;
+        }
 
-		public void Start()
-		{
+        readonly int _winshooterServerPort;
+        readonly string _competitionName;
+        Socket _socketUdp;
+        EndPoint _remoteEp;
 
-			try
-			{
-				//Create a UDP socket.
-				_socketUdp = new Socket(AddressFamily.InterNetwork, SocketType.Dgram, ProtocolType.Udp);
-				_socketUdp.SetSocketOption(SocketOptionLevel.Socket,
-					SocketOptionName.Broadcast,
-					1);
-			
-				var localIpEndPoint = new IPEndPoint(
-					new IPAddress(new byte[] { 0,0,0,0 }),
-					NetworkSettings.GroupPortServer);
+        public void Start()
+        {
 
-				Debug.WriteLine("Will bind to localIpEndPoint: " + localIpEndPoint);
+            try
+            {
+                //Create a UDP socket.
+                _socketUdp = new Socket(AddressFamily.InterNetwork, SocketType.Dgram, ProtocolType.Udp);
+                _socketUdp.SetSocketOption(SocketOptionLevel.Socket,
+                    SocketOptionName.Broadcast,
+                    1);
+            
+                var localIpEndPoint = new IPEndPoint(
+                    new IPAddress(new byte[] { 0,0,0,0 }),
+                    NetworkSettings.GroupPortServer);
 
-				_socketUdp.SetSocketOption(SocketOptionLevel.Socket,
-					SocketOptionName.ReuseAddress, 1);
-				_socketUdp.Bind(localIpEndPoint);
-			
-				Trace.WriteLine("Server: Starting UDP Broadcast Server");
-				while (true)
-				{
-					var received = new Byte[512];
-					var tmpIpEndPoint = new IPEndPoint(
-						_localHostEntry.AddressList[0], 
-						NetworkSettings.GroupPortServer);
+                Debug.WriteLine("Will bind to localIpEndPoint: " + localIpEndPoint);
 
-					_remoteEp = (tmpIpEndPoint);
+                _socketUdp.SetSocketOption(SocketOptionLevel.Socket,
+                    SocketOptionName.ReuseAddress, 1);
+                _socketUdp.Bind(localIpEndPoint);
+            
+                Trace.WriteLine("Server: Starting UDP Broadcast Server");
+                while (true)
+                {
+                    var received = new Byte[512];
+                    var tmpIpEndPoint = new IPEndPoint(
+                        _localHostEntry.AddressList[0], 
+                        NetworkSettings.GroupPortServer);
 
-					Trace.WriteLine("ServerUDP: Waiting to receive UDP message.");
-					var bytesReceived = _socketUdp.ReceiveFrom(received, ref _remoteEp);
+                    _remoteEp = (tmpIpEndPoint);
 
-					var receivedString = Encoding.UTF8.GetString(received, 0, bytesReceived);
+                    Trace.WriteLine("ServerUDP: Waiting to receive UDP message.");
+                    var bytesReceived = _socketUdp.ReceiveFrom(received, ref _remoteEp);
 
-					Trace.WriteLine("ServerUDP: " + bytesReceived + " bytes received: \"" +
-						receivedString + "\"");
+                    var receivedString = Encoding.UTF8.GetString(received, 0, bytesReceived);
 
-					if (receivedString.IndexOf("WinShooter Server Requested") > -1)
-					{
-						// We have received a request for a WinShooter Server. Respond
-						SendServerResponse();
-					}
-				}
-			}
-			catch (SocketException se)
-			{
-				Trace.WriteLine("A Socket Exception has occurred!" + se);
-				throw;
-			}
-		}
+                    Trace.WriteLine("ServerUDP: " + bytesReceived + " bytes received: \"" +
+                        receivedString + "\"");
 
-		private void SendServerResponse()
-		{
-			var localHostEntry = Dns.GetHostEntry(Dns.GetHostName());
-			foreach (var address in localHostEntry.AddressList)
-			{
-				if (address.AddressFamily != AddressFamily.InterNetwork) 
-					continue;
+                    if (receivedString.IndexOf("WinShooter Server Requested") > -1)
+                    {
+                        // We have received a request for a WinShooter Server. Respond
+                        SendServerResponse();
+                    }
+                }
+            }
+            catch (SocketException se)
+            {
+                Trace.WriteLine("A Socket Exception has occurred!" + se);
+                throw;
+            }
+        }
 
-				var clientSock = new Socket(AddressFamily.InterNetwork,
-				                               SocketType.Dgram,
-				                               ProtocolType.Udp);
-				clientSock.SetSocketOption(SocketOptionLevel.Socket,
-				                           SocketOptionName.Broadcast,
-				                           1);
-				var iep = new IPEndPoint(IPAddress.Broadcast, NetworkSettings.GroupPortServer);
-				var strToSend = new StringBuilder();
-				strToSend.Append("Message=WinShooter Server;");
-				strToSend.Append("IP=" + address + ";");
-				strToSend.Append("Port=" + _winshooterServerPort + ";");
-				strToSend.Append("Competition=" + _competitionName + ";");
+        private void SendServerResponse()
+        {
+            var localHostEntry = Dns.GetHostEntry(Dns.GetHostName());
+            foreach (var address in localHostEntry.AddressList)
+            {
+                if (address.AddressFamily != AddressFamily.InterNetwork) 
+                    continue;
 
-				var data = Encoding.UTF8.GetBytes(strToSend.ToString()); // put your data here
-				Trace.WriteLine("Sending Data: \"" + strToSend + "\"");
+                var clientSock = new Socket(AddressFamily.InterNetwork,
+                                               SocketType.Dgram,
+                                               ProtocolType.Udp);
+                clientSock.SetSocketOption(SocketOptionLevel.Socket,
+                                           SocketOptionName.Broadcast,
+                                           1);
+                var iep = new IPEndPoint(IPAddress.Broadcast, NetworkSettings.GroupPortServer);
+                var strToSend = new StringBuilder();
+                strToSend.Append("Message=WinShooter Server;");
+                strToSend.Append("IP=" + address + ";");
+                strToSend.Append("Port=" + _winshooterServerPort + ";");
+                strToSend.Append("Competition=" + _competitionName + ";");
 
-				clientSock.SendTo(data, iep);
-			}
-		}
-	}
+                var data = Encoding.UTF8.GetBytes(strToSend.ToString()); // put your data here
+                Trace.WriteLine("Sending Data: \"" + strToSend + "\"");
+
+                clientSock.SendTo(data, iep);
+            }
+        }
+    }
 }

@@ -25,6 +25,7 @@ namespace Allberg.Shooter.Common
 {
     using System;
 
+    using Allberg.Shooter.Common.Exceptions;
     using Allberg.Shooter.WinShooterServerRemoting;
 
     /// <summary>

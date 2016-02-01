@@ -1,46 +1,48 @@
-#region copyright
-/*
-Copyright ©2009 John Allberg
-
-This program is free software; you can redistribute it and/or
-modify it under the terms of the GNU General Public License
-as published by the Free Software Foundation; either version 2
-of the License, or (at your option) any later version.
-
-This program is distributed in the hope that it will be useful,
-but WITHOUT ANY WARRANTY; without even the implied warranty of
-MERCHANTABILITY OR FITNESS FOR A PARTICULAR PURPOSE. See the
-GNU General Public License for more details.
-
-You should have received a copy of the GNU General Public License
-along with this program; if not, write to the Free Software
-Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
-*/
-#endregion
-// $Id: InvokeRequiredException.cs 105 2009-01-29 10:54:00Z smuda $
-using System;
-using System.Runtime.Serialization;
+// --------------------------------------------------------------------------------------------------------------------
+// <copyright file="InvokeRequiredException.cs" company="John Allberg">
+//   Copyright ©2001-2016 John Allberg
+//   
+//   This program is free software; you can redistribute it and/or
+//   modify it under the terms of the GNU General Public License
+//   as published by the Free Software Foundation; either version 2
+//   of the License, or (at your option) any later version.
+//   
+//   This program is distributed in the hope that it will be useful,
+//   but WITHOUT ANY WARRANTY; without even the implied warranty of
+//   MERCHANTABILITY OR FITNESS FOR A PARTICULAR PURPOSE. See the
+//   GNU General Public License for more details.
+//   
+//   You should have received a copy of the GNU General Public License
+//   along with this program; if not, write to the Free Software
+//   Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
+// </copyright>
+// <summary>
+//   Summary description for InvokeRequiredException.
+// </summary>
+// --------------------------------------------------------------------------------------------------------------------
 
 namespace Allberg.Shooter.Windows.Forms
 {
-	/// <summary>
-	/// Summary description for InvokeRequiredException.
-	/// </summary>
-	public class InvokeRequiredException : System.ApplicationException
-	{
+    using System;
+    using System.Runtime.Serialization;
 
-		public InvokeRequiredException(string message) : base(message)
-		{
-		}
+    /// <summary>
+    /// Summary description for InvokeRequiredException.
+    /// </summary>
+    public class InvokeRequiredException : System.ApplicationException
+    {
+        public InvokeRequiredException(string message) : base(message)
+        {
+        }
 
-		public InvokeRequiredException(string message , Exception exc)
-			: base(message, exc)
-		{
-		}
+        public InvokeRequiredException(string message , Exception exc)
+            : base(message, exc)
+        {
+        }
 
-		protected InvokeRequiredException(SerializationInfo info , StreamingContext context)
-			: base(info, context)
-		{
-		}
-	}
+        protected InvokeRequiredException(SerializationInfo info , StreamingContext context)
+            : base(info, context)
+        {
+        }
+    }
 }
