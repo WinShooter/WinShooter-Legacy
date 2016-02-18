@@ -24,7 +24,7 @@
 namespace Allberg.Shooter.WinShooterServer
 {
     using System;
-    using System.Collections;
+    using System.Collections.Generic;
     using System.Diagnostics;
     using System.IO;
     using System.Net.Sockets;
@@ -44,12 +44,14 @@ namespace Allberg.Shooter.WinShooterServer
         private string _method;
         private string _url;
         private string _protocol;
-        private readonly Hashtable _headers;
+        private readonly Dictionary<string, string> _headers;
         private string _request;
         private const bool KeepAlive = false;
         private int _numRequests;
         private readonly bool _verbose = HttpServer.verbose;
         private readonly TimeSpan _cacheTime;
+
+        private readonly ClientInterface commonCode;
 
         /**
          * Each HTTP processor object handles one client.  If Keep-Alive is enabled then this
@@ -62,14 +64,11 @@ namespace Allberg.Shooter.WinShooterServer
         
         internal HttpProcessor(Socket socket, ref ClientInterface commonCode, TimeSpan cacheTime) 
         {
-            _socket = socket;
-            _headers = new Hashtable();
-            _commonCode = commonCode;
-            _cacheTime = cacheTime;
+            this._socket = socket;
+            this._headers = new Dictionary<string, string>();
+            this.commonCode = commonCode;
+            this._cacheTime = cacheTime;
         }
-
-        readonly ClientInterface _commonCode;
-
 
         /**
          * This is the main method of each thread of HTTP processing.  We pass this method
@@ -288,7 +287,7 @@ namespace Allberg.Shooter.WinShooterServer
                 byte[] bytes = null;
                 string contentType = "";
 
-                if (_commonCode.GetCompetitionsCount() == 0)
+                if (this.commonCode.GetCompetitionsCount() == 0)
                 {
                     // No competition exist
                     file = "<html>\r\n" + 
@@ -307,7 +306,7 @@ namespace Allberg.Shooter.WinShooterServer
                             #region Patrullista
                         case "/patrullista":
                         {
-                            file = _commonCode.InternetHtmlExportPatrols();
+                            file = this.commonCode.InternetHtmlExportPatrols();
                             break;
                         }
                             #endregion
@@ -315,7 +314,7 @@ namespace Allberg.Shooter.WinShooterServer
                         case "/resultat":
                         {
                             const bool finalResults = false;
-                            file = _commonCode.InternetHtmlExportResults(finalResults);
+                            file = this.commonCode.InternetHtmlExportResults(finalResults);
                             file = file.Replace("<head>", "<head>\r\n" +
                                     "<meta http-equiv=\"refresh\" content=\"120\">\r\n");
                             break;

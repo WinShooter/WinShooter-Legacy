@@ -25,6 +25,7 @@ namespace Allberg.Shooter.Common
 {
     using System;
     using System.Collections;
+    using System.Collections.Generic;
     using System.Data;
     using System.Diagnostics;
     using System.IO;
@@ -110,8 +111,7 @@ namespace Allberg.Shooter.Common
             for (int i = 0; i < columnOrder.Count; i++)
             {
                 ViewTableColumnNames viewColumnName;
-                var temp = (string)columnOrder.GetKey(
-                    columnOrder.IndexOfValue(i));
+                var temp = (string)columnOrder[columnOrder.IndexOfValue(i)];
                 var dataColumnName = this.ConvertImportFileColumnsName(temp);
 
                 switch(dataColumnName)

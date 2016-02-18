@@ -25,6 +25,8 @@
 namespace Allberg.Shooter.Common
 {
     using System;
+    using System.Collections;
+    using System.Collections.Generic;
     using System.Collections.Specialized;
     using System.Diagnostics;
     using System.Runtime.Remoting.Channels;
@@ -2818,15 +2820,19 @@ namespace Allberg.Shooter.Common
         /// <param name="FilePath">filename</param>
         /// <param name="ColumnOrder">order of columns</param>
         /// <returns></returns>
-        public string[] ImportFileLoadFile(string FilePath, 
-            System.Collections.SortedList ColumnOrder)
+        public string[] ImportFileLoadFile(
+            string FilePath, 
+            SortedList ColumnOrder)
         {
-            if (serverInterface != null)
+            if (this.serverInterface != null)
+            {
                 throw new ApplicationException("Not supported while connected to server");
-            else
-                return fileImportClass.LoadFile(
-                    FilePath, Interface.ImportFileType.SKV, ColumnOrder);
+            }
+
+            return this.fileImportClass.LoadFile(
+                FilePath, Interface.ImportFileType.SKV, ColumnOrder);
         }
+
         /// <summary>
         /// Tells to import the dataset into the database
         /// </summary>
