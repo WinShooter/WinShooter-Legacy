@@ -40,7 +40,7 @@ namespace Allberg.Shooter.Common
     [Serializable]
     internal class CFileImport
     {
-        private enum viewTableColumnNames
+        private enum ViewTableColumnNames
         {
             Skyttekort,
             Klubb,
@@ -53,91 +53,116 @@ namespace Allberg.Shooter.Common
             Kontrollera,
             Epost
         }
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="CFileImport"/> class.
+        /// </summary>
+        /// <param name="callerInterface">
+        /// The caller interface.
+        /// </param>
         internal CFileImport(Interface callerInterface)
         {
-            myInterface = callerInterface;
+            this.myInterface = callerInterface;
         }
 
-        private Interface myInterface;
-        internal DataTable ViewDatatable;
-        internal DataTable ViewDatatableCheck;
+        private readonly Interface myInterface;
 
-        private Common.Interface.ImportFileColumns convertImportFileColumnsName(string name)
+        /// <summary>
+        /// The view datatable.
+        /// </summary>
+        internal DataTable ViewDatatable { get; set; }
+
+        /// <summary>
+        /// The view datatable check.
+        /// </summary>
+        internal DataTable ViewDatatableCheck { get; set; }
+
+        /// <summary>
+        /// The convert import file columns name.
+        /// </summary>
+        /// <param name="name">
+        /// The name.
+        /// </param>
+        /// <returns>
+        /// The <see cref="Interface.ImportFileColumns"/>.
+        /// </returns>
+        /// <exception cref="ApplicationException">
+        /// </exception>
+        private Interface.ImportFileColumns ConvertImportFileColumnsName(string name)
         {
-            for(int i=0;i<20;i++)
+            for (int i = 0; i < 20; i++)
             {
-                Common.Interface.ImportFileColumns col =
-                    (Common.Interface.ImportFileColumns)i;
+                var col = (Interface.ImportFileColumns)i;
 
                 if (col.ToString() == name)
+                {
                     return col;
+                }
             }
-            throw new ApplicationException(
-                "Cannot find Common.Interface.ImportFileColumns." + name +".");
-        }
-        private void createViewDatatable(SortedList columnOrder)
-        {
-            ViewDatatable = new DataTable();
 
-            for(int i=0;i<columnOrder.Count; i++)
+            throw new ApplicationException("Cannot find Common.Interface.ImportFileColumns." + name +".");
+        }
+
+        private void CreateViewDatatable(SortedList columnOrder)
+        {
+            this.ViewDatatable = new DataTable();
+
+            for (int i = 0; i < columnOrder.Count; i++)
             {
-                viewTableColumnNames viewColumnName;
-                Common.Interface.ImportFileColumns dataColumnName;
-                string temp = (string)columnOrder.GetKey(
+                ViewTableColumnNames viewColumnName;
+                var temp = (string)columnOrder.GetKey(
                     columnOrder.IndexOfValue(i));
-                dataColumnName = convertImportFileColumnsName(temp);
+                var dataColumnName = this.ConvertImportFileColumnsName(temp);
+
                 switch(dataColumnName)
                 {
-                    case Common.Interface.ImportFileColumns.ClubId:
-                        viewColumnName = viewTableColumnNames.Klubb;
+                    case Interface.ImportFileColumns.ClubId:
+                        viewColumnName = ViewTableColumnNames.Klubb;
                         break;
-                    case Common.Interface.ImportFileColumns.Email:
-                        viewColumnName = viewTableColumnNames.Epost;
+                    case Interface.ImportFileColumns.Email:
+                        viewColumnName = ViewTableColumnNames.Epost;
                         break;
-                    case Common.Interface.ImportFileColumns.Givenname:
-                        viewColumnName = viewTableColumnNames.Fornamn;
+                    case Interface.ImportFileColumns.Givenname:
+                        viewColumnName = ViewTableColumnNames.Fornamn;
                         break;
-                    case Common.Interface.ImportFileColumns.Lane:
-                        viewColumnName = viewTableColumnNames.Bana;
+                    case Interface.ImportFileColumns.Lane:
+                        viewColumnName = ViewTableColumnNames.Bana;
                         break;
-                    case Common.Interface.ImportFileColumns.Patrol:
-                        viewColumnName = viewTableColumnNames.Patrull;
+                    case Interface.ImportFileColumns.Patrol:
+                        viewColumnName = ViewTableColumnNames.Patrull;
                         break;
-                    case Common.Interface.ImportFileColumns.ShooterClass:
-                        viewColumnName = viewTableColumnNames.Klass;
+                    case Interface.ImportFileColumns.ShooterClass:
+                        viewColumnName = ViewTableColumnNames.Klass;
                         break;
-                    case Common.Interface.ImportFileColumns.ShooterId:
-                        viewColumnName = viewTableColumnNames.Skyttekort;
+                    case Interface.ImportFileColumns.ShooterId:
+                        viewColumnName = ViewTableColumnNames.Skyttekort;
                         break;
-                    case Common.Interface.ImportFileColumns.Surname:
-                        viewColumnName = viewTableColumnNames.Efternamn;
+                    case Interface.ImportFileColumns.Surname:
+                        viewColumnName = ViewTableColumnNames.Efternamn;
                         break;
-                    case Common.Interface.ImportFileColumns.WeaponId:
-                        viewColumnName = viewTableColumnNames.Vapen;
+                    case Interface.ImportFileColumns.WeaponId:
+                        viewColumnName = ViewTableColumnNames.Vapen;
                         break;
                     default:
                         throw new ApplicationException("Unknown datacolumn");
                 }
                 try
                 {
-                    ViewDatatable.Columns.Add(viewColumnName.ToString(), typeof(string));
+                    this.ViewDatatable.Columns.Add(viewColumnName.ToString(), typeof(string));
                 }
-                catch(Exception)
+                catch (Exception)
                 {
                 }
             }
         }
-        internal string[] LoadFile(string filePath, 
-            Interface.ImportFileType fileType, SortedList columnOrder)
+
+        internal string[] LoadFile(string filePath, Interface.ImportFileType fileType, SortedList columnOrder)
         {
-            createViewDatatable(columnOrder);
+            this.CreateViewDatatable(columnOrder);
 
-            FileStream fs = new FileStream(filePath, FileMode.Open, 
-                FileAccess.Read, FileShare.Write);
+            FileStream fs = new FileStream(filePath, FileMode.Open, FileAccess.Read, FileShare.Write);
 
-            StringBuilder output = new StringBuilder();
-
-            output.Length = 0;
+            var output = new StringBuilder { Length = 0 };
 
             Encoding encoding = Encoding.GetEncoding(1252);
             StreamReader r = new StreamReader(fs, encoding);
@@ -146,7 +171,7 @@ namespace Allberg.Shooter.Common
             while (r.Peek() > -1) 
             {
                 string temp = r.ReadLine();
-                if (temp.Replace(";", "").Replace(" ", "").Length != 0)
+                if (temp.Replace(";", string.Empty).Replace(" ", string.Empty).Length != 0)
                 {
                     output.Append(temp + "\n");
                 }
@@ -154,29 +179,29 @@ namespace Allberg.Shooter.Common
 
             r.Close();
 
-            switch(fileType)
+            switch (fileType)
             {
                 case Interface.ImportFileType.SKV:
-                    parseSkvFile(output.ToString(), columnOrder);
+                    this.parseSkvFile(output.ToString(), columnOrder);
                     break;
                 default:
                     throw new ApplicationException("Not implemented");
             }
 
-            return output.ToString().Replace("\r", "").Split('\n');
+            return output.ToString().Replace("\r", string.Empty).Split('\n');
         }
 
         internal bool ignorePatrolErrors = false;
         internal bool ignoreLaneErrors = false;
         internal bool ignoreShooterErrors = false;
 
-        System.Threading.Thread workerThread;
+        Thread workerThread;
         
         internal void ValidateDataset()
         {
             ViewDatatableCheck = this.ViewDatatable.Copy();
             ViewDatatableCheck.Columns.Add(
-                viewTableColumnNames.Kontrollera.ToString());
+                ViewTableColumnNames.Kontrollera.ToString());
 
             workerThread = 
                 new System.Threading.Thread(
@@ -196,7 +221,7 @@ namespace Allberg.Shooter.Common
 
                 DataRow row = ViewDatatableCheck.Rows[i];
 
-                row[viewTableColumnNames.Kontrollera.ToString()] = ""; 
+                row[ViewTableColumnNames.Kontrollera.ToString()] = string.Empty; 
                 string[] resultStrings = new string[5];
                 resultStrings[0] = checkRowClub(row);
                 resultStrings[1] = checkRowWeapon(row);
@@ -205,10 +230,10 @@ namespace Allberg.Shooter.Common
                 resultStrings[4] = checkRowLane(row);
 
                 bool errorAlreadyFound = false;
-                string resultStringTot = "";
+                string resultStringTot = string.Empty;
                 foreach(string resultString in resultStrings)
                 {
-                    if (resultString != "" & resultString != null)
+                    if (resultString != string.Empty & resultString != null)
                     {
                         if (errorAlreadyFound)
                         {
@@ -219,10 +244,10 @@ namespace Allberg.Shooter.Common
                     }
                 }
 
-                if (resultStringTot != "")
+                if (resultStringTot != string.Empty)
                 {
                     // Some error occured
-                    row[viewTableColumnNames.Kontrollera.ToString()] = resultStringTot;
+                    row[ViewTableColumnNames.Kontrollera.ToString()] = resultStringTot;
                 }
                 else
                 {
@@ -241,7 +266,7 @@ namespace Allberg.Shooter.Common
         private void parseSkvFile(string fileContent, SortedList columnOrder)
         {
             this.ViewDatatable.Rows.Clear();
-            fileContent = fileContent.Replace("\r", "");
+            fileContent = fileContent.Replace("\r", string.Empty);
             string[] lines = fileContent.Split('\n');
 
             foreach(string line in lines)
@@ -270,10 +295,10 @@ namespace Allberg.Shooter.Common
 
         private string checkRowClub(DataRow row)
         {
-            if (row.IsNull(viewTableColumnNames.Klubb.ToString()))
+            if (row.IsNull(ViewTableColumnNames.Klubb.ToString()))
                 return "Klubb saknas i importfilen";
 
-            string clubId = (string)row[viewTableColumnNames.Klubb.ToString()];
+            string clubId = (string)row[ViewTableColumnNames.Klubb.ToString()];
             try
             {
                 myInterface.GetClub(clubId);
@@ -282,16 +307,16 @@ namespace Allberg.Shooter.Common
             {
                 return "Kan inte hitta klubben i databasen";
             }
-            return "";
+            return string.Empty;
         }
         private string checkRowWeapon(DataRow row)
         {
-            if (row.IsNull(viewTableColumnNames.Vapen.ToString()))
+            if (row.IsNull(ViewTableColumnNames.Vapen.ToString()))
                 return "VapenID saknas i importfilen";
-            if ((string)row[viewTableColumnNames.Vapen.ToString()] == "")
+            if ((string)row[ViewTableColumnNames.Vapen.ToString()] == string.Empty)
                 return "VapenID saknas i importfilen";
 
-            string weaponId = (string)row[viewTableColumnNames.Vapen.ToString()];
+            string weaponId = (string)row[ViewTableColumnNames.Vapen.ToString()];
             Structs.Weapon thisWeapon;
             try
             {
@@ -314,19 +339,19 @@ namespace Allberg.Shooter.Common
             {
                 return "VapenID " + weaponId + " saknas i databasen";
             }
-            return "";
+            return string.Empty;
         }
 
         private string checkRowShooter(DataRow row)
         {
-            if (row.IsNull(viewTableColumnNames.Skyttekort.ToString()))
+            if (row.IsNull(ViewTableColumnNames.Skyttekort.ToString()))
                 return "Skyttekortsnr saknas i importfilen";
 
-            string shooterCard = (string)row[viewTableColumnNames.Skyttekort.ToString().Trim()];
+            string shooterCard = (string)row[ViewTableColumnNames.Skyttekort.ToString().Trim()];
             //int shooterId = -1;
 
-            if (shooterCard == "")
-                return "";
+            if (shooterCard == string.Empty)
+                return string.Empty;
 
             try
             {
@@ -337,14 +362,14 @@ namespace Allberg.Shooter.Common
                 return "Skyttekortet får endast innehålla siffror";
             }
 
-            return "";
+            return string.Empty;
         }
         private string checkRowPatrol(DataRow row)
         {
-            if (row.IsNull(viewTableColumnNames.Patrull.ToString()))
-                return ""; // Patrol will be set later via GUI
+            if (row.IsNull(ViewTableColumnNames.Patrull.ToString()))
+                return string.Empty; // Patrol will be set later via GUI
 
-            string patrullString = (string)row[viewTableColumnNames.Patrull.ToString()];
+            string patrullString = (string)row[ViewTableColumnNames.Patrull.ToString()];
             try
             {
                 int patrolId = int.Parse(patrullString);
@@ -359,20 +384,20 @@ namespace Allberg.Shooter.Common
                 myInterface.PatrolAddEmpty();
                 return checkRowPatrol(row);
             }
-            return "";
+            return string.Empty;
         }
 
         private string checkRowLane(DataRow row)
         {
-            if (row.IsNull(viewTableColumnNames.Bana.ToString())
-                | row.IsNull(viewTableColumnNames.Patrull.ToString()))
-                return ""; // Patrol will be set later via GUI
+            if (row.IsNull(ViewTableColumnNames.Bana.ToString())
+                | row.IsNull(ViewTableColumnNames.Patrull.ToString()))
+                return string.Empty; // Patrol will be set later via GUI
 
-            if (checkRowPatrol(row) != "")
+            if (checkRowPatrol(row) != string.Empty)
                 return "Bana kunde inte kontrolleras på grund av fel i patrullen.";
 
-            string laneString = (string)row[viewTableColumnNames.Bana.ToString()];
-            string patrullString = (string)row[viewTableColumnNames.Patrull.ToString()];
+            string laneString = (string)row[ViewTableColumnNames.Bana.ToString()];
+            string patrullString = (string)row[ViewTableColumnNames.Patrull.ToString()];
 
             try
             {
@@ -398,7 +423,7 @@ namespace Allberg.Shooter.Common
             {
                 return "Patrullen " + laneString + " saknas";
             }
-            return "";
+            return string.Empty;
         }
 
 
@@ -428,7 +453,7 @@ namespace Allberg.Shooter.Common
                     i,ViewDatatable.Rows.Count);
 
                 // Get shooter
-                string shooterCard = (string)row[viewTableColumnNames.Skyttekort.ToString().Trim()];
+                string shooterCard = (string)row[ViewTableColumnNames.Skyttekort.ToString().Trim()];
 
                 // Get shooter from DB
                 Structs.Shooter shooter;
@@ -436,7 +461,7 @@ namespace Allberg.Shooter.Common
                 {
                     shooter = myInterface.GetShooter(shooterCard);
 
-                    classString = (string)row[viewTableColumnNames.Klass.ToString()];
+                    classString = (string)row[ViewTableColumnNames.Klass.ToString()];
                     if (classString.IndexOf("1") >= 0)
                         shooter.Class = Structs.ShootersClass.Klass1;
                     if (classString.IndexOf("2") >= 0)
@@ -451,7 +476,7 @@ namespace Allberg.Shooter.Common
                     // Add user to DB with values from file.
                     shooter = new Structs.Shooter();
                     // What class?
-                    classString = (string)row[viewTableColumnNames.Klass.ToString()];
+                    classString = (string)row[ViewTableColumnNames.Klass.ToString()];
                     Structs.ShootersClass sclass = Structs.ShootersClass.Klass1;
                     if (classString.IndexOf("1") >= 0)
                         sclass = Structs.ShootersClass.Klass1;
@@ -460,7 +485,7 @@ namespace Allberg.Shooter.Common
                     if (classString.IndexOf("3") >= 0)
                         sclass = Structs.ShootersClass.Klass3;
 
-                    if (shooterCard == "")
+                    if (shooterCard == string.Empty)
                     {
                         try
                         {
@@ -479,10 +504,10 @@ namespace Allberg.Shooter.Common
                     shooter.Automatic = false;
                     shooter.CardNr = shooterCard.ToString();
                     shooter.Class = sclass;
-                    shooter.ClubId = ((string)row[viewTableColumnNames.Klubb.ToString()]).Trim();
-                    shooter.Email = ((string)row[viewTableColumnNames.Epost.ToString()]).Trim();
-                    shooter.Givenname = ((string)row[viewTableColumnNames.Efternamn.ToString()]).Trim();
-                    shooter.Surname = ((string)row[viewTableColumnNames.Fornamn.ToString()]).Trim();
+                    shooter.ClubId = ((string)row[ViewTableColumnNames.Klubb.ToString()]).Trim();
+                    shooter.Email = ((string)row[ViewTableColumnNames.Epost.ToString()]).Trim();
+                    shooter.Givenname = ((string)row[ViewTableColumnNames.Efternamn.ToString()]).Trim();
+                    shooter.Surname = ((string)row[ViewTableColumnNames.Fornamn.ToString()]).Trim();
                     shooter.Payed = 0;
                     shooter.ToAutomatic = false;
 
@@ -492,7 +517,7 @@ namespace Allberg.Shooter.Common
                 }
 
                 // Ok, shooter is done. Create competitor
-                classString = (string)row[viewTableColumnNames.Klass.ToString().ToUpper()];
+                classString = (string)row[ViewTableColumnNames.Klass.ToString().ToUpper()];
                 Structs.ShootersClass cclass = shooter.Class;
                 if (classString.IndexOf("D")>=0)
                 {
@@ -521,18 +546,18 @@ namespace Allberg.Shooter.Common
                 Structs.Competitor competitor = new Structs.Competitor();
                 competitor.CompetitionId = myInterface.GetCompetitions()[0].CompetitionId;
                 competitor.ShooterId = shooter.ShooterId;
-                competitor.WeaponId = (string)row[viewTableColumnNames.Vapen.ToString()];
+                competitor.WeaponId = (string)row[ViewTableColumnNames.Vapen.ToString()];
                 competitor.PatrolId = -1;
                 competitor.Lane = -1;
                 competitor.ShooterClass = cclass;
 
-                if (!row.IsNull(viewTableColumnNames.Patrull.ToString()) &&
-                    ((string)row[viewTableColumnNames.Patrull.ToString()]).Trim() != "")
+                if (!row.IsNull(ViewTableColumnNames.Patrull.ToString()) &&
+                    ((string)row[ViewTableColumnNames.Patrull.ToString()]).Trim() != string.Empty)
                 {
                     try
                     {
                         // Patrol defined in importfile
-                        string patrolString = (string)row[viewTableColumnNames.Patrull.ToString()];
+                        string patrolString = (string)row[ViewTableColumnNames.Patrull.ToString()];
                         int patrolId = -1;
                         patrolId = int.Parse(patrolString);
                         while (patrolId > myInterface.GetPatrolsCount())
@@ -541,11 +566,11 @@ namespace Allberg.Shooter.Common
                         }
                         competitor.PatrolId = patrolId;
                         string laneString = null;
-                        if (!row.IsNull(viewTableColumnNames.Bana.ToString()))
-                            laneString = (string)row[viewTableColumnNames.Bana.ToString()];
+                        if (!row.IsNull(ViewTableColumnNames.Bana.ToString()))
+                            laneString = (string)row[ViewTableColumnNames.Bana.ToString()];
 
                         if (laneString != null &&
-                            laneString.Trim() != "")
+                            laneString.Trim() != string.Empty)
                         {
                             competitor.Lane = int.Parse(laneString);
                         }

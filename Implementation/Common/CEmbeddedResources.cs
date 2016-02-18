@@ -25,6 +25,7 @@ namespace Allberg.Shooter.Common
 {
     using System;
     using System.Diagnostics;
+    using System.Reflection;
 
     /// <summary>
     /// CEmbeddedResources handles the embedded resources.
@@ -32,25 +33,24 @@ namespace Allberg.Shooter.Common
     public class CEmbeddedResources
     {
         #region Common
-        private static System.IO.StreamReader getResourceReader(string filename)
-        {
-            System.Reflection.Assembly ass;
 
+        /// <summary>
+        /// Get the resource reader.
+        /// </summary>
+        /// <param name="filename">
+        /// The filename.
+        /// </param>
+        /// <returns>
+        /// The <see cref="System.IO.StreamReader"/>.
+        /// </returns>
+        private static System.IO.StreamReader GetResourceReader(string filename)
+        {
             // If strIdentifier is local, get local assembly
-            if ("Allberg.Shooter.Common." == 
-                filename.Substring(0, 
-                "Allberg.Shooter.Common.".Length))
-            {
-                // Get local assembly
-                ass = System.Reflection.Assembly.GetExecutingAssembly();
-            }
-            else
-            {
-                // Get calling assembly
-                ass = System.Reflection.Assembly.GetCallingAssembly();
-            }
+            var ass = "Allberg.Shooter.Common." == filename.Substring(0, "Allberg.Shooter.Common.".Length) 
+                ? Assembly.GetExecutingAssembly() 
+                : Assembly.GetCallingAssembly();
 #if DEBUG
-            foreach(string resource in ass.GetManifestResourceNames())
+            foreach (string resource in ass.GetManifestResourceNames())
             {
                 Trace.WriteLine("Found object in assembly: " + resource);
             }
@@ -68,26 +68,15 @@ namespace Allberg.Shooter.Common
         /// Gets the bytes of an embedded resource
         /// </summary>
         /// <param name="filename">Filename, including namespace</param>
-        /// <returns></returns>
+        /// <returns>the bytes of an embedded resource</returns>
         public static byte[] GetEmbeddedResourceBytes(string filename)
         {
             try
             {
-                System.Reflection.Assembly ass;
-
                 // If strIdentifier is local, get local assembly
-                if ("Allberg.Shooter.Common." == 
-                    filename.Substring(0, 
-                    "Allberg.Shooter.Common.".Length))
-                {
-                    // Get local assembly
-                    ass = System.Reflection.Assembly.GetExecutingAssembly();
-                }
-                else
-                {
-                    // Get calling assembly
-                    ass = System.Reflection.Assembly.GetCallingAssembly();
-                }
+                var ass = "Allberg.Shooter.Common." == filename.Substring(0, "Allberg.Shooter.Common.".Length) 
+                    ? Assembly.GetExecutingAssembly() 
+                    : Assembly.GetCallingAssembly();
 #if DEBUG
                 foreach(string resource in ass.GetManifestResourceNames())
                 {
@@ -101,7 +90,7 @@ namespace Allberg.Shooter.Common
                 byte[] bytes = reader.ReadBytes((int)stream.Length);
                 return bytes;
             }
-            catch(Exception exc)
+            catch (Exception exc)
             {
                 Trace.WriteLine(exc.ToString());
                 throw;
@@ -114,57 +103,45 @@ namespace Allberg.Shooter.Common
         /// Gets the bitmap of an embedded picture resource
         /// </summary>
         /// <param name="filename">Filename, including namespace</param>
-        /// <returns></returns>
+        /// <returns>the bitmap of an embedded picture resource</returns>
         public static System.Drawing.Image GetEmbeddedPicture(string filename)
         {
             try
             {
                 // get stream to resource
-                System.IO.StreamReader reader = getResourceReader(filename);
-                // read the resource from the returned stream
-                //System.Drawing.Image retValue = System.Drawing.Bitmap.FromStream(reader.BaseStream, true, true);
+                System.IO.StreamReader reader = GetResourceReader(filename);
                 System.Drawing.Image retValue = new System.Drawing.Bitmap(reader.BaseStream);
                 System.Drawing.Image image = new System.Drawing.Bitmap(retValue);
-                //retValue.Save(new System.IO.MemoryStream(), System.Drawing.Imaging.ImageFormat.Jpeg);
 
                 // close the stream
                 reader.Close();
 
-                //retValue.Save(new System.IO.MemoryStream(), System.Drawing.Imaging.ImageFormat.Jpeg);
-
                 return image;
             }
-            catch(Exception exc)
+            catch (Exception exc)
             {
                 Trace.WriteLine(exc.ToString());
 
                 throw;
-                //return new System.Drawing.Bitmap(20,20);
             }
         }
         #endregion
 
         #region Xml
         /// <summary>
-        /// Gets the streamreader of an embedded resource
+        /// Gets the stream reader of an embedded resource
         /// </summary>
         /// <param name="filename">Filename, including namespace</param>
-        /// <returns></returns>
+        /// <returns>the stream reader of an embedded resource</returns>
         public static System.IO.StreamReader GetEmbeddedXmlFile(string filename)
         {
             try
             {
                 // get stream to resource
-                System.IO.StreamReader reader = getResourceReader(filename);
+                var reader = GetResourceReader(filename);
                 return reader;
-                // read the resource from the returned stream
-                //System.Drawing.Bitmap retValue = new System.Drawing.Bitmap(reader.BaseStream);
-
-                // close the stream
-                //reader.Close();
-                //return retValue;
             }
-            catch(Exception exc)
+            catch (Exception exc)
             {
                 Trace.WriteLine(exc.ToString());
                 throw;

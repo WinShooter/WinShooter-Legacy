@@ -23,15 +23,26 @@
 
 namespace Allberg.Shooter.Common
 {
-    using System.Collections;
+    using System.Collections.Generic;
+
     using Allberg.Shooter.WinShooterServerRemoting;
 
     internal class CFollowUp
     {
+        private readonly Interface myInterface;
+
+        private readonly DatabaseDataset database;
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="CFollowUp"/> class.
+        /// </summary>
+        /// <param name="callerInterface">
+        /// The caller interface.
+        /// </param>
         internal CFollowUp(Interface callerInterface)
         {
-            myInterface = callerInterface;
-            database = myInterface.databaseClass.Database;
+            this.myInterface = callerInterface;
+            this.database = this.myInterface.databaseClass.Database;
         }
 
         internal enum SortingEnum
@@ -40,70 +51,69 @@ namespace Allberg.Shooter.Common
             ByLastnameFirstname
         }
 
-        Interface myInterface;
-        DatabaseDataset database;
-
         internal Structs.FollowUpReturn[] FollowUp(SortingEnum sorting)
         {
-            ArrayList toReturn = new ArrayList();
+            var toReturn = new List<Structs.FollowUpReturn>();
 
-            DatabaseDataset.ClubsRow[] clubs =
-                (DatabaseDataset.ClubsRow[])
-                database.Clubs.Select("", "Name");
-            foreach (DatabaseDataset.ClubsRow club in clubs)
+            var clubs = (DatabaseDataset.ClubsRow[])this.database.Clubs.Select(string.Empty, "Name");
+            foreach (var club in clubs)
             {
-                toReturn.AddRange(checkClub(club));
+                toReturn.AddRange(this.checkClub(club));
             }
-            return (Structs.FollowUpReturn[])toReturn.ToArray(typeof(Structs.FollowUpReturn));
+
+            return toReturn.ToArray();
         }
 
-        Structs.FollowUpReturn[] checkClub(DatabaseDataset.ClubsRow club)
+        private Structs.FollowUpReturn[] checkClub(DatabaseDataset.ClubsRow club)
         {
-            string filter = "ClubId='" + club.ClubId + "'";
-            //filter = "";
-            ArrayList toReturn = new ArrayList();
-            DatabaseDataset.ShootersRow[] shooters =
-                (DatabaseDataset.ShootersRow[])
-                //    club.GetShootersRows();
-                database.Shooters.Select(filter, "GivenName, Surname");
+            var filter = "ClubId='" + club.ClubId + "'";
 
-            foreach (DatabaseDataset.ShootersRow shooter in shooters)
+            var toReturn = new List<Structs.FollowUpReturn>();
+            var shooters = (DatabaseDataset.ShootersRow[])
+                this.database.Shooters.Select(filter, "GivenName, Surname");
+
+            foreach (var shooter in shooters)
             {
                 // This is for safety reasons
                 if (shooter.IsArrivedNull())
+                {
                     shooter.Arrived = false;
+                }
 
-                Structs.FollowUpReturn followUp = new Structs.FollowUpReturn();
-                followUp.Arrived = shooter.Arrived;
-                followUp.CardNr = shooter.Cardnr;
-                followUp.ClubName = club.Name;
-                followUp.Payed = shooter.Payed;
-                followUp.Rounds = getRoundsForShooter(shooter);
-                followUp.ResultsExistForRounds = getResultExistForShooter(shooter);
-                followUp.ShooterName = shooter.Givenname + ", " + shooter.Surname;
-                followUp.ShouldHavePayed = GetShouldHavePayed(shooter);
+                var followUp = new Structs.FollowUpReturn
+                {
+                    Arrived = shooter.Arrived,
+                    CardNr = shooter.Cardnr,
+                    ClubName = club.Name,
+                    Payed = shooter.Payed,
+                    Rounds = this.GetRoundsForShooter(shooter),
+                    ResultsExistForRounds = this.GetResultExistForShooter(shooter),
+                    ShooterName = shooter.Givenname + ", " + shooter.Surname,
+                    ShouldHavePayed = this.GetShouldHavePayed(shooter)
+                };
+
                 toReturn.Add(followUp);
             }
 
-            return (Structs.FollowUpReturn[])toReturn.ToArray(typeof(Structs.FollowUpReturn));
+            return toReturn.ToArray();
         }
 
-        private int getRoundsForShooter(DatabaseDataset.ShootersRow shooter)
+        private int GetRoundsForShooter(DatabaseDataset.ShootersRow shooter)
         {
             return shooter.GetCompetitorsRows().Length;
         }
-        private int getResultExistForShooter(DatabaseDataset.ShootersRow shooter)
+
+        private int GetResultExistForShooter(DatabaseDataset.ShootersRow shooter)
         {
-            DatabaseDataset.CompetitorsRow[] competitors =
-                (DatabaseDataset.CompetitorsRow[])
-                shooter.GetCompetitorsRows();
+            var competitors = shooter.GetCompetitorsRows();
 
             int count = 0;
-            foreach (DatabaseDataset.CompetitorsRow competitor in
-                competitors)
+            foreach (var competitor in competitors)
             {
                 if (competitor.GetCompetitorResultsRows().Length > 0)
+                {
                     count++;
+                }
             }
 
             return count;
@@ -115,24 +125,25 @@ namespace Allberg.Shooter.Common
             switch (shooter.GetCompetitorsRows().Length)
             {
                 case 1:
-                    paying = myInterface.CompetitionCurrent.ShooterFee1;
+                    paying = this.myInterface.CompetitionCurrent.ShooterFee1;
                     break;
                 case 2:
-                    paying = myInterface.CompetitionCurrent.ShooterFee1 +
-                        myInterface.CompetitionCurrent.ShooterFee2;
+                    paying = this.myInterface.CompetitionCurrent.ShooterFee1 +
+                        this.myInterface.CompetitionCurrent.ShooterFee2;
                     break;
                 case 3:
-                    paying = myInterface.CompetitionCurrent.ShooterFee1 +
-                        myInterface.CompetitionCurrent.ShooterFee2 +
-                        myInterface.CompetitionCurrent.ShooterFee3;
+                    paying = this.myInterface.CompetitionCurrent.ShooterFee1 +
+                        this.myInterface.CompetitionCurrent.ShooterFee2 +
+                        this.myInterface.CompetitionCurrent.ShooterFee3;
                     break;
                 case 4:
-                    paying = myInterface.CompetitionCurrent.ShooterFee1 +
-                        myInterface.CompetitionCurrent.ShooterFee2 +
-                        myInterface.CompetitionCurrent.ShooterFee3 +
-                        myInterface.CompetitionCurrent.ShooterFee4;
+                    paying = this.myInterface.CompetitionCurrent.ShooterFee1 +
+                        this.myInterface.CompetitionCurrent.ShooterFee2 +
+                        this.myInterface.CompetitionCurrent.ShooterFee3 +
+                        this.myInterface.CompetitionCurrent.ShooterFee4;
                     break;
             }
+
             return paying;
         }
     }

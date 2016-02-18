@@ -59,7 +59,7 @@ namespace Allberg.Shooter.Common
 
             try
             {
-                OleDbCommand cmd = new OleDbCommand("select * from DbInfo", dbconn);
+                OleDbCommand cmd = new OleDbCommand("select * from DbInfo", this.dbconn);
                 OleDbDataReader reader = cmd.ExecuteReader(CommandBehavior.Default);
 
                 while (reader.Read())
@@ -85,69 +85,69 @@ namespace Allberg.Shooter.Common
 
             if (version < new Version("1.1.0"))
             {
-                UpgradeVersion1_1();
+                this.UpgradeVersion1_1();
             }
 
             if (version < new Version("1.2.0"))
             {
-                UpgradeVersion1_2();
+                this.UpgradeVersion1_2();
             }
 
 
             if (version < new Version("1.4.0"))
             {
-                UpgradeVersion1_4();
+                this.UpgradeVersion1_4();
             }
 
             if (version < new Version("1.5.6"))
             {
-                UpgradeVersion1_5_6();
+                this.UpgradeVersion1_5_6();
             }
 
             if (version < new Version("1.6.0"))
             {
-                UpgradeVersion1_6_0();
+                this.UpgradeVersion1_6_0();
             }
 
             if (version < new Version("1.6.2"))
             {
-                UpgradeVersion1_6_2();
+                this.UpgradeVersion1_6_2();
             }
 
             // Finished upgrading database
-            OleDbCommand SqlCmd = null;
+            OleDbCommand sqlCmd = null;
             try
             {
                 if (new Version(CDatabase.CurrentDbVersion) > version)
                 {
-                    SqlCmd = new OleDbCommand(
+                    sqlCmd = new OleDbCommand(
                         "update DbInfo set KeyValue='" + 
                             CDatabase.CurrentDbVersion + 
                             "' where KeyName='Version'", 
-                        dbconn);
-                    int nrAffected = SqlCmd.ExecuteNonQuery();
-                    if (nrAffected == 0)
+                            this.dbconn);
+                    int affected = sqlCmd.ExecuteNonQuery();
+                    if (affected == 0)
                     {
-                        SqlCmd = new OleDbCommand(
+                        sqlCmd = new OleDbCommand(
                             "insert into DbInfo (KeyName, KeyValue) values ('Version', '" + 
                                 CDatabase.CurrentDbVersion + "')", 
-                            dbconn);
-                        nrAffected = SqlCmd.ExecuteNonQuery();
-                        SqlCmd.Dispose();
+                            this.dbconn);
+                        affected = sqlCmd.ExecuteNonQuery();
+                        sqlCmd.Dispose();
                     }
                 }
             }
             catch (Exception exc)
             {
                 Trace.WriteLine("Exception while updating/inserting the version value of the DbInfo table:" +
-                    exc.ToString());
+                    exc);
                 throw;
             }
             finally
             {
-                if (SqlCmd != null)
+                if (sqlCmd != null)
                 {
-                    SqlCmd.Dispose();
+                    sqlCmd.Dispose();
                 }
             }
         }
@@ -160,41 +160,38 @@ namespace Allberg.Shooter.Common
         /// </summary>
         private void UpgradeVersion1_1()
         {
-            if (checkTableExist("Teams", dbconn))
+            if (CheckTableExist("Teams", this.dbconn))
             {
-                dropTable("Teams", dbconn);
+                DropTable("Teams", this.dbconn);
             }
 
             // Create table Teams
-            CDatabase.CreateTable(new DatabaseDataset.TeamsDataTable(), dbconn);
-
-            string sqlCreate;
-            OleDbCommand SQL;
+            CDatabase.CreateTable(new DatabaseDataset.TeamsDataTable(), this.dbconn);
 
             // Create restrictions for table Teams
-            DatabaseDataset dbtemp = new DatabaseDataset();
+            var dbtemp = new DatabaseDataset();
             foreach (DataRelation rel in dbtemp.Relations)
             {
                 if (rel.RelationName.IndexOf("Teams") > -1)
                 {
-                    sqlCreate = "ALTER TABLE " + rel.ChildTable.TableName + " ADD " + "CONSTRAINT " + rel.RelationName
-                                + " FOREIGN KEY " + "(" + rel.ChildColumns[0].ColumnName + ")" + " REFERENCES "
-                                + rel.ParentTable + " (" + rel.ParentColumns[0].ColumnName + ")";
+                    var sqlCreate = "ALTER TABLE " + rel.ChildTable.TableName + " ADD " + "CONSTRAINT " + rel.RelationName
+                                       + " FOREIGN KEY " + "(" + rel.ChildColumns[0].ColumnName + ")" + " REFERENCES "
+                                       + rel.ParentTable + " (" + rel.ParentColumns[0].ColumnName + ")";
 
                     // Execute against database
                     Trace.WriteLine("CDatabase: Running SQL to create relation: " + sqlCreate);
-                    SQL = new OleDbCommand(sqlCreate, dbconn);
-                    SQL.ExecuteNonQuery();
-                    SQL.Dispose();
+                    var sql = new OleDbCommand(sqlCreate, this.dbconn);
+                    sql.ExecuteNonQuery();
+                    sql.Dispose();
                 }
             }
 
             // Create table DbInfo
-            CDatabase.CreateTable(new DatabaseDataset.DbInfoDataTable(), dbconn);
+            CDatabase.CreateTable(new DatabaseDataset.DbInfoDataTable(), this.dbconn);
 
             // Change shooter table to include "arrived" column
-            addColumnToTable("shooters", "Arrived", "bit null", dbconn);
-            addColumnToTable("shooters", "EmailResult", "bit null", dbconn);
+            AddColumnToTable("shooters", "Arrived", "bit null", this.dbconn);
+            AddColumnToTable("shooters", "EmailResult", "bit null", this.dbconn);
         }
 
         #endregion
@@ -205,30 +202,33 @@ namespace Allberg.Shooter.Common
         /// </summary>
         private void UpgradeVersion1_2()
         {
-            OleDbCommand SqlCmd = null;
+            OleDbCommand sqlCmd = null;
             try
             {
                 // Add competition type
-                addColumnToTable("competition", "Type", "int null", dbconn);
+                AddColumnToTable("competition", "Type", "int null", this.dbconn);
                 string sqlUpdate = "update competition set Type=0";
 
                 Trace.WriteLine("CDatabase: Running SQL to set competition type: " + sqlUpdate);
-                SqlCmd = new OleDbCommand(sqlUpdate, dbconn);
-                SqlCmd.ExecuteNonQuery();
+                sqlCmd = new OleDbCommand(sqlUpdate, this.dbconn);
+                sqlCmd.ExecuteNonQuery();
 
                 // Add stationId to table CompetitorResults
-                addColumnToTable("CompetitorResults", "StationId", "int null", dbconn);
+                AddColumnToTable("CompetitorResults", "StationId", "int null", this.dbconn);
                 sqlUpdate = "update CompetitorResults set StationId=StationNr";
 
                 Trace.WriteLine("CDatabase: Running SQL to set StationId=StationNr: " + sqlUpdate);
-                SqlCmd = new OleDbCommand(sqlUpdate, dbconn);
-                SqlCmd.ExecuteNonQuery();
+                sqlCmd = new OleDbCommand(sqlUpdate, this.dbconn);
+                sqlCmd.ExecuteNonQuery();
 
-                addConstraint("StationsCompetitorResults", new DatabaseDataset(), dbconn);
+                AddConstraint("StationsCompetitorResults", new DatabaseDataset(), this.dbconn);
             }
             finally
             {
-                SqlCmd.Dispose();
+                if (sqlCmd != null)
+                {
+                    sqlCmd.Dispose();
+                }
             }
         }
 
@@ -241,15 +241,15 @@ namespace Allberg.Shooter.Common
         private void UpgradeVersion1_4()
         {
             // Add competition type
-            addColumnToTable("Teams", "CompetitorId5", "int null", dbconn);
-            addConstraint("CompetitorsTeams5", new DatabaseDataset(), dbconn);
+            AddColumnToTable("Teams", "CompetitorId5", "int null", this.dbconn);
+            AddConstraint("CompetitorsTeams5", new DatabaseDataset(), this.dbconn);
 
-            addColumnToTable("Competition", "Championship", "int null", dbconn);
-            string sqlUpdate = "update competition set Championship=0";
+            AddColumnToTable("Competition", "Championship", "int null", this.dbconn);
+            const string SqlUpdate = "update competition set Championship=0";
 
-            Trace.WriteLine("CDatabase: Running SQL to set competition Championship: " + sqlUpdate);
-            OleDbCommand SqlCmd = new OleDbCommand(sqlUpdate, dbconn);
-            SqlCmd.ExecuteNonQuery();
+            Trace.WriteLine("CDatabase: Running SQL to set competition Championship: " + SqlUpdate);
+            var sqlCmd = new OleDbCommand(SqlUpdate, this.dbconn);
+            sqlCmd.ExecuteNonQuery();
         }
 
         #endregion
@@ -260,12 +260,12 @@ namespace Allberg.Shooter.Common
         /// </summary>
         private void UpgradeVersion1_5_6()
         {
-            addColumnToTable("Competition", "PatrolConnectionType", "int null", dbconn);
-            string sqlUpdate = "update competition set PatrolConnectionType=1";
+            AddColumnToTable("Competition", "PatrolConnectionType", "int null", this.dbconn);
+            const string SqlUpdate = "update competition set PatrolConnectionType=1";
 
-            Trace.WriteLine("CDatabase: Running SQL to set competition patrolConnectionType: " + sqlUpdate);
-            OleDbCommand SqlCmd = new OleDbCommand(sqlUpdate, dbconn);
-            SqlCmd.ExecuteNonQuery();
+            Trace.WriteLine("CDatabase: Running SQL to set competition patrolConnectionType: " + SqlUpdate);
+            var sqlCmd = new OleDbCommand(SqlUpdate, this.dbconn);
+            sqlCmd.ExecuteNonQuery();
         }
 
         #endregion
@@ -277,44 +277,44 @@ namespace Allberg.Shooter.Common
         private void UpgradeVersion1_6_0()
         {
             string sqlUpdate;
-            OleDbCommand SqlCmd;
+            OleDbCommand sqlCmd;
 
             // Add shooterFee
             for (int i = 1; i <= 4; i++)
             {
-                addColumnToTable("Competition", "ShooterFee" + i.ToString(), "int null", dbconn);
+                AddColumnToTable("Competition", "ShooterFee" + i, "int null", this.dbconn);
 
-                sqlUpdate = "update competition set ShooterFee" + i.ToString() + "=ShooterFee";
+                sqlUpdate = "update competition set ShooterFee" + i + "=ShooterFee";
                 Trace.WriteLine("CDatabase: Running SQL to set competition shooterFee: " + sqlUpdate);
-                SqlCmd = new OleDbCommand(sqlUpdate, dbconn);
-                SqlCmd.ExecuteNonQuery();
+                sqlCmd = new OleDbCommand(sqlUpdate, this.dbconn);
+                sqlCmd.ExecuteNonQuery();
             }
 
             // Add lastupdate
-            addColumnToTable("Shooters", "LastUpdate", "DateTime null", dbconn);
-            addColumnToTable("Clubs", "LastUpdate", "DateTime null", dbconn);
-            addColumnToTable("Weapons", "LastUpdate", "DateTime null", dbconn);
+            AddColumnToTable("Shooters", "LastUpdate", "DateTime null", this.dbconn);
+            AddColumnToTable("Clubs", "LastUpdate", "DateTime null", this.dbconn);
+            AddColumnToTable("Weapons", "LastUpdate", "DateTime null", this.dbconn);
 
             sqlUpdate = "update shooters set LastUpdate='2004-01-01 10:00:00'";
             Trace.WriteLine("CDatabase: Running SQL to set shooters lastupdate: " + sqlUpdate);
-            SqlCmd = new OleDbCommand(sqlUpdate, dbconn);
-            SqlCmd.ExecuteNonQuery();
+            sqlCmd = new OleDbCommand(sqlUpdate, this.dbconn);
+            sqlCmd.ExecuteNonQuery();
 
             sqlUpdate = "update clubs set LastUpdate='2004-01-01 10:00:00'";
             Trace.WriteLine("CDatabase: Running SQL to set clubs lastupdate: " + sqlUpdate);
-            SqlCmd = new OleDbCommand(sqlUpdate, dbconn);
-            SqlCmd.ExecuteNonQuery();
+            sqlCmd = new OleDbCommand(sqlUpdate, this.dbconn);
+            sqlCmd.ExecuteNonQuery();
 
             sqlUpdate = "update weapons set LastUpdate='2004-01-01 10:00:00'";
             Trace.WriteLine("CDatabase: Running SQL to set weapons lastupdate: " + sqlUpdate);
-            SqlCmd = new OleDbCommand(sqlUpdate, dbconn);
-            SqlCmd.ExecuteNonQuery();
+            sqlCmd = new OleDbCommand(sqlUpdate, this.dbconn);
+            sqlCmd.ExecuteNonQuery();
 
             // Add one to competition championship type
             sqlUpdate = "update competition set Championship=Championship+1";
             Trace.WriteLine("CDatabase: Running SQL to update ChampionShipType: " + sqlUpdate);
-            SqlCmd = new OleDbCommand(sqlUpdate, dbconn);
-            SqlCmd.ExecuteNonQuery();
+            sqlCmd = new OleDbCommand(sqlUpdate, this.dbconn);
+            sqlCmd.ExecuteNonQuery();
         }
 
         #endregion
@@ -325,23 +325,20 @@ namespace Allberg.Shooter.Common
         /// </summary>
         private void UpgradeVersion1_6_2()
         {
-            addColumnToTable("Stations", "Distinguish", "bit null", dbconn);
-            addColumnToTable("Competition", "OneClass", "bit null", dbconn);
-
-            string sqlUpdate;
-            OleDbCommand SqlCmd;
+            AddColumnToTable("Stations", "Distinguish", "bit null", this.dbconn);
+            AddColumnToTable("Competition", "OneClass", "bit null", this.dbconn);
 
             // Set Distinguish=0
-            sqlUpdate = "update Stations set Distinguish=0";
+            var sqlUpdate = "update Stations set Distinguish=0";
             Trace.WriteLine("CDatabase: Running SQL to update Stations: " + sqlUpdate);
-            SqlCmd = new OleDbCommand(sqlUpdate, dbconn);
-            SqlCmd.ExecuteNonQuery();
+            var sqlCmd = new OleDbCommand(sqlUpdate, this.dbconn);
+            sqlCmd.ExecuteNonQuery();
 
             // Set OneClass=0
             sqlUpdate = "update Competition set OneClass=0";
             Trace.WriteLine("CDatabase: Running SQL to update Competitions: " + sqlUpdate);
-            SqlCmd = new OleDbCommand(sqlUpdate, dbconn);
-            SqlCmd.ExecuteNonQuery();
+            sqlCmd = new OleDbCommand(sqlUpdate, this.dbconn);
+            sqlCmd.ExecuteNonQuery();
 
         }
 
@@ -357,17 +354,17 @@ namespace Allberg.Shooter.Common
         /// The table name.
         /// </param>
         /// <param name="dbconn">
-        /// The dbconn.
+        /// The database connection.
         /// </param>
         /// <returns>
         /// The <see cref="bool"/>.
         /// </returns>
-        private static bool checkTableExist(string tableName, OleDbConnection dbconn)
+        private static bool CheckTableExist(string tableName, OleDbConnection dbconn)
         {
             try
             {
-                OleDbCommand cmd = new OleDbCommand("select * from " + tableName, dbconn);
-                OleDbDataReader reader = cmd.ExecuteReader(CommandBehavior.Default);
+                var cmd = new OleDbCommand("select * from " + tableName, dbconn);
+                var reader = cmd.ExecuteReader(CommandBehavior.Default);
                 reader.Close();
                 return true;
             }
@@ -377,7 +374,7 @@ namespace Allberg.Shooter.Common
                 if (exc.Message.IndexOf("cannot find the input table") == -1)
                 {
                     Trace.WriteLine("Ops, unknown System.Data.OleDb.OleDbException while checking for db upgrade:\r\n" +
-                        exc.ToString());
+                        exc);
                 }
 
                 return false;
@@ -396,11 +393,11 @@ namespace Allberg.Shooter.Common
         /// <returns>
         /// The <see cref="bool"/>.
         /// </returns>
-        private bool dropTable(string tableName, OleDbConnection dbconn)
+        private static bool DropTable(string tableName, OleDbConnection dbconn)
         {
             try
             {
-                OleDbCommand cmd = new OleDbCommand("drop table " + tableName, dbconn);
+                var cmd = new OleDbCommand("drop table " + tableName, dbconn);
                 cmd.ExecuteNonQuery();
                 return true;
             }
@@ -410,7 +407,7 @@ namespace Allberg.Shooter.Common
                 if (exc.Message.IndexOf("cannot find the input table") == -1)
                 {
                     Trace.WriteLine("Ops, unknown System.Data.OleDb.OleDbException while checking for db upgrade:\r\n" +
-                        exc.ToString());
+                        exc);
                 }
 
                 return false;
@@ -421,38 +418,41 @@ namespace Allberg.Shooter.Common
         /// The add column to table.
         /// </summary>
         /// <param name="tablename">
-        /// The tablename.
+        /// The table name.
         /// </param>
         /// <param name="columnname">
-        /// The columnname.
+        /// The column name.
         /// </param>
         /// <param name="columntype">
-        /// The columntype.
+        /// The column type.
         /// </param>
         /// <param name="dbconn">
-        /// The dbconn.
+        /// The database connection.
         /// </param>
-        /// <exception cref="OleDbException">
-        /// </exception>
-        private static void addColumnToTable(string tablename, string columnname, 
-            string columntype, OleDbConnection dbconn)
+        private static void AddColumnToTable(
+            string tablename, 
+            string columnname, 
+            string columntype, 
+            OleDbConnection dbconn)
         {
             try
             {
-                string sqlCreate = "ALTER TABLE " + tablename + " " +
+                var sqlCreate = "ALTER TABLE " + tablename + " " +
                     "ADD " + columnname + " " + columntype;
 
                 // Execute against database
                 Trace.WriteLine("CDatabase: Running SQL to add column \"" +
                     columnname + "\" to table \"" + tablename + "\": " + sqlCreate);
-                OleDbCommand SQL = new OleDbCommand(sqlCreate, dbconn);
-                SQL.ExecuteNonQuery();
-                SQL.Dispose();
+                var sql = new OleDbCommand(sqlCreate, dbconn);
+                sql.ExecuteNonQuery();
+                sql.Dispose();
             }
             catch (OleDbException exc)
             {
                 if (exc.Message.IndexOf("already exists in table") == -1)
+                {
                     throw exc;
+                }
             }
         }
 
@@ -468,17 +468,15 @@ namespace Allberg.Shooter.Common
         /// <param name="conn">
         /// The conn.
         /// </param>
-        private static void addConstraint(string constraintName, DatabaseDataset database, OleDbConnection conn)
+        private static void AddConstraint(string constraintName, DatabaseDataset database, OleDbConnection conn)
         {
             Trace.WriteLine("CDatabase: Entering createDatabaseConstraints()");
-
-            StringBuilder sqlCreate = new StringBuilder(string.Empty);
 
             foreach (DataRelation rel in database.Relations)
             {
                 if (rel.RelationName == constraintName)
                 {
-                    sqlCreate = new StringBuilder(string.Empty);
+                    var sqlCreate = new StringBuilder();
                     sqlCreate.Append("ALTER TABLE " + rel.ChildTable.TableName + " ADD " +
                         "CONSTRAINT " + rel.RelationName + " FOREIGN KEY " +
                         "(" + rel.ChildColumns[0].ColumnName + ")" +
@@ -487,16 +485,14 @@ namespace Allberg.Shooter.Common
                         ")");
 
                     // Execute against database
-                    Trace.WriteLine("CDatabase: Running SQL to create relation: " + sqlCreate.ToString());
-                    OleDbCommand SQL = new OleDbCommand(sqlCreate.ToString(), conn);
+                    Trace.WriteLine("CDatabase: Running SQL to create relation: " + sqlCreate);
+                    var sql = new OleDbCommand(sqlCreate.ToString(), conn);
 
-                    SQL.ExecuteNonQuery();
-                    SQL.Dispose();
+                    sql.ExecuteNonQuery();
+                    sql.Dispose();
                 }
             }
         }
-
         #endregion
-
     }
 }
