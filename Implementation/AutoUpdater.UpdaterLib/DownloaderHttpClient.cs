@@ -25,6 +25,7 @@ namespace Allberg.AutoUpdater.UpdaterLib
 {
     using System;
     using System.Collections;
+    using System.Collections.Generic;
     using System.Diagnostics;
     using System.IO;
     using System.Net;
@@ -65,15 +66,15 @@ namespace Allberg.AutoUpdater.UpdaterLib
             currentDir = CurrentDir + "\\";
 
             byte[] bytes = getFile(Url, -1);
-            string content = System.Text.UTF8Encoding.UTF8.GetString(bytes).Replace("\n", "");;
+            string content = System.Text.UTF8Encoding.UTF8.GetString(bytes).Replace("\n", string.Empty);;
             string[] files = content.Split('\r');
 
-            ArrayList urlsList = new ArrayList();
+            List<string> urlsList = new List<string>();
             int sizeToDownLoad = 0;
             Trace.WriteLine("DownloaderHttpClient.PrepareFiles: Checking what files to actually download.");
-            foreach(string fileLine in files)
+            foreach (string fileLine in files)
             {
-                if (fileLine.Trim() != "")
+                if (fileLine.Trim() != string.Empty)
                 {
                     string[] parts = fileLine.Split(';');
                     string fileUrl = parts[0].Trim();
@@ -91,7 +92,7 @@ namespace Allberg.AutoUpdater.UpdaterLib
                     }
                 }
             }
-            urls = (string[])urlsList.ToArray(typeof(string));
+            urls = urlsList.ToArray();
 
             return sizeToDownLoad;
         }

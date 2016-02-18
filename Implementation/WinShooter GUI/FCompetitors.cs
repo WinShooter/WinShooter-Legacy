@@ -2,6 +2,7 @@ namespace Allberg.Shooter.Windows
 {
     using System;
     using System.Collections;
+    using System.Collections.Generic;
     using System.Data;
     using System.Diagnostics;
     using System.Threading;
@@ -2779,24 +2780,20 @@ namespace Allberg.Shooter.Windows
                     shooter.ToAutomatic = true;
             }
 
-            ArrayList competitors = new ArrayList();
+            var competitors = new List<Structs.Competitor>();
 
             // Competitor part
-            Structs.Competitor comp = new Structs.Competitor();
+            Structs.Competitor comp;
             if (this.chkCompetitor1.Checked)
             {
                 Trace.WriteLine("FCompetitors: btnSave_Click Competitor 1");
                 comp = new Structs.Competitor();
-                comp.CompetitionId = CommonCode.GetCompetitions()
+                comp.CompetitionId = this.CommonCode.GetCompetitions()
                     [0].CompetitionId;
-                //comp.CompetitorId = -1;
-                //comp.ShooterId = shooterId;
-                comp.WeaponId = (string)ddWeapon1.SelectedValue;
-                comp.PatrolId = (int)ddPatrol1.SelectedValue;
-                comp.Lane = CommonCode.PatrolGetNextLane(comp.PatrolId);
-                comp.ShooterClass = calculateShootersClass(ref this.ddShooterClass, ref this.ddShooterClass1);
-                //CommonCode.NewCompetitor(comp);
-                //Trace.WriteLine("FCompetitors: btnSave_Click competitor 1 saved");
+                comp.WeaponId = (string)this.ddWeapon1.SelectedValue;
+                comp.PatrolId = (int)this.ddPatrol1.SelectedValue;
+                comp.Lane = this.CommonCode.PatrolGetNextLane(comp.PatrolId);
+                comp.ShooterClass = this.calculateShootersClass(ref this.ddShooterClass, ref this.ddShooterClass1);
                 competitors.Add(comp);
             }
 
@@ -2872,7 +2869,7 @@ namespace Allberg.Shooter.Windows
 
             //int i = 0;
             Structs.Competitor[] competitorArray =
-                (Structs.Competitor[])competitors.ToArray(comp.GetType());
+                competitors.ToArray();
             for (int i = 0; i < competitorArray.Length; i++)
             {
                 Structs.Competitor compsaving = competitorArray[i];
@@ -2905,27 +2902,27 @@ namespace Allberg.Shooter.Windows
             int iClass = int.Parse((string)ddShooterClass.SelectedValue);
             shooter.Class = (Structs.ShootersClass)iClass;
 
-            ArrayList updatedCompetitors = new ArrayList();
+            var updatedCompetitors = new List<Structs.Competitor>();
 
             // Fixup competitor 1
             if (this.chkCompetitor1.Checked)
             {
                 Structs.Competitor comp;
                 if (this.competitorIds[0] > -1)
-                    comp =
-                        CommonCode.GetCompetitor(this.competitorIds[0]);
+                {
+                    comp = this.CommonCode.GetCompetitor(this.competitorIds[0]);
+                }
                 else
                 {
-                    comp = new Structs.Competitor();
-                    comp.PatrolId = -1;
-                    comp.Lane = -1;
-                    comp.CompetitorId = -1;
+                    comp = new Structs.Competitor { PatrolId = -1, Lane = -1, CompetitorId = -1 };
                 }
 
                 comp.WeaponId = (string)this.ddWeapon1.SelectedValue;
                 comp.ShooterClass = calculateShootersClass(ref this.ddShooterClass, ref this.ddShooterClass1);
                 if (this.ddPatrol1.SelectedIndex == -1)
+                {
                     comp.PatrolId = -1;
+                }
                 else
                 {
                     int newPatrol1 = (int)this.ddPatrol1.SelectedValue;
@@ -2936,6 +2933,7 @@ namespace Allberg.Shooter.Windows
                         comp.PatrolId = newPatrol1;
                     }
                 }
+
                 updatedCompetitors.Add(comp);
             }
             else
@@ -3072,8 +3070,7 @@ namespace Allberg.Shooter.Windows
             Trace.WriteLine("FCompetitors: btnSave_Click saving.");
             CommonCode.UpdateShooter(shooter);
             Structs.Competitor[] compsArray =
-                (Structs.Competitor[])updatedCompetitors.ToArray(
-                (new Structs.Competitor()).GetType());
+                updatedCompetitors.ToArray();
             for (int i = 0; i < compsArray.Length; i++)
             {
                 Structs.Competitor thisComp = compsArray[i];

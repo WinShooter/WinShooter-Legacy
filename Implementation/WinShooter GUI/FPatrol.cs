@@ -25,6 +25,7 @@ namespace Allberg.Shooter.Windows
 {
     using System;
     using System.Collections;
+    using System.Collections.Generic;
     using System.Diagnostics;
     using System.Drawing;
     using System.Threading;
@@ -791,10 +792,10 @@ namespace Allberg.Shooter.Windows
         {
             Trace.WriteLine("FPatrol: btnRemoveFromPatrol_Click started on thread \"" +
                 Thread.CurrentThread.Name + "\" ( " +
-                Thread.CurrentThread.ManagedThreadId.ToString() + " )");
+                Thread.CurrentThread.ManagedThreadId + " )");
 
-            ArrayList competitorIds = new ArrayList();
-            foreach(DatasetPatrol.shootersRow row in this.datasetPatrol.shooters)
+            var competitorIds = new List<int>();
+            foreach (DatasetPatrol.shootersRow row in this.datasetPatrol.shooters)
             {
                 if (row.Move)
                 {
@@ -802,7 +803,7 @@ namespace Allberg.Shooter.Windows
                 }
             }
 
-            int[] competitorIdInts = (int[])competitorIds.ToArray(0.GetType());
+            int[] competitorIdInts = competitorIds.ToArray();
             foreach(int thisCompId in competitorIdInts)
             {
                 Structs.Competitor comp = CommonCode.GetCompetitor(thisCompId);
@@ -823,8 +824,8 @@ namespace Allberg.Shooter.Windows
 
             try
             {
-                ArrayList competitorIds = new ArrayList();
-                foreach(DatasetPatrol.unassignedRow row in this.datasetPatrol.unassigned)
+                var competitorIds = new List<int>();
+                foreach (DatasetPatrol.unassignedRow row in this.datasetPatrol.unassigned)
                 {
                     if (row.Move)
                     {
@@ -832,16 +833,16 @@ namespace Allberg.Shooter.Windows
                     }
                 }
 
-                checkAddPerson();
+                this.checkAddPerson();
 
-                int[] competitorIdInts = (int[])competitorIds.ToArray(0.GetType());
-                foreach(int thisCompId in competitorIdInts)
+                var competitorIdInts = competitorIds.ToArray();
+                foreach (int thisCompId in competitorIdInts)
                 {
                     Structs.Competitor comp = CommonCode.GetCompetitor(thisCompId);
-                    comp.PatrolId = Patrol.PatrolId;
+                    comp.PatrolId = this.Patrol.PatrolId;
                     comp.Lane = -1;
 
-                    CommonCode.UpdateCompetitor(comp);
+                    this.CommonCode.UpdateCompetitor(comp);
                 }
             }
             catch(PatrolAlreadyFullException)
@@ -883,10 +884,10 @@ namespace Allberg.Shooter.Windows
         {
             Trace.WriteLine("FPatrol: btnMoveUp_Click started on thread \"" +
                 Thread.CurrentThread.Name + "\" ( " +
-                Thread.CurrentThread.ManagedThreadId.ToString() + " )");
+                Thread.CurrentThread.ManagedThreadId + " )");
 
-            ArrayList competitorIds = new ArrayList();
-            foreach(DatasetPatrol.shootersRow row in this.datasetPatrol.shooters)
+            var competitorIds = new List<int>();
+            foreach (DatasetPatrol.shootersRow row in this.datasetPatrol.shooters)
             {
                 if (row.Move)
                 {
@@ -894,7 +895,7 @@ namespace Allberg.Shooter.Windows
                 }
             }
 
-            int[] competitorIdInts = (int[])competitorIds.ToArray(0.GetType());
+            int[] competitorIdInts = competitorIds.ToArray();
             foreach(int thisCompId in competitorIdInts)
             {
                 Structs.Competitor comp = CommonCode.GetCompetitor(thisCompId);
@@ -916,10 +917,10 @@ namespace Allberg.Shooter.Windows
         {
             Trace.WriteLine("FPatrol: btnMoveDown_Click started on thread \"" +
                 Thread.CurrentThread.Name + "\" ( " +
-                Thread.CurrentThread.ManagedThreadId.ToString() + " )");
+                Thread.CurrentThread.ManagedThreadId + " )");
 
-            ArrayList competitorIds = new ArrayList();
-            foreach(DatasetPatrol.shootersRow row in this.datasetPatrol.shooters)
+            var competitorIds = new List<int>();
+            foreach (DatasetPatrol.shootersRow row in this.datasetPatrol.shooters)
             {
                 if (row.Move)
                 {
@@ -927,7 +928,7 @@ namespace Allberg.Shooter.Windows
                 }
             }
 
-            int[] competitorIdInts = (int[])competitorIds.ToArray(0.GetType());
+            int[] competitorIdInts = competitorIds.ToArray();
             for(int i = competitorIdInts.Length-1; i >= 0; i--)
             {
                 Structs.Competitor comp = CommonCode.GetCompetitor(competitorIdInts[i]);

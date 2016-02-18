@@ -786,7 +786,7 @@ namespace Allberg.Shooter.Windows
         {
             Structs.Team team = CommonCode.GetTeam(result.TeamId);
 
-            foreach (int compid in (int[])team.CompetitorIds.ToArray(typeof(int)))
+            foreach (int compid in (int[])team.CompetitorIds.ToArray())
             {
                 Structs.Competitor comp = CommonCode.GetCompetitor(compid);
                 printTeamMemberResults(ev, ref yPos, comp);

@@ -912,7 +912,7 @@ namespace Allberg.Shooter.Common
 
             Structs.Team team = myInterface.GetTeam(result.TeamId);
 
-            foreach (int compid in (int[])team.CompetitorIds.ToArray(typeof(int)))
+            foreach (int compid in team.CompetitorIds.ToArray())
             {
                 newYPos = writeResultsTeam(page, newYPos, colResultResultPos, colResultTotPos, compid);
             }

@@ -25,6 +25,7 @@ namespace Allberg.Shooter.WinShooterServerRemoting
 {
     using System;
     using System.Collections;
+    using System.Collections.Generic;
 
     /// <summary>
     /// Summary description for Structs.
@@ -190,23 +191,7 @@ namespace Allberg.Shooter.WinShooterServerRemoting
             /// <summary>
             /// 
             /// </summary>
-            public ArrayList CompetitorIds;
-            /*/// <summary>
-            /// 
-            /// </summary>
-            public int CompetitorId1;
-            /// <summary>
-            /// 
-            /// </summary>
-            public int CompetitorId2;
-            /// <summary>
-            /// 
-            /// </summary>
-            public int CompetitorId3;
-            /// <summary>
-            /// 
-            /// </summary>
-            public int CompetitorId4;*/
+            public List<int> CompetitorIds;
         }
         /// <summary>
         /// Weapon

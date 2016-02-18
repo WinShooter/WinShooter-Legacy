@@ -25,6 +25,7 @@ namespace Allberg.Shooter.Windows
 {
     using System;
     using System.Collections;
+    using System.Collections.Generic;
     using System.Diagnostics;
     using System.Threading;
     using System.Windows.Forms;
@@ -826,12 +827,12 @@ namespace Allberg.Shooter.Windows
             if ((int)this.DdTeams.SelectedValue != -1)
             {
                 team = CommonCode.GetTeam((int)this.DdTeams.SelectedValue);
-                team.CompetitorIds = new ArrayList();
+                team.CompetitorIds = new List<int>();
             }
             else
             {
                 team = new Structs.Team();
-                team.CompetitorIds = new ArrayList();
+                team.CompetitorIds = new List<int>();
                 team.TeamId = -1;
             }
 

@@ -25,6 +25,7 @@ namespace Allberg.Shooter.Common
 {
     using System;
     using System.Collections;
+    using System.Collections.Generic;
     using System.Diagnostics;
     using System.Threading;
 
@@ -388,26 +389,25 @@ namespace Allberg.Shooter.Common
             try
             {
                 // Get the competitors from the database
-                Structs.Competitor[] temp = myInterface.GetCompetitors(shooterId);
-                ArrayList competitorsUnfiltered = 
-                    new ArrayList(temp);
-                for(int i = 0;i<competitorsUnfiltered.Count;)
+                Structs.Competitor[] temp = this.myInterface.GetCompetitors(shooterId);
+                var competitorsUnfiltered = new List<Structs.Competitor>(temp);
+
+                for (var i = 0; i < competitorsUnfiltered.Count;)
                 {
-                    object obj = competitorsUnfiltered[i];
-                    Structs.Competitor comp = (Structs.Competitor)obj;
+                    var comp = competitorsUnfiltered[i];
                     if (comp.PatrolId != -1)
                     {
-                        competitorsUnfiltered.Remove(obj);
+                        competitorsUnfiltered.Remove(comp);
                     }
+
                     i++;
                 }
-                Structs.Competitor[] competitors = (Structs.Competitor[])
-                    competitorsUnfiltered.ToArray(
-                    typeof(Structs.Competitor));
+
+                Structs.Competitor[] competitors = competitorsUnfiltered.ToArray();
 
                 // Insert them into a temporary table
                 DSPatrolManagement dblistunsorted = new DSPatrolManagement();
-                foreach(Structs.Competitor row in competitors)
+                foreach (Structs.Competitor row in competitors)
                 {
                     DSPatrolManagement.CompetitorsRow newRow = 
                         dblistunsorted.Competitors.NewCompetitorsRow();

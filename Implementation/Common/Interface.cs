@@ -624,7 +624,7 @@ namespace Allberg.Shooter.Common
                     throw new ApplicationException(
                         "Database not initialized when trying to fetch Weapons");
 
-                return databaseClass.getWeapons("WeaponId");
+                return databaseClass.GetWeapons("WeaponId");
             }
         }
         /// <summary>
@@ -646,7 +646,7 @@ namespace Allberg.Shooter.Common
                     throw new ApplicationException(
                         "Database not initialized when trying to fetch Weapons");
 
-                return databaseClass.getWeapons(sorting);
+                return databaseClass.GetWeapons(sorting);
             }
         }
         /// <summary>
@@ -668,7 +668,7 @@ namespace Allberg.Shooter.Common
                     throw new ApplicationException(
                         "Database not initialized when trying to fetch Weapons");
 
-                return databaseClass.getWeapon(WeaponsId);
+                return databaseClass.GetWeapon(WeaponsId);
             }
         }
         /// <summary>
@@ -699,7 +699,7 @@ namespace Allberg.Shooter.Common
                     throw new ApplicationException(
                         "Database not initialized when trying to fetch Competitions");
 
-                return databaseClass.getCompetitions();
+                return databaseClass.GetCompetitions();
             }
         }
         /// <summary>
@@ -976,7 +976,7 @@ namespace Allberg.Shooter.Common
                     throw new ApplicationException(
                         "Database not initialized when trying to fetch Team");
 
-                return databaseClass.getTeam(TeamId);
+                return databaseClass.GetTeam(TeamId);
             }
         }
                           

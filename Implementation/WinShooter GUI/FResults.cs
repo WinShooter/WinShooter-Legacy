@@ -25,6 +25,7 @@ namespace Allberg.Shooter.Windows
 {
     using System;
     using System.Collections;
+    using System.Collections.Generic;
     using System.Diagnostics;
     using System.Drawing;
     using System.Threading;
@@ -320,12 +321,11 @@ namespace Allberg.Shooter.Windows
         DatasetPatrols patrolsDs = new DatasetPatrols();
         DatasetCompetitors competitorsDs = new DatasetCompetitors();
         int currentCompetitorId = -1;
-        ArrayList resultBoxes = new ArrayList();
-        ArrayList resultFigures = new ArrayList();
-        ArrayList resultPoints = new ArrayList();
+        List<GroupBox> resultBoxes = new List<GroupBox>();
+        List<SafeTextBox> resultFigures = new List<SafeTextBox>();
+        List<SafeTextBox> resultPoints = new List<SafeTextBox>();
 
-        Structs.CompetitionTypeEnum CompetitionType = 
-            Structs.CompetitionTypeEnum.Field;
+        Structs.CompetitionTypeEnum CompetitionType = Structs.CompetitionTypeEnum.Field;
 
         #region Window Handling
         internal void enableMe()
@@ -423,7 +423,7 @@ namespace Allberg.Shooter.Windows
                 Structs.Shooter shooter = 
                     CommonCode.GetShooter(competitor.ShooterId);
                 row.Club = CommonCode.GetClub(shooter.ClubId).Name;
-                row.Name = ""; 
+                row.Name = string.Empty; 
                 if (competitor.Lane.ToString().Length < 2) 
                     row.Name += "0";
                 row.Name += competitor.Lane.ToString() + " - " +
@@ -597,7 +597,7 @@ namespace Allberg.Shooter.Windows
                 Allberg.Shooter.Windows.Forms.SafeTextBox txtPoints = new SafeTextBox();
                 txtPoints.Name = "Points" + station.StationNr.ToString();
                 txtPoints.Location = new Point(SafeLabelPoints.Width+5, groupBoxHeight-25);
-                txtPoints.Text = "";
+                txtPoints.Text = string.Empty;
                 txtPoints.Size = new Size(30,20);
                 txtPoints.Enabled = station.Points;
                 txtPoints.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
@@ -642,7 +642,7 @@ namespace Allberg.Shooter.Windows
                 // Add SafeTextBox
                 txtFinalPlace = new SafeTextBox();
                 txtFinalPlace.Location = getTxtBoxLocation(3, 2);
-                txtFinalPlace.Text = "";
+                txtFinalPlace.Text = string.Empty;
                 txtFinalPlace.Size = new System.Drawing.Size(40,23);
                 txtFinalPlace.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
                 txtFinalPlace.TextChanged += new System.EventHandler(this.txtFinalPlace_TextChanged);
@@ -658,19 +658,21 @@ namespace Allberg.Shooter.Windows
         SafeTextBox txtFinalPlace = new SafeTextBox();
         private void clearCurrentStations()
         {
-            foreach(SafeTextBox tbox in resultFigures.ToArray(new SafeTextBox().GetType()))
+            foreach(SafeTextBox tbox in resultFigures.ToArray())
             {
-                resultFigures.Remove(tbox);
+                this.resultFigures.Remove(tbox);
                 tbox.Dispose();
             }
-            foreach(SafeTextBox tbox in resultPoints.ToArray(new SafeTextBox().GetType()))
+
+            foreach(SafeTextBox tbox in resultPoints.ToArray())
             {
-                resultPoints.Remove(tbox);
+                this.resultPoints.Remove(tbox);
                 tbox.Dispose();
             }
-            foreach(GroupBox gbox in resultBoxes.ToArray(new GroupBox().GetType()))
+
+            foreach(GroupBox gbox in this.resultBoxes.ToArray())
             {
-                resultBoxes.Remove(gbox);
+                this.resultBoxes.Remove(gbox);
                 gbox.Dispose();
             }
         }
@@ -690,19 +692,19 @@ namespace Allberg.Shooter.Windows
 
         private SafeTextBox[] createTxtBoxes(int stationNr, int figures)
         {
-            ArrayList boxes = new ArrayList();
+            var boxes = new List<SafeTextBox>();
 
-            for (int i=1 ; i<= figures ; i++ )
+            for (int i = 1; i <= figures; i++)
             {
                 SafeTextBox thisBox = new SafeTextBox();
-                thisBox.Name = "Figure" + stationNr.ToString() + "-" + i.ToString();
-                thisBox.Text = "";
-                thisBox.Location = getTxtBoxLocation(figures, i);
-                thisBox.Size = getTxtBoxSize(figures, i);
+                thisBox.Name = "Figure" + stationNr + "-" + i;
+                thisBox.Text = string.Empty;
+                thisBox.Location = this.getTxtBoxLocation(figures, i);
+                thisBox.Size = this.getTxtBoxSize(figures, i);
                 boxes.Add(thisBox);
             }
 
-            SafeTextBox[] boxesArray =  (SafeTextBox[])boxes.ToArray(new SafeTextBox().GetType());
+            SafeTextBox[] boxesArray =  boxes.ToArray();
             return boxesArray;
         }
 
@@ -844,7 +846,7 @@ namespace Allberg.Shooter.Windows
 
             // Get all values into hash tables for easy retreival
             Hashtable hitsTable = new Hashtable();
-            foreach(SafeTextBox safeTextBox in resultFigures.ToArray(typeof(SafeTextBox)))
+            foreach(SafeTextBox safeTextBox in resultFigures)
             {
                 int parse = 0;
                 try
@@ -860,7 +862,7 @@ namespace Allberg.Shooter.Windows
             }
 
             Hashtable pointsTable = new Hashtable();
-            foreach(SafeTextBox safeTextBox in resultPoints.ToArray(new SafeTextBox().GetType()))
+            foreach(SafeTextBox safeTextBox in resultPoints.ToArray())
             {
                 int parse = 0;
                 try
@@ -882,7 +884,7 @@ namespace Allberg.Shooter.Windows
             {
                 int totHits = 0;
                 int totFigureHits = 0;
-                string stationFigureHits = "";
+                string stationFigureHits = string.Empty;
                 for(int figure=1; figure<=station.Figures ; figure++)
                 {
                     int thisHit = (int)hitsTable["Figure" + station.StationNr.ToString() +
@@ -932,7 +934,7 @@ namespace Allberg.Shooter.Windows
             }
 
             Structs.Competitor competitor = CommonCode.GetCompetitor(currentCompetitorId);
-            if (this.txtFinalPlace.Text == "")
+            if (this.txtFinalPlace.Text == string.Empty)
                 competitor.FinalShootingPlace = 100;
             else
             {
@@ -1017,7 +1019,7 @@ namespace Allberg.Shooter.Windows
                 this.txtShooter.Text = shooter.Givenname + ", " + shooter.Surname;
                 if (competitor.FinalShootingPlace == 100 |
                     competitor.FinalShootingPlace == 0)
-                    this.txtFinalPlace.Text = "";
+                    this.txtFinalPlace.Text = string.Empty;
                 else
                     this.txtFinalPlace.Text = competitor.FinalShootingPlace.ToString();
                 foreach (Structs.CompetitorResult res in 
@@ -1036,7 +1038,7 @@ namespace Allberg.Shooter.Windows
                             figure++;
                             string figureText = "Figure" + res.Station.ToString() +
                                 "-" + figure.ToString();
-                            string temp = str.Replace(";", "");
+                            string temp = str.Replace(";", string.Empty);
                             if (temp.Length>0)
                             {
                                 SafeTextBox figureBox = this.getSafeTextBoxFigure(figureText);
@@ -1073,14 +1075,16 @@ namespace Allberg.Shooter.Windows
             {
                 automaticChange = true;
 
-                foreach(SafeTextBox thisBox in this.resultFigures.ToArray(new SafeTextBox().GetType()))
+                foreach (SafeTextBox thisBox in this.resultFigures.ToArray())
                 {
-                    thisBox.Text = "";
+                    thisBox.Text = string.Empty;
                 }
-                foreach(SafeTextBox thisBox in this.resultPoints.ToArray(new SafeTextBox().GetType()))
+
+                foreach (SafeTextBox thisBox in this.resultPoints.ToArray())
                 {
-                    thisBox.Text = "";
+                    thisBox.Text = string.Empty;
                 }
+
                 this.currentCompetitorId = -1;
             }
             finally
@@ -1114,7 +1118,7 @@ namespace Allberg.Shooter.Windows
             // Do sanity check
             try
             {
-                if (thisBox.Text != "")
+                if (thisBox.Text != string.Empty)
                     int.Parse(thisBox.Text);
             }
             catch(Exception)
@@ -1135,9 +1139,9 @@ namespace Allberg.Shooter.Windows
 
             // If there is 0 hits on this station, 
             // set 0 as points and continue
-            if (calculateFigureHits(stationNr) == 0)
+            if (this.CalculateFigureHits(stationNr) == 0)
             {
-                if (thisBox.Text != "" &
+                if (thisBox.Text != string.Empty &
                     thisBox.Text != "0")
                 {
                     MessageBox.Show("Om skytten inte har några träffar " +
@@ -1359,10 +1363,10 @@ namespace Allberg.Shooter.Windows
             int stationNr = getStationNr(thisBox.Name);
 
             // Check that
-            if (calculateFigureHits(stationNr) == 0)
+            if (this.CalculateFigureHits(stationNr) == 0)
             {
                 SafeTextBox pointsBox = getSafeTextBoxPoints(stationNr);
-                if (pointsBox.Text != "" &
+                if (pointsBox.Text != string.Empty &
                     pointsBox.Text != "0")
                 {
                     MessageBox.Show(
@@ -1396,7 +1400,7 @@ namespace Allberg.Shooter.Windows
                         else
                         {
                             ddCompetitors.SelectedIndex = 0;
-                            int figurenr = int.Parse(newBoxName.Substring(0, newBoxName.IndexOf("-")).Replace("Figure", ""));
+                            int figurenr = int.Parse(newBoxName.Substring(0, newBoxName.IndexOf("-")).Replace("Figure", string.Empty));
                             figurenr++;
                             newBoxName = "Figure" + figurenr.ToString() + "-1";
                             nextBox = getSafeTextBoxFigure(newBoxName);
@@ -1426,11 +1430,11 @@ namespace Allberg.Shooter.Windows
         private int getStationNr(string currentTextBoxName)
         {
             // Current name is "Figure" + stationNr +"-" + figure
-            string boxName = currentTextBoxName.Replace("Figure", "").Replace("Points", "");
+            string boxName = currentTextBoxName.Replace("Figure", string.Empty).Replace("Points", string.Empty);
             int length = 2;
             if (boxName.Length < 2)
                 length = boxName.Length;
-            int stationNr = int.Parse(boxName.Substring(0,length).Replace("-", ""));
+            int stationNr = int.Parse(boxName.Substring(0,length).Replace("-", string.Empty));
 
             return stationNr;
         }
@@ -1492,7 +1496,7 @@ namespace Allberg.Shooter.Windows
                 {
                     // If there is 0 hits on this station, 
                     // set 0 as points and continue
-                    if (calculateFigureHits(stationNr) == 0)
+                    if (this.CalculateFigureHits(stationNr) == 0)
                     {
                         nextBox.Text = "0";
                         nextBox = getSafeTextBoxFigure(newName2);
@@ -1526,7 +1530,7 @@ namespace Allberg.Shooter.Windows
                 " ( " + Thread.CurrentThread.ManagedThreadId.ToString() + " ) " +
                 DateTime.Now.ToLongTimeString());
 
-            foreach(SafeTextBox searchBox in this.resultFigures.ToArray(new SafeTextBox().GetType()))
+            foreach(SafeTextBox searchBox in this.resultFigures.ToArray())
             {
                 if (searchBox.Name == name)
                 {
@@ -1543,7 +1547,7 @@ namespace Allberg.Shooter.Windows
         private SafeTextBox getSafeTextBoxPoints(int stationNr)
         {
             string name = "Points" + stationNr.ToString();
-            foreach(SafeTextBox searchBox in this.resultPoints.ToArray(new SafeTextBox().GetType()))
+            foreach(SafeTextBox searchBox in this.resultPoints.ToArray())
             {
                 if (searchBox.Name == name)
                 {
@@ -1558,30 +1562,31 @@ namespace Allberg.Shooter.Windows
         {
             if (this.chkCalculateResults.Checked)
             {
-                calculateResults();
+                this.calculateResults();
             }
             else
             {
-                this.txtResults.Text = "";
+                this.txtResults.Text = string.Empty;
             }
         }
         #endregion
 
 
         #region ResultsCalculation
-        private int calculateFigureHits(int stationNr)
+        private int CalculateFigureHits(int stationNr)
         {
             int figureHits = 0;
-            foreach(SafeTextBox safeTextBox in resultFigures.ToArray(typeof(SafeTextBox)))
+            foreach (var safeTextBox in this.resultFigures.ToArray())
             {
                 if (safeTextBox.Name.StartsWith("Figure" + stationNr.ToString() + "-"))
                 {
-                    int parse = 0;
                     try
                     {
-                        parse = int.Parse(safeTextBox.Text);
+                        var parse = int.Parse(safeTextBox.Text);
                         if (parse > 0)
+                        {
                             figureHits++;
+                        }
                     }
                     catch(Exception)
                     {

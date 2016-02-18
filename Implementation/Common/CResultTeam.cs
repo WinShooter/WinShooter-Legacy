@@ -25,6 +25,7 @@ namespace Allberg.Shooter.Common
 {
     using System;
     using System.Collections;
+    using System.Collections.Generic;
     using System.Data;
     using System.Diagnostics;
     using System.Threading;
@@ -124,27 +125,41 @@ namespace Allberg.Shooter.Common
                 }
             }
 
-            foreach(DatabaseDataset.TeamsRow teamrow in database.Teams)
+            foreach (DatabaseDataset.TeamsRow teamrow in this.database.Teams)
             {
                 if (teamrow.WClass == (int)wclass)
                 {
-                    ArrayList comps = new ArrayList();
+                    var comps = new List<DatabaseDataset.CompetitorsRow>();
 
                     if (!teamrow.IsCompetitorId1Null())
-                        comps.Add((DatabaseDataset.CompetitorsRow)
-                            database.Competitors.Select("CompetitorId=" + teamrow.CompetitorId1.ToString())[0]);
+                    {
+                        comps.Add(
+                            (DatabaseDataset.CompetitorsRow)this.database.Competitors.Select("CompetitorId=" + teamrow.CompetitorId1)[0]);
+                    }
+
                     if (!teamrow.IsCompetitorId2Null())
-                        comps.Add((DatabaseDataset.CompetitorsRow)
-                            database.Competitors.Select("CompetitorId=" + teamrow.CompetitorId2.ToString())[0]);
+                    {
+                        comps.Add(
+                            (DatabaseDataset.CompetitorsRow)this.database.Competitors.Select("CompetitorId=" + teamrow.CompetitorId2)[0]);
+                    }
+
                     if (!teamrow.IsCompetitorId3Null())
-                        comps.Add((DatabaseDataset.CompetitorsRow)
-                            database.Competitors.Select("CompetitorId=" + teamrow.CompetitorId3.ToString())[0]);
+                    {
+                        comps.Add(
+                            (DatabaseDataset.CompetitorsRow)this.database.Competitors.Select("CompetitorId=" + teamrow.CompetitorId3)[0]);
+                    }
+
                     if (!teamrow.IsCompetitorId4Null())
-                        comps.Add((DatabaseDataset.CompetitorsRow)
-                            database.Competitors.Select("CompetitorId=" + teamrow.CompetitorId4.ToString())[0]);
+                    {
+                        comps.Add(
+                            (DatabaseDataset.CompetitorsRow)this.database.Competitors.Select("CompetitorId=" + teamrow.CompetitorId4)[0]);
+                    }
+
                     if (!teamrow.IsCompetitorId5Null())
-                        comps.Add((DatabaseDataset.CompetitorsRow)
-                            database.Competitors.Select("CompetitorId=" + teamrow.CompetitorId5.ToString())[0]);
+                    {
+                        comps.Add(
+                            (DatabaseDataset.CompetitorsRow)this.database.Competitors.Select("CompetitorId=" + teamrow.CompetitorId5)[0]);
+                    }
 
                     Hashtable teamHits = new Hashtable();
                     Hashtable teamFigureHits = new Hashtable();
@@ -152,8 +167,7 @@ namespace Allberg.Shooter.Common
 
                     int totPoints = 0;
                     foreach(DatabaseDataset.CompetitorsRow compsRow in
-                        (DatabaseDataset.CompetitorsRow[])
-                        comps.ToArray(typeof(DatabaseDataset.CompetitorsRow)))
+                        comps.ToArray())
                     {
                         foreach(DatabaseDataset.CompetitorResultsRow compresrow in
                             (DatabaseDataset.CompetitorResultsRow[])

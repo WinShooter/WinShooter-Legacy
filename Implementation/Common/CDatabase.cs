@@ -1874,16 +1874,17 @@ namespace Allberg.Shooter.Common
         {
             Trace.WriteLine("CDatabase: Entering getShooters()");
 
-            var shooters = new ArrayList();
-            var shooter = new Structs.Shooter();
+            var shooters = new List<Structs.Shooter>();
 
-            foreach(DatabaseDataset.ShootersRow row in Database.Shooters.Select(string.Empty, sorting))
+            foreach (DatabaseDataset.ShootersRow row in this.Database.Shooters.Select(string.Empty, sorting))
             {
                 // Safety first...
                 if (row.IsArrivedNull())
+                {
                     row.Arrived = false;
+                }
 
-                shooter = new Structs.Shooter();
+                var shooter = new Structs.Shooter();
                 shooter.Arrived = row.Arrived;
                 shooter.ClubId = row.ClubId;
                 shooter.CardNr = row.Cardnr;
@@ -1896,18 +1897,18 @@ namespace Allberg.Shooter.Common
                 shooter.Class = (Structs.ShootersClass)row.Class;
                 shooters.Add(shooter);
             }
-            return (Structs.Shooter[])shooters.ToArray(shooter.GetType());
+
+            return shooters.ToArray();
         }
         internal Structs.Shooter[] GetShooters(Structs.Club club)
         {
             Trace.WriteLine("CDatabase: Entering getShooters(\"" + club.ClubId + "\")");
 
-            var shooters = new ArrayList();
-            var shooter = new Structs.Shooter();
+            var shooters = new List<Structs.Shooter>();
 
-            foreach(DatabaseDataset.ShootersRow row in Database.Shooters.Select("ClubId='" + club.ClubId + "'", "givenname, surname"))
+            foreach (DatabaseDataset.ShootersRow row in this.Database.Shooters.Select("ClubId='" + club.ClubId + "'", "givenname, surname"))
             {
-                shooter = new Structs.Shooter();
+                var shooter = new Structs.Shooter();
                 shooter.Arrived = row.Arrived;
                 shooter.ClubId = row.ClubId;
                 shooter.CardNr = row.Cardnr;
@@ -1920,27 +1921,29 @@ namespace Allberg.Shooter.Common
                 shooter.Class = (Structs.ShootersClass)row.Class;
                 shooters.Add(shooter);
             }
-            return (Structs.Shooter[])shooters.ToArray(shooter.GetType());
+
+            return shooters.ToArray();
         }
         internal Structs.Shooter[] GetShooters(Structs.Club club, Structs.ResultWeaponsClass wclass)
         {
             Trace.WriteLine(string.Format("CDatabase: Entering getShooters(\"{0}\", {1})", club.ClubId, wclass));
 
-            var shooters = new ArrayList();
-            var shooter = new Structs.Shooter();
+            var shooters = new List<Structs.Shooter>();
 
-            foreach(DatabaseDataset.ShootersRow row in Database.Shooters.Select("ClubId='" + club.ClubId + "'", "givenname, surname"))
+            foreach (DatabaseDataset.ShootersRow row in this.Database.Shooters.Select("ClubId='" + club.ClubId + "'", "givenname, surname"))
             {
                 foreach(DatabaseDataset.CompetitorsRow comprow in row.GetChildRows("ShootersCompetitors"))
                 {
                     var weaponsrow = 
                         (DatabaseDataset.WeaponsRow)comprow.GetParentRow("WeaponsCompetitors");
                     var weaponclass = (Structs.WeaponClass)weaponsrow.Class;
-                    if (MyInterface.ConvertWeaponsClassToResultClass(weaponclass) != wclass) 
+                    if (this.MyInterface.ConvertWeaponsClassToResultClass(weaponclass) != wclass)
+                    {
                         continue;
+                    }
 
                     // Only choose those with the same wclass
-                    shooter = new Structs.Shooter();
+                    var shooter = new Structs.Shooter();
                     shooter.Arrived = row.Arrived;
                     shooter.ClubId = row.ClubId;
                     shooter.CardNr = row.Cardnr;
@@ -1954,7 +1957,8 @@ namespace Allberg.Shooter.Common
                     shooters.Add(shooter);
                 }
             }
-            return (Structs.Shooter[])shooters.ToArray(shooter.GetType());
+
+            return shooters.ToArray();
         }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Globalization", "CA1303:DoNotPassLiteralsAsLocalizedParameters", MessageId = "Allberg.Shooter.Common.CannotFindIdException.#ctor(System.String)")]
@@ -2028,7 +2032,7 @@ namespace Allberg.Shooter.Common
         {
             Trace.WriteLine("CDatabase: Entering getCompetitors()");
 
-            ArrayList competitors = new ArrayList();
+            var competitors = new List<Structs.Competitor>();
             Structs.Competitor competitor = new Structs.Competitor();
 
             foreach(DatabaseDataset.CompetitorsRow row in Database.Competitors)
@@ -2038,197 +2042,229 @@ namespace Allberg.Shooter.Common
                 competitor.CompetitorId = row.CompetitorId;
                 competitor.ShooterClass = (Structs.ShootersClass)row.ShooterClass;
                 if (row.IsPatrolIdNull())
+                {
                     competitor.PatrolId = -1;
+                }
                 else
+                {
                     competitor.PatrolId = row.PatrolId;
+                }
                 competitor.ShooterId = row.ShooterId;
                 competitor.WeaponId = row.WeaponId;
                 if (row.IsLaneNull())
+                {
                     competitor.Lane = -1;
+                }
                 else
+                {
                     competitor.Lane = row.Lane;
+                }
                 competitor.FinalShootingPlace = row.FinalShootingPlace;
 
                 competitors.Add(competitor);
             }
-            return (Structs.Competitor[])competitors.ToArray(competitor.GetType());
+            return competitors.ToArray();
         }
         internal Structs.Competitor[] GetCompetitorsWithNoPatrol(
             Structs.PatrolClass thisClass)
         {
             Trace.WriteLine("CDatabase: Entering GetCompetitorsWithNoPatrol(" + 
-                thisClass.ToString() + ")");
+                thisClass + ")");
 
-            ArrayList competitors = new ArrayList();
-            Structs.Competitor competitor = new Structs.Competitor();
+            var competitors = new List<Structs.Competitor>();
 
-            foreach(DatabaseDataset.CompetitorsRow row in Database.Competitors.Select("PatrolId is null"))
+            foreach (DatabaseDataset.CompetitorsRow row in Database.Competitors.Select("PatrolId is null"))
             {
-                if (thisClass == Structs.PatrolClass.Okänd |
-                    MyInterface.ConvertWeaponsClassToPatrolClass( 
-                    MyInterface.GetWeapon( row.WeaponId )
-                    .WClass) == thisClass)
+                if (thisClass == Structs.PatrolClass.Okänd 
+                    | this.MyInterface.ConvertWeaponsClassToPatrolClass(this.MyInterface.GetWeapon(row.WeaponId).WClass) == thisClass)
                 {
-                    competitor = new Structs.Competitor();
+                    var competitor = new Structs.Competitor();
                     competitor.CompetitionId = row.CompetitionId;
                     competitor.CompetitorId = row.CompetitorId;
                     competitor.ShooterClass = (Structs.ShootersClass)row.ShooterClass;
                     if (row.IsPatrolIdNull())
+                    {
                         competitor.PatrolId = -1;
+                    }
                     else
+                    {
                         competitor.PatrolId = row.PatrolId;
+                    }
                     competitor.ShooterId = row.ShooterId;
                     competitor.WeaponId = row.WeaponId;
                     if (row.IsLaneNull())
+                    {
                         competitor.Lane = -1;
+                    }
                     else
+                    {
                         competitor.Lane = row.Lane;
+                    }
                     competitor.FinalShootingPlace = row.FinalShootingPlace;
                     competitors.Add(competitor);
                 }
             }
-            return (Structs.Competitor[])competitors.ToArray(competitor.GetType());
+            return competitors.ToArray();
         }
         internal Structs.Competitor[] getCompetitors(Structs.Patrol patrolSearch, string sortOrder)
         {
             Trace.WriteLine("CDatabase: Entering getCompetitors(" + 
-                patrolSearch.ToString() + ")");
+                patrolSearch + ")");
 
-            var competitors = new ArrayList();
-            var competitor = new Structs.Competitor();
+            var competitors = new List<Structs.Competitor>();
 
-            foreach(DatabaseDataset.CompetitorsRow row in 
-                Database.Competitors.Select(
+            foreach(DatabaseDataset.CompetitorsRow row in this.Database.Competitors.Select(
                 "PatrolId=" + patrolSearch.PatrolId, sortOrder))
             {
                 if (!row.IsPatrolIdNull())
                 {
                     if (row.PatrolId == patrolSearch.PatrolId)
                     {
-                        competitor = new Structs.Competitor();
+                        var competitor = new Structs.Competitor();
                         competitor.CompetitionId = row.CompetitionId;
                         competitor.CompetitorId = row.CompetitorId;
                         competitor.ShooterClass = (Structs.ShootersClass)row.ShooterClass;
                         if (row.IsPatrolIdNull())
+                        {
                             competitor.PatrolId = -1;
+                        }
                         else
+                        {
                             competitor.PatrolId = row.PatrolId;
+                        }
                         competitor.ShooterId = row.ShooterId;
                         competitor.WeaponId = row.WeaponId;
                         if (row.IsLaneNull())
+                        {
                             competitor.Lane = -1;
+                        }
                         else
+                        {
                             competitor.Lane = row.Lane;
+                        }
                         competitor.FinalShootingPlace = row.FinalShootingPlace;
                         competitors.Add(competitor);
                     }
                 }
             }
-            return (Structs.Competitor[])competitors.ToArray(competitor.GetType());
+            return competitors.ToArray();
         }
 
         internal Structs.Competitor[] getCompetitors(int shooterId)
         {
-            Trace.WriteLine("CDatabase: Entering getCompetitors(" + 
-                shooterId.ToString() + ")");
+            Trace.WriteLine("CDatabase: Entering getCompetitors(" + shooterId + ")");
 
-            ArrayList competitors = new ArrayList();
-            Structs.Competitor competitor = new Structs.Competitor();
+            List<Structs.Competitor> competitors = new List<Structs.Competitor>();
 
-            foreach(DatabaseDataset.CompetitorsRow row in
-                Database.Competitors.Select("ShooterId=" + shooterId.ToString()))
+            foreach(DatabaseDataset.CompetitorsRow row in this.Database.Competitors.Select("ShooterId=" + shooterId))
             {
                 try
                 {
                     if (row.ShooterId == shooterId)
                     {
-                        competitor = new Structs.Competitor();
+                        var competitor = new Structs.Competitor();
                         competitor.CompetitionId = row.CompetitionId;
                         competitor.CompetitorId = row.CompetitorId;
                         competitor.ShooterClass = (Structs.ShootersClass)row.ShooterClass;
                         if (row.IsPatrolIdNull())
+                        {
                             competitor.PatrolId = -1;
+                        }
                         else
+                        {
                             competitor.PatrolId = row.PatrolId;
+                        }
                         competitor.ShooterId = row.ShooterId;
                         competitor.WeaponId = row.WeaponId;
                         if (row.IsLaneNull())
+                        {
                             competitor.Lane = -1;
+                        }
                         else
+                        {
                             competitor.Lane = row.Lane;
+                        }
                         competitor.FinalShootingPlace = row.FinalShootingPlace;
                         competitors.Add(competitor);
                     }
                 }
-                catch(System.Data.DeletedRowInaccessibleException)
+                catch(DeletedRowInaccessibleException)
                 {
                 }
             }
+
             Trace.WriteLine("CDatabase: Exiting getCompetitors()");
 
-            return (Structs.Competitor[])competitors.ToArray(competitor.GetType());
+            return competitors.ToArray();
         }
+
         internal Structs.Competitor[] getCompetitors(int shooterId, string sorting)
         {
-            Trace.WriteLine("CDatabase: Entering getCompetitors(" + 
-                shooterId.ToString() + ")");
+            Trace.WriteLine("CDatabase: Entering getCompetitors(" + shooterId + ")");
 
-            ArrayList competitors = new ArrayList();
-            Structs.Competitor competitor = new Structs.Competitor();
+            List<Structs.Competitor> competitors = new List<Structs.Competitor>();
 
-            foreach(DatabaseDataset.CompetitorsRow row in 
-                Database.Competitors.Select("ShooterId=" + shooterId.ToString(), sorting))
+            foreach (DatabaseDataset.CompetitorsRow row in this.Database.Competitors.Select("ShooterId=" + shooterId, sorting))
             {
                 if (row.ShooterId == shooterId)
                 {
-                    competitor = new Structs.Competitor();
+                    var competitor = new Structs.Competitor();
                     competitor.CompetitionId = row.CompetitionId;
                     competitor.CompetitorId = row.CompetitorId;
                     competitor.ShooterClass = (Structs.ShootersClass)row.ShooterClass;
                     if (row.IsPatrolIdNull())
+                    {
                         competitor.PatrolId = -1;
+                    }
                     else
+                    {
                         competitor.PatrolId = row.PatrolId;
+                    }
                     competitor.ShooterId = row.ShooterId;
                     competitor.WeaponId = row.WeaponId;
                     if (row.IsLaneNull())
+                    {
                         competitor.Lane = -1;
+                    }
                     else
+                    {
                         competitor.Lane = row.Lane;
+                    }
+
                     competitor.FinalShootingPlace = row.FinalShootingPlace;
                     competitors.Add(competitor);
                 }
             }
-            return (Structs.Competitor[])competitors.ToArray(competitor.GetType());
+
+            return competitors.ToArray();
         }
-        internal Structs.Competitor[] GetCompetitors(Structs.Club ClubToFetch, 
+        internal Structs.Competitor[] GetCompetitors(
+            Structs.Club ClubToFetch, 
             Structs.ResultWeaponsClass wclass, string sorting)
         {
             Trace.WriteLine("CDatabase: Entering getCompetitors(" + 
-                ClubToFetch.ToString() + ", " + wclass + ")");
+                ClubToFetch + ", " + wclass + ")");
 
-            Structs.CompetitionTypeEnum compType = getCompetitions()[0].Type;
+            var compType = this.GetCompetitions()[0].Type;
 
-            ArrayList competitors = new ArrayList();
-            Structs.Competitor competitor = new Structs.Competitor();
+            var competitors = new List<Structs.Competitor>();
 
-            foreach(DatabaseDataset.ShootersRow shooter in 
-                Database.Shooters.Select("ClubId='" + ClubToFetch.ClubId + "'", sorting))
+            foreach (DatabaseDataset.ShootersRow shooter in this.Database.Shooters.Select("ClubId='" + ClubToFetch.ClubId + "'", sorting))
             {
-                DatabaseDataset.CompetitorsRow[] compRows = shooter.GetCompetitorsRows();
-                foreach(DatabaseDataset.CompetitorsRow compRow in compRows)
+                var compRows = shooter.GetCompetitorsRows();
+                foreach (DatabaseDataset.CompetitorsRow compRow in compRows)
                 {
-                    Structs.Weapon weapon = 
-                        MyInterface.GetWeapon(compRow.WeaponId);
+                    var weapon = this.MyInterface.GetWeapon(compRow.WeaponId);
 
                     if (CConvert.ConvertWeaponsClassToResultClass(weapon.WClass, compType) == wclass)
                     {
-                        Structs.Competitor comp = MyInterface.GetCompetitor(compRow.CompetitorId);
+                        var comp = this.MyInterface.GetCompetitor(compRow.CompetitorId);
                         competitors.Add(comp);
                     }
                 }
             }
-            return (Structs.Competitor[])competitors.ToArray(competitor.GetType());
+
+            return competitors.ToArray();
         }
         internal Structs.Competitor getCompetitor(int competitorId)
         {
@@ -2263,18 +2299,17 @@ namespace Allberg.Shooter.Common
             }
             throw new CannotFindIdException("Could not find competitor with id " + competitorId.ToString());
         }
-        internal Structs.Weapon[] getWeapons(string sorting)
+        internal Structs.Weapon[] GetWeapons(string sorting)
         {
             Trace.WriteLine("CDatabase: Entering getWeapons()");
 
-            Structs.CompetitionTypeEnum comptype = getCompetitions()[0].Type;
+            var comptype = this.GetCompetitions()[0].Type;
 
-            ArrayList weapons = new ArrayList();
-            Structs.Weapon weapon = new Structs.Weapon();
+            var weapons = new List<Structs.Weapon>();
 
-            foreach(DatabaseDataset.WeaponsRow row in Database.Weapons.Select(string.Empty, sorting))
+            foreach(DatabaseDataset.WeaponsRow row in this.Database.Weapons.Select(string.Empty, sorting))
             {
-                weapon = new Structs.Weapon();
+                var weapon = new Structs.Weapon();
                 weapon.Manufacturer = row.Manufacturer;
                 weapon.Model = row.Model;
                 weapon.Caliber = row.Caliber;
@@ -2284,25 +2319,29 @@ namespace Allberg.Shooter.Common
                 weapon.ToAutomatic = row.ToAutomatic;
 
                 if (comptype != Structs.CompetitionTypeEnum.MagnumField)
+                {
                     weapons.Add(weapon);
+                }
                 else
                 {
-                    if (weapon.WClass.ToString().IndexOf("M") > -1 &
-                        weapon.WClass.ToString().Length > 1)
+                    if (weapon.WClass.ToString().IndexOf("M") > -1 & weapon.WClass.ToString().Length > 1)
+                    {
                         weapons.Add(weapon);
+                    }
                 }
             }
-            return (Structs.Weapon[])weapons.ToArray(weapon.GetType());
+            return weapons.ToArray();
         }
-        internal Structs.Weapon getWeapon(string weaponId)
+
+        internal Structs.Weapon GetWeapon(string weaponId)
         {
             Trace.WriteLine("CDatabase: Entering getWeapon(" + 
                 weaponId + ") on thread \"" +
-                System.Threading.Thread.CurrentThread.Name + "\" ( " +
-                System.Threading.Thread.CurrentThread.ManagedThreadId.ToString() + " )");
-            DateTime start = DateTime.Now;
+                Thread.CurrentThread.Name + "\" ( " +
+                Thread.CurrentThread.ManagedThreadId + " )");
+            var start = DateTime.Now;
 
-            Structs.Weapon weapon = new Structs.Weapon();
+            var weapon = new Structs.Weapon();
 
             foreach(DatabaseDataset.WeaponsRow row in Database.Weapons.Select("WeaponId='" + weaponId + "'"))
             {
@@ -2317,26 +2356,26 @@ namespace Allberg.Shooter.Common
                     weapon.ToAutomatic = row.ToAutomatic;
 
                     Trace.WriteLine("CDatabase: Ending getWeapon() after " +
-                        (DateTime.Now-start).TotalMilliseconds.ToString() +
+                        (DateTime.Now-start).TotalMilliseconds +
                         " ms.");
                     return weapon;
                 }
             }
-            throw new CannotFindIdException("Could not find WeapondId " + weaponId.ToString());
+
+            throw new CannotFindIdException("Could not find WeapondId " + weaponId);
         }
-        internal Structs.Competition[] getCompetitions()
+
+        internal Structs.Competition[] GetCompetitions()
         {
             Trace.WriteLine("CDatabase: Entering getCompetitions() on thread \"" +
-                System.Threading.Thread.CurrentThread.Name + "\" ( " +
-                System.Threading.Thread.CurrentThread.ManagedThreadId.ToString() + " ) ");
+                Thread.CurrentThread.Name + "\" ( " +
+                Thread.CurrentThread.ManagedThreadId + " ) ");
 
-            ArrayList competitions = new ArrayList();
-            Structs.Competition competition = 
-                new Structs.Competition();
+            var competitions = new List<Structs.Competition>();
 
-            foreach(DatabaseDataset.CompetitionRow row in Database.Competition)
+            foreach (DatabaseDataset.CompetitionRow row in this.Database.Competition)
             {
-                competition = new Structs.Competition();
+                var competition = new Structs.Competition();
                 competition.CompetitionId = row.CompetitionId;
                 competition.Name = row.Name;
                 competition.NorwegianCount = row.NorwegianCount;
@@ -2360,32 +2399,32 @@ namespace Allberg.Shooter.Common
                 competition.OneClass = row.OneClass;
                 competitions.Add(competition);
             }
-            return (Structs.Competition[])competitions.ToArray(competition.GetType());
+
+            return competitions.ToArray();
         }
+
         internal Structs.Patrol[] getPatrols()
         {
             Trace.WriteLine("CDatabase: Entering getPatrols()");
 
-            ArrayList patrols = new ArrayList();
-            Structs.Patrol patrol = new Structs.Patrol();
+            var patrols = new List<Structs.Patrol>();
+            DateTime compStart = this.GetCompetitions()[0].StartTime;
 
-            DateTime compStart = getCompetitions()[0].StartTime;
             foreach(DatabaseDataset.PatrolsRow row in Database.Patrols.Select(string.Empty, "PatrolId"))
             {
-                patrol = new Structs.Patrol();
+                var patrol = new Structs.Patrol();
                 patrol.CompetitionId = row.CompetitionId;
                 patrol.PatrolId = row.PatrolId;
                 patrol.StartDateTime = compStart.AddMinutes(row.StartDateTime);
                 patrol.PClass = (Structs.PatrolClass)row.PClass;
-                if (row.StartDateTimeDisplay > -1054800000)
-                    patrol.StartDateTimeDisplay = compStart.AddMinutes(row.StartDateTimeDisplay);
-                else
-                    patrol.StartDateTimeDisplay = patrol.StartDateTime;
+                patrol.StartDateTimeDisplay = row.StartDateTimeDisplay > -1054800000 
+                    ? compStart.AddMinutes(row.StartDateTimeDisplay) 
+                    : patrol.StartDateTime;
                 patrol.LockedForAutomatic = row.Automatic;
                 patrols.Add(patrol);
             }
 
-            return (Structs.Patrol[])patrols.ToArray(patrol.GetType());
+            return patrols.ToArray();
         }
         internal Structs.Patrol[] getPatrols(
             Structs.PatrolClass patrolClass, 
@@ -2402,15 +2441,14 @@ namespace Allberg.Shooter.Common
                 select += " or PClass=" + 
                     ((int)Structs.PatrolClass.Okänd).ToString();
 
-            ArrayList patrols = new ArrayList();
-            Structs.Patrol patrol = new Structs.Patrol();
-            
-            Structs.Competition competition = getCompetitions()[0];
+            var patrols = new List<Structs.Patrol>();
+
+            Structs.Competition competition = this.GetCompetitions()[0];
             DateTime compStart = competition.StartTime;
-            foreach(DatabaseDataset.PatrolsRow row in Database.Patrols.Select(
+            foreach (DatabaseDataset.PatrolsRow row in Database.Patrols.Select(
                 select, "PatrolId"))
             {
-                patrol = new Structs.Patrol();
+                var patrol = new Structs.Patrol();
                 patrol.CompetitionId = row.CompetitionId;
                 patrol.PatrolId = row.PatrolId;
                 patrol.StartDateTime = compStart.AddMinutes(row.StartDateTime);
@@ -2429,7 +2467,7 @@ namespace Allberg.Shooter.Common
                     patrols.Add(patrol);
                 }
             }
-            return (Structs.Patrol[])patrols.ToArray(patrol.GetType());
+            return patrols.ToArray();
         }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Globalization", "CA1303:DoNotPassLiteralsAsLocalizedParameters", MessageId = "Allberg.Shooter.Common.CannotFindIdException.#ctor(System.String)")]
         internal Structs.Patrol getPatrol(int id)
@@ -2439,11 +2477,11 @@ namespace Allberg.Shooter.Common
 
             Structs.Patrol patrol = new Structs.Patrol();
 
-            if (getCompetitions().Length == 0)
+            if (this.GetCompetitions().Length == 0)
                 throw new CannotFindIdException("Cannot find patrol with Id " + 
                     id.ToString());
 
-            DateTime compStart = getCompetitions()[0].StartTime;
+            DateTime compStart = this.GetCompetitions()[0].StartTime;
             foreach(DatabaseDataset.PatrolsRow row in 
                 Database.Patrols.Select("PatrolId=" + id.ToString()))
             {
@@ -2468,18 +2506,15 @@ namespace Allberg.Shooter.Common
         {
             Trace.WriteLine("CDatabase: Entering getCompetitorResults()");
 
-            ArrayList compresults = new ArrayList();
-            Structs.CompetitorResult compresult =
-                new Structs.CompetitorResult();
+            var compresults = new List<Structs.CompetitorResult>();
 
-            foreach(DatabaseDataset.CompetitorResultsRow row in
-                Database.CompetitorResults)
+            foreach (DatabaseDataset.CompetitorResultsRow row in
+                this.Database.CompetitorResults)
             {
                 DatabaseDataset.StationsRow stationsRow = 
-                    (DatabaseDataset.StationsRow)Database.Stations.Select("StationId=" + row.StationId.ToString())[0];
+                    (DatabaseDataset.StationsRow)this.Database.Stations.Select("StationId=" + row.StationId.ToString())[0];
 
-                compresult =
-                    new Structs.CompetitorResult();
+                var compresult = new Structs.CompetitorResult();
                 compresult.CompetitorId = row.CompetitorId;
                 compresult.Hits = row.Hits;
                 compresult.ResultId = row.ResultId;
@@ -2489,25 +2524,26 @@ namespace Allberg.Shooter.Common
                 compresult.StationFigureHits = row.StationFigureHits;
                 compresults.Add(compresult);
             }
-            return (Structs.CompetitorResult[])compresults.ToArray(compresult.GetType());
+
+            return compresults.ToArray();
         }
         internal Structs.CompetitorResult[] getCompetitorResults(int competitorsId)
         {
             Trace.WriteLine("CDatabase: Entering getCompetitorResults(" + 
                 competitorsId.ToString() + ")");
 
-            ArrayList compresults = new ArrayList();
-            Structs.CompetitorResult compresult =
+            var compresults = new List<Structs.CompetitorResult>();
+            var compresult =
                 new Structs.CompetitorResult();
 
-            foreach(DatabaseDataset.CompetitorResultsRow row in
-                Database.CompetitorResults.Select(
+            foreach (DatabaseDataset.CompetitorResultsRow row in
+                this.Database.CompetitorResults.Select(
                 "CompetitorId=" + competitorsId.ToString()))
             {
                 if (row.CompetitorId == competitorsId)
                 {
                     DatabaseDataset.StationsRow stationsRow = 
-                        (DatabaseDataset.StationsRow)Database.Stations.Select("StationId=" + row.StationId.ToString())[0];
+                        (DatabaseDataset.StationsRow)this.Database.Stations.Select("StationId=" + row.StationId)[0];
 
                     compresult.CompetitorId = row.CompetitorId;
                     compresult.Hits = row.Hits;
@@ -2519,7 +2555,7 @@ namespace Allberg.Shooter.Common
                     compresults.Add(compresult);
                 }
             }
-            return (Structs.CompetitorResult[])compresults.ToArray(compresult.GetType());
+            return compresults.ToArray();
         }
         internal Structs.CompetitorResult getCompetitorResult(int competitorsId, int stationNr)
         {
@@ -2602,10 +2638,10 @@ namespace Allberg.Shooter.Common
             else
             {
                 Structs.Station stn = new Structs.Station();
-                stn.CompetitionId = getCompetitions()[0].CompetitionId;
+                stn.CompetitionId = this.GetCompetitions()[0].CompetitionId;
                 stn.StationNr = 1;
                 stn.Points = false;
-                switch (getCompetitions()[0].Type)
+                switch (this.GetCompetitions()[0].Type)
                 {
                     case Structs.CompetitionTypeEnum.Field:
                         stn.Figures = 6;
@@ -2621,7 +2657,7 @@ namespace Allberg.Shooter.Common
                         break;
                     default:
                         throw new NotImplementedException(
-                            getCompetitions()[0].Type.ToString() +
+                            this.GetCompetitions()[0].Type.ToString() +
                             " is not implemented");
                 }
                 
@@ -2660,53 +2696,64 @@ namespace Allberg.Shooter.Common
         {
             Trace.WriteLine("CDatabase: Entering getTeams()");
 
-            ArrayList list = new ArrayList();
-            foreach(DatabaseDataset.TeamsRow row in
-                Database.Teams)
+            var list = new List<Structs.Team>();
+            foreach (DatabaseDataset.TeamsRow row in
+                this.Database.Teams)
             {
-                Structs.Team team = new Structs.Team();
-                team.CompetitorIds = new ArrayList();
+                var team = new Structs.Team();
+                team.CompetitorIds = new List<int>();
 
                 team.ClubId = row.ClubId;
                 team.Name = row.Name;
                 if (!row.IsCompetitorId1Null())
+                {
                     team.CompetitorIds.Add(row.CompetitorId1);
+                }
 
                 if (!row.IsCompetitorId2Null())
+                {
                     team.CompetitorIds.Add(row.CompetitorId2);
+                }
 
                 if (!row.IsCompetitorId3Null())
+                {
                     team.CompetitorIds.Add(row.CompetitorId3);
+                }
 
                 if (!row.IsCompetitorId4Null())
+                {
                     team.CompetitorIds.Add(row.CompetitorId4);
+                }
 
                 if (!row.IsCompetitorId5Null())
+                {
                     team.CompetitorIds.Add(row.CompetitorId5);
+                }
 
                 team.TeamId = row.TeamId;
                 team.WClass = (Structs.ResultWeaponsClass)row.WClass;
                 list.Add(team);
             }
-            return (Structs.Team[])list.ToArray(typeof(Structs.Team));
+            return list.ToArray();
         }
 
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Globalization", "CA1303:DoNotPassLiteralsAsLocalizedParameters", MessageId = "Allberg.Shooter.Common.CannotFindIdException.#ctor(System.String)")]
-        internal Structs.Team getTeam(int teamId)
+        internal Structs.Team GetTeam(int teamId)
         {
             Trace.WriteLine("CDatabase: Entering getStation(" + 
-                teamId.ToString() + ")");
+                teamId + ")");
 
-            foreach(DatabaseDataset.TeamsRow row in
-                Database.Teams.Select("TeamId=" + teamId))
+            foreach (DatabaseDataset.TeamsRow row in this.Database.Teams.Select("TeamId=" + teamId))
             {
                 Structs.Team team = new Structs.Team();
                 team.ClubId = row.ClubId;
                 team.Name = row.Name;
 
                 if (team.CompetitorIds == null)
-                    team.CompetitorIds = new ArrayList();
+                {
+                    team.CompetitorIds = new List<int>();
+                }
 
                 if (!row.IsCompetitorId1Null())
                     team.CompetitorIds.Add( row.CompetitorId1);
@@ -3379,7 +3426,7 @@ namespace Allberg.Shooter.Common
             Trace.WriteLine("CDatabase: Entering updatePatrol(" + 
                 patrol.ToString() + ", " + updateGui.ToString() + ")");
 
-            DateTime compStart = getCompetitions()[0].StartTime;
+            DateTime compStart = this.GetCompetitions()[0].StartTime;
 
             bool found = false;
             foreach(DatabaseDataset.PatrolsRow row in 
@@ -3812,7 +3859,7 @@ namespace Allberg.Shooter.Common
             Trace.WriteLine("CDatabase newPatrol: StartDateTime = " +
                 patrol.StartDateTime.ToString());
 
-            DateTime compStart = getCompetitions()[0].StartTime;
+            DateTime compStart = this.GetCompetitions()[0].StartTime;
             DatabaseDataset.PatrolsRow row =
                 Database.Patrols.NewPatrolsRow();
 

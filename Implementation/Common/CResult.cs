@@ -773,13 +773,13 @@ namespace Allberg.Shooter.Common
 
         internal Structs.ResultWeaponsClass[] ResultsGetWClasses()
         {
-            database = myInterface.databaseClass.Database;
+            this.database = this.myInterface.databaseClass.Database;
 
-            ArrayList list = new ArrayList();
-            for(int i=1;i<=Structs.ResultWeaponsClassMax;i++)
+            List<Structs.ResultWeaponsClass> list = new List<Structs.ResultWeaponsClass>();
+
+            for (int i = 1; i <= Structs.ResultWeaponsClassMax; i++)
             {
-                Structs.ResultWeaponsClass thisClass =
-                    (Structs.ResultWeaponsClass)i;
+                Structs.ResultWeaponsClass thisClass = (Structs.ResultWeaponsClass)i;
 
                 try
                 {
@@ -788,12 +788,14 @@ namespace Allberg.Shooter.Common
                 catch(Exception)
                 {
                     // thisClass is a string, which means it is a valid class
-                    if (myInterface.GetCompetitorResultsExist(thisClass))
+                    if (this.myInterface.GetCompetitorResultsExist(thisClass))
+                    {
                         list.Add(thisClass);
+                    }
                 }
             }
 
-            return (Structs.ResultWeaponsClass[])list.ToArray(typeof(Structs.ResultWeaponsClass));
+            return list.ToArray();
         }
 
         internal Structs.ShootersClass[] ResultsGetUClasses(

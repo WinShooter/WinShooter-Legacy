@@ -819,14 +819,14 @@ namespace Allberg.Shooter.Common
                 html.Append("<td colspan=2>" + result.HitsPerStn.Replace(";", " ") + "</td>");
                 html.Append("</tr>\r\n");
 
-                Structs.Team team = myInterface.GetTeam( result.TeamId );
+                Structs.Team team = this.myInterface.GetTeam( result.TeamId );
 
-                foreach (int compId in (int[])team.CompetitorIds.ToArray(typeof(int)))
+                foreach (var compId in team.CompetitorIds.ToArray())
                 {
-                    Structs.Competitor comp = myInterface.GetCompetitor(compId);
+                    Structs.Competitor comp = this.myInterface.GetCompetitor(compId);
                     html.Append("<tr><td colspan=2></td>");
-                    html.Append("<td>" + GetNameForCompetitor(comp) + "</td>");
-                    html.Append("<td>" + GetResultForCompetitor(comp) + "</td>");
+                    html.Append("<td>" + this.GetNameForCompetitor(comp) + "</td>");
+                    html.Append("<td>" + this.GetResultForCompetitor(comp) + "</td>");
                     html.Append("</tr>\r\n");
                 }
             }
@@ -836,7 +836,7 @@ namespace Allberg.Shooter.Common
 
         private string GetNameForCompetitor(Structs.Competitor comp)
         {
-            Structs.Shooter shooter = myInterface.GetShooter(comp.ShooterId);
+            Structs.Shooter shooter = this.myInterface.GetShooter(comp.ShooterId);
             return shooter.Surname + " " + shooter.Givenname;
         }
         private string GetResultForCompetitor(Structs.Competitor comp)

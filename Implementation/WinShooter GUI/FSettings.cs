@@ -25,6 +25,7 @@ namespace Allberg.Shooter.Windows
 {
     using System;
     using System.Collections;
+    using System.Collections.Generic;
     using System.Diagnostics;
     using System.Drawing;
     using System.Threading;
@@ -1024,14 +1025,14 @@ namespace Allberg.Shooter.Windows
         #region Labels
         private void displayLabelsSettings(ISettings settings)
         {
-            ArrayList labelUsage = new ArrayList();
+            var labelUsage = new List<string>();
             labelUsage.Add("Speglar");
             labelUsage.Add("Resultat");
 
             ddLabelUsage.DataSource = labelUsage;
             ddLabelUsage.SelectedIndex = 0;
 
-            ArrayList labelTypes = new ArrayList();
+            List<PrintLabelDocument.PrintLabelDocumentTypeEnum> labelTypes = new List<PrintLabelDocument.PrintLabelDocumentTypeEnum>();
             labelTypes.Add(PrintLabelDocument.PrintLabelDocumentTypeEnum.Avery6150);
             labelTypes.Add(PrintLabelDocument.PrintLabelDocumentTypeEnum.Anpassad);
             ddLabelType.DataSource = labelTypes;
