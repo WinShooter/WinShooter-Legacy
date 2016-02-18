@@ -42,8 +42,10 @@ namespace Allberg.Shooter.Common
     [CLSCompliant(false)]
     public class Interface : IWinshooterServer, IDisposable
     {
+        readonly CSettings settings = CSettings.Instance;
+
         /// <summary>
-        /// Initiate the class
+        /// Initializes a new instance of the <see cref="Interface"/> class.
         /// </summary>
         public Interface()
         {
@@ -59,13 +61,11 @@ namespace Allberg.Shooter.Common
             fileImportClass = new CFileImport(this);
             internetXmlExportClass = new CInternetXmlExport(this);
             internetTextExportClass = new CInternetTextExport(this);
-
-            
         }
 
         public void Dispose()
         {
-            Dispose(true);
+            this.Dispose(true);
             GC.SuppressFinalize(this); 
         }
 
@@ -73,18 +73,18 @@ namespace Allberg.Shooter.Common
         {
             if (disposing)
             {
-                if (serverInterface != null)
+                if (this.serverInterface != null)
                 {
                     Trace.WriteLine("Disposing server connection");
-                    serverInterface.UpdatedClub -= MethodInvokerUpdatedClub;
-                    serverInterface.UpdatedCompetition -= MethodInvokerUpdatedCompetition;
-                    serverInterface.UpdatedCompetitor -= MethodInvokerUpdatedCompetitor;
-                    serverInterface.UpdatedCompetitorResult -= MethodInvokerUpdatedCompetitorResult;
-                    serverInterface.UpdatedPatrol -= MethodInvokerUpdatedPatrol;
-                    serverInterface.UpdatedShooter -= MethodInvokerUpdatedShooter;
-                    serverInterface.UpdatedStation -= MethodInvokerUpdatedStation;
-                    serverInterface.UpdatedWeapon -= MethodInvokerUpdatedWeapon;
-                    serverInterface.UpdatedTeam -= MethodInvokerUpdatedTeam;
+                    this.serverInterface.UpdatedClub -= this.MethodInvokerUpdatedClub;
+                    this.serverInterface.UpdatedCompetition -= this.MethodInvokerUpdatedCompetition;
+                    this.serverInterface.UpdatedCompetitor -= this.MethodInvokerUpdatedCompetitor;
+                    this.serverInterface.UpdatedCompetitorResult -= this.MethodInvokerUpdatedCompetitorResult;
+                    this.serverInterface.UpdatedPatrol -= this.MethodInvokerUpdatedPatrol;
+                    this.serverInterface.UpdatedShooter -= this.MethodInvokerUpdatedShooter;
+                    this.serverInterface.UpdatedStation -= this.MethodInvokerUpdatedStation;
+                    this.serverInterface.UpdatedWeapon -= this.MethodInvokerUpdatedWeapon;
+                    this.serverInterface.UpdatedTeam -= this.MethodInvokerUpdatedTeam;
                 }
             }
         }
@@ -95,23 +95,25 @@ namespace Allberg.Shooter.Common
         private const string minimumServerVersionString = "1.6.0";
 
         /// <summary>
-        /// Determines if Internet Database should be enabled.
+        /// Gets or sets a value indicating whether Internet Database should be enabled.
         /// </summary>
         public bool EnableInternetConnections
         {
             get
             {
-                if (serverInterface != null)
-                    return serverInterface.EnableInternetConnections;
-                else
-                    return enableInternetConnections;
+                return this.serverInterface != null ? this.serverInterface.EnableInternetConnections : this.enableInternetConnections;
             }
+
             set
             {
-                if (serverInterface != null)
-                    serverInterface.EnableInternetConnections = value;
+                if (this.serverInterface != null)
+                {
+                    this.serverInterface.EnableInternetConnections = value;
+                }
                 else
-                    enableInternetConnections = value;
+                {
+                    this.enableInternetConnections = value;
+                }
             }
         }
 
@@ -123,33 +125,34 @@ namespace Allberg.Shooter.Common
         {
             get
             {
-                return CompetitionCurrent.PatrolConnectionType;
+                return this.CompetitionCurrent.PatrolConnectionType;
             }
             set
             {
-                Structs.Competition comp = CompetitionCurrent;
+                Structs.Competition comp = this.CompetitionCurrent;
                 comp.PatrolConnectionType = value;
-                UpdateCompetition(comp);
+                this.UpdateCompetition(comp);
             }
         }
 
-        CSettings settings = CSettings.Instance;
-        public Allberg.Shooter.WinShooterServerRemoting.ISettings Settings
+        public ISettings Settings
         {
             get
             {
-                return settings;
+                return this.settings;
             }
+
             set
             {
-                settings.Update(value);
+                this.settings.Update(value);
             }
         }
+
         public string CurrentFilename
         {
             get
             {
-                return currentFile;
+                return this.currentFile;
             }
         }
 
@@ -2193,7 +2196,6 @@ namespace Allberg.Shooter.Common
         }
         #endregion
 
-        
         #region Converters
         /// <summary>
         /// Converts WeaponsClass to PatrolClass
@@ -2907,8 +2909,7 @@ namespace Allberg.Shooter.Common
         }
         #endregion
 
-        #region Client Methods
-        Allberg.Shooter.WinShooterServerRemoting.IWinshooterServer serverInterface = null;
+        private IWinshooterServer serverInterface = null;
         /// <summary>
         /// Connects to a WinShooter Server
         /// </summary>
@@ -2918,22 +2919,27 @@ namespace Allberg.Shooter.Common
             int serverPort = 90;
             if (servername.Contains(":"))
             {
-                string port = servername.Substring(servername.IndexOf(":")+1);
+                var port = servername.Substring(servername.IndexOf(":") + 1);
                 serverPort = int.Parse(port);
                 servername = servername.Substring(0, servername.IndexOf(":"));
             }
+
             HttpChannel clientchan = null;
-            foreach(IChannel channel in ChannelServices.RegisteredChannels)
+            foreach (var channel in ChannelServices.RegisteredChannels)
             {
                 if (channel.ChannelName == "WinShooterClientChan")
+                {
                     clientchan = (HttpChannel)channel;
+                }
             }
+
             if (clientchan == null)
             {
-                ListDictionary channelProperties = new ListDictionary();
-
-                channelProperties.Add("port", 0);
-                channelProperties.Add("name", "WinShooterClientChan");
+                var channelProperties = new ListDictionary
+                {
+                    { "port", 0 },
+                    { "name", "WinShooterClientChan" }
+                };
 
                 clientchan = new HttpChannel(
                     channelProperties, 
@@ -2942,19 +2948,20 @@ namespace Allberg.Shooter.Common
 
                 ChannelServices.RegisterChannel(clientchan, false);
             }
-            serverInterface = 
-                (Allberg.Shooter.WinShooterServerRemoting.IWinshooterServer)
+
+            this.serverInterface = 
+                (IWinshooterServer)
                 Activator.GetObject(
-                typeof(Allberg.Shooter.WinShooterServerRemoting.IWinshooterServer), 
-                "http://" + servername + ":" + serverPort.ToString() + "/WinShooterServer");
+                typeof(IWinshooterServer), 
+                "http://" + servername + ":" + serverPort + "/WinShooterServer");
 
             // Check versions
-            System.Version version = serverInterface.Sync(
+            var version = this.serverInterface.Sync(
                 System.Reflection.Assembly.GetExecutingAssembly().GetName().Version);
             if (version < new Version(minimumServerVersionString))
             {
                 throw new ApplicationException("Servern har version " + 
-                    version.ToString() + " vilket är för lågt för att denna " + 
+                    version + " vilket är för lågt för att denna " + 
                     "klient ska kunna köra mot den. Uppdatera servern med " + 
                     "den senaste programvaran.");
             }
@@ -2974,31 +2981,31 @@ namespace Allberg.Shooter.Common
             callback.SyncronizeEvent                += new MethodInvoker(this.SyncClient);
 
             MethodInvokerUpdatedClub                = new MethodInvoker(callback.UpdatedClub);
-            serverInterface.UpdatedClub             += MethodInvokerUpdatedClub;
+            serverInterface.UpdatedClub             += this.MethodInvokerUpdatedClub;
 
             MethodInvokerUpdatedCompetition         = new MethodInvoker(callback.UpdatedCompetition);
-            serverInterface.UpdatedCompetition      += MethodInvokerUpdatedCompetition;
+            serverInterface.UpdatedCompetition      += this.MethodInvokerUpdatedCompetition;
 
             MethodInvokerUpdatedCompetitor          = new MethodInvoker(callback.UpdatedCompetitor);
-            serverInterface.UpdatedCompetitor       += MethodInvokerUpdatedCompetitor;
+            serverInterface.UpdatedCompetitor       += this.MethodInvokerUpdatedCompetitor;
 
             MethodInvokerUpdatedCompetitorResult    = new MethodInvoker(callback.UpdatedCompetitorResult);
-            serverInterface.UpdatedCompetitorResult += MethodInvokerUpdatedCompetitorResult;
+            serverInterface.UpdatedCompetitorResult += this.MethodInvokerUpdatedCompetitorResult;
 
             MethodInvokerUpdatedPatrol              = new MethodInvoker(callback.UpdatedPatrol);
-            serverInterface.UpdatedPatrol           += MethodInvokerUpdatedPatrol;
+            serverInterface.UpdatedPatrol           += this.MethodInvokerUpdatedPatrol;
 
             MethodInvokerUpdatedShooter             = new MethodInvoker(callback.UpdatedShooter);
-            serverInterface.UpdatedShooter          += MethodInvokerUpdatedShooter;
+            serverInterface.UpdatedShooter          += this.MethodInvokerUpdatedShooter;
 
             MethodInvokerUpdatedStation             = new MethodInvoker(callback.UpdatedStation);
-            serverInterface.UpdatedStation          += MethodInvokerUpdatedStation;
+            serverInterface.UpdatedStation          += this.MethodInvokerUpdatedStation;
 
             MethodInvokerUpdatedWeapon              = new MethodInvoker(callback.UpdatedWeapon);
-            serverInterface.UpdatedWeapon           += MethodInvokerUpdatedWeapon;
+            serverInterface.UpdatedWeapon           += this.MethodInvokerUpdatedWeapon;
 
             MethodInvokerUpdatedTeam                = new MethodInvoker(callback.UpdatedTeam);
-            serverInterface.UpdatedTeam             += MethodInvokerUpdatedTeam;
+            serverInterface.UpdatedTeam             += this.MethodInvokerUpdatedTeam;
 
             serverInterface.SyncronizeEvent         += new MethodInvoker(callback.Syncronize);
 
@@ -3021,19 +3028,26 @@ namespace Allberg.Shooter.Common
         /// </summary>
         public void Sync()
         {
-            if (serverInterface != null)
-                serverInterface.Sync();
+            if (this.serverInterface != null)
+            {
+                this.serverInterface.Sync();
+            }
         }
+
+        /// <summary>
+        /// Sync client.
+        /// </summary>
         public void SyncClient()
         {
             Trace.WriteLine("Sync Callback...");
         }
+
         /// <summary>
         /// Syncs a version. This is not implemented in common, only on serverside
         /// </summary>
         /// <param name="version"></param>
         /// <returns></returns>
-        public System.Version Sync(System.Version version)
+        public Version Sync(Version version)
         {
             throw new ApplicationException("Not implemented in common");
         }
@@ -3044,12 +3058,12 @@ namespace Allberg.Shooter.Common
         /// <param name="filename"></param>
         public void Backup(string filename)
         {
-            if (serverInterface != null)
+            if (this.serverInterface != null)
+            {
                 throw new ApplicationException("Not supported while connected to server");
-            else
-                databaseClass.Backup(filename);
-        }
-        #endregion
+            }
 
+            this.databaseClass.Backup(filename);
+        }
     }
 }

@@ -82,11 +82,11 @@ namespace Allberg.Shooter.Common
                     useNorwegianCount = competition.NorwegianCount;
 
                     // Ok, now lets count the real ones
-                    DSResults results = getAllTeams(wclass);
-                    results = sortTeams(results);
+                    DSResults results = this.GetAllTeams(wclass);
+                    results = this.SortTeams(results);
 
                     ResultsReturnTeam[] toReturn = 
-                        convertIntoArray(results);
+                        ConvertIntoArray(results);
 
                     return toReturn;
                 }
@@ -104,23 +104,24 @@ namespace Allberg.Shooter.Common
         }
 
 
-        private DSResults getAllTeams(Structs.ResultWeaponsClass wclass)
+        private DSResults GetAllTeams(Structs.ResultWeaponsClass wclass)
         {
             DSResults results = new DSResults();
 
             // Add columns for each station (used later for sorting)
-            int stationCount = myInterface.GetStationsCount();
-            for(int stationNr=1;stationNr<=stationCount;stationNr++)
+            int stationCount = this.myInterface.GetStationsCount();
+            for (int stationNr = 1; stationNr <= stationCount; stationNr++)
             {
-                results.TeamResults.Columns.Add("Station" + stationNr.ToString(), typeof(int));
+                results.TeamResults.Columns.Add("Station" + stationNr, typeof(int));
             }
-            if (myInterface.CompetitionCurrent.Type == Structs.CompetitionTypeEnum.Precision)
+
+            if (this.myInterface.CompetitionCurrent.Type == Structs.CompetitionTypeEnum.Precision)
             {
-                for(int stationNr=myInterface.GetStationsCount();stationNr>=1;stationNr--)
+                for (int stationNr = this.myInterface.GetStationsCount(); stationNr >= 1; stationNr--)
                 {
-                    for(int i=10; i>0; i--)
+                    for (var i = 10; i > 0; i--)
                     {
-                        results.TeamResults.Columns.Add("Station" + stationNr.ToString() + "-" + i.ToString(), typeof(int));
+                        results.TeamResults.Columns.Add("Station" + stationNr + "-" + i, typeof(int));
                     }
                 }
             }
@@ -194,7 +195,7 @@ namespace Allberg.Shooter.Common
                             {
                                 foreach(string strn in compresrow.StationFigureHits.Split(';'))
                                 {
-                                    if (strn != "" && int.Parse(strn) != 0)
+                                    if (strn != string.Empty && int.Parse(strn) != 0)
                                     {
                                         string columnName = "Station" + stationsRow.StationNr.ToString() + "-" +
                                             strn;
@@ -211,13 +212,13 @@ namespace Allberg.Shooter.Common
 
                     int totFigureHits = 0;
                     int totHits = 0;
-                    string stnHits = "";
+                    string stnHits = string.Empty;
                     DSResults.TeamResultsRow newTeamRow = 
                         results.TeamResults.NewTeamResultsRow();
 
                     if (myInterface.GetCompetitions()[0].Type == Structs.CompetitionTypeEnum.Precision)
                     {
-                        for(int stationNr=myInterface.GetStationsCount();stationNr>=1;stationNr--)
+                        for (int stationNr = myInterface.GetStationsCount(); stationNr >= 1; stationNr--)
                         {
                             for(int i=10; i>0; i--)
                             {
@@ -226,41 +227,46 @@ namespace Allberg.Shooter.Common
                         }
                     }
 
-                    for(int stationNr=1;stationNr<=stationCount;stationNr++)
+                    for (int stationNr = 1; stationNr <= stationCount; stationNr++)
                     {
                         int hitsThisStn = 0;
                         int figureHitsThisStn = 0;
                         if (teamHits.ContainsKey(stationNr))
+                        {
                             hitsThisStn =(int)teamHits[stationNr];
+                        }
                         if (teamFigureHits.ContainsKey(stationNr))
+                        {
                             figureHitsThisStn = (int)teamFigureHits[stationNr];
+                        }
 
                         totHits += hitsThisStn;
                         totFigureHits += figureHitsThisStn;
-                        switch(CompetitionType)
+                        switch (this.CompetitionType)
                         {
                             case Structs.CompetitionTypeEnum.Field:
                             {
                                 if (this.useNorwegianCount)
                                 {
-                                    stnHits += (hitsThisStn + figureHitsThisStn).ToString() + ";";
-                                    newTeamRow["Station" + stationNr.ToString()] = hitsThisStn + figureHitsThisStn;
+                                    stnHits += (hitsThisStn + figureHitsThisStn) + ";";
+                                    newTeamRow["Station" + stationNr] = hitsThisStn + figureHitsThisStn;
                                 }
                                 else
                                 {
-                                    stnHits += hitsThisStn.ToString() + "/" + figureHitsThisStn.ToString() + ";";
-                                    newTeamRow["Station" + stationNr.ToString()] = hitsThisStn;
+                                    stnHits += hitsThisStn + "/" + figureHitsThisStn + ";";
+                                    newTeamRow["Station" + stationNr] = hitsThisStn;
                                 }
+
                                 break;
                             }
+
                             case Structs.CompetitionTypeEnum.Precision:
                             {
-                                stnHits += hitsThisStn.ToString() + ";";
-                                newTeamRow["Station" + stationNr.ToString()] = hitsThisStn;
-                                for(int i=10;i>=1;i--)
+                                stnHits += hitsThisStn + ";";
+                                newTeamRow["Station" + stationNr] = hitsThisStn;
+                                for (var i = 10; i >= 1; i--)
                                 {
-                                    string columnName = "Station" + stationNr.ToString() + "-" +
-                                        i.ToString();
+                                    var columnName = "Station" + stationNr + "-" + i;
                                     if (teamCountNrOfTens.ContainsKey(columnName))
                                     {
                                         newTeamRow[columnName] = (int)teamCountNrOfTens[columnName];
@@ -270,10 +276,12 @@ namespace Allberg.Shooter.Common
                                         newTeamRow[columnName] = 0;
                                     }
                                 }
+
                                 break;
                             }
                         }
                     }
+
                     newTeamRow.ClubId = teamrow.ClubId;
                     newTeamRow.FigureHits = totFigureHits;
                     newTeamRow.Hits = totHits;
@@ -285,14 +293,15 @@ namespace Allberg.Shooter.Common
                     results.TeamResults.AddTeamResultsRow(newTeamRow);
                 }
             }
+
             return results;
         }
 
-        private DSResults sortTeams(DSResults results)
+        private DSResults SortTeams(DSResults results)
         {
-            string sortExpression = "";
-            int StationsCount = myInterface.GetStationsCount();
-            switch(CompetitionType)
+            string sortExpression;
+            var stationsCount = myInterface.GetStationsCount();
+            switch (this.CompetitionType)
             {
                 case Structs.CompetitionTypeEnum.Field:
                     {
@@ -301,42 +310,45 @@ namespace Allberg.Shooter.Common
                             // Poängfäljtskjutning
                             sortExpression = "NorwPoints desc, Points desc, ";
                             // Add columns for each station
-                            for (int stationNr = StationsCount; stationNr >= 1; stationNr--)
+                            for (int stationNr = stationsCount; stationNr >= 1; stationNr--)
                             {
-                                sortExpression += "Station" + stationNr.ToString() + " desc, ";
+                                sortExpression += "Station" + stationNr + " desc, ";
                             }
                         }
                         else
                         {
                             // Fältskjutning
                             sortExpression = "Hits desc, FigureHits desc, Points desc, ";
-                            for (int stationNr = StationsCount; stationNr >= 1; stationNr--)
+                            for (var stationNr = stationsCount; stationNr >= 1; stationNr--)
                             {
-                                sortExpression += "Station" + stationNr.ToString() + " desc, ";
+                                sortExpression += "Station" + stationNr + " desc, ";
                             }
 
                         }
+
                         break;
                     }
+
                 case Structs.CompetitionTypeEnum.MagnumField:
                     {
                         if (this.useNorwegianCount)
                         {
                             // Poängfältskjutning
                             sortExpression = "NorwPoints desc, Points desc, ";
+
                             // Add columns for each station
-                            for (int stationNr = StationsCount; stationNr >= 1; stationNr--)
+                            for (int stationNr = stationsCount; stationNr >= 1; stationNr--)
                             {
-                                sortExpression += "Station" + stationNr.ToString() + " desc, ";
+                                sortExpression += "Station" + stationNr + " desc, ";
                             }
                         }
                         else
                         {
                             // Fältskjutning
                             sortExpression = "Hits desc, FigureHits desc, Points desc, ";
-                            for (int stationNr = StationsCount; stationNr >= 1; stationNr--)
+                            for (int stationNr = stationsCount; stationNr >= 1; stationNr--)
                             {
-                                sortExpression += "Station" + stationNr.ToString() + " desc, ";
+                                sortExpression += "Station" + stationNr + " desc, ";
                             }
 
                         }
@@ -345,35 +357,38 @@ namespace Allberg.Shooter.Common
                 case Structs.CompetitionTypeEnum.Precision:
                 {
                     sortExpression = "Hits desc, ";
-                    for(int stationNr=StationsCount;stationNr>=1;stationNr--)
+                    for (int stationNr = stationsCount; stationNr >= 1; stationNr--)
                     {
-                        sortExpression += "Station" + stationNr.ToString() + " desc, ";
+                        sortExpression += "Station" + stationNr + " desc, ";
                     }
-                    for(int stationNr=StationsCount;stationNr>=1;stationNr--)
+
+                    for (int stationNr = stationsCount; stationNr >= 1; stationNr--)
                     {
-                        for(int i=10;i>=1;i--)
+                        for (int i = 10; i >= 1; i--)
                         {
-                            sortExpression += "Station" + stationNr.ToString() + "-" + i.ToString() + " desc, ";
+                            sortExpression += "Station" + stationNr + "-" + i + " desc, ";
                         }
                     }
                     break;
                 }
                 default:
-                    throw new NotImplementedException(CompetitionType.ToString());
+                    {
+                        throw new NotImplementedException(this.CompetitionType.ToString());
+                    }
             }
+
             sortExpression = sortExpression.Trim();
-            if (sortExpression.Substring(sortExpression.Length-1, 1) == ",")
+            if (sortExpression.Substring(sortExpression.Length - 1, 1) == ",")
             {
-                sortExpression = sortExpression.Substring(0,sortExpression.Length-1);
+                sortExpression = sortExpression.Substring(0, sortExpression.Length - 1);
             }
 
-            DataRow[] dataRows = results.TeamResults.Select("", sortExpression);
+            var dataRows = results.TeamResults.Select(string.Empty, sortExpression);
 
-            DSResults newResults = new DSResults();
-            foreach(DataRow row in dataRows)
+            var newResults = new DSResults();
+            foreach (var row in dataRows)
             {
-                DSResults.TeamResultsRow newRow =
-                    newResults.TeamResults.NewTeamResultsRow();
+                var newRow = newResults.TeamResults.NewTeamResultsRow();
 
                 newRow.ClubId = (string)row["ClubId"];
                 newRow.TeamId = (int)row["TeamId"];
@@ -386,27 +401,30 @@ namespace Allberg.Shooter.Common
 
                 newResults.TeamResults.AddTeamResultsRow(newRow);
             }
+
             return newResults;
         }
 
-        private ResultsReturnTeam[] convertIntoArray(DSResults results)
+        private static ResultsReturnTeam[] ConvertIntoArray(DSResults results)
         {
-            ResultsReturnTeam[] returnArray =
-                new ResultsReturnTeam[results.TeamResults.Count];
-            int i = 0;
-            foreach(DSResults.TeamResultsRow row in results.TeamResults)
+            var returnArray = new List<ResultsReturnTeam>();
+            
+            foreach (DSResults.TeamResultsRow row in results.TeamResults)
             {
-                returnArray[i] = new ResultsReturnTeam();
-                returnArray[i].ClubId = row.ClubId;
-                returnArray[i].TeamId = row.TeamId;
-                returnArray[i].Hits = row.Hits;
-                returnArray[i].Points = row.Points;
-                returnArray[i].TeamName = row.TeamName;
-                returnArray[i].FigureHits = row.FigureHits;
-                returnArray[i].HitsPerStn = row.HitsPerStn;
-                i++;
+                var result = new ResultsReturnTeam
+                {
+                    ClubId = row.ClubId,
+                    TeamId = row.TeamId,
+                    Hits = row.Hits,
+                    Points = row.Points,
+                    TeamName = row.TeamName,
+                    FigureHits = row.FigureHits,
+                    HitsPerStn = row.HitsPerStn
+                };
+                returnArray.Add(result);
             }
-            return returnArray;
+
+            return returnArray.ToArray();
         }
 
     }
