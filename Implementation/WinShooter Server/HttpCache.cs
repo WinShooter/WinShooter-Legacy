@@ -58,7 +58,7 @@ namespace Allberg.Shooter.WinShooterServer
         /// <returns>
         /// The <see cref="HttpCache"/>.
         /// </returns>
-        static public HttpCache GetInstance()
+        public static HttpCache GetInstance()
         {
             lock (Locker)
             {

@@ -260,17 +260,20 @@ namespace Allberg.Shooter.WinShooterServer
             props["port"] = this.ServerPort;
             props["name"] = "ServerChannel";
             HttpChannel chan = new HttpChannel(props, clientSinkProvider, serverSinkProvider);
-            string name = chan.ChannelName;
             ChannelServices.RegisterChannel(chan, false);
 
 
-            if (System.IO.File.Exists(configFile))
-                RemotingConfiguration.Configure(configFile, false);
+            if (File.Exists(this.configFile))
+            {
+                RemotingConfiguration.Configure(this.configFile, false);
+            }
             else
-                MessageBox.Show("Missing config file:\r\n" + configFile);
+            {
+                MessageBox.Show("Missing config file:\r\n" + this.configFile);
+            }
 
             RemotingConfiguration.RegisterWellKnownServiceType(
-                typeof(Allberg.Shooter.WinShooterServer.ClientInterface),
+                typeof(ClientInterface),
                 "WinShooterServer",
                 WellKnownObjectMode.Singleton);
         }
@@ -280,19 +283,19 @@ namespace Allberg.Shooter.WinShooterServer
             // Connect to server and open file
             Trace.WriteLine("FMain: Starting local client.");
 
-            HttpChannel clientchan = new HttpChannel(0);
+            var clientchan = new HttpChannel(0);
             ChannelServices.RegisterChannel(clientchan, false);
-            myInterface = (Allberg.Shooter.WinShooterServer.ClientInterface)
+            this.myInterface = (ClientInterface)
                 Activator.GetObject(
-                typeof(Allberg.Shooter.WinShooterServer.ClientInterface),
-                "http://localhost:" + ServerPort.ToString() + "/WinShooterServer");
+                typeof(ClientInterface),
+                "http://localhost:" + this.ServerPort + "/WinShooterServer");
 
             // Open database
             Trace.WriteLine("FMain: using local client to open file: \"" +
                 this.openFileDialog1.FileName + "\"");
 
-            myInterface.OpenAccessDatabase(this.openFileDialog1.FileName);
-            myInterface.OpenDatabase();
+            this.myInterface.OpenAccessDatabase(this.openFileDialog1.FileName);
+            this.myInterface.OpenDatabase();
             this.txtFilename.Text = this.openFileDialog1.FileName;
 
             Trace.WriteLine("FMain: displaying server address.");
@@ -300,51 +303,52 @@ namespace Allberg.Shooter.WinShooterServer
             // Display server address
             IPHostEntry serverHost =
                 Dns.GetHostEntry(Dns.GetHostName());
-            string addresses = "";
-            foreach (IPAddress address in serverHost.AddressList)
+            string addresses = string.Empty;
+            foreach (var address in serverHost.AddressList)
             {
                 if (address.AddressFamily == System.Net.Sockets.AddressFamily.InterNetwork)
                 {
                     if (addresses.Length > 0)
+                    {
                         addresses += ", ";
+                    }
 
                     addresses += address.ToString();
                 }
             }
             Trace.WriteLine("FMain: Serveraddresses: " + addresses);
-            this.BeginInvoke(FMainSetServerAddressInvoker, new object[] { addresses });
+            this.BeginInvoke(this.FMainSetServerAddressInvoker, addresses);
 
             // fixup timers
             Trace.WriteLine("FMain: ServerStartup: Disabling/Enabling timers from thread \"" +
-                System.Threading.Thread.CurrentThread.Name + "\" " +
-                " ( " + Thread.CurrentThread.ManagedThreadId.ToString() + " ) " +
+                Thread.CurrentThread.Name + "\" " +
+                " ( " + Thread.CurrentThread.ManagedThreadId + " ) " +
                 DateTime.Now.ToLongTimeString());
 
-            this.BeginInvoke(StartupTimersInvoker);
+            this.BeginInvoke(this.StartupTimersInvoker);
         }
 
         private void ServerStartupUdpListener()
         {
             // Start up UDP responder
-            udpProcessor = new UdpProcessor(myInterface.GetCompetitions()[0].Name, ServerPort);
-            UdpThread = new Thread(new ThreadStart(udpProcessor.Start));
-            UdpThread.IsBackground = true;
-            UdpThread.Start();
+            this.udpProcessor = new UdpProcessor(this.myInterface.GetCompetitions()[0].Name, this.ServerPort);
+            this.UdpThread = new Thread(this.udpProcessor.Start) { IsBackground = true };
+            this.UdpThread.Start();
         }
 
-        UdpProcessor udpProcessor;
-        Thread UdpThread;
+        private UdpProcessor udpProcessor;
+        private Thread UdpThread;
 
         private void StartUpTimers()
         {
             Trace.WriteLine("FMain: StartUpTimers started from thread \"" + 
-                System.Threading.Thread.CurrentThread.Name + "\" " +
-                " ( " + Thread.CurrentThread.ManagedThreadId.ToString() + " ) " +
+                Thread.CurrentThread.Name + "\" " +
+                " ( " + Thread.CurrentThread.ManagedThreadId + " ) " +
                 DateTime.Now.ToLongTimeString());
 
-            timerClientsUpdate.Enabled = true;
-            timerKeepConnection.Enabled = true;
-            timerClientsUpdate.Enabled = true;
+            this.timerClientsUpdate.Enabled = true;
+            this.timerKeepConnection.Enabled = true;
+            this.timerClientsUpdate.Enabled = true;
 
             Trace.WriteLine("FMain: StartUpTimers ended.");
         }
@@ -353,22 +357,21 @@ namespace Allberg.Shooter.WinShooterServer
         {
             Trace.WriteLine("FMain: FMainSetServerAddress started from thread \"" + 
                 System.Threading.Thread.CurrentThread.Name + "\" " +
-                " ( " + Thread.CurrentThread.ManagedThreadId.ToString() + " ) " +
+                " ( " + Thread.CurrentThread.ManagedThreadId + " ) " +
                 DateTime.Now.ToLongTimeString());
             this.txtServerAddress.Text = addresses;
             Trace.WriteLine("FMain: FMainSetServerAddress ended");
         }
 
 
-        Allberg.Shooter.WinShooterServer.ClientInterface myInterface;
+        ClientInterface myInterface;
 
         private string configFile
         {
             get
             {
-                string filename = "";
-                System.Reflection.Assembly ass = System.Reflection.Assembly.GetExecutingAssembly();
-                filename = System.IO.Path.GetDirectoryName(ass.Location) + "\\Server.config";
+                var ass = Assembly.GetExecutingAssembly();
+                var filename = Path.GetDirectoryName(ass.Location) + "\\Server.config";
                 
                 return filename;
             }
@@ -377,9 +380,9 @@ namespace Allberg.Shooter.WinShooterServer
         internal bool UnhandledExceptionOccurred = false;
         void FMain_FormClosing(object sender, FormClosingEventArgs e)
         {
-            if (UnhandledExceptionOccurred)
+            if (this.UnhandledExceptionOccurred)
             {
-                Visible = false;
+                this.Visible = false;
                 return;
             }
 
@@ -501,22 +504,22 @@ namespace Allberg.Shooter.WinShooterServer
             // dataGridTextBoxIPAddress
             // 
             this.dataGridTextBoxIPAddress.Alignment = System.Windows.Forms.HorizontalAlignment.Center;
-            this.dataGridTextBoxIPAddress.Format = "";
+            this.dataGridTextBoxIPAddress.Format = string.Empty;
             this.dataGridTextBoxIPAddress.FormatInfo = null;
             this.dataGridTextBoxIPAddress.HeaderText = "Klient";
             this.dataGridTextBoxIPAddress.MappingName = "IPAddress";
-            this.dataGridTextBoxIPAddress.NullText = "";
+            this.dataGridTextBoxIPAddress.NullText = string.Empty;
             this.dataGridTextBoxIPAddress.ReadOnly = true;
             this.dataGridTextBoxIPAddress.Width = 125;
             // 
             // dataGridTextBoxLastUpdate
             // 
             this.dataGridTextBoxLastUpdate.Alignment = System.Windows.Forms.HorizontalAlignment.Center;
-            this.dataGridTextBoxLastUpdate.Format = "";
+            this.dataGridTextBoxLastUpdate.Format = string.Empty;
             this.dataGridTextBoxLastUpdate.FormatInfo = null;
             this.dataGridTextBoxLastUpdate.HeaderText = "Senast anslutning";
             this.dataGridTextBoxLastUpdate.MappingName = "LastUpdate";
-            this.dataGridTextBoxLastUpdate.NullText = "";
+            this.dataGridTextBoxLastUpdate.NullText = string.Empty;
             this.dataGridTextBoxLastUpdate.ReadOnly = true;
             this.dataGridTextBoxLastUpdate.Width = 150;
             // 
@@ -765,7 +768,7 @@ namespace Allberg.Shooter.WinShooterServer
         }
 
         #region EvaluationCode
-        internal string AssemblyVersion = "";
+        internal string AssemblyVersion = string.Empty;
         private void getAssemblyVersion()
         {
             AssemblyVersion = getAssemblyVersion(4);
