@@ -162,28 +162,30 @@ namespace Allberg.Shooter.Common
                             (DatabaseDataset.CompetitorsRow)this.database.Competitors.Select("CompetitorId=" + teamrow.CompetitorId5)[0]);
                     }
 
-                    Hashtable teamHits = new Hashtable();
-                    Hashtable teamFigureHits = new Hashtable();
-                    Hashtable teamCountNrOfTens = new Hashtable();
+                    var teamHits = new Dictionary<int, int>();
+                    var teamFigureHits = new Dictionary<int, int>();
+                    var teamCountNrOfTens = new Dictionary<string, int>();
 
                     int totPoints = 0;
-                    foreach(DatabaseDataset.CompetitorsRow compsRow in
-                        comps.ToArray())
+                    foreach (var compsRow in comps)
                     {
-                        foreach(DatabaseDataset.CompetitorResultsRow compresrow in
-                            (DatabaseDataset.CompetitorResultsRow[])
+                        foreach (var compresrow in (DatabaseDataset.CompetitorResultsRow[])
                             compsRow.GetChildRows("CompetitorsCompetitorResults"))
                         {
-                            DatabaseDataset.StationsRow stationsRow =
-                                (DatabaseDataset.StationsRow)database.Stations.Select("StationId=" + compresrow.StationId.ToString())[0];
+                            var stationsRow =
+                                (DatabaseDataset.StationsRow)this.database.Stations.Select("StationId=" + compresrow.StationId.ToString())[0];
                             
                             int teamHitsThisStn = 0;
                             if (teamHits.ContainsKey(stationsRow.StationNr))
-                                teamHitsThisStn = (int)teamHits[stationsRow.StationNr];
+                            {
+                                teamHitsThisStn = teamHits[stationsRow.StationNr];
+                            }
 
-                            int teamFigureHitsThisStn = 0;
+                            var teamFigureHitsThisStn = 0;
                             if (teamFigureHits.ContainsKey(stationsRow.StationNr))
-                                teamFigureHitsThisStn = (int)teamFigureHits[stationsRow.StationNr];
+                            {
+                                teamFigureHitsThisStn = teamFigureHits[stationsRow.StationNr];
+                            }
 
                             teamHitsThisStn += compresrow.Hits;
                             teamFigureHitsThisStn += compresrow.FigureHits;
@@ -191,17 +193,20 @@ namespace Allberg.Shooter.Common
 
                             teamHits[stationsRow.StationNr] = teamHitsThisStn;
                             teamFigureHits[stationsRow.StationNr] = teamFigureHitsThisStn;
-                            if (CompetitionType == Structs.CompetitionTypeEnum.Precision)
+                            if (this.CompetitionType == Structs.CompetitionTypeEnum.Precision)
                             {
-                                foreach(string strn in compresrow.StationFigureHits.Split(';'))
+                                foreach (var strn in compresrow.StationFigureHits.Split(';'))
                                 {
                                     if (strn != string.Empty && int.Parse(strn) != 0)
                                     {
-                                        string columnName = "Station" + stationsRow.StationNr.ToString() + "-" +
+                                        var columnName = "Station" + stationsRow.StationNr + "-" +
                                             strn;
                                         int thisValue = 0;
                                         if (teamCountNrOfTens.ContainsKey(columnName))
-                                            thisValue = (int)teamCountNrOfTens[columnName];
+                                        {
+                                            thisValue = teamCountNrOfTens[columnName];
+                                        }
+
                                         thisValue++;
                                         teamCountNrOfTens[columnName] = thisValue;
                                     }
@@ -213,16 +218,15 @@ namespace Allberg.Shooter.Common
                     int totFigureHits = 0;
                     int totHits = 0;
                     string stnHits = string.Empty;
-                    DSResults.TeamResultsRow newTeamRow = 
-                        results.TeamResults.NewTeamResultsRow();
+                    DSResults.TeamResultsRow newTeamRow = results.TeamResults.NewTeamResultsRow();
 
-                    if (myInterface.GetCompetitions()[0].Type == Structs.CompetitionTypeEnum.Precision)
+                    if (this.myInterface.GetCompetitions()[0].Type == Structs.CompetitionTypeEnum.Precision)
                     {
-                        for (int stationNr = myInterface.GetStationsCount(); stationNr >= 1; stationNr--)
+                        for (int stationNr = this.myInterface.GetStationsCount(); stationNr >= 1; stationNr--)
                         {
-                            for(int i=10; i>0; i--)
+                            for (var i = 10; i > 0; i--)
                             {
-                                newTeamRow["Station" + stationNr.ToString() + "-" + i.ToString()] = 0;
+                                newTeamRow["Station" + stationNr + "-" + i] = 0;
                             }
                         }
                     }
@@ -233,7 +237,7 @@ namespace Allberg.Shooter.Common
                         int figureHitsThisStn = 0;
                         if (teamHits.ContainsKey(stationNr))
                         {
-                            hitsThisStn =(int)teamHits[stationNr];
+                            hitsThisStn = (int)teamHits[stationNr];
                         }
                         if (teamFigureHits.ContainsKey(stationNr))
                         {

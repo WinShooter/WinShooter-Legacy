@@ -1176,7 +1176,7 @@ namespace Allberg.Shooter.Common
                     throw new ApplicationException(
                         "Database not initialized when trying to fetch Results");
 
-                return databaseClass.getCompetitorResultsCount();
+                return databaseClass.GetCompetitorResultsCount();
             }
         }
         /// <summary>
@@ -1197,7 +1197,7 @@ namespace Allberg.Shooter.Common
                     throw new ApplicationException(
                         "Database not initialized when trying to fetch Results");
 
-                return databaseClass.getCompetitorResultsCount(wclass, uclass);
+                return databaseClass.GetCompetitorResultsCount(wclass, uclass);
             }
         }
         /// <summary>
@@ -1219,7 +1219,7 @@ namespace Allberg.Shooter.Common
                     throw new ApplicationException(
                         "Database not initialized when trying to fetch Results");
 
-                return databaseClass.getCompetitorResultsCount(wclass, uclass, clubId);
+                return databaseClass.GetCompetitorResultsCount(wclass, uclass, clubId);
             }
         }
         /// <summary>
@@ -1238,7 +1238,7 @@ namespace Allberg.Shooter.Common
                     throw new ApplicationException(
                         "Database not initialized when trying to fetch Results");
 
-                return databaseClass.getCompetitorResultsExist(wclass);
+                return databaseClass.GetCompetitorResultsExist(wclass);
             }
         }
         /// <summary>
@@ -1259,7 +1259,7 @@ namespace Allberg.Shooter.Common
                     throw new ApplicationException(
                         "Database not initialized when trying to fetch Results");
 
-                return databaseClass.getCompetitorResultsExist(wclass, uclass);
+                return databaseClass.GetCompetitorResultsExist(wclass, uclass);
             }
         }
         /// <summary>

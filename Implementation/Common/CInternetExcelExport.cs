@@ -25,6 +25,7 @@ namespace Allberg.Shooter.Common
 {
     using System;
     using System.Collections;
+    using System.Collections.Generic;
     using System.Diagnostics;
     using System.Text;
     using Allberg.Shooter.WinShooterServerRemoting;
@@ -88,33 +89,30 @@ namespace Allberg.Shooter.Common
         {
             try
             {
-                Structs.CompetitionTypeEnum compType = myInterface.CompetitionCurrent.Type;
+                Structs.CompetitionTypeEnum compType = this.myInterface.CompetitionCurrent.Type;
 
                 StringBuilder toReturn = new StringBuilder();
-                if (compType == Structs.CompetitionTypeEnum.Precision)
-                {
-                    toReturn.Append("Plats\tNamn\tKlubb\tResultat\tTot\tStm\r\n");
-                }
-                else
-                {
-                    toReturn.Append("Plats\tNamn\tKlubb\tResultat\tTot\tPoäng\tStm\r\n");
-                }
+                toReturn.Append(
+                    compType == Structs.CompetitionTypeEnum.Precision
+                        ? "Plats\tNamn\tKlubb\tResultat\tTot\tStm\r\n"
+                        : "Plats\tNamn\tKlubb\tResultat\tTot\tPoäng\tStm\r\n");
 
-                bool norwegianCount = myInterface.CompetitionCurrent.NorwegianCount;
+                bool norwegianCount = this.myInterface.CompetitionCurrent.NorwegianCount;
 
-                Hashtable clubs = new Hashtable();
+                var clubs = new Dictionary<string, string>();
 
                 int place = 0;
-                foreach (ResultsReturn res in results)
+                foreach (var res in results)
                 {
                     place++;
-                    toReturn.Append(place.ToString() + "\t");
+                    toReturn.Append(place + "\t");
                     toReturn.Append(res.ShooterName + "\t");
-                    if (clubs[res.ClubId] == null)
+                    if (!clubs.ContainsKey(res.ClubId))
                     {
-                        clubs[res.ClubId] = myInterface.GetClub(res.ClubId).Name;
+                        clubs[res.ClubId] = this.myInterface.GetClub(res.ClubId).Name;
                     }
-                    toReturn.Append((string)clubs[res.ClubId] + "\t");
+
+                    toReturn.Append(clubs[res.ClubId] + "\t");
 
                     switch (compType)
                     {
@@ -126,12 +124,12 @@ namespace Allberg.Shooter.Common
                                     toReturn.Append(stnRes + " ");
                                 }
 
-                                toReturn.Append("\t" + (res.HitsTotal + res.FigureHitsTotal).ToString() + "\t");
+                                toReturn.Append("\t" + (res.HitsTotal + res.FigureHitsTotal) + "\t");
                             }
                             else
                             {
                                 toReturn.Append("\"" + res.HitsPerStnString.Replace(';', ' ') + "\"\t");
-                                toReturn.Append("\" " + res.HitsTotal.ToString() + "/" + res.FigureHitsTotal.ToString() + "\"\t");
+                                toReturn.Append("\" " + res.HitsTotal + "/" + res.FigureHitsTotal + "\"\t");
                             }
                             break;
                         case Structs.CompetitionTypeEnum.MagnumField:

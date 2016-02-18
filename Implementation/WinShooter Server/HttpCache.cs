@@ -31,61 +31,92 @@ namespace Allberg.Shooter.WinShooterServer
     /// </summary>
     public class HttpCache
     {
+        /// <summary>
+        /// The locker.
+        /// </summary>
+        private static readonly object Locker = new object();
+
+        /// <summary>
+        /// The the http cache.
+        /// </summary>
+        private static HttpCache theHttpCache;
+
+        private readonly Hashtable pageTimes = Hashtable.Synchronized(new Hashtable());
+        private readonly Hashtable pageContent = Hashtable.Synchronized(new Hashtable());
+        private readonly Hashtable pageContentType = Hashtable.Synchronized(new Hashtable());
+
+        /// <summary>
+        /// Prevents a default instance of the <see cref="HttpCache"/> class from being created.
+        /// </summary>
         private HttpCache()
         {
         }
 
-        static readonly object Locker = new object();
-        static HttpCache _theInstance;
+        /// <summary>
+        /// Get the current instance.
+        /// </summary>
+        /// <returns>
+        /// The <see cref="HttpCache"/>.
+        /// </returns>
         static public HttpCache GetInstance()
         {
-            lock(Locker)
+            lock (Locker)
             {
-                return _theInstance ?? (_theInstance = new HttpCache());
+                return theHttpCache ?? (theHttpCache = new HttpCache());
             }
         }
 
-        private readonly Hashtable _pageTimes = Hashtable.Synchronized(new Hashtable());
-        private readonly Hashtable _pageContent = Hashtable.Synchronized(new Hashtable());
-        private readonly Hashtable _pageContentType = Hashtable.Synchronized(new Hashtable());
-
         public bool IsInCache(string page, TimeSpan scavaging)
         {
-            if (!_pageTimes.ContainsKey(page))
+            if (!this.pageTimes.ContainsKey(page))
+            {
                 return false;
+            }
 
-            var last = (DateTime)_pageTimes[page];
+            var last = (DateTime)this.pageTimes[page];
             return last.Add(scavaging) > DateTime.Now;
         }
 
         public byte[] ReturnFromCache(string page)
         {
-            var bytes = (byte[])_pageContent[page];
+            var bytes = (byte[])this.pageContent[page];
             return bytes;
         }
 
         public string ReturnContentTypeFromCache(string page)
         {
-            var type = (string)_pageContentType[page];
+            var type = (string)this.pageContentType[page];
             return type;
         }
 
         public void AddToCache(string page, byte[] content, string type)
         {
-            if (_pageTimes.ContainsKey(page))
-                _pageTimes[page] = DateTime.Now;
+            if (this.pageTimes.ContainsKey(page))
+            {
+                this.pageTimes[page] = DateTime.Now;
+            }
             else
-                _pageTimes.Add(page, DateTime.Now);
+            {
+                this.pageTimes.Add(page, DateTime.Now);
+            }
 
-            if (_pageContent.ContainsKey(page))
-                _pageContent[page] = content;
+            if (this.pageContent.ContainsKey(page))
+            {
+                this.pageContent[page] = content;
+            }
             else
-                _pageContent.Add(page, content);
+            {
+                this.pageContent.Add(page, content);
+            }
 
-            if (_pageContentType.ContainsKey(page))
-                _pageContentType[page] = type;
+            if (this.pageContentType.ContainsKey(page))
+            {
+                this.pageContentType[page] = type;
+            }
             else
-                _pageContentType.Add(page, type);
+            {
+                this.pageContentType.Add(page, type);
+            }
         }
     }
 }

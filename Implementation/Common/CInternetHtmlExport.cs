@@ -25,6 +25,7 @@ namespace Allberg.Shooter.Common
 {
     using System;
     using System.Collections;
+    using System.Collections.Generic;
     using System.Text;
     using System.Web;
 
@@ -142,7 +143,7 @@ namespace Allberg.Shooter.Common
         }
         private string createPatrolHtmlCompetitor(Structs.Competitor comp)
         {
-            string tdclass = "";
+            string tdclass = string.Empty;
             if (comp.Lane%2 == 0)
                 tdclass = " class=\"resultevenline\" ";
             else
@@ -165,7 +166,7 @@ namespace Allberg.Shooter.Common
         }
         private string createPatrolHtmlEmpty(int lane)
         {
-            string tdclass = "";
+            string tdclass = string.Empty;
             if (lane%2 == 0)
                 tdclass = " class=\"resultevenline\" ";
             else
@@ -190,13 +191,13 @@ namespace Allberg.Shooter.Common
             StringBuilder html = new StringBuilder();
             html.Append(createHtmlHeader());
             html.Append(createCompetitionHeader());
-            DSInternetExport ds = getShootersForPatrolExportByClub();
+            DSInternetExport ds = this.GetShootersForPatrolExportByClub();
             ds.Locale = new System.Globalization.CultureInfo("sv");
 
-            string lastClubName = "";
+            string lastClubName = string.Empty;
             int clubPayed = 0;
             int line = 0;
-            foreach(System.Data.DataRow rowTemp in ds.PatrolsByClub.Select("", "ClubName, ShooterName, PatrolId"))
+            foreach(System.Data.DataRow rowTemp in ds.PatrolsByClub.Select(string.Empty, "ClubName, ShooterName, PatrolId"))
             {
                 DSInternetExport.PatrolsByClubRow row = (DSInternetExport.PatrolsByClubRow)rowTemp;
                 if (lastClubName != row.ClubName)
@@ -209,94 +210,101 @@ namespace Allberg.Shooter.Common
                 line++;
                 html.Append("<tr>");
                 html.Append("<td></td>");
-                html.Append("<td" + getCssClassLine(line) + ">" + row.ShooterName + "</td>");
-                html.Append("<td" + getCssClassLine(line) + ">" + row.ShooterClass + "</td>");
-                html.Append("<td" + getCssClassLine(line) + ">" + row.PatrolId.ToString() + "</td>");
-                html.Append("<td" + getCssClassLine(line) + ">" + row.Lane.ToString() + "</td>");
-                html.Append("<td" + getCssClassLine(line) + ">" + row.Start.ToShortTimeString() + "</td>");
-                html.Append("<td" + getCssClassLine(line) + ">" + row.Weapon + "</td>");
-                html.Append("<td" + getCssClassLine(line) + ">" + row.WeaponCaliber + "</td>");
+                html.Append("<td" + this.GetCssClassLine(line) + ">" + row.ShooterName + "</td>");
+                html.Append("<td" + this.GetCssClassLine(line) + ">" + row.ShooterClass + "</td>");
+                html.Append("<td" + this.GetCssClassLine(line) + ">" + row.PatrolId.ToString() + "</td>");
+                html.Append("<td" + this.GetCssClassLine(line) + ">" + row.Lane.ToString() + "</td>");
+                html.Append("<td" + this.GetCssClassLine(line) + ">" + row.Start.ToShortTimeString() + "</td>");
+                html.Append("<td" + this.GetCssClassLine(line) + ">" + row.Weapon + "</td>");
+                html.Append("<td" + this.GetCssClassLine(line) + ">" + row.WeaponCaliber + "</td>");
                 html.Append("</tr>");
             }
             html.Append(createHtmlFooter());
 
             return html.ToString();
         }
-        string getCssClassLine(int line)
+
+        string GetCssClassLine(int line)
         {
-            if (line%2 == 0)
-                return " class=\"resultevenline\" ";
-            else
-                return " class=\"resultoddline\" ";
+            return line % 2 == 0 ? " class=\"resultevenline\" " : " class=\"resultoddline\" ";
         }
-        DSInternetExport getShootersForPatrolExportByClub()
+
+        private DSInternetExport GetShootersForPatrolExportByClub()
         {
-            DSInternetExport toReturn = new DSInternetExport();
-            Hashtable shooters = new Hashtable();
-            Hashtable clubs = new Hashtable();
-            Hashtable weapons = new Hashtable();
-            foreach(Structs.Competitor comp in 
-                myInterface.GetCompetitors())
+            var toReturn = new DSInternetExport();
+
+            var shooters = new Dictionary<int, Structs.Shooter>();
+            var clubs = new Dictionary<string, Structs.Club>();
+            var weapons = new Dictionary<string, Structs.Weapon>();
+
+            foreach (var comp in this.myInterface.GetCompetitors())
             {
-                if (comp.PatrolId != -1 &
-                    comp.Lane != -1)
+                if (!(comp.PatrolId != -1 & comp.Lane != -1))
                 {
-                    DSInternetExport.PatrolsByClubRow newRow =
-                        toReturn.PatrolsByClub.NewPatrolsByClubRow();
-
-                    newRow.PatrolId = comp.PatrolId;
-                    newRow.Lane = comp.Lane;
-
-                    Structs.Shooter shooter;
-                    if (shooters.Contains(comp.ShooterId))
-                        shooter = (Structs.Shooter)shooters[comp.ShooterId];
-                    else
-                    {
-                        shooter = myInterface.GetShooter(comp.ShooterId);
-                        shooters.Add(comp.ShooterId, shooter);
-                    }
-
-                    newRow.ShooterName = shooter.Surname + " " + shooter.Givenname;
-                    newRow.Payed = shooter.Payed;
-
-                    Structs.Club club;
-                    if (clubs.Contains(shooter.ClubId))
-                        club = (Structs.Club)clubs[shooter.ClubId];
-                    else
-                    {
-                        club = myInterface.GetClub(shooter.ClubId);
-                        clubs.Add(shooter.ClubId, club);
-                    }
-
-                    newRow.ClubName = club.Name;
-                    newRow.ClubId = shooter.ClubId;
-
-                    Structs.Patrol patrol = myInterface.GetPatrol(comp.PatrolId);
-                    newRow.Start = patrol.StartDateTimeDisplay;
-
-                    Structs.Weapon weapon;
-                    if (weapons.Contains(comp.WeaponId))
-                        weapon = (Structs.Weapon)weapons[comp.WeaponId];
-                    else
-                    {
-                        weapon = myInterface.GetWeapon(comp.WeaponId);
-                        weapons.Add(comp.WeaponId, weapon);
-                    }
-                    newRow.Weapon = weapon.Manufacturer;
-                    newRow.WeaponCaliber = weapon.Caliber;
-
-                    Structs.ShootersClassShort shootershort = (Structs.ShootersClassShort)
-                        (int)comp.ShooterClass;
-                    newRow.ShooterClass = shootershort.ToString()
-                        .Replace("Klass", "")
-                        .Replace("Damklass", "D") +
-                        weapon.WClass.ToString()
-                        .Replace("1", "")
-                        .Replace("2", "")
-                        .Replace("3", "");
-
-                    toReturn.PatrolsByClub.AddPatrolsByClubRow(newRow);
+                    continue;
                 }
+
+                var newRow = toReturn.PatrolsByClub.NewPatrolsByClubRow();
+
+                newRow.PatrolId = comp.PatrolId;
+                newRow.Lane = comp.Lane;
+
+                Structs.Shooter shooter;
+                if (shooters.ContainsKey(comp.ShooterId))
+                {
+                    shooter = shooters[comp.ShooterId];
+                }
+                else
+                {
+                    shooter = this.myInterface.GetShooter(comp.ShooterId);
+                    shooters.Add(comp.ShooterId, shooter);
+                }
+
+                newRow.ShooterName = shooter.Surname + " " + shooter.Givenname;
+                newRow.Payed = shooter.Payed;
+
+                Structs.Club club;
+                if (clubs.ContainsKey(shooter.ClubId))
+                {
+                    club = clubs[shooter.ClubId];
+                }
+                else
+                {
+                    club = this.myInterface.GetClub(shooter.ClubId);
+                    clubs.Add(shooter.ClubId, club);
+                }
+
+                newRow.ClubName = club.Name;
+                newRow.ClubId = shooter.ClubId;
+
+                var patrol = this.myInterface.GetPatrol(comp.PatrolId);
+                newRow.Start = patrol.StartDateTimeDisplay;
+
+                Structs.Weapon weapon;
+                if (weapons.ContainsKey(comp.WeaponId))
+                {
+                    weapon = weapons[comp.WeaponId];
+                }
+                else
+                {
+                    weapon = this.myInterface.GetWeapon(comp.WeaponId);
+                    weapons.Add(comp.WeaponId, weapon);
+                }
+
+                newRow.Weapon = weapon.Manufacturer;
+                newRow.WeaponCaliber = weapon.Caliber;
+
+                Structs.ShootersClassShort shootershort = (Structs.ShootersClassShort)
+                                                          (int)comp.ShooterClass;
+                newRow.ShooterClass = shootershort.ToString()
+                                          .Replace("Klass", string.Empty)
+                                          .Replace("Damklass", "D") +
+                                      weapon.WClass.ToString()
+                                          .Replace("1", string.Empty)
+                                          .Replace("2", string.Empty)
+                                          .Replace("3", string.Empty);
+
+                toReturn.PatrolsByClub.AddPatrolsByClubRow(newRow);
             }
             return toReturn;
         }
@@ -319,7 +327,7 @@ namespace Allberg.Shooter.Common
         private string createClubFooter(string lastClubName, int clubPayed)
         {
             StringBuilder html = new StringBuilder();
-            if (lastClubName != "")
+            if (lastClubName != string.Empty)
             {
                 html.Append("<!--- club footer --->\r\n</table><p></p>\r\n");
             }
@@ -411,7 +419,7 @@ namespace Allberg.Shooter.Common
         }
         private string createHtmlCssScreen()
         {
-            string html = "";
+            string html = string.Empty;
             html += "<STYLE TYPE=\"text/css\" MEDIA=screen>	\r\n";
             html += "<!--									\r\n";
             html += "body									\r\n";
@@ -435,7 +443,7 @@ namespace Allberg.Shooter.Common
 
         private string createHtmlCssPrinter()
         {
-            string html = "";
+            string html = string.Empty;
             html += "<STYLE TYPE=\"text/css\" MEDIA=print>	\r\n";
             html += "<!--									\r\n";
             html += "body									\r\n";

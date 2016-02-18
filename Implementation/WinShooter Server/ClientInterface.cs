@@ -2681,14 +2681,15 @@ namespace Allberg.Shooter.WinShooterServer
         {
             try
             {
-                return clients;
+                return this.clients;
             }
-            catch(Exception exc)
+            catch (Exception exc)
             {
                 Trace.WriteLine(exc.ToString());
                 throw;
             }
         }
+
         public Version Sync(Version version)
         {
             Trace.WriteLine("ClientInterface: Sync(" + version + 

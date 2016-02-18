@@ -2941,237 +2941,252 @@ namespace Allberg.Shooter.Common
 
             return Database.Patrols.Count;
         }
-        internal int getCompetitorResultsCount()
+        internal int GetCompetitorResultsCount()
         {
-            Trace.WriteLine("CDatabase: Entering getCompetitorResultsCount()");
+            Trace.WriteLine("CDatabase: Entering GetCompetitorResultsCount()");
 
             return Database.CompetitorResults.Count;
         }
-        internal int getCompetitorResultsCount(Structs.ResultWeaponsClass wclass,
+        internal int GetCompetitorResultsCount(Structs.ResultWeaponsClass wclass,
             Structs.ShootersClass uclass)
         {
-            Trace.WriteLine("CDatabase: Entering getCompetitorResultsCount(" +
-                wclass.ToString() + ", " + uclass.ToString() + ") on thread \"" +
-                System.Threading.Thread.CurrentThread.Name + "\" ( " +
-                System.Threading.Thread.CurrentThread.ManagedThreadId.ToString() + " )");
+            Trace.WriteLine("CDatabase: Entering GetCompetitorResultsCount(" +
+                wclass + ", " + uclass + ") on thread \"" +
+                Thread.CurrentThread.Name + "\" ( " +
+                Thread.CurrentThread.ManagedThreadId + " )");
             DateTime start = DateTime.Now;
 
             int returnValue = 0;
             try
             {
-                Hashtable compsList = new Hashtable();
-                Hashtable weaponList = new Hashtable();
-                foreach(DatabaseDataset.CompetitorResultsRow row in
-                    Database.CompetitorResults)
+                var compsList = new Dictionary<int, Structs.Competitor>();
+                var weaponList = new Dictionary<string, Structs.Weapon>();
+                foreach (DatabaseDataset.CompetitorResultsRow row in this.Database.CompetitorResults)
                 {
                     Structs.Competitor comp;
                     if (compsList.ContainsKey(row.CompetitorId))
-                        comp = (Structs.Competitor)compsList[row.CompetitorId];
+                    {
+                        comp = compsList[row.CompetitorId];
+                    }
                     else
                     {
-                        comp = 
-                            MyInterface.GetCompetitor(row.CompetitorId);
+                        comp = this.MyInterface.GetCompetitor(row.CompetitorId);
                         compsList.Add(row.CompetitorId, comp);
                     }
+
                     Structs.Weapon weapon;
                     if (weaponList.ContainsKey(comp.WeaponId))
-                        weapon = (Structs.Weapon)weaponList[comp.WeaponId];
+                    {
+                        weapon = weaponList[comp.WeaponId];
+                    }
                     else
                     {
-                        weapon = MyInterface.GetWeapon(comp.WeaponId);
+                        weapon = this.MyInterface.GetWeapon(comp.WeaponId);
                         weaponList.Add(comp.WeaponId, weapon);
                     }
-                    if ( MyInterface.ConvertWeaponsClassToResultClass(
-                        weapon.WClass) == wclass)
-                    {
-                        // Weaponsclass is correct. Check Shooters class
-                        //Interface.Shooter shooter = 
-                        //	myInterface.GetShooter(comp.ShooterId);
 
+                    if (this.MyInterface.ConvertWeaponsClassToResultClass(weapon.WClass) == wclass)
+                    {
                         if (comp.ShooterClass == uclass)
+                        {
                             returnValue++;
+                        }
                     }
                 }
             }
-            catch(System.InvalidOperationException)
+            catch (InvalidOperationException)
             {
                 // this occurs when the collection changed during testing.
                 // try again
-                Trace.WriteLine("CDatabase: getCompetitorResultsCount failed due to changed collection. Retrying.");
-                return getCompetitorResultsCount(wclass, uclass);
+                Trace.WriteLine("CDatabase: GetCompetitorResultsCount failed due to changed collection. Retrying.");
+                return this.GetCompetitorResultsCount(wclass, uclass);
             }
 
-            TimeSpan span = DateTime.Now - start;
-            Trace.WriteLine("CDatabase: Leaving getCompetitorResultsCount() after " +
-                Common.Formatter.FormatTimeSpan(span) + "sec.");
+            var span = DateTime.Now - start;
+            Trace.WriteLine("CDatabase: Leaving GetCompetitorResultsCount() after " + Formatter.FormatTimeSpan(span) + "sec.");
             return returnValue;
         }
-        internal int getCompetitorResultsCount(Structs.ResultWeaponsClass wclass,
-            Structs.ShootersClass uclass, string clubId)
-        {
-            Trace.WriteLine("CDatabase: Entering getCompetitorResultsCount(" +
-                wclass.ToString() + ", " + uclass.ToString() + ") on thread \"" +
-                System.Threading.Thread.CurrentThread.Name + "\" ( " +
-                System.Threading.Thread.CurrentThread.ManagedThreadId.ToString() + " )");
 
-            int returnValue = 0;
+        internal int GetCompetitorResultsCount(
+            Structs.ResultWeaponsClass wclass,
+            Structs.ShootersClass uclass, 
+            string clubId)
+        {
+            Trace.WriteLine("CDatabase: Entering GetCompetitorResultsCount(" +
+                wclass + ", " + uclass + ") on thread \"" +
+                Thread.CurrentThread.Name + "\" ( " +
+                Thread.CurrentThread.ManagedThreadId + " )");
+
+            var returnValue = 0;
             try
             {
-                Hashtable compsList = new Hashtable();
-                Hashtable weaponList = new Hashtable();
-                foreach(DatabaseDataset.CompetitorResultsRow row in
-                    Database.CompetitorResults)
+                var compsList = new Dictionary<int, Structs.Competitor>();
+                var weaponList = new Dictionary<string, Structs.Weapon>();
+                foreach (DatabaseDataset.CompetitorResultsRow row in this.Database.CompetitorResults)
                 {
-                    //Structs.Shooter shooter = myInterface.GetShooter(row.CompetitorId);
-                    DatabaseDataset.CompetitorsRow compRow = 
-                        (DatabaseDataset.CompetitorsRow)row.GetParentRow("CompetitorsCompetitorResults");
-                    DatabaseDataset.ShootersRow shooterRow = 
-                        (DatabaseDataset.ShootersRow)compRow.GetParentRow("ShootersCompetitors");
+                    var compRow = (DatabaseDataset.CompetitorsRow)row.GetParentRow("CompetitorsCompetitorResults");
+                    var shooterRow = (DatabaseDataset.ShootersRow)compRow.GetParentRow("ShootersCompetitors");
 
-                    if (shooterRow.ClubId == clubId)
+                    if (shooterRow.ClubId != clubId)
                     {
-                        Structs.Competitor comp;
-                        if (compsList.ContainsKey(row.CompetitorId))
-                            comp = (Structs.Competitor)compsList[row.CompetitorId];
-                        else
-                        {
-                            comp = 
-                                MyInterface.GetCompetitor(row.CompetitorId);
-                            compsList.Add(row.CompetitorId, comp);
-                        }
-                        Structs.Weapon weapon;
-                        if (weaponList.ContainsKey(comp.WeaponId))
-                            weapon = (Structs.Weapon)weaponList[comp.WeaponId];
-                        else
-                        {
-                            weapon = MyInterface.GetWeapon(comp.WeaponId);
-                            weaponList.Add(comp.WeaponId, weapon);
-                        }
-                        if ( MyInterface.ConvertWeaponsClassToResultClass(
-                            weapon.WClass) == wclass)
-                        {
-                            // Weaponsclass is correct. Check Shooters class
-                            //Interface.Shooter shooter = 
-                            //	myInterface.GetShooter(comp.ShooterId);
+                        continue;
+                    }
 
-                            if (comp.ShooterClass == uclass)
-                                returnValue++;
-                        }
+                    Structs.Competitor comp;
+                    if (compsList.ContainsKey(row.CompetitorId))
+                    {
+                        comp = compsList[row.CompetitorId];
+                    }
+                    else
+                    {
+                        comp = this.MyInterface.GetCompetitor(row.CompetitorId);
+                        compsList.Add(row.CompetitorId, comp);
+                    }
+
+                    Structs.Weapon weapon;
+                    if (weaponList.ContainsKey(comp.WeaponId))
+                    {
+                        weapon = weaponList[comp.WeaponId];
+                    }
+                    else
+                    {
+                        weapon = this.MyInterface.GetWeapon(comp.WeaponId);
+                        weaponList.Add(comp.WeaponId, weapon);
+                    }
+
+                    if (this.MyInterface.ConvertWeaponsClassToResultClass(weapon.WClass) != wclass)
+                    {
+                        continue;
+                    }
+
+                    // Weaponsclass is correct. Check Shooters class
+                    if (comp.ShooterClass == uclass)
+                    {
+                        returnValue++;
                     }
                 }
             }
-            catch(System.InvalidOperationException)
+            catch (InvalidOperationException)
             {
                 // this occurs when the collection changed during testing.
                 // try again
-                Trace.WriteLine("CDatabase: getCompetitorResultsCount failed due to changed collection. Retrying.");
-                return getCompetitorResultsCount(wclass, uclass);
+                Trace.WriteLine("CDatabase: GetCompetitorResultsCount failed due to changed collection. Retrying.");
+                return this.GetCompetitorResultsCount(wclass, uclass);
             }
 
-            Trace.WriteLine("CDatabase: Leaving getCompetitorResultsCount()");
+            Trace.WriteLine("CDatabase: Leaving GetCompetitorResultsCount()");
             return returnValue;
         }
-        internal bool getCompetitorResultsExist(Structs.ResultWeaponsClass wclass)
+
+        internal bool GetCompetitorResultsExist(Structs.ResultWeaponsClass wclass)
         {
-            Trace.WriteLine("CDatabase: Entering getCompetitorResultsExist(" +
-                wclass.ToString() + ") on thread \"" +
-                System.Threading.Thread.CurrentThread.Name + "\" ( " +
-                System.Threading.Thread.CurrentThread.ManagedThreadId.ToString() + " ) ");
+            Trace.WriteLine("CDatabase: Entering GetCompetitorResultsExist(" +
+                wclass + ") on thread \"" +
+                Thread.CurrentThread.Name + "\" ( " +
+                Thread.CurrentThread.ManagedThreadId + " ) ");
 
             try
             {
-                Hashtable compsList = new Hashtable();
-                Hashtable weaponsList = new Hashtable();
-                foreach(DatabaseDataset.CompetitorResultsRow row in
-                    Database.CompetitorResults)
+                var compsList = new Dictionary<int, Structs.Competitor>();
+                var weaponsList = new Dictionary<string, Structs.Weapon>();
+                foreach (DatabaseDataset.CompetitorResultsRow row in this.Database.CompetitorResults)
                 {
                     Structs.Competitor comp;
                     if (compsList.ContainsKey(row.CompetitorId))
-                        comp = (Structs.Competitor)compsList[row.CompetitorId];
+                    {
+                        comp = compsList[row.CompetitorId];
+                    }
                     else
                     {
-                        comp = MyInterface.GetCompetitor(row.CompetitorId);
+                        comp = this.MyInterface.GetCompetitor(row.CompetitorId);
                         compsList.Add(row.CompetitorId, comp);
                     }
-                    Structs.Weapon weapon; 
+
+                    Structs.Weapon weapon;
                     if (weaponsList.ContainsKey(comp.WeaponId))
-                        weapon = (Structs.Weapon)weaponsList[comp.WeaponId];
+                    {
+                        weapon = weaponsList[comp.WeaponId];
+                    }
                     else
                     {
-                        weapon = MyInterface.GetWeapon(comp.WeaponId);
+                        weapon = this.MyInterface.GetWeapon(comp.WeaponId);
                         weaponsList.Add(comp.WeaponId, weapon);
                     }
-                    if ( MyInterface.ConvertWeaponsClassToResultClass(
-                        weapon.WClass) == wclass)
+
+                    if (this.MyInterface.ConvertWeaponsClassToResultClass(weapon.WClass) == wclass)
                     {
                         // Weaponsclass is correct. 
                         return true;
                     }
                 }
             }
-            catch(System.InvalidOperationException)
+            catch (InvalidOperationException)
             {
                 // this occurs when the collection changed during testing.
                 // try again
-                Trace.WriteLine("CDatabase: getCompetitorResultsCount failed to changed collection. Retrying.");
-                return getCompetitorResultsExist(wclass);
+                Trace.WriteLine("CDatabase: GetCompetitorResultsCount failed to changed collection. Retrying.");
+                return this.GetCompetitorResultsExist(wclass);
             }
 
-            Trace.WriteLine("CDatabase: Leaving getCompetitorResultsExist()");
+            Trace.WriteLine("CDatabase: Leaving GetCompetitorResultsExist()");
             return false;
         }
-        internal bool getCompetitorResultsExist(Structs.ResultWeaponsClass wclass,
+        internal bool GetCompetitorResultsExist(Structs.ResultWeaponsClass wclass,
             Structs.ShootersClass uclass)
         {
-            Trace.WriteLine("CDatabase: Entering getCompetitorResultsExist(" +
-                wclass.ToString() + ", " + uclass.ToString() + ") on thread \"" +
-                System.Threading.Thread.CurrentThread.Name + "\" ( " +
-                System.Threading.Thread.CurrentThread.ManagedThreadId.ToString() + " ) ");
+            Trace.WriteLine("CDatabase: Entering GetCompetitorResultsExist(" +
+                wclass + ", " + uclass + ") on thread \"" +
+                Thread.CurrentThread.Name + "\" ( " +
+                Thread.CurrentThread.ManagedThreadId + " ) ");
 
             try
             {
-                Hashtable compsList = new Hashtable();
-                Hashtable weaponsList = new Hashtable();
-                foreach(DatabaseDataset.CompetitorResultsRow row in
-                    Database.CompetitorResults)
+                var compsList = new Dictionary<int, Structs.Competitor>();
+                var weaponsList = new Dictionary<string, Structs.Weapon>();
+                foreach (DatabaseDataset.CompetitorResultsRow row in this.Database.CompetitorResults)
                 {
                     Structs.Competitor comp;
                     if (compsList.ContainsKey(row.CompetitorId))
-                        comp = (Structs.Competitor)compsList[row.CompetitorId];
+                    {
+                        comp = compsList[row.CompetitorId];
+                    }
                     else
                     {
-                        comp = MyInterface.GetCompetitor(row.CompetitorId);
+                        comp = this.MyInterface.GetCompetitor(row.CompetitorId);
                         compsList.Add(row.CompetitorId, comp);
                     }
+
                     Structs.Weapon weapon;
                     if (weaponsList.ContainsKey(comp.WeaponId))
-                        weapon = (Structs.Weapon)weaponsList[comp.WeaponId];
+                    {
+                        weapon = weaponsList[comp.WeaponId];
+                    }
                     else
                     {
-                        weapon = MyInterface.GetWeapon(comp.WeaponId);
+                        weapon = this.MyInterface.GetWeapon(comp.WeaponId);
                         weaponsList.Add(comp.WeaponId, weapon);
                     }
-                    if ( MyInterface.ConvertWeaponsClassToResultClass(
-                        weapon.WClass) == wclass)
-                    {
-                        // Weaponsclass is correct. Check Shooters class
-                        //Interface.Shooter shooter = 
-                        //	myInterface.GetShooter(comp.ShooterId);
 
-                        if (comp.ShooterClass == uclass)
-                            return true;
+                    if (this.MyInterface.ConvertWeaponsClassToResultClass(weapon.WClass) != wclass)
+                    {
+                        continue;
+                    }
+
+                    if (comp.ShooterClass == uclass)
+                    {
+                        return true;
                     }
                 }
             }
-            catch(System.InvalidOperationException)
+            catch (InvalidOperationException)
             {
                 // this occurs when the collection changed during testing.
                 // try again
-                Trace.WriteLine("CDatabase: getCompetitorResultsCount failed to changed collection. Retrying.");
-                return getCompetitorResultsExist(wclass, uclass);
+                Trace.WriteLine("CDatabase: GetCompetitorResultsCount failed to changed collection. Retrying.");
+                return this.GetCompetitorResultsExist(wclass, uclass);
             }
 
-            Trace.WriteLine("CDatabase: Leaving getCompetitorResultsExist()");
+            Trace.WriteLine("CDatabase: Leaving GetCompetitorResultsExist()");
             return false;
         }
         internal int getStationsCount()

@@ -244,12 +244,10 @@ namespace Allberg.Shooter.WinShooterServer
             this.Focus();
         }
 
-        
-
         private void ServerStartupRemoting()
         {
-            SoapClientFormatterSinkProvider clientSinkProvider = new SoapClientFormatterSinkProvider();
-            IDictionary props = new Hashtable();
+            var clientSinkProvider = new SoapClientFormatterSinkProvider();
+            var props = new Hashtable();
             props["typeFilterLevel"] = "Full";
 
             SoapServerFormatterSinkProvider serverSinkProvider =
@@ -259,7 +257,7 @@ namespace Allberg.Shooter.WinShooterServer
             serverSinkProvider.Next = clientIpSinkProvider;
 
 
-            props["port"] = ServerPort;
+            props["port"] = this.ServerPort;
             props["name"] = "ServerChannel";
             HttpChannel chan = new HttpChannel(props, clientSinkProvider, serverSinkProvider);
             string name = chan.ChannelName;

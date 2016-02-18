@@ -88,49 +88,57 @@ namespace Allberg.Shooter.Common
             if ( patrolId == -1 )
                 return -1;
 
-            int MaxCompetitorsInPatrol = myInterface.GetCompetitions()[0].PatrolSize;
+            int maxCompetitorsInPatrol = this.myInterface.GetCompetitions()[0].PatrolSize;
 
-            Hashtable hash = new Hashtable();
+            var lanes = new Dictionary<int, Structs.Competitor>();
 
-            Structs.Competitor[] competitors =
-                myInterface.GetCompetitors(myInterface.GetPatrol(patrolId));
+            var competitors = this.myInterface.GetCompetitors(this.myInterface.GetPatrol(patrolId));
 
-            foreach(Structs.Competitor competitor in competitors)
+            foreach (var competitor in competitors)
             {
-                if (!hash.ContainsKey(competitor.Lane))
-                    hash.Add(competitor.Lane, competitor);
+                if (!lanes.ContainsKey(competitor.Lane))
+                {
+                    lanes.Add(competitor.Lane, competitor);
+                }
             }
 
-            for (int lane=startlane+1;lane<=MaxCompetitorsInPatrol;lane++)
+            for (var lane = startlane + 1; lane <= maxCompetitorsInPatrol; lane++)
             {
-                if (!hash.ContainsKey(lane))
+                if (!lanes.ContainsKey(lane))
+                {
                     return lane;
-            }		
+                }
+            }
+
             throw new PatrolAlreadyFullException(patrolId);
         }
 
         internal int GetNextLaneUp(int patrolId, int startlane)
         {
-            if ( patrolId == -1 )
-                return -1;
-
-            int MaxCompetitorsInPatrol = myInterface.GetCompetitions()[0].PatrolSize;
-
-            Hashtable hash = new Hashtable();
-
-            Structs.Competitor[] competitors =
-                myInterface.GetCompetitors(myInterface.GetPatrol(patrolId));
-
-            foreach(Structs.Competitor competitor in competitors)
+            if (patrolId == -1)
             {
-                hash.Add(competitor.Lane, competitor);
+                return -1;
             }
 
-            for (int lane = startlane - 1; lane>0; lane--)
+            int maxCompetitorsInPatrol = this.myInterface.GetCompetitions()[0].PatrolSize;
+
+            var lanes = new Dictionary<int, Structs.Competitor>();
+
+            var competitors = this.myInterface.GetCompetitors(this.myInterface.GetPatrol(patrolId));
+
+            foreach (var competitor in competitors)
             {
-                if (!hash.ContainsKey(lane))
+                lanes.Add(competitor.Lane, competitor);
+            }
+
+            for (var lane = startlane - 1; lane > 0; lane--)
+            {
+                if (!lanes.ContainsKey(lane))
+                {
                     return lane;
-            }		
+                }
+            }
+
             throw new ApplicationException("There is no more room in this patrol");
         }
 
@@ -138,44 +146,45 @@ namespace Allberg.Shooter.Common
         internal void PatrolAddAutomaticCompetitors(bool CleanPatrols, bool preserveCompetitorOrder)
         {
             Trace.WriteLine("CPatrolManagement: PatrolAddAutomaticCompetitors(" +
-                CleanPatrols.ToString() + ") started on thread \"" +
+                CleanPatrols + ") started on thread \"" +
                 Thread.CurrentThread.Name + "\" ( " +
-                System.Threading.Thread.CurrentThread.ManagedThreadId.ToString() +
+                Thread.CurrentThread.ManagedThreadId +
                 " )");
 
-            database = myInterface.databaseClass.Database;
+            this.database = this.myInterface.databaseClass.Database;
 
             // First clean patrols if instructed
             if (CleanPatrols)
             {
-                cleanPatrols();
-                myInterface.updatedPatrol();
+                this.cleanPatrols();
+                this.myInterface.updatedPatrol();
             }
 
             // Check there is any competitors
-            if (this.database.Competitors
-                .Select("PatrolId is null").Length == 0)
+            if (this.database.Competitors.Select("PatrolId is null").Length == 0)
+            {
                 return;
+            }
 
-            this.myInterface.updatedPatrolAddAutomaticCompetitors(
-                0, 3*database.Shooters.Count);
-            
+            this.myInterface.updatedPatrolAddAutomaticCompetitors(0, 3 * this.database.Shooters.Count);
+
             // Create list
-            DSPatrolManagement dblist = createList();
+            DSPatrolManagement dblist = this.createList();
 
             // Sort list
-            dblist = sortList(dblist);
+            dblist = this.sortList(dblist);
 
             // Spread list evenly
-            spreadList(dblist, preserveCompetitorOrder);
+            this.spreadList(dblist, preserveCompetitorOrder);
 
             // Update interface
             this.myInterface.updatedPatrolAddAutomaticCompetitors(
-                3*database.Shooters.Count, 
-                3*database.Shooters.Count);
+                3 * this.database.Shooters.Count,
+                3 * this.database.Shooters.Count);
 
             Trace.WriteLine("CPatrolManagement: PatrolAddAutomaticCompetitors ended.");
         }
+
         internal bool CheckChangePatrolConnectionTypeIsPossible(
             Structs.Patrol patrol,
             Structs.PatrolConnectionTypeEnum newPatrolConnectionType)

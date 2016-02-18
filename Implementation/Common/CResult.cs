@@ -279,7 +279,7 @@ namespace Allberg.Shooter.Common
 
                     if (finalResults)
                     {
-                        results = markPriceMoney(results);
+                        results = this.MarkPriceMoney(results);
                     }
 
                     return results.ToArray();
@@ -558,22 +558,21 @@ namespace Allberg.Shooter.Common
             Structs.ShootersClass uclass, bool standardMedalsCalculation)
         {
             List<ResultsReturn> results = new List<ResultsReturn>();
-            Structs.Competition competition = myInterface.CompetitionCurrent;
+            Structs.Competition competition = this.myInterface.CompetitionCurrent;
 
-            Hashtable shooters = new Hashtable();
-            Hashtable weapons = new Hashtable();
+            var weapons = new Dictionary<string, Structs.Weapon>();
 
-            string selectString = "";
-            string standardClass = "ShooterClass=" + ((int)Structs.ShootersClass.Klass1).ToString() +
-                            " or ShooterClass=" + ((int)Structs.ShootersClass.Klass2).ToString() +
-                            " or ShooterClass=" + ((int)Structs.ShootersClass.Klass3).ToString() +
-                            " or ShooterClass=" + ((int)Structs.ShootersClass.Öppen).ToString();
-            string damClass = "ShooterClass=" + ((int)Structs.ShootersClass.Damklass1).ToString() +
-                            " or ShooterClass=" + ((int)Structs.ShootersClass.Damklass2).ToString() +
-                            " or ShooterClass=" + ((int)Structs.ShootersClass.Damklass3).ToString();
-            string extraClasses = "ShooterClass=" + ((int)Structs.ShootersClass.Juniorklass).ToString() +
-                            " or ShooterClass=" + ((int)Structs.ShootersClass.VeteranklassYngre).ToString() +
-                            " or ShooterClass=" + ((int)Structs.ShootersClass.VeteranklassÄldre).ToString();
+            string selectString;
+            string standardClass = "ShooterClass=" + ((int)Structs.ShootersClass.Klass1) +
+                            " or ShooterClass=" + ((int)Structs.ShootersClass.Klass2) +
+                            " or ShooterClass=" + ((int)Structs.ShootersClass.Klass3) +
+                            " or ShooterClass=" + ((int)Structs.ShootersClass.Öppen);
+            string damClass = "ShooterClass=" + ((int)Structs.ShootersClass.Damklass1) +
+                            " or ShooterClass=" + ((int)Structs.ShootersClass.Damklass2) +
+                            " or ShooterClass=" + ((int)Structs.ShootersClass.Damklass3);
+            string extraClasses = "ShooterClass=" + ((int)Structs.ShootersClass.Juniorklass) +
+                            " or ShooterClass=" + ((int)Structs.ShootersClass.VeteranklassYngre) +
+                            " or ShooterClass=" + ((int)Structs.ShootersClass.VeteranklassÄldre);
 
             if (standardMedalsCalculation)
             {
@@ -596,7 +595,7 @@ namespace Allberg.Shooter.Common
                             selectString = standardClass;
                             break;
                         case Structs.ShootersClass.Öppen:
-                            selectString = "ShooterClass=" + ((int)uclass).ToString();
+                            selectString = "ShooterClass=" + ((int)uclass);
                             break;
                         case Structs.ShootersClass.Damklass:
                             selectString = damClass;
@@ -611,21 +610,21 @@ namespace Allberg.Shooter.Common
                             selectString = damClass;
                             break;
                         case Structs.ShootersClass.Juniorklass:
-                            selectString = "ShooterClass=" + ((int)Structs.ShootersClass.Juniorklass).ToString();
+                            selectString = "ShooterClass=" + ((int)Structs.ShootersClass.Juniorklass);
                             break;
                         case Structs.ShootersClass.VeteranklassYngre:
-                            selectString = "ShooterClass=" + ((int)Structs.ShootersClass.VeteranklassYngre).ToString();
+                            selectString = "ShooterClass=" + ((int)Structs.ShootersClass.VeteranklassYngre);
                             break;
                         case Structs.ShootersClass.VeteranklassÄldre:
-                            selectString = "ShooterClass=" + ((int)Structs.ShootersClass.VeteranklassÄldre).ToString();
+                            selectString = "ShooterClass=" + ((int)Structs.ShootersClass.VeteranklassÄldre);
                             break;
                         default:
-                            throw new NotImplementedException("uclass: " + uclass.ToString());
+                            throw new NotImplementedException("uclass: " + uclass);
                     }
                 }
                 else
                 {
-                    selectString = ""; // Everyone in one calculation
+                    selectString = string.Empty; // Everyone in one calculation
                 }
             }
             else
@@ -640,68 +639,67 @@ namespace Allberg.Shooter.Common
                         selectString = standardClass;
                         break;
                     case Structs.ShootersClass.Okänd:
-                        selectString = "";
+                        selectString = string.Empty;
                         break;
                     default:
-                        selectString = "ShooterClass=" + ((int)uclass).ToString();
+                        selectString = "ShooterClass=" + ((int)uclass);
                         break;
                 }
             }
 
 
-            foreach (DatabaseDataset.CompetitorsRow row in database.Competitors.Select(selectString))
+            foreach (var dataRow in this.database.Competitors.Select(selectString))
             {
-                // What shootersclass is current user?
-#if DEBUG
-                Structs.ShootersClass currentUclass =
-                    (Structs.ShootersClass)row.ShooterClass; // TODO Remove
-#endif
+                var competitorsRow = (DatabaseDataset.CompetitorsRow)dataRow;
 
                 // Setup a cache for weapons.
                 Structs.Weapon weapon;
-                if (weapons.ContainsKey(row.WeaponId))
-                    weapon = (Structs.Weapon)weapons[row.WeaponId];
+                if (weapons.ContainsKey(competitorsRow.WeaponId))
+                {
+                    weapon = weapons[competitorsRow.WeaponId];
+                }
                 else
                 {
-                    weapon = myInterface.GetWeapon(row.WeaponId);
-                    weapons.Add(row.WeaponId, weapon);
+                    weapon = this.myInterface.GetWeapon(competitorsRow.WeaponId);
+                    weapons.Add(competitorsRow.WeaponId, weapon);
                 }
 
                 // For each competitor, find the result (competitorresults)
                 // and add together
-                /*if ( (myInterface.ConvertWeaponsClassToResultClass(
-                    weapon.WClass) == wclass |
-                    wclass == Structs.ResultWeaponsClass.Unknown) 
-                    &
-                    ( uclass == currentUclass | uclass == Structs.ShootersClass.Okänd))*/
-                if ( myInterface.ConvertWeaponsClassToResultClass(
+                if (this.myInterface.ConvertWeaponsClassToResultClass(
                     weapon.WClass) == wclass |
                     wclass == Structs.ResultWeaponsClass.Unknown) 
                 {
-                    ResultsReturn thisResult = ResultsGetCompetitor(row.CompetitorId);
+                    ResultsReturn thisResult = this.ResultsGetCompetitor(competitorsRow.CompetitorId);
                     if (thisResult.HitsTotal > 0)
+                    {
                         results.Add(thisResult);
+                    }
                 }
             }
+
             return results;
         }
 
-        private List<ResultsReturn> markPriceMoney(List<ResultsReturn> results)
+        private List<ResultsReturn> MarkPriceMoney(List<ResultsReturn> results)
         {
-            Structs.Competition comp = myInterface.CompetitionCurrent;
+            var comp = this.myInterface.CompetitionCurrent;
 
-            int nrOfShooterWithPrice = (int)(((double)comp.PriceMoneyShooterPercent)/100 * results.Count);
-            int totalAmount = getTotalAmountOfMoney();
-            CPriceMoney prices = new CPriceMoney(nrOfShooterWithPrice,
+            var numberOfShooterWithPrice = (int)(((double)comp.PriceMoneyShooterPercent) / 100 * results.Count);
+            var totalAmount = this.getTotalAmountOfMoney();
+            var prices = new CPriceMoney(
+                numberOfShooterWithPrice,
                 comp.ShooterFee1,
                 comp.FirstPrice,
                 totalAmount,
                 comp.ShooterFee1);
-            int[] priceArray = prices.Calculate(((double)comp.PriceMoneyPercentToReturn)/100);
+
+            var priceArray = prices.Calculate(((double)comp.PriceMoneyPercentToReturn) / 100);
             for (int i = 0; i < priceArray.Length & i < results.Count; i++)
             {
                 results[i].PriceMoney = priceArray[i];
             }
+
             return results;
         }
 
