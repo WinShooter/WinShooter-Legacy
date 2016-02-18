@@ -182,7 +182,7 @@ namespace Allberg.Shooter.Common
             if (serverInterface != null)
                 throw new ApplicationException("Cannot create via server");
             else
-                databaseClass.createAccessDatabase(PathAndFilename);
+                databaseClass.CreateAccessDatabase(PathAndFilename);
         }
         /// <summary>
         /// Creates the database content
@@ -266,7 +266,7 @@ namespace Allberg.Shooter.Common
                 if (databaseClass.Database == null)
                     throw new ApplicationException("Database not initialized when trying to fetch Clubs");
 
-                return databaseClass.getClubs();
+                return databaseClass.GetClubs();
             }
         }
         /// <summary>
@@ -2238,7 +2238,7 @@ namespace Allberg.Shooter.Common
             set
             {
                 connectionString = value;
-                databaseClass.initConnection();
+                databaseClass.InitConnection();
             }
         }
 

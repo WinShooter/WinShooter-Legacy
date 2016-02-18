@@ -38,77 +38,158 @@ namespace Allberg.Shooter.Common
     using Allberg.Shooter.WinShooterServerRemoting;
 
     /// <summary>
-    /// Summary description for Database.
+    /// The class for handling the database.
     /// </summary>
     [Serializable]
     internal class CDatabase
     {
-        internal CDatabase(Interface callerInterface)
-        {
-            MyInterface = callerInterface;
-        }
+        /// <summary>
+        /// This is the version of the database
+        /// </summary>
+        internal const string CurrentDbVersion = "1.6.2";
 
-        internal const string CurrentDbVersion = "1.6.2";   // This is the version of the database
-        private const int MaxNrOfCompetitorsPerShooter = 4; // This is couple to the GUI
-        internal Interface MyInterface;
-        internal DatabaseDataset Database;
+        /// <summary>
+        /// This is coupled to the GUI.
+        /// </summary>
+        private const int MaxNrOfCompetitorsPerShooter = 4;
+
+        /// <summary>
+        /// The conn.
+        /// </summary>
         [NonSerialized]
         internal OleDbConnection Conn;
 
-        // This object is locked each time the database is updated
-        private readonly object _databaseLocker = new object();
+        /// <summary>
+        /// This object is locked each time the database is updated
+        /// </summary>
+        private readonly object databaseLocker = new object();
 
+
+        private OleDbDataAdapter _daDbInfo;
+        private OleDbDataAdapter _daShooters;
+        private OleDbDataAdapter _daWeapons;
+        private OleDbDataAdapter _daCompetition;
+        private OleDbDataAdapter _daPatrols;
+        private OleDbDataAdapter _daCompetitors;
+        private OleDbDataAdapter _daStations;
+        private OleDbDataAdapter _daCompetitorResults;
+        private OleDbDataAdapter _daTeams;
+
+        private OleDbCommand _selectCommandDaDbInfo;
+        private OleDbCommand _insertCommandDaDbInfo;
+        private OleDbCommand _updateCommandDaDbInfo;
+        private OleDbCommand _deleteCommandDaDbInfo;
+
+        private OleDbDataAdapter DAClubs;
+        private OleDbCommand selectCommandClubs;
+        private OleDbCommand insertCommandClubs;
+        private OleDbCommand updateCommandClubs;
+        private OleDbCommand deleteCommandClubs;
+
+        private OleDbCommand selectCommandShooters;
+        private OleDbCommand insertCommandShooters;
+        private OleDbCommand updateCommandShooters;
+        private OleDbCommand deleteCommandShooters;
+        private OleDbCommand identityCommandShooters;
+
+        private OleDbCommand selectCommandTeams;
+        private OleDbCommand insertCommandTeams;
+        private OleDbCommand updateCommandTeams;
+        private OleDbCommand deleteCommandTeams;
+        private OleDbCommand identityCommandTeams;
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="CDatabase"/> class.
+        /// </summary>
+        /// <param name="callerInterface">
+        /// The caller interface.
+        /// </param>
+        internal CDatabase(Interface callerInterface)
+        {
+            this.MyInterface = callerInterface;
+        }
+
+        /// <summary>
+        /// Gets or sets the my interface.
+        /// </summary>
+        internal Interface MyInterface { get; set; }
+
+        /// <summary>
+        /// Gets or sets the database.
+        /// </summary>
+        internal DatabaseDataset Database { get; set; }
 
         #region Database init
-        internal void initConnection()
+
+        /// <summary>
+        /// Init database connection.
+        /// </summary>
+        internal void InitConnection()
         {
             Trace.WriteLine("CDatabase: Entering initConnection()");
 
             var testConnection =
-                new OleDbConnection(MyInterface.connectionString);
+                new OleDbConnection(this.MyInterface.connectionString);
             testConnection.Open();
             testConnection.Close();
         }
 
-        
-        private void checkDbForUpgrade(OleDbConnection dbconn)
+        /// <summary>
+        /// Check database for upgrade.
+        /// </summary>
+        /// <param name="dbconn">
+        /// The database connection.
+        /// </param>
+        private void CheckDbForUpgrade(OleDbConnection dbconn)
         {
-            var upgrade = new CDatabaseUpgrade(dbconn, this);
+            var upgrade = new CDatabaseUpgrade(dbconn);
             upgrade.Upgrade();
         }
 
-        internal void createAccessDatabase(string PathAndFilename)
+        /// <summary>
+        /// Create access database.
+        /// </summary>
+        /// <param name="pathAndFilename">
+        /// The path and filename.
+        /// </param>
+        internal void CreateAccessDatabase(string pathAndFilename)
         {
             Trace.WriteLine("CDatabase: Entering createAccessDatabase(" +
-                PathAndFilename + ")");
+                pathAndFilename + ")");
 
             // Check path exists
-            if (!Directory.Exists(Path.GetDirectoryName(PathAndFilename)))
+            if (!Directory.Exists(Path.GetDirectoryName(pathAndFilename)))
             {
                 throw new ArgumentException("Path does not exist");
             }
 
             // If file exists, delete file
-            if (File.Exists(PathAndFilename))
-                File.Delete(PathAndFilename);
+            if (File.Exists(pathAndFilename))
+            {
+                File.Delete(pathAndFilename);
+            }
 
             var cat = new Interop.ADOX.CatalogClass();
 
             cat.Create("Provider=Microsoft.Jet.OLEDB.4.0;" +
-                "Data Source=" + PathAndFilename + ";" +
-                "Jet OLEDB:Engine Type=5;");// +
-            //"Mode=Share Exclusive");
+                "Data Source=" + pathAndFilename + ";" +
+                "Jet OLEDB:Engine Type=5;");
 
             cat = null;
-            MyInterface.currentFile = PathAndFilename;
+            this.MyInterface.currentFile = pathAndFilename;
 
             // Ok, done.
-            MyInterface.connectionString = "Provider=Microsoft.Jet.OLEDB.4.0;" +
-                "Data Source=" + PathAndFilename + ";" +
+            this.MyInterface.connectionString = "Provider=Microsoft.Jet.OLEDB.4.0;" +
+                "Data Source=" + pathAndFilename + ";" +
                 "Jet OLEDB:Engine Type=5;";
-            //+ "Mode=Share Exclusive";
         }
 
+        /// <summary>
+        /// Open an access database.
+        /// </summary>
+        /// <param name="pathAndFilename">
+        /// The path and filename.
+        /// </param>
         internal void OpenAccessDatabase(string pathAndFilename)
         {
             Trace.WriteLine("CDatabase: Entering openAccessDatabase(" + 
@@ -119,23 +200,26 @@ namespace Allberg.Shooter.Common
                 throw new ArgumentException("File does not exist");
             }
 
-            MyInterface.currentFile = pathAndFilename;
+            this.MyInterface.currentFile = pathAndFilename;
 
             // Ok, done.
-            MyInterface.connectionString = "Provider=Microsoft.Jet.OLEDB.4.0;" +
+            this.MyInterface.connectionString = "Provider=Microsoft.Jet.OLEDB.4.0;" +
                 "Data Source=" + pathAndFilename + ";" +
                 "Jet OLEDB:Engine Type=5;" +
                 "Mode=Share Exclusive";
 
-            Conn = new OleDbConnection(MyInterface.connectionString);
+            this.Conn = new OleDbConnection(this.MyInterface.connectionString);
 
             Thread.Sleep(50);
 
-            Conn.Open();
-            checkDbForUpgrade(Conn);
-            Conn.Close();
+            this.Conn.Open();
+            this.CheckDbForUpgrade(this.Conn);
+            this.Conn.Close();
         }
 
+        /// <summary>
+        /// Open database.
+        /// </summary>
         internal void OpenDatabase()
         {
             Trace.WriteLine("CDatabase: Entering openDatabase()");
@@ -144,58 +228,59 @@ namespace Allberg.Shooter.Common
                 " locking \"DatabaseLocker\" on thread \"" +
                 Thread.CurrentThread.Name + "\" ( " +
                 Thread.CurrentThread.ManagedThreadId + " )");
-            lock(_databaseLocker)
+
+            lock (this.databaseLocker)
             {
                 Trace.WriteLine("CDatabase: openDatabase() " + 
                     " locked \"DatabaseLocker\" on thread \"" +
                     Thread.CurrentThread.Name + "\" ( " +
                     Thread.CurrentThread.ManagedThreadId + " )");
 
-                Database = new DatabaseDataset();
-                CreateDataAdapters();
+                this.Database = new DatabaseDataset();
+                this.CreateDataAdapters();
 
                 // Get data into dataset
                 Trace.WriteLine("   Reading DbInfo from file.");
-                _daDbInfo.Fill(Database, "DbInfo");
+                this._daDbInfo.Fill(this.Database, "DbInfo");
 
                 Trace.WriteLine("   Reading Clubs from file.");
-                DAClubs.Fill(Database, "Clubs");
+                this.DAClubs.Fill(this.Database, "Clubs");
 
                 Trace.WriteLine("   Reading Shooters from file.");
-                _daShooters.Fill(Database, "Shooters");
+                this._daShooters.Fill(this.Database, "Shooters");
 
                 Trace.WriteLine("   Reading Weapons from file.");
-                _daWeapons.Fill(Database, "Weapons");
+                this._daWeapons.Fill(this.Database, "Weapons");
 
                 Trace.WriteLine("   Reading Competition from file.");
-                _daCompetition.Fill(Database, "Competition");
+                this._daCompetition.Fill(this.Database, "Competition");
 
                 Trace.WriteLine("   Reading patrols from file.");
-                _daPatrols.Fill(Database, "Patrols");
+                this._daPatrols.Fill(this.Database, "Patrols");
 
                 Trace.WriteLine("   Reading Stations from file.");
-                _daStations.Fill(Database, "Stations");
+                this._daStations.Fill(this.Database, "Stations");
             
                 Trace.WriteLine("   Reading Competitors from file.");
-                _daCompetitors.Fill(Database, "Competitors");
+                this._daCompetitors.Fill(this.Database, "Competitors");
             
                 Trace.WriteLine("   Reading CompetitorResults from file.");
-                _daCompetitorResults.Fill(Database, "CompetitorResults");
+                this._daCompetitorResults.Fill(this.Database, "CompetitorResults");
 
                 Trace.WriteLine("   Reading Teams from file.");
-                _daTeams.Fill(Database, "Teams");
+                this._daTeams.Fill(this.Database, "Teams");
 
                 // Tell gui data is updated
                 Trace.WriteLine("   Done reading from file. Update GUI.");
-                MyInterface.updatedClub();
-                MyInterface.updatedShooter(new Structs.Shooter());
-                MyInterface.updatedWeapon();
-                MyInterface.updatedCompetition();
-                MyInterface.updatedPatrol();
-                MyInterface.updatedStation();
-                MyInterface.updatedCompetitor(new Structs.Competitor());
-                MyInterface.updatedCompetitorResult(new Structs.CompetitorResult());
-                MyInterface.updatedTeam();
+                this.MyInterface.updatedClub();
+                this.MyInterface.updatedShooter(new Structs.Shooter());
+                this.MyInterface.updatedWeapon();
+                this.MyInterface.updatedCompetition();
+                this.MyInterface.updatedPatrol();
+                this.MyInterface.updatedStation();
+                this.MyInterface.updatedCompetitor(new Structs.Competitor());
+                this.MyInterface.updatedCompetitorResult(new Structs.CompetitorResult());
+                this.MyInterface.updatedTeam();
 
                 Trace.WriteLine("CDatabase: openDatabase() " + 
                     " unlocking \"DatabaseLocker\" on thread \"" +
@@ -204,7 +289,9 @@ namespace Allberg.Shooter.Common
             }
         }
 
-
+        /// <summary>
+        /// Create default database content.
+        /// </summary>
         internal void CreateDefaultDatabaseContent()
         {
             Trace.WriteLine("CDatabase: Entering createDefaultDatabaseContent()");
@@ -213,7 +300,7 @@ namespace Allberg.Shooter.Common
                 Thread.CurrentThread.Name + "\" ( " +
                 Thread.CurrentThread.ManagedThreadId + " )");
 
-            lock(_databaseLocker)
+            lock (this.databaseLocker)
             {
                 Trace.WriteLine("CDatabase: createDefaultDatabaseContent() " + 
                     " locked \"DatabaseLocker\" on thread \"" +
@@ -223,22 +310,22 @@ namespace Allberg.Shooter.Common
                 OleDbCommand cmd = null;
                 try
                 {
-                    Database = new DatabaseDataset();
-                    Conn = new OleDbConnection(MyInterface.connectionString);
-                    Conn.Open();
+                    this.Database = new DatabaseDataset();
+                    this.Conn = new OleDbConnection(this.MyInterface.connectionString);
+                    this.Conn.Open();
 
 
-                    CreateTables(Database, Conn);
-                    CreateDatabaseConstraints(Database, Conn);
+                    this.CreateTables(this.Database, this.Conn);
+                    CreateDatabaseConstraints(this.Database, this.Conn);
 
                     cmd = new OleDbCommand(
                         "insert into DbInfo (KeyName, KeyValue) values ('Version', '" + CurrentDbVersion + "')",
-                        Conn);
+                        this.Conn);
                     cmd.ExecuteNonQuery();
 
-                    GetDefaultContent();
+                    this.GetDefaultContent();
 
-                    Conn.Close();
+                    this.Conn.Close();
                 }
                 catch (Exception exc)
                 {
@@ -248,11 +335,13 @@ namespace Allberg.Shooter.Common
                 finally
                 {
                     if (cmd != null)
+                    {
                         cmd.Dispose();
+                    }
                 }
-                CreateDataAdapters();
-                MyInterface.updatedClub();
-                MyInterface.updatedWeapon();
+                this.CreateDataAdapters();
+                this.MyInterface.updatedClub();
+                this.MyInterface.updatedWeapon();
 
                 Trace.WriteLine("CDatabase: createDefaultDatabaseContent() " + 
                     " unlocking \"DatabaseLocker\" on thread \"" +
@@ -260,6 +349,10 @@ namespace Allberg.Shooter.Common
                     Thread.CurrentThread.ManagedThreadId + " )");
             }
         }
+
+        /// <summary>
+        /// Create the default content.
+        /// </summary>
         private void GetDefaultContent()
         {
             Trace.WriteLine("CDatabase: getDefaultContent() " + 
@@ -277,7 +370,7 @@ namespace Allberg.Shooter.Common
             // Transfer default clubs to current database
             foreach (DSStartupResources.ClubsRow defaultRow in startup.Clubs)
             {
-                var newRow = Database.Clubs.NewClubsRow();
+                var newRow = this.Database.Clubs.NewClubsRow();
                 newRow.Automatic = true;
                 newRow.ClubId = defaultRow.ClubId;
                 newRow.Country  = defaultRow.Country;
@@ -287,18 +380,22 @@ namespace Allberg.Shooter.Common
                 newRow.Plusgiro = defaultRow.Plusgiro;
 
                 if (newRow.IsBankgiroNull())
-                    newRow.Bankgiro = "";
+                {
+                    newRow.Bankgiro = string.Empty;
+                }
 
                 if (newRow.IsPlusgiroNull())
-                    newRow.Plusgiro = "";
+                {
+                    newRow.Plusgiro = string.Empty;
+                }
 
-                Database.Clubs.AddClubsRow(newRow);
+                this.Database.Clubs.AddClubsRow(newRow);
             }
 
             // Transfer default weapons to current database
             foreach (DSStartupResources.WeaponsRow defaultRow in startup.Weapons)
             {
-                var newRow = Database.Weapons.NewWeaponsRow();
+                var newRow = this.Database.Weapons.NewWeaponsRow();
                 newRow.Automatic = true;
                 newRow.Class = defaultRow.Class;
                 newRow.Manufacturer = defaultRow.Manufacturer;
@@ -307,11 +404,22 @@ namespace Allberg.Shooter.Common
                 newRow.ToAutomatic = false;
                 newRow.WeaponId = defaultRow.WeaponId;
 
-                Database.Weapons.AddWeaponsRow(newRow);
+                this.Database.Weapons.AddWeaponsRow(newRow);
             }
+
             Trace.WriteLine("CDatabase: getDefaultContent() " + 
                 " ending.");
         }
+
+        /// <summary>
+        /// Create the tables.
+        /// </summary>
+        /// <param name="database">
+        /// The database.
+        /// </param>
+        /// <param name="conn">
+        /// The conn.
+        /// </param>
         private void CreateTables(DatabaseDataset database, OleDbConnection conn)
         {
             Trace.WriteLine("CDatabase: Entering createDatabases()");
@@ -320,7 +428,7 @@ namespace Allberg.Shooter.Common
                 " locking \"DatabaseLocker\" on thread \"" +
                 Thread.CurrentThread.Name + "\" ( " +
                 Thread.CurrentThread.ManagedThreadId + " )");
-            lock(_databaseLocker)
+            lock (this.databaseLocker)
             {
                 Trace.WriteLine("CDatabase: createTables() " + 
                     " locked \"DatabaseLocker\" on thread \"" +
@@ -333,7 +441,7 @@ namespace Allberg.Shooter.Common
                 CreateTable(database.Tables["Weapons"], conn);
                 CreateTable(database.Tables["Competition"], conn);
                 CreateTable(database.Tables["Patrols"], conn);
-                UpdateTablePatrols();
+                this.UpdateTablePatrols();
                 CreateTable(database.Tables["Competitors"], conn);
                 CreateTable(database.Tables["Stations"], conn);
                 CreateTable(database.Tables["CompetitorResults"], conn);
@@ -346,21 +454,32 @@ namespace Allberg.Shooter.Common
             }
         }
 
+        /// <summary>
+        /// Update table patrols.
+        /// </summary>
         private void UpdateTablePatrols()
         {
             Trace.WriteLine("CDatabase: Entering updateTablePatrols");
 
-            var sqlUpdate = "ALTER TABLE Patrols ADD unique ( PatrolId )";
+            const string SqlUpdate = "ALTER TABLE Patrols ADD unique ( PatrolId )";
 
             // Execute against database
-            Trace.WriteLine("CDatabase: Running SQL: " + sqlUpdate);
-            var SQL = new OleDbCommand(sqlUpdate,Conn);
-            //int result = SQL.ExecuteNonQuery();
-            SQL.ExecuteNonQuery();
+            Trace.WriteLine("CDatabase: Running SQL: " + SqlUpdate);
+            var sql = new OleDbCommand(SqlUpdate, this.Conn);
+            sql.ExecuteNonQuery();
 
             Trace.WriteLine("CDatabase: Exiting updateTablePatrols");
         }
 
+        /// <summary>
+        /// Create table.
+        /// </summary>
+        /// <param name="table">
+        /// The table.
+        /// </param>
+        /// <param name="dbconn">
+        /// The dbconn.
+        /// </param>
         internal static void CreateTable(DataTable table, OleDbConnection dbconn)
         {
             Trace.WriteLine("CDatabase: Entering createTable(" + 
@@ -369,10 +488,13 @@ namespace Allberg.Shooter.Common
             var sqlCreate = new StringBuilder("create table " + table.TableName + "(");
             var columnPrinted = false;
             var primaryKey = true;
-            foreach(DataColumn col in table.Columns)
+            foreach (DataColumn col in table.Columns)
             {
                 if (columnPrinted)
+                {
                     sqlCreate.Append(", ");
+                }
+
                 sqlCreate.Append(col.ColumnName + " ");
                 switch(col.DataType.ToString())
                 {
@@ -402,39 +524,47 @@ namespace Allberg.Shooter.Common
                     sqlCreate.Append(" PRIMARY KEY ");
                     primaryKey = false;
                 }
+
                 columnPrinted = true;
             }
+
             sqlCreate.Append(");");
 
             Trace.WriteLine("CDatabase: Running SQL: " + sqlCreate);
 
             // Execute against database
-            var SQL = new OleDbCommand(sqlCreate.ToString(),dbconn);
-            //int result = SQL.ExecuteNonQuery();
-            SQL.ExecuteNonQuery();
-            SQL.Dispose();
+            var sql = new OleDbCommand(sqlCreate.ToString(), dbconn);
+            sql.ExecuteNonQuery();
+            sql.Dispose();
             Trace.WriteLine("CDatabase: Exiting createTable(" + 
                 table.TableName + ")");
         }
 
+        /// <summary>
+        /// Create database constraints.
+        /// </summary>
+        /// <param name="database">
+        /// The database.
+        /// </param>
+        /// <param name="conn">
+        /// The conn.
+        /// </param>
         private static void CreateDatabaseConstraints(DatabaseDataset database, OleDbConnection conn)
         {
             Trace.WriteLine("CDatabase: Entering createDatabaseConstraints()");
 
-            var sqlCreate = "";
-
             foreach (DataRelation rel in database.Relations)
             {
-                sqlCreate = "ALTER TABLE " + rel.ChildTable.TableName + " ADD " +
-                    "CONSTRAINT " + rel.RelationName + " FOREIGN KEY " +
-                    "(" + rel.ChildColumns[0].ColumnName + ")" +
-                    " REFERENCES " + rel.ParentTable + 
-                    " (" + rel.ParentColumns[0].ColumnName +
-                    ")";
+                var sqlCreate = "ALTER TABLE " + rel.ChildTable.TableName + " ADD " +
+                                "CONSTRAINT " + rel.RelationName + " FOREIGN KEY " +
+                                "(" + rel.ChildColumns[0].ColumnName + ")" +
+                                " REFERENCES " + rel.ParentTable + 
+                                " (" + rel.ParentColumns[0].ColumnName +
+                                ")";
 
                 // Execute against database
                 Trace.WriteLine("CDatabase: Running SQL to create relation: " + sqlCreate);
-                var SQL = new OleDbCommand(sqlCreate,conn);
+                var SQL = new OleDbCommand(sqlCreate, conn);
 
                 SQL.ExecuteNonQuery();
             }
@@ -443,279 +573,262 @@ namespace Allberg.Shooter.Common
 
         #region Database reading and writing
 
-        private OleDbDataAdapter _daDbInfo;
-        private OleDbDataAdapter _daShooters;
-        private OleDbDataAdapter _daWeapons;
-        private OleDbDataAdapter _daCompetition;
-        private OleDbDataAdapter _daPatrols;
-        private OleDbDataAdapter _daCompetitors;
-        private OleDbDataAdapter _daStations;
-        private OleDbDataAdapter _daCompetitorResults;
-        private OleDbDataAdapter _daTeams;
-
+        /// <summary>
+        /// Create the data adapters.
+        /// </summary>
         private void CreateDataAdapters()
         {
             Trace.WriteLine("CDatabase: Entering createDatabaseAdapters()");
 
-            CreateDataAdapterDbInfo();
-            createDataAdapterClubs();
-            createDataAdapterShooters();
-            createDataAdapterWeapons();
-            createDataAdapterCompetition();
-            createDataAdapterPatrols();
-            createDataAdapterCompetitors();
-            createDataAdapterStations();
-            createDataAdapterCompetitorResults();
-            createDataAdapterTeams();
+            this.CreateDataAdapterDbInfo();
+            this.createDataAdapterClubs();
+            this.createDataAdapterShooters();
+            this.createDataAdapterWeapons();
+            this.createDataAdapterCompetition();
+            this.createDataAdapterPatrols();
+            this.createDataAdapterCompetitors();
+            this.createDataAdapterStations();
+            this.createDataAdapterCompetitorResults();
+            this.createDataAdapterTeams();
         }
 
         #region DADbInfo
-        private OleDbCommand _selectCommandDaDbInfo;
-        private OleDbCommand _insertCommandDaDbInfo;
-        private OleDbCommand _updateCommandDaDbInfo;
-        private OleDbCommand _deleteCommandDaDbInfo;
         private void CreateDataAdapterDbInfo()
         {
             Trace.WriteLine("CDatabase: Entering createDataAdapterClubs()");
 
             // First create the datadapter
-            _daDbInfo = new OleDbDataAdapter();
+            this._daDbInfo = new OleDbDataAdapter();
 
             // Create all commands
-            _selectCommandDaDbInfo = new OleDbCommand();
-            _insertCommandDaDbInfo = new OleDbCommand();
-            _updateCommandDaDbInfo = new OleDbCommand();
-            _deleteCommandDaDbInfo = new OleDbCommand();
+            this._selectCommandDaDbInfo = new OleDbCommand();
+            this._insertCommandDaDbInfo = new OleDbCommand();
+            this._updateCommandDaDbInfo = new OleDbCommand();
+            this._deleteCommandDaDbInfo = new OleDbCommand();
             // 
             // selectCommandDADbInfo
             // 
-            _selectCommandDaDbInfo.CommandText = "SELECT KeyName, KeyValue FROM DbInfo";
-            _selectCommandDaDbInfo.Connection = Conn;
+            this._selectCommandDaDbInfo.CommandText = "SELECT KeyName, KeyValue FROM DbInfo";
+            this._selectCommandDaDbInfo.Connection = this.Conn;
             // 
             // insertCommandDADbInfo
             // 
-            _insertCommandDaDbInfo.CommandText = "INSERT INTO DbInfo(KeyName, KeyValue) VALUES (?, ?)";
-            _insertCommandDaDbInfo.Connection = Conn;
-            _insertCommandDaDbInfo.Parameters.Add(new OleDbParameter("KeyName", OleDbType.VarWChar, 150, "KeyName"));
-            _insertCommandDaDbInfo.Parameters.Add(new OleDbParameter("KeyValue", OleDbType.VarWChar, 150, "KeyValue"));
+            this._insertCommandDaDbInfo.CommandText = "INSERT INTO DbInfo(KeyName, KeyValue) VALUES (?, ?)";
+            this._insertCommandDaDbInfo.Connection = this.Conn;
+            this._insertCommandDaDbInfo.Parameters.Add(new OleDbParameter("KeyName", OleDbType.VarWChar, 150, "KeyName"));
+            this._insertCommandDaDbInfo.Parameters.Add(new OleDbParameter("KeyValue", OleDbType.VarWChar, 150, "KeyValue"));
             // 
             // updateCommandDADbInfo
             // 
-            _updateCommandDaDbInfo.CommandText = "UPDATE DbInfo SET KeyName = ?, KeyValue = ? WHERE (KeyName = ?) AND (KeyValue = ?" +
+            this._updateCommandDaDbInfo.CommandText = "UPDATE DbInfo SET KeyName = ?, KeyValue = ? WHERE (KeyName = ?) AND (KeyValue = ?" +
                 " OR ? IS NULL AND KeyValue IS NULL)";
-            _updateCommandDaDbInfo.Connection = Conn;
-            _updateCommandDaDbInfo.Parameters.Add(new OleDbParameter("KeyName", OleDbType.VarWChar, 150, "KeyName"));
-            _updateCommandDaDbInfo.Parameters.Add(new OleDbParameter("KeyValue", OleDbType.VarWChar, 150, "KeyValue"));
-            _updateCommandDaDbInfo.Parameters.Add(new OleDbParameter("Original_KeyName", OleDbType.VarWChar, 150, System.Data.ParameterDirection.Input, false, ((System.Byte)(0)), ((System.Byte)(0)), "KeyName", System.Data.DataRowVersion.Original, null));
-            _updateCommandDaDbInfo.Parameters.Add(new OleDbParameter("Original_KeyValue", OleDbType.VarWChar, 150, System.Data.ParameterDirection.Input, false, ((System.Byte)(0)), ((System.Byte)(0)), "KeyValue", System.Data.DataRowVersion.Original, null));
-            _updateCommandDaDbInfo.Parameters.Add(new OleDbParameter("Original_KeyValue1", OleDbType.VarWChar, 150, System.Data.ParameterDirection.Input, false, ((System.Byte)(0)), ((System.Byte)(0)), "KeyValue", System.Data.DataRowVersion.Original, null));
-            // 
+            this._updateCommandDaDbInfo.Connection = Conn;
+            this._updateCommandDaDbInfo.Parameters.Add(new OleDbParameter("KeyName", OleDbType.VarWChar, 150, "KeyName"));
+            this._updateCommandDaDbInfo.Parameters.Add(new OleDbParameter("KeyValue", OleDbType.VarWChar, 150, "KeyValue"));
+            this._updateCommandDaDbInfo.Parameters.Add(new OleDbParameter("Original_KeyName", OleDbType.VarWChar, 150, ParameterDirection.Input, false, ((System.Byte)(0)), ((System.Byte)(0)), "KeyName", System.Data.DataRowVersion.Original, null));
+            this._updateCommandDaDbInfo.Parameters.Add(new OleDbParameter("Original_KeyValue", OleDbType.VarWChar, 150, System.Data.ParameterDirection.Input, false, ((System.Byte)(0)), ((System.Byte)(0)), "KeyValue", System.Data.DataRowVersion.Original, null));
+            this._updateCommandDaDbInfo.Parameters.Add(new OleDbParameter("Original_KeyValue1", OleDbType.VarWChar, 150, System.Data.ParameterDirection.Input, false, ((System.Byte)(0)), ((System.Byte)(0)), "KeyValue", System.Data.DataRowVersion.Original, null));
+
             // deleteCommandDADbInfo
-            // 
-            _deleteCommandDaDbInfo.CommandText = "DELETE FROM DbInfo WHERE (KeyName = ?) AND (KeyValue = ? OR ? IS NULL AND KeyValu" +
+            this._deleteCommandDaDbInfo.CommandText = "DELETE FROM DbInfo WHERE (KeyName = ?) AND (KeyValue = ? OR ? IS NULL AND KeyValu" +
                 "e IS NULL)";
-            _deleteCommandDaDbInfo.Connection = Conn;
-            _deleteCommandDaDbInfo.Parameters.Add(new OleDbParameter("Original_KeyName", OleDbType.VarWChar, 150, System.Data.ParameterDirection.Input, false, ((System.Byte)(0)), ((System.Byte)(0)), "KeyName", System.Data.DataRowVersion.Original, null));
-            _deleteCommandDaDbInfo.Parameters.Add(new OleDbParameter("Original_KeyValue", OleDbType.VarWChar, 150, System.Data.ParameterDirection.Input, false, ((System.Byte)(0)), ((System.Byte)(0)), "KeyValue", System.Data.DataRowVersion.Original, null));
-            _deleteCommandDaDbInfo.Parameters.Add(new OleDbParameter("Original_KeyValue1", OleDbType.VarWChar, 150, System.Data.ParameterDirection.Input, false, ((System.Byte)(0)), ((System.Byte)(0)), "KeyValue", System.Data.DataRowVersion.Original, null));
-            // 
+            this._deleteCommandDaDbInfo.Connection = Conn;
+            this._deleteCommandDaDbInfo.Parameters.Add(new OleDbParameter("Original_KeyName", OleDbType.VarWChar, 150, System.Data.ParameterDirection.Input, false, ((System.Byte)(0)), ((System.Byte)(0)), "KeyName", System.Data.DataRowVersion.Original, null));
+            this._deleteCommandDaDbInfo.Parameters.Add(new OleDbParameter("Original_KeyValue", OleDbType.VarWChar, 150, System.Data.ParameterDirection.Input, false, ((System.Byte)(0)), ((System.Byte)(0)), "KeyValue", System.Data.DataRowVersion.Original, null));
+            this._deleteCommandDaDbInfo.Parameters.Add(new OleDbParameter("Original_KeyValue1", OleDbType.VarWChar, 150, System.Data.ParameterDirection.Input, false, ((System.Byte)(0)), ((System.Byte)(0)), "KeyValue", System.Data.DataRowVersion.Original, null));
+
             // oleDbDataAdapter1
-            // 
-            _daDbInfo.DeleteCommand = _deleteCommandDaDbInfo;
-            _daDbInfo.InsertCommand = _insertCommandDaDbInfo;
-            _daDbInfo.SelectCommand = _selectCommandDaDbInfo;
-            _daDbInfo.TableMappings.AddRange(new System.Data.Common.DataTableMapping[] {
-                                                                                                        new System.Data.Common.DataTableMapping("Table", "DbInfo", new System.Data.Common.DataColumnMapping[] {
-                                                                                                                                                                                                                  new System.Data.Common.DataColumnMapping("KeyName", "KeyName"),
-                                                                                                                                                                                                                  new System.Data.Common.DataColumnMapping("KeyValue", "KeyValue")})});
-            _daDbInfo.UpdateCommand = _updateCommandDaDbInfo;
+            this._daDbInfo.DeleteCommand = this._deleteCommandDaDbInfo;
+            this._daDbInfo.InsertCommand = this._insertCommandDaDbInfo;
+            this._daDbInfo.SelectCommand = this._selectCommandDaDbInfo;
+            this._daDbInfo.TableMappings.AddRange(new[] 
+            {
+                new System.Data.Common.DataTableMapping("Table", "DbInfo", new[] 
+                {
+                    new System.Data.Common.DataColumnMapping("KeyName", "KeyName"),
+                    new System.Data.Common.DataColumnMapping("KeyValue", "KeyValue")
+                })
+            });
+
+            this._daDbInfo.UpdateCommand = this._updateCommandDaDbInfo;
         }
         #endregion
 
         #region Clubs
-        private OleDbDataAdapter DAClubs;
-        private OleDbCommand selectCommandClubs;
-        private OleDbCommand insertCommandClubs;
-        private OleDbCommand updateCommandClubs;
-        private OleDbCommand deleteCommandClubs;
         private void createDataAdapterClubs()
         {
             Trace.WriteLine("CDatabase: Entering createDataAdapterClubs()");
 
             // First create the datadapter
-            DAClubs = new OleDbDataAdapter();
+            this.DAClubs = new OleDbDataAdapter();
 
             // Create all commands
-            selectCommandClubs = new OleDbCommand();
-            insertCommandClubs = new OleDbCommand();
-            updateCommandClubs = new OleDbCommand();
-            deleteCommandClubs = new OleDbCommand();
+            this.selectCommandClubs = new OleDbCommand();
+            this.insertCommandClubs = new OleDbCommand();
+            this.updateCommandClubs = new OleDbCommand();
+            this.deleteCommandClubs = new OleDbCommand();
 
-            selectCommandClubs.CommandText = "SELECT Automatic, ClubId, Country, Name, ToAutomatic, LastUpdate FROM Clubs";
-            selectCommandClubs.Connection = Conn;
-            // 
+            this.selectCommandClubs.CommandText = "SELECT Automatic, ClubId, Country, Name, ToAutomatic, LastUpdate FROM Clubs";
+            this.selectCommandClubs.Connection = this.Conn;
+
             // insertCommandClubs
-            // 
-            insertCommandClubs.CommandText = "INSERT INTO Clubs(Automatic, ClubId, Country, Name, ToAutomatic, LastUpdate) VALUES (?, ?, ?," +
+            this.insertCommandClubs.CommandText = "INSERT INTO Clubs(Automatic, ClubId, Country, Name, ToAutomatic, LastUpdate) VALUES (?, ?, ?," +
                 " ?, ?, ?)";
-            insertCommandClubs.Connection = Conn;
-            insertCommandClubs.Parameters.Add(new OleDbParameter("Automatic", OleDbType.Boolean, 2, "Automatic"));
-            insertCommandClubs.Parameters.Add(new OleDbParameter("ClubId", OleDbType.VarWChar, 150, "ClubId"));
-            insertCommandClubs.Parameters.Add(new OleDbParameter("Country", OleDbType.VarWChar, 150, "Country"));
-            insertCommandClubs.Parameters.Add(new OleDbParameter("Name", OleDbType.VarWChar, 150, "Name"));
-            insertCommandClubs.Parameters.Add(new OleDbParameter("ToAutomatic", OleDbType.Boolean, 2, "ToAutomatic"));
-            insertCommandClubs.Parameters.Add(new OleDbParameter("LastUpdate", OleDbType.Date, 2, "LastUpdate"));
-            // 
+            this.insertCommandClubs.Connection = this.Conn;
+            this.insertCommandClubs.Parameters.Add(new OleDbParameter("Automatic", OleDbType.Boolean, 2, "Automatic"));
+            this.insertCommandClubs.Parameters.Add(new OleDbParameter("ClubId", OleDbType.VarWChar, 150, "ClubId"));
+            this.insertCommandClubs.Parameters.Add(new OleDbParameter("Country", OleDbType.VarWChar, 150, "Country"));
+            this.insertCommandClubs.Parameters.Add(new OleDbParameter("Name", OleDbType.VarWChar, 150, "Name"));
+            this.insertCommandClubs.Parameters.Add(new OleDbParameter("ToAutomatic", OleDbType.Boolean, 2, "ToAutomatic"));
+            this.insertCommandClubs.Parameters.Add(new OleDbParameter("LastUpdate", OleDbType.Date, 2, "LastUpdate"));
+
             // updateCommandClubs
-            // 
-            updateCommandClubs.CommandText = "UPDATE Clubs SET Automatic = ?, Country = ?, Name = ?, ToAutomatic = " +
+            this.updateCommandClubs.CommandText = "UPDATE Clubs SET Automatic = ?, Country = ?, Name = ?, ToAutomatic = " +
                 "?, LastUpdate = ? WHERE (ClubId = ?)";
-            //updateCommandClubs.CommandText = "UPDATE Clubs SET Automatic = ?, ClubId = ?, Country = ?, Name = ?, ToAutomatic = " +
-            //"? WHERE (ClubId = ?) AND (Automatic = ?) AND (Country = ? OR ? IS NULL AND Count" +
-                //"ry IS NULL) AND (Name = ? OR ? IS NULL AND Name IS NULL) AND (ToAutomatic = ?)";
-            updateCommandClubs.Connection = Conn;
-            updateCommandClubs.Parameters.Add(new OleDbParameter("Automatic", OleDbType.Boolean, 2, "Automatic"));
-            updateCommandClubs.Parameters.Add(new OleDbParameter("Country", OleDbType.VarWChar, 150, "Country"));
-            updateCommandClubs.Parameters.Add(new OleDbParameter("Name", OleDbType.VarWChar, 150, "Name"));
-            updateCommandClubs.Parameters.Add(new OleDbParameter("ToAutomatic", OleDbType.Boolean, 2, "ToAutomatic"));
-            updateCommandClubs.Parameters.Add(new OleDbParameter("LastUpdate", OleDbType.Date, 2, "LastUpdate"));
-            updateCommandClubs.Parameters.Add(new OleDbParameter("Original_ClubId", OleDbType.VarWChar, 150, System.Data.ParameterDirection.Input, false, ((System.Byte)(0)), ((System.Byte)(0)), "ClubId", System.Data.DataRowVersion.Original, null));
-            // 
+            this.updateCommandClubs.Connection = this.Conn;
+            this.updateCommandClubs.Parameters.Add(new OleDbParameter("Automatic", OleDbType.Boolean, 2, "Automatic"));
+            this.updateCommandClubs.Parameters.Add(new OleDbParameter("Country", OleDbType.VarWChar, 150, "Country"));
+            this.updateCommandClubs.Parameters.Add(new OleDbParameter("Name", OleDbType.VarWChar, 150, "Name"));
+            this.updateCommandClubs.Parameters.Add(new OleDbParameter("ToAutomatic", OleDbType.Boolean, 2, "ToAutomatic"));
+            this.updateCommandClubs.Parameters.Add(new OleDbParameter("LastUpdate", OleDbType.Date, 2, "LastUpdate"));
+            this.updateCommandClubs.Parameters.Add(new OleDbParameter("Original_ClubId", OleDbType.VarWChar, 150, System.Data.ParameterDirection.Input, false, ((System.Byte)(0)), ((System.Byte)(0)), "ClubId", System.Data.DataRowVersion.Original, null));
+
             // deleteCommandClubs
-            // 
-            deleteCommandClubs.CommandText = "DELETE FROM Clubs WHERE (ClubId = ?) AND (Automatic = ?) AND (Country = ? OR ? IS" +
+            this.deleteCommandClubs.CommandText = "DELETE FROM Clubs WHERE (ClubId = ?) AND (Automatic = ?) AND (Country = ? OR ? IS" +
                 " NULL AND Country IS NULL) AND (Name = ? OR ? IS NULL AND Name IS NULL) AND (ToA" +
                 "utomatic = ?) AND (LastUpdate = ?)";
-            deleteCommandClubs.Connection = Conn;
-            deleteCommandClubs.Parameters.Add(new OleDbParameter("Original_ClubId", OleDbType.VarWChar, 150, System.Data.ParameterDirection.Input, false, ((System.Byte)(0)), ((System.Byte)(0)), "ClubId", System.Data.DataRowVersion.Original, null));
-            deleteCommandClubs.Parameters.Add(new OleDbParameter("Original_Automatic", OleDbType.Boolean, 2, System.Data.ParameterDirection.Input, false, ((System.Byte)(0)), ((System.Byte)(0)), "Automatic", System.Data.DataRowVersion.Original, null));
-            deleteCommandClubs.Parameters.Add(new OleDbParameter("Original_Country", OleDbType.VarWChar, 150, System.Data.ParameterDirection.Input, false, ((System.Byte)(0)), ((System.Byte)(0)), "Country", System.Data.DataRowVersion.Original, null));
-            deleteCommandClubs.Parameters.Add(new OleDbParameter("Original_Country1", OleDbType.VarWChar, 150, System.Data.ParameterDirection.Input, false, ((System.Byte)(0)), ((System.Byte)(0)), "Country", System.Data.DataRowVersion.Original, null));
-            deleteCommandClubs.Parameters.Add(new OleDbParameter("Original_Name", OleDbType.VarWChar, 150, System.Data.ParameterDirection.Input, false, ((System.Byte)(0)), ((System.Byte)(0)), "Name", System.Data.DataRowVersion.Original, null));
-            deleteCommandClubs.Parameters.Add(new OleDbParameter("Original_Name1", OleDbType.VarWChar, 150, System.Data.ParameterDirection.Input, false, ((System.Byte)(0)), ((System.Byte)(0)), "Name", System.Data.DataRowVersion.Original, null));
-            deleteCommandClubs.Parameters.Add(new OleDbParameter("Original_ToAutomatic", OleDbType.Boolean, 2, System.Data.ParameterDirection.Input, false, ((System.Byte)(0)), ((System.Byte)(0)), "ToAutomatic", System.Data.DataRowVersion.Original, null));
-            deleteCommandClubs.Parameters.Add(new OleDbParameter("Original_LastUpdate", OleDbType.Date, 2, System.Data.ParameterDirection.Input, false, ((System.Byte)(0)), ((System.Byte)(0)), "LastUpdate", System.Data.DataRowVersion.Original, null));
-            // 
+            this.deleteCommandClubs.Connection = this.Conn;
+            this.deleteCommandClubs.Parameters.Add(new OleDbParameter("Original_ClubId", OleDbType.VarWChar, 150, System.Data.ParameterDirection.Input, false, ((System.Byte)(0)), ((System.Byte)(0)), "ClubId", System.Data.DataRowVersion.Original, null));
+            this.deleteCommandClubs.Parameters.Add(new OleDbParameter("Original_Automatic", OleDbType.Boolean, 2, System.Data.ParameterDirection.Input, false, ((System.Byte)(0)), ((System.Byte)(0)), "Automatic", System.Data.DataRowVersion.Original, null));
+            this.deleteCommandClubs.Parameters.Add(new OleDbParameter("Original_Country", OleDbType.VarWChar, 150, System.Data.ParameterDirection.Input, false, ((System.Byte)(0)), ((System.Byte)(0)), "Country", System.Data.DataRowVersion.Original, null));
+            this.deleteCommandClubs.Parameters.Add(new OleDbParameter("Original_Country1", OleDbType.VarWChar, 150, System.Data.ParameterDirection.Input, false, ((System.Byte)(0)), ((System.Byte)(0)), "Country", System.Data.DataRowVersion.Original, null));
+            this.deleteCommandClubs.Parameters.Add(new OleDbParameter("Original_Name", OleDbType.VarWChar, 150, System.Data.ParameterDirection.Input, false, ((System.Byte)(0)), ((System.Byte)(0)), "Name", System.Data.DataRowVersion.Original, null));
+            this.deleteCommandClubs.Parameters.Add(new OleDbParameter("Original_Name1", OleDbType.VarWChar, 150, System.Data.ParameterDirection.Input, false, ((System.Byte)(0)), ((System.Byte)(0)), "Name", System.Data.DataRowVersion.Original, null));
+            this.deleteCommandClubs.Parameters.Add(new OleDbParameter("Original_ToAutomatic", OleDbType.Boolean, 2, System.Data.ParameterDirection.Input, false, ((System.Byte)(0)), ((System.Byte)(0)), "ToAutomatic", System.Data.DataRowVersion.Original, null));
+            this.deleteCommandClubs.Parameters.Add(new OleDbParameter("Original_LastUpdate", OleDbType.Date, 2, System.Data.ParameterDirection.Input, false, ((System.Byte)(0)), ((System.Byte)(0)), "LastUpdate", System.Data.DataRowVersion.Original, null));
+
             // oleDbDataAdapter1
-            // 
-            DAClubs.DeleteCommand = deleteCommandClubs;
-            DAClubs.InsertCommand = insertCommandClubs;
-            DAClubs.SelectCommand = selectCommandClubs;
-            DAClubs.UpdateCommand = updateCommandClubs;
-            DAClubs.TableMappings.AddRange(new System.Data.Common.DataTableMapping[] {
-                                                                                                        new System.Data.Common.DataTableMapping("Table", "Clubs", new System.Data.Common.DataColumnMapping[] {
-                                                                                                                                                                                                                 new System.Data.Common.DataColumnMapping("Automatic", "Automatic"),
-                                                                                                                                                                                                                 new System.Data.Common.DataColumnMapping("ClubId", "ClubId"),
-                                                                                                                                                                                                                 new System.Data.Common.DataColumnMapping("Country", "Country"),
-                                                                                                                                                                                                                 new System.Data.Common.DataColumnMapping("Name", "Name"),
-                                                                                                                                                                                                                 new System.Data.Common.DataColumnMapping("ToAutomatic", "ToAutomatic"),
-                                                                                                                                                                                                                 new System.Data.Common.DataColumnMapping("LastUpdate", "LastUpdate")})});
+            this.DAClubs.DeleteCommand = this.deleteCommandClubs;
+            this.DAClubs.InsertCommand = this.insertCommandClubs;
+            this.DAClubs.SelectCommand = this.selectCommandClubs;
+            this.DAClubs.UpdateCommand = this.updateCommandClubs;
+            this.DAClubs.TableMappings.AddRange(new System.Data.Common.DataTableMapping[] {
+                new System.Data.Common.DataTableMapping("Table", "Clubs", new System.Data.Common.DataColumnMapping[] {
+                    new System.Data.Common.DataColumnMapping("Automatic", "Automatic"),
+                    new System.Data.Common.DataColumnMapping("ClubId", "ClubId"),
+                    new System.Data.Common.DataColumnMapping("Country", "Country"),
+                    new System.Data.Common.DataColumnMapping("Name", "Name"),
+                    new System.Data.Common.DataColumnMapping("ToAutomatic", "ToAutomatic"),
+                    new System.Data.Common.DataColumnMapping("LastUpdate", "LastUpdate")
+                })
+            });
         }
         #endregion
 
         #region Shooters
-        private OleDbCommand selectCommandShooters;
-        private OleDbCommand insertCommandShooters;
-        private OleDbCommand updateCommandShooters;
-        private OleDbCommand deleteCommandShooters;
-        private OleDbCommand identityCommandShooters;
         private void createDataAdapterShooters()
         {
             Trace.WriteLine("CDatabase: Entering createDataAdapterShooters()");
 
             // Create dataadapter
-            _daShooters = new OleDbDataAdapter();
+            this._daShooters = new OleDbDataAdapter();
 
             // Create commands
-            selectCommandShooters = new OleDbCommand();
-            insertCommandShooters = new OleDbCommand();
-            updateCommandShooters = new OleDbCommand();
-            deleteCommandShooters = new OleDbCommand();
-            identityCommandShooters = new OleDbCommand();
-            // 
+            this.selectCommandShooters = new OleDbCommand();
+            this.insertCommandShooters = new OleDbCommand();
+            this.updateCommandShooters = new OleDbCommand();
+            this.deleteCommandShooters = new OleDbCommand();
+            this.identityCommandShooters = new OleDbCommand();
+
             // selectCommandShooters
-            // 
-            selectCommandShooters.CommandText = "SELECT Automatic, Cardnr, Class, ClubId, Email, Givenname, Payed, ShooterId, Surn" +
+            this.selectCommandShooters.CommandText = "SELECT Automatic, Cardnr, Class, ClubId, Email, Givenname, Payed, ShooterId, Surn" +
                 "ame, ToAutomatic, Arrived, LastUpdate FROM Shooters";
-            selectCommandShooters.Connection = Conn;
-            // 
+            this.selectCommandShooters.Connection = this.Conn;
+
             // insertCommandShooters
-            // 
-            insertCommandShooters.CommandText = "INSERT INTO Shooters(Automatic, Cardnr, Class, ClubId, Email, Givenname, Payed, S" +
+            this.insertCommandShooters.CommandText = "INSERT INTO Shooters(Automatic, Cardnr, Class, ClubId, Email, Givenname, Payed, S" +
                 "urname, ToAutomatic, Arrived, LastUpdate) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
-            insertCommandShooters.Connection = Conn;
-            insertCommandShooters.Parameters.Add(new OleDbParameter("Automatic", OleDbType.Boolean, 2, "Automatic"));
-            insertCommandShooters.Parameters.Add(new OleDbParameter("Cardnr", OleDbType.VarWChar, 150, "Cardnr"));
-            insertCommandShooters.Parameters.Add(new OleDbParameter("Class", OleDbType.Integer, 0, "Class"));
-            insertCommandShooters.Parameters.Add(new OleDbParameter("ClubId", OleDbType.VarWChar, 150, "ClubId"));
-            insertCommandShooters.Parameters.Add(new OleDbParameter("Email", OleDbType.VarWChar, 150, "Email"));
-            insertCommandShooters.Parameters.Add(new OleDbParameter("Givenname", OleDbType.VarWChar, 150, "Givenname"));
-            insertCommandShooters.Parameters.Add(new OleDbParameter("Payed", OleDbType.Integer, 0, "Payed"));
-            insertCommandShooters.Parameters.Add(new OleDbParameter("Surname", OleDbType.VarWChar, 150, "Surname"));
-            insertCommandShooters.Parameters.Add(new OleDbParameter("ToAutomatic", OleDbType.Boolean, 2, "ToAutomatic"));
-            insertCommandShooters.Parameters.Add(new OleDbParameter("Arrived", OleDbType.Boolean, 2, "Arrived"));
-            insertCommandShooters.Parameters.Add(new OleDbParameter("LastUpdate", OleDbType.Date, 2, "LastUpdate"));
-            // 
+            this.insertCommandShooters.Connection = Conn;
+            this.insertCommandShooters.Parameters.Add(new OleDbParameter("Automatic", OleDbType.Boolean, 2, "Automatic"));
+            this.insertCommandShooters.Parameters.Add(new OleDbParameter("Cardnr", OleDbType.VarWChar, 150, "Cardnr"));
+            this.insertCommandShooters.Parameters.Add(new OleDbParameter("Class", OleDbType.Integer, 0, "Class"));
+            this.insertCommandShooters.Parameters.Add(new OleDbParameter("ClubId", OleDbType.VarWChar, 150, "ClubId"));
+            this.insertCommandShooters.Parameters.Add(new OleDbParameter("Email", OleDbType.VarWChar, 150, "Email"));
+            this.insertCommandShooters.Parameters.Add(new OleDbParameter("Givenname", OleDbType.VarWChar, 150, "Givenname"));
+            this.insertCommandShooters.Parameters.Add(new OleDbParameter("Payed", OleDbType.Integer, 0, "Payed"));
+            this.insertCommandShooters.Parameters.Add(new OleDbParameter("Surname", OleDbType.VarWChar, 150, "Surname"));
+            this.insertCommandShooters.Parameters.Add(new OleDbParameter("ToAutomatic", OleDbType.Boolean, 2, "ToAutomatic"));
+            this.insertCommandShooters.Parameters.Add(new OleDbParameter("Arrived", OleDbType.Boolean, 2, "Arrived"));
+            this.insertCommandShooters.Parameters.Add(new OleDbParameter("LastUpdate", OleDbType.Date, 2, "LastUpdate"));
+
             // updateCommandShooters
-            // 
-            updateCommandShooters.CommandText = @"UPDATE Shooters SET Automatic = ?, Cardnr = ?, Class = ?, ClubId = ?, Email = ?, Givenname = ?, Payed = ?, Surname = ?, ToAutomatic = ?, Arrived = ?, LastUpdate = ? "+
+            this.updateCommandShooters.CommandText = @"UPDATE Shooters SET Automatic = ?, Cardnr = ?, Class = ?, ClubId = ?, Email = ?, Givenname = ?, Payed = ?, Surname = ?, ToAutomatic = ?, Arrived = ?, LastUpdate = ? " +
                 "WHERE ShooterId = ?";
-            updateCommandShooters.Connection = Conn;
-            updateCommandShooters.Parameters.Add(new OleDbParameter("Automatic", OleDbType.Boolean, 2, "Automatic"));
-            updateCommandShooters.Parameters.Add(new OleDbParameter("Cardnr", OleDbType.VarWChar, 150, "Cardnr"));
-            updateCommandShooters.Parameters.Add(new OleDbParameter("Class", OleDbType.Integer, 0, "Class"));
-            updateCommandShooters.Parameters.Add(new OleDbParameter("ClubId", OleDbType.VarWChar, 150, "ClubId"));
-            updateCommandShooters.Parameters.Add(new OleDbParameter("Email", OleDbType.VarWChar, 150, "Email"));
-            updateCommandShooters.Parameters.Add(new OleDbParameter("Givenname", OleDbType.VarWChar, 150, "Givenname"));
-            updateCommandShooters.Parameters.Add(new OleDbParameter("Payed", OleDbType.Integer, 0, "Payed"));
-            updateCommandShooters.Parameters.Add(new OleDbParameter("Surname", OleDbType.VarWChar, 150, "Surname"));
-            updateCommandShooters.Parameters.Add(new OleDbParameter("ToAutomatic", OleDbType.Boolean, 2, "ToAutomatic"));
-            updateCommandShooters.Parameters.Add(new OleDbParameter("Arrived", OleDbType.Boolean, 2, "Arrived"));
-            updateCommandShooters.Parameters.Add(new OleDbParameter("LastUpdate", OleDbType.Date, 2, "LastUpdate"));
-            updateCommandShooters.Parameters.Add(new OleDbParameter("Original_ShooterId", OleDbType.Integer, 0, System.Data.ParameterDirection.Input, false, ((System.Byte)(0)), ((System.Byte)(0)), "ShooterId", System.Data.DataRowVersion.Original, null));
-            // 
+            this.updateCommandShooters.Connection = this.Conn;
+            this.updateCommandShooters.Parameters.Add(new OleDbParameter("Automatic", OleDbType.Boolean, 2, "Automatic"));
+            this.updateCommandShooters.Parameters.Add(new OleDbParameter("Cardnr", OleDbType.VarWChar, 150, "Cardnr"));
+            this.updateCommandShooters.Parameters.Add(new OleDbParameter("Class", OleDbType.Integer, 0, "Class"));
+            this.updateCommandShooters.Parameters.Add(new OleDbParameter("ClubId", OleDbType.VarWChar, 150, "ClubId"));
+            this.updateCommandShooters.Parameters.Add(new OleDbParameter("Email", OleDbType.VarWChar, 150, "Email"));
+            this.updateCommandShooters.Parameters.Add(new OleDbParameter("Givenname", OleDbType.VarWChar, 150, "Givenname"));
+            this.updateCommandShooters.Parameters.Add(new OleDbParameter("Payed", OleDbType.Integer, 0, "Payed"));
+            this.updateCommandShooters.Parameters.Add(new OleDbParameter("Surname", OleDbType.VarWChar, 150, "Surname"));
+            this.updateCommandShooters.Parameters.Add(new OleDbParameter("ToAutomatic", OleDbType.Boolean, 2, "ToAutomatic"));
+            this.updateCommandShooters.Parameters.Add(new OleDbParameter("Arrived", OleDbType.Boolean, 2, "Arrived"));
+            this.updateCommandShooters.Parameters.Add(new OleDbParameter("LastUpdate", OleDbType.Date, 2, "LastUpdate"));
+            this.updateCommandShooters.Parameters.Add(new OleDbParameter("Original_ShooterId", OleDbType.Integer, 0, System.Data.ParameterDirection.Input, false, ((System.Byte)(0)), ((System.Byte)(0)), "ShooterId", System.Data.DataRowVersion.Original, null));
+
             // deleteCommandShooters
-            // 
-            deleteCommandShooters.CommandText = @"DELETE FROM Shooters WHERE (ShooterId = ?)";
-            deleteCommandShooters.Connection = Conn;
-            deleteCommandShooters.Parameters.Add(new OleDbParameter("Original_ShooterId", OleDbType.Integer, 0, System.Data.ParameterDirection.Input, false, ((System.Byte)(0)), ((System.Byte)(0)), "ShooterId", System.Data.DataRowVersion.Original, null));
-            //
+            this.deleteCommandShooters.CommandText = @"DELETE FROM Shooters WHERE (ShooterId = ?)";
+            this.deleteCommandShooters.Connection = this.Conn;
+            this.deleteCommandShooters.Parameters.Add(new OleDbParameter("Original_ShooterId", OleDbType.Integer, 0, System.Data.ParameterDirection.Input, false, ((System.Byte)(0)), ((System.Byte)(0)), "ShooterId", System.Data.DataRowVersion.Original, null));
+
             // identityCommandShooters
-            //
-            identityCommandShooters.CommandText = "SELECT @@IDENTITY";
-            identityCommandShooters.Connection = Conn;
-            // 
+            this.identityCommandShooters.CommandText = "SELECT @@IDENTITY";
+            this.identityCommandShooters.Connection = this.Conn;
+
             // oleDbDataAdapter1
-            // 
-            _daShooters.DeleteCommand = deleteCommandShooters;
-            _daShooters.InsertCommand = insertCommandShooters;
-            _daShooters.SelectCommand = selectCommandShooters;
-            _daShooters.TableMappings.AddRange(new System.Data.Common.DataTableMapping[] {
-                                                                                                        new System.Data.Common.DataTableMapping("Table", "Shooters", new System.Data.Common.DataColumnMapping[] {
-                                                                                                                                                                                                                    new System.Data.Common.DataColumnMapping("Automatic", "Automatic"),
-                                                                                                                                                                                                                    new System.Data.Common.DataColumnMapping("Cardnr", "Cardnr"),
-                                                                                                                                                                                                                    new System.Data.Common.DataColumnMapping("Class", "Class"),
-                                                                                                                                                                                                                    new System.Data.Common.DataColumnMapping("ClubId", "ClubId"),
-                                                                                                                                                                                                                    new System.Data.Common.DataColumnMapping("Email", "Email"),
-                                                                                                                                                                                                                    new System.Data.Common.DataColumnMapping("Givenname", "Givenname"),
-                                                                                                                                                                                                                    new System.Data.Common.DataColumnMapping("Payed", "Payed"),
-                                                                                                                                                                                                                    new System.Data.Common.DataColumnMapping("ShooterId", "ShooterId"),
-                                                                                                                                                                                                                    new System.Data.Common.DataColumnMapping("Surname", "Surname"),
-                                                                                                                                                                                                                    new System.Data.Common.DataColumnMapping("ToAutomatic", "ToAutomatic"),
-                                                                                                                                                                                                                    new System.Data.Common.DataColumnMapping("Arrived", "Arrived"),
-                                                                                                                                                                                                                    new System.Data.Common.DataColumnMapping("LastUpdate", "LastUpdate")})});
-            _daShooters.UpdateCommand = updateCommandShooters;
+            this._daShooters.DeleteCommand = this.deleteCommandShooters;
+            this._daShooters.InsertCommand = this.insertCommandShooters;
+            this._daShooters.SelectCommand = this.selectCommandShooters;
+            this._daShooters.TableMappings.AddRange(new System.Data.Common.DataTableMapping[] {
+                new System.Data.Common.DataTableMapping("Table", "Shooters", new System.Data.Common.DataColumnMapping[] {
+                    new System.Data.Common.DataColumnMapping("Automatic", "Automatic"),
+                    new System.Data.Common.DataColumnMapping("Cardnr", "Cardnr"),
+                    new System.Data.Common.DataColumnMapping("Class", "Class"),
+                    new System.Data.Common.DataColumnMapping("ClubId", "ClubId"),
+                    new System.Data.Common.DataColumnMapping("Email", "Email"),
+                    new System.Data.Common.DataColumnMapping("Givenname", "Givenname"),
+                    new System.Data.Common.DataColumnMapping("Payed", "Payed"),
+                    new System.Data.Common.DataColumnMapping("ShooterId", "ShooterId"),
+                    new System.Data.Common.DataColumnMapping("Surname", "Surname"),
+                    new System.Data.Common.DataColumnMapping("ToAutomatic", "ToAutomatic"),
+                    new System.Data.Common.DataColumnMapping("Arrived", "Arrived"),
+                    new System.Data.Common.DataColumnMapping("LastUpdate", "LastUpdate")
+                })
+            });
+            this._daShooters.UpdateCommand = this.updateCommandShooters;
 
             // Handle fetching identity of new inserted rows.
-            _daShooters.RowUpdated += new OleDbRowUpdatedEventHandler(DAShooters_RowUpdated);
+            this._daShooters.RowUpdated += new OleDbRowUpdatedEventHandler(this.DaShootersRowUpdated);
 
         }
-        private void DAShooters_RowUpdated(object sender, OleDbRowUpdatedEventArgs e)
+
+        /// <summary>
+        /// Event handler called when the <see cref="_daShooters"/> have a new row.
+        /// </summary>
+        /// <param name="sender">
+        /// The sender.
+        /// </param>
+        /// <param name="e">
+        /// The e.
+        /// </param>
+        private void DaShootersRowUpdated(object sender, OleDbRowUpdatedEventArgs e)
         {
-            if (e.Status == UpdateStatus.Continue && e.StatementType == StatementType.Insert )
+            if (e.Status == UpdateStatus.Continue && e.StatementType == StatementType.Insert)
             {
                 // Get the Identity column value
-                int identity = Int32.Parse(identityCommandShooters.ExecuteScalar().ToString());
+                int identity = int.Parse(this.identityCommandShooters.ExecuteScalar().ToString());
                 e.Row["ShooterId"] = identity;
                 e.Row.AcceptChanges();
             }
@@ -1198,7 +1311,7 @@ namespace Allberg.Shooter.Common
             // selectCommandStations
             // 
             selectCommandStations.CommandText = "SELECT CompetitionId, Figures, Points, Shoots, StationId, StationNr, Distinguish FROM Stations" +
-                "";
+                string.Empty;
             selectCommandStations.Connection = Conn;
             // 
             // insertCommandStations
@@ -1401,106 +1514,95 @@ namespace Allberg.Shooter.Common
         #endregion
 
         #region Teams
-        private OleDbCommand selectCommandTeams;
-        private OleDbCommand insertCommandTeams;
-        private OleDbCommand updateCommandTeams;
-        private OleDbCommand deleteCommandTeams;
-        private OleDbCommand identityCommandTeams;
         private void createDataAdapterTeams()
         {
             Trace.WriteLine("CDatabase: Entering createDataAdapterTeams()");
 
             // Create adapter
-            _daTeams = new OleDbDataAdapter();
+            this._daTeams = new OleDbDataAdapter();
 
             // Create the commands
-            selectCommandTeams = new OleDbCommand();
-            insertCommandTeams = new OleDbCommand();
-            updateCommandTeams = new OleDbCommand();
-            deleteCommandTeams = new OleDbCommand();
-            identityCommandTeams = new OleDbCommand();
-            // 
+            this.selectCommandTeams = new OleDbCommand();
+            this.insertCommandTeams = new OleDbCommand();
+            this.updateCommandTeams = new OleDbCommand();
+            this.deleteCommandTeams = new OleDbCommand();
+            this.identityCommandTeams = new OleDbCommand();
+
             // selectCommandTeams
-            // 
-            selectCommandTeams.CommandText = "SELECT ClubId, CompetitorId1, CompetitorId2, CompetitorId3, CompetitorId4, CompetitorId5, Name, " +
+            this.selectCommandTeams.CommandText = "SELECT ClubId, CompetitorId1, CompetitorId2, CompetitorId3, CompetitorId4, CompetitorId5, Name, " +
                 "TeamId, WClass FROM Teams";
-            selectCommandTeams.Connection = Conn;
-            // 
+            this.selectCommandTeams.Connection = this.Conn;
+
             // insertCommandTeams
-            // 
-            insertCommandTeams.CommandText = "INSERT INTO Teams(ClubId, CompetitorId1, CompetitorId2, CompetitorId3, Competitor" +
+            this.insertCommandTeams.CommandText = "INSERT INTO Teams(ClubId, CompetitorId1, CompetitorId2, CompetitorId3, Competitor" +
                 "Id4, CompetitorId5, Name, WClass) VALUES (?, ?, ?, ?, ?, ?, ?)";
-            insertCommandTeams.Connection = Conn;
-            insertCommandTeams.Parameters.Add(new OleDbParameter("ClubId", OleDbType.VarWChar, 150, "ClubId"));
-            insertCommandTeams.Parameters.Add(new OleDbParameter("CompetitorId1", OleDbType.Integer, 0, "CompetitorId1"));
-            insertCommandTeams.Parameters.Add(new OleDbParameter("CompetitorId2", OleDbType.Integer, 0, "CompetitorId2"));
-            insertCommandTeams.Parameters.Add(new OleDbParameter("CompetitorId3", OleDbType.Integer, 0, "CompetitorId3"));
-            insertCommandTeams.Parameters.Add(new OleDbParameter("CompetitorId4", OleDbType.Integer, 0, "CompetitorId4"));
-            insertCommandTeams.Parameters.Add(new OleDbParameter("CompetitorId5", OleDbType.Integer, 0, "CompetitorId5"));
-            insertCommandTeams.Parameters.Add(new OleDbParameter("Name", OleDbType.VarWChar, 150, "Name"));
-            insertCommandTeams.Parameters.Add(new OleDbParameter("WClass", OleDbType.Integer, 0, "WClass"));
-            // 
+            this.insertCommandTeams.Connection = Conn;
+            this.insertCommandTeams.Parameters.Add(new OleDbParameter("ClubId", OleDbType.VarWChar, 150, "ClubId"));
+            this.insertCommandTeams.Parameters.Add(new OleDbParameter("CompetitorId1", OleDbType.Integer, 0, "CompetitorId1"));
+            this.insertCommandTeams.Parameters.Add(new OleDbParameter("CompetitorId2", OleDbType.Integer, 0, "CompetitorId2"));
+            this.insertCommandTeams.Parameters.Add(new OleDbParameter("CompetitorId3", OleDbType.Integer, 0, "CompetitorId3"));
+            this.insertCommandTeams.Parameters.Add(new OleDbParameter("CompetitorId4", OleDbType.Integer, 0, "CompetitorId4"));
+            this.insertCommandTeams.Parameters.Add(new OleDbParameter("CompetitorId5", OleDbType.Integer, 0, "CompetitorId5"));
+            this.insertCommandTeams.Parameters.Add(new OleDbParameter("Name", OleDbType.VarWChar, 150, "Name"));
+            this.insertCommandTeams.Parameters.Add(new OleDbParameter("WClass", OleDbType.Integer, 0, "WClass"));
+
             // updateCommandTeams
-            // 
-            updateCommandTeams.CommandText = @"UPDATE Teams SET ClubId = ?, CompetitorId1 = ?, CompetitorId2 = ?, CompetitorId3 = ?, CompetitorId4 = ?, CompetitorId5 = ?, Name = ?, WClass = ? WHERE (TeamId = ?) AND (ClubId = ? OR ? IS NULL AND ClubId IS NULL) AND (CompetitorId1 = ? OR ? IS NULL AND CompetitorId1 IS NULL) AND (CompetitorId2 = ? OR ? IS NULL AND CompetitorId2 IS NULL) AND (CompetitorId3 = ? OR ? IS NULL AND CompetitorId3 IS NULL) AND (CompetitorId4 = ? OR ? IS NULL AND CompetitorId4 IS NULL)AND (CompetitorId5 = ? OR ? IS NULL AND CompetitorId5 IS NULL) AND (Name = ?) AND (WClass = ? OR ? IS NULL AND WClass IS NULL)";
-            updateCommandTeams.Connection = Conn;
-            updateCommandTeams.Parameters.Add(new OleDbParameter("ClubId", OleDbType.VarWChar, 150, "ClubId"));
-            updateCommandTeams.Parameters.Add(new OleDbParameter("CompetitorId1", OleDbType.Integer, 0, "CompetitorId1"));
-            updateCommandTeams.Parameters.Add(new OleDbParameter("CompetitorId2", OleDbType.Integer, 0, "CompetitorId2"));
-            updateCommandTeams.Parameters.Add(new OleDbParameter("CompetitorId3", OleDbType.Integer, 0, "CompetitorId3"));
-            updateCommandTeams.Parameters.Add(new OleDbParameter("CompetitorId4", OleDbType.Integer, 0, "CompetitorId4"));
-            updateCommandTeams.Parameters.Add(new OleDbParameter("CompetitorId5", OleDbType.Integer, 0, "CompetitorId5"));
-            updateCommandTeams.Parameters.Add(new OleDbParameter("Name", OleDbType.VarWChar, 150, "Name"));
-            updateCommandTeams.Parameters.Add(new OleDbParameter("WClass", OleDbType.Integer, 0, "WClass"));
-            updateCommandTeams.Parameters.Add(new OleDbParameter("Original_TeamId", OleDbType.Integer, 0, System.Data.ParameterDirection.Input, false, ((System.Byte)(0)), ((System.Byte)(0)), "TeamId", System.Data.DataRowVersion.Original, null));
-            updateCommandTeams.Parameters.Add(new OleDbParameter("Original_ClubId", OleDbType.VarWChar, 150, System.Data.ParameterDirection.Input, false, ((System.Byte)(0)), ((System.Byte)(0)), "ClubId", System.Data.DataRowVersion.Original, null));
-            updateCommandTeams.Parameters.Add(new OleDbParameter("Original_ClubId1", OleDbType.VarWChar, 150, System.Data.ParameterDirection.Input, false, ((System.Byte)(0)), ((System.Byte)(0)), "ClubId", System.Data.DataRowVersion.Original, null));
-            updateCommandTeams.Parameters.Add(new OleDbParameter("Original_CompetitorId1", OleDbType.Integer, 0, System.Data.ParameterDirection.Input, false, ((System.Byte)(0)), ((System.Byte)(0)), "CompetitorId1", System.Data.DataRowVersion.Original, null));
-            updateCommandTeams.Parameters.Add(new OleDbParameter("Original_CompetitorId11", OleDbType.Integer, 0, System.Data.ParameterDirection.Input, false, ((System.Byte)(0)), ((System.Byte)(0)), "CompetitorId1", System.Data.DataRowVersion.Original, null));
-            updateCommandTeams.Parameters.Add(new OleDbParameter("Original_CompetitorId2", OleDbType.Integer, 0, System.Data.ParameterDirection.Input, false, ((System.Byte)(0)), ((System.Byte)(0)), "CompetitorId2", System.Data.DataRowVersion.Original, null));
-            updateCommandTeams.Parameters.Add(new OleDbParameter("Original_CompetitorId21", OleDbType.Integer, 0, System.Data.ParameterDirection.Input, false, ((System.Byte)(0)), ((System.Byte)(0)), "CompetitorId2", System.Data.DataRowVersion.Original, null));
-            updateCommandTeams.Parameters.Add(new OleDbParameter("Original_CompetitorId3", OleDbType.Integer, 0, System.Data.ParameterDirection.Input, false, ((System.Byte)(0)), ((System.Byte)(0)), "CompetitorId3", System.Data.DataRowVersion.Original, null));
-            updateCommandTeams.Parameters.Add(new OleDbParameter("Original_CompetitorId31", OleDbType.Integer, 0, System.Data.ParameterDirection.Input, false, ((System.Byte)(0)), ((System.Byte)(0)), "CompetitorId3", System.Data.DataRowVersion.Original, null));
-            updateCommandTeams.Parameters.Add(new OleDbParameter("Original_CompetitorId4", OleDbType.Integer, 0, System.Data.ParameterDirection.Input, false, ((System.Byte)(0)), ((System.Byte)(0)), "CompetitorId4", System.Data.DataRowVersion.Original, null));
-            updateCommandTeams.Parameters.Add(new OleDbParameter("Original_CompetitorId41", OleDbType.Integer, 0, System.Data.ParameterDirection.Input, false, ((System.Byte)(0)), ((System.Byte)(0)), "CompetitorId4", System.Data.DataRowVersion.Original, null));
-            updateCommandTeams.Parameters.Add(new OleDbParameter("Original_CompetitorId5", OleDbType.Integer, 0, System.Data.ParameterDirection.Input, false, ((System.Byte)(0)), ((System.Byte)(0)), "CompetitorId5", System.Data.DataRowVersion.Original, null));
-            updateCommandTeams.Parameters.Add(new OleDbParameter("Original_CompetitorId51", OleDbType.Integer, 0, System.Data.ParameterDirection.Input, false, ((System.Byte)(0)), ((System.Byte)(0)), "CompetitorId5", System.Data.DataRowVersion.Original, null));
-            updateCommandTeams.Parameters.Add(new OleDbParameter("Original_Name", OleDbType.VarWChar, 150, System.Data.ParameterDirection.Input, false, ((System.Byte)(0)), ((System.Byte)(0)), "Name", System.Data.DataRowVersion.Original, null));
-            updateCommandTeams.Parameters.Add(new OleDbParameter("Original_WClass", OleDbType.Integer, 0, System.Data.ParameterDirection.Input, false, ((System.Byte)(0)), ((System.Byte)(0)), "WClass", System.Data.DataRowVersion.Original, null));
-            updateCommandTeams.Parameters.Add(new OleDbParameter("Original_WClass1", OleDbType.Integer, 0, System.Data.ParameterDirection.Input, false, ((System.Byte)(0)), ((System.Byte)(0)), "WClass", System.Data.DataRowVersion.Original, null));
-            // 
+            this.updateCommandTeams.CommandText = @"UPDATE Teams SET ClubId = ?, CompetitorId1 = ?, CompetitorId2 = ?, CompetitorId3 = ?, CompetitorId4 = ?, CompetitorId5 = ?, Name = ?, WClass = ? WHERE (TeamId = ?) AND (ClubId = ? OR ? IS NULL AND ClubId IS NULL) AND (CompetitorId1 = ? OR ? IS NULL AND CompetitorId1 IS NULL) AND (CompetitorId2 = ? OR ? IS NULL AND CompetitorId2 IS NULL) AND (CompetitorId3 = ? OR ? IS NULL AND CompetitorId3 IS NULL) AND (CompetitorId4 = ? OR ? IS NULL AND CompetitorId4 IS NULL)AND (CompetitorId5 = ? OR ? IS NULL AND CompetitorId5 IS NULL) AND (Name = ?) AND (WClass = ? OR ? IS NULL AND WClass IS NULL)";
+            this.updateCommandTeams.Connection = this.Conn;
+            this.updateCommandTeams.Parameters.Add(new OleDbParameter("ClubId", OleDbType.VarWChar, 150, "ClubId"));
+            this.updateCommandTeams.Parameters.Add(new OleDbParameter("CompetitorId1", OleDbType.Integer, 0, "CompetitorId1"));
+            this.updateCommandTeams.Parameters.Add(new OleDbParameter("CompetitorId2", OleDbType.Integer, 0, "CompetitorId2"));
+            this.updateCommandTeams.Parameters.Add(new OleDbParameter("CompetitorId3", OleDbType.Integer, 0, "CompetitorId3"));
+            this.updateCommandTeams.Parameters.Add(new OleDbParameter("CompetitorId4", OleDbType.Integer, 0, "CompetitorId4"));
+            this.updateCommandTeams.Parameters.Add(new OleDbParameter("CompetitorId5", OleDbType.Integer, 0, "CompetitorId5"));
+            this.updateCommandTeams.Parameters.Add(new OleDbParameter("Name", OleDbType.VarWChar, 150, "Name"));
+            this.updateCommandTeams.Parameters.Add(new OleDbParameter("WClass", OleDbType.Integer, 0, "WClass"));
+            this.updateCommandTeams.Parameters.Add(new OleDbParameter("Original_TeamId", OleDbType.Integer, 0, System.Data.ParameterDirection.Input, false, ((System.Byte)(0)), ((System.Byte)(0)), "TeamId", System.Data.DataRowVersion.Original, null));
+            this.updateCommandTeams.Parameters.Add(new OleDbParameter("Original_ClubId", OleDbType.VarWChar, 150, System.Data.ParameterDirection.Input, false, ((System.Byte)(0)), ((System.Byte)(0)), "ClubId", System.Data.DataRowVersion.Original, null));
+            this.updateCommandTeams.Parameters.Add(new OleDbParameter("Original_ClubId1", OleDbType.VarWChar, 150, System.Data.ParameterDirection.Input, false, ((System.Byte)(0)), ((System.Byte)(0)), "ClubId", System.Data.DataRowVersion.Original, null));
+            this.updateCommandTeams.Parameters.Add(new OleDbParameter("Original_CompetitorId1", OleDbType.Integer, 0, System.Data.ParameterDirection.Input, false, ((System.Byte)(0)), ((System.Byte)(0)), "CompetitorId1", System.Data.DataRowVersion.Original, null));
+            this.updateCommandTeams.Parameters.Add(new OleDbParameter("Original_CompetitorId11", OleDbType.Integer, 0, System.Data.ParameterDirection.Input, false, ((System.Byte)(0)), ((System.Byte)(0)), "CompetitorId1", System.Data.DataRowVersion.Original, null));
+            this.updateCommandTeams.Parameters.Add(new OleDbParameter("Original_CompetitorId2", OleDbType.Integer, 0, System.Data.ParameterDirection.Input, false, ((System.Byte)(0)), ((System.Byte)(0)), "CompetitorId2", System.Data.DataRowVersion.Original, null));
+            this.updateCommandTeams.Parameters.Add(new OleDbParameter("Original_CompetitorId21", OleDbType.Integer, 0, System.Data.ParameterDirection.Input, false, ((System.Byte)(0)), ((System.Byte)(0)), "CompetitorId2", System.Data.DataRowVersion.Original, null));
+            this.updateCommandTeams.Parameters.Add(new OleDbParameter("Original_CompetitorId3", OleDbType.Integer, 0, System.Data.ParameterDirection.Input, false, ((System.Byte)(0)), ((System.Byte)(0)), "CompetitorId3", System.Data.DataRowVersion.Original, null));
+            this.updateCommandTeams.Parameters.Add(new OleDbParameter("Original_CompetitorId31", OleDbType.Integer, 0, System.Data.ParameterDirection.Input, false, ((System.Byte)(0)), ((System.Byte)(0)), "CompetitorId3", System.Data.DataRowVersion.Original, null));
+            this.updateCommandTeams.Parameters.Add(new OleDbParameter("Original_CompetitorId4", OleDbType.Integer, 0, System.Data.ParameterDirection.Input, false, ((System.Byte)(0)), ((System.Byte)(0)), "CompetitorId4", System.Data.DataRowVersion.Original, null));
+            this.updateCommandTeams.Parameters.Add(new OleDbParameter("Original_CompetitorId41", OleDbType.Integer, 0, System.Data.ParameterDirection.Input, false, ((System.Byte)(0)), ((System.Byte)(0)), "CompetitorId4", System.Data.DataRowVersion.Original, null));
+            this.updateCommandTeams.Parameters.Add(new OleDbParameter("Original_CompetitorId5", OleDbType.Integer, 0, System.Data.ParameterDirection.Input, false, ((System.Byte)(0)), ((System.Byte)(0)), "CompetitorId5", System.Data.DataRowVersion.Original, null));
+            this.updateCommandTeams.Parameters.Add(new OleDbParameter("Original_CompetitorId51", OleDbType.Integer, 0, System.Data.ParameterDirection.Input, false, ((System.Byte)(0)), ((System.Byte)(0)), "CompetitorId5", System.Data.DataRowVersion.Original, null));
+            this.updateCommandTeams.Parameters.Add(new OleDbParameter("Original_Name", OleDbType.VarWChar, 150, System.Data.ParameterDirection.Input, false, ((System.Byte)(0)), ((System.Byte)(0)), "Name", System.Data.DataRowVersion.Original, null));
+            this.updateCommandTeams.Parameters.Add(new OleDbParameter("Original_WClass", OleDbType.Integer, 0, System.Data.ParameterDirection.Input, false, ((System.Byte)(0)), ((System.Byte)(0)), "WClass", System.Data.DataRowVersion.Original, null));
+            this.updateCommandTeams.Parameters.Add(new OleDbParameter("Original_WClass1", OleDbType.Integer, 0, System.Data.ParameterDirection.Input, false, ((System.Byte)(0)), ((System.Byte)(0)), "WClass", System.Data.DataRowVersion.Original, null));
+
             // deleteCommandTeams
-            // 
-            deleteCommandTeams.CommandText = @"DELETE FROM Teams WHERE (TeamId = ?) AND (ClubId = ? OR ? IS NULL AND ClubId IS NULL) AND (CompetitorId1 = ? OR ? IS NULL AND CompetitorId1 IS NULL) AND (CompetitorId2 = ? OR ? IS NULL AND CompetitorId2 IS NULL) AND (CompetitorId3 = ? OR ? IS NULL AND CompetitorId3 IS NULL) AND (CompetitorId4 = ? OR ? IS NULL AND CompetitorId4 IS NULL) AND (CompetitorId5 = ? OR ? IS NULL AND CompetitorId5 IS NULL) AND (Name = ?) AND (WClass = ? OR ? IS NULL AND WClass IS NULL)";
-            deleteCommandTeams.Connection = Conn;
-            deleteCommandTeams.Parameters.Add(new OleDbParameter("Original_TeamId", OleDbType.Integer, 0, System.Data.ParameterDirection.Input, false, ((System.Byte)(0)), ((System.Byte)(0)), "TeamId", System.Data.DataRowVersion.Original, null));
-            deleteCommandTeams.Parameters.Add(new OleDbParameter("Original_ClubId", OleDbType.VarWChar, 150, System.Data.ParameterDirection.Input, false, ((System.Byte)(0)), ((System.Byte)(0)), "ClubId", System.Data.DataRowVersion.Original, null));
-            deleteCommandTeams.Parameters.Add(new OleDbParameter("Original_ClubId1", OleDbType.VarWChar, 150, System.Data.ParameterDirection.Input, false, ((System.Byte)(0)), ((System.Byte)(0)), "ClubId", System.Data.DataRowVersion.Original, null));
-            deleteCommandTeams.Parameters.Add(new OleDbParameter("Original_CompetitorId1", OleDbType.Integer, 0, System.Data.ParameterDirection.Input, false, ((System.Byte)(0)), ((System.Byte)(0)), "CompetitorId1", System.Data.DataRowVersion.Original, null));
-            deleteCommandTeams.Parameters.Add(new OleDbParameter("Original_CompetitorId11", OleDbType.Integer, 0, System.Data.ParameterDirection.Input, false, ((System.Byte)(0)), ((System.Byte)(0)), "CompetitorId1", System.Data.DataRowVersion.Original, null));
-            deleteCommandTeams.Parameters.Add(new OleDbParameter("Original_CompetitorId2", OleDbType.Integer, 0, System.Data.ParameterDirection.Input, false, ((System.Byte)(0)), ((System.Byte)(0)), "CompetitorId2", System.Data.DataRowVersion.Original, null));
-            deleteCommandTeams.Parameters.Add(new OleDbParameter("Original_CompetitorId21", OleDbType.Integer, 0, System.Data.ParameterDirection.Input, false, ((System.Byte)(0)), ((System.Byte)(0)), "CompetitorId2", System.Data.DataRowVersion.Original, null));
-            deleteCommandTeams.Parameters.Add(new OleDbParameter("Original_CompetitorId3", OleDbType.Integer, 0, System.Data.ParameterDirection.Input, false, ((System.Byte)(0)), ((System.Byte)(0)), "CompetitorId3", System.Data.DataRowVersion.Original, null));
-            deleteCommandTeams.Parameters.Add(new OleDbParameter("Original_CompetitorId31", OleDbType.Integer, 0, System.Data.ParameterDirection.Input, false, ((System.Byte)(0)), ((System.Byte)(0)), "CompetitorId3", System.Data.DataRowVersion.Original, null));
-            deleteCommandTeams.Parameters.Add(new OleDbParameter("Original_CompetitorId4", OleDbType.Integer, 0, System.Data.ParameterDirection.Input, false, ((System.Byte)(0)), ((System.Byte)(0)), "CompetitorId4", System.Data.DataRowVersion.Original, null));
-            deleteCommandTeams.Parameters.Add(new OleDbParameter("Original_CompetitorId41", OleDbType.Integer, 0, System.Data.ParameterDirection.Input, false, ((System.Byte)(0)), ((System.Byte)(0)), "CompetitorId4", System.Data.DataRowVersion.Original, null));
-            deleteCommandTeams.Parameters.Add(new OleDbParameter("Original_CompetitorId5", OleDbType.Integer, 0, System.Data.ParameterDirection.Input, false, ((System.Byte)(0)), ((System.Byte)(0)), "CompetitorId4", System.Data.DataRowVersion.Original, null));
-            deleteCommandTeams.Parameters.Add(new OleDbParameter("Original_CompetitorId51", OleDbType.Integer, 0, System.Data.ParameterDirection.Input, false, ((System.Byte)(0)), ((System.Byte)(0)), "CompetitorId4", System.Data.DataRowVersion.Original, null));
-            deleteCommandTeams.Parameters.Add(new OleDbParameter("Original_Name", OleDbType.VarWChar, 150, System.Data.ParameterDirection.Input, false, ((System.Byte)(0)), ((System.Byte)(0)), "Name", System.Data.DataRowVersion.Original, null));
-            deleteCommandTeams.Parameters.Add(new OleDbParameter("Original_WClass", OleDbType.Integer, 0, System.Data.ParameterDirection.Input, false, ((System.Byte)(0)), ((System.Byte)(0)), "WClass", System.Data.DataRowVersion.Original, null));
-            deleteCommandTeams.Parameters.Add(new OleDbParameter("Original_WClass1", OleDbType.Integer, 0, System.Data.ParameterDirection.Input, false, ((System.Byte)(0)), ((System.Byte)(0)), "WClass", System.Data.DataRowVersion.Original, null));
-            //
+            this.deleteCommandTeams.CommandText = @"DELETE FROM Teams WHERE (TeamId = ?) AND (ClubId = ? OR ? IS NULL AND ClubId IS NULL) AND (CompetitorId1 = ? OR ? IS NULL AND CompetitorId1 IS NULL) AND (CompetitorId2 = ? OR ? IS NULL AND CompetitorId2 IS NULL) AND (CompetitorId3 = ? OR ? IS NULL AND CompetitorId3 IS NULL) AND (CompetitorId4 = ? OR ? IS NULL AND CompetitorId4 IS NULL) AND (CompetitorId5 = ? OR ? IS NULL AND CompetitorId5 IS NULL) AND (Name = ?) AND (WClass = ? OR ? IS NULL AND WClass IS NULL)";
+            this.deleteCommandTeams.Connection = this.Conn;
+            this.deleteCommandTeams.Parameters.Add(new OleDbParameter("Original_TeamId", OleDbType.Integer, 0, System.Data.ParameterDirection.Input, false, ((System.Byte)(0)), ((System.Byte)(0)), "TeamId", System.Data.DataRowVersion.Original, null));
+            this.deleteCommandTeams.Parameters.Add(new OleDbParameter("Original_ClubId", OleDbType.VarWChar, 150, System.Data.ParameterDirection.Input, false, ((System.Byte)(0)), ((System.Byte)(0)), "ClubId", System.Data.DataRowVersion.Original, null));
+            this.deleteCommandTeams.Parameters.Add(new OleDbParameter("Original_ClubId1", OleDbType.VarWChar, 150, System.Data.ParameterDirection.Input, false, ((System.Byte)(0)), ((System.Byte)(0)), "ClubId", System.Data.DataRowVersion.Original, null));
+            this.deleteCommandTeams.Parameters.Add(new OleDbParameter("Original_CompetitorId1", OleDbType.Integer, 0, System.Data.ParameterDirection.Input, false, ((System.Byte)(0)), ((System.Byte)(0)), "CompetitorId1", System.Data.DataRowVersion.Original, null));
+            this.deleteCommandTeams.Parameters.Add(new OleDbParameter("Original_CompetitorId11", OleDbType.Integer, 0, System.Data.ParameterDirection.Input, false, ((System.Byte)(0)), ((System.Byte)(0)), "CompetitorId1", System.Data.DataRowVersion.Original, null));
+            this.deleteCommandTeams.Parameters.Add(new OleDbParameter("Original_CompetitorId2", OleDbType.Integer, 0, System.Data.ParameterDirection.Input, false, ((System.Byte)(0)), ((System.Byte)(0)), "CompetitorId2", System.Data.DataRowVersion.Original, null));
+            this.deleteCommandTeams.Parameters.Add(new OleDbParameter("Original_CompetitorId21", OleDbType.Integer, 0, System.Data.ParameterDirection.Input, false, ((System.Byte)(0)), ((System.Byte)(0)), "CompetitorId2", System.Data.DataRowVersion.Original, null));
+            this.deleteCommandTeams.Parameters.Add(new OleDbParameter("Original_CompetitorId3", OleDbType.Integer, 0, System.Data.ParameterDirection.Input, false, ((System.Byte)(0)), ((System.Byte)(0)), "CompetitorId3", System.Data.DataRowVersion.Original, null));
+            this.deleteCommandTeams.Parameters.Add(new OleDbParameter("Original_CompetitorId31", OleDbType.Integer, 0, System.Data.ParameterDirection.Input, false, ((System.Byte)(0)), ((System.Byte)(0)), "CompetitorId3", System.Data.DataRowVersion.Original, null));
+            this.deleteCommandTeams.Parameters.Add(new OleDbParameter("Original_CompetitorId4", OleDbType.Integer, 0, System.Data.ParameterDirection.Input, false, ((System.Byte)(0)), ((System.Byte)(0)), "CompetitorId4", System.Data.DataRowVersion.Original, null));
+            this.deleteCommandTeams.Parameters.Add(new OleDbParameter("Original_CompetitorId41", OleDbType.Integer, 0, System.Data.ParameterDirection.Input, false, ((System.Byte)(0)), ((System.Byte)(0)), "CompetitorId4", System.Data.DataRowVersion.Original, null));
+            this.deleteCommandTeams.Parameters.Add(new OleDbParameter("Original_CompetitorId5", OleDbType.Integer, 0, System.Data.ParameterDirection.Input, false, ((System.Byte)(0)), ((System.Byte)(0)), "CompetitorId4", System.Data.DataRowVersion.Original, null));
+            this.deleteCommandTeams.Parameters.Add(new OleDbParameter("Original_CompetitorId51", OleDbType.Integer, 0, System.Data.ParameterDirection.Input, false, ((System.Byte)(0)), ((System.Byte)(0)), "CompetitorId4", System.Data.DataRowVersion.Original, null));
+            this.deleteCommandTeams.Parameters.Add(new OleDbParameter("Original_Name", OleDbType.VarWChar, 150, System.Data.ParameterDirection.Input, false, ((System.Byte)(0)), ((System.Byte)(0)), "Name", System.Data.DataRowVersion.Original, null));
+            this.deleteCommandTeams.Parameters.Add(new OleDbParameter("Original_WClass", OleDbType.Integer, 0, System.Data.ParameterDirection.Input, false, ((System.Byte)(0)), ((System.Byte)(0)), "WClass", System.Data.DataRowVersion.Original, null));
+            this.deleteCommandTeams.Parameters.Add(new OleDbParameter("Original_WClass1", OleDbType.Integer, 0, System.Data.ParameterDirection.Input, false, ((System.Byte)(0)), ((System.Byte)(0)), "WClass", System.Data.DataRowVersion.Original, null));
+
             // identityCommandTeams
-            //
-            identityCommandTeams.CommandText = "SELECT @@IDENTITY";
-            identityCommandTeams.Connection = Conn;
-            // 
+            this.identityCommandTeams.CommandText = "SELECT @@IDENTITY";
+            this.identityCommandTeams.Connection = this.Conn;
+
             // DATeams
-            // 
-            _daTeams.DeleteCommand = deleteCommandTeams;
-            _daTeams.InsertCommand = insertCommandTeams;
-            _daTeams.SelectCommand = selectCommandTeams;
-            _daTeams.TableMappings.AddRange(new System.Data.Common.DataTableMapping[] {
+            this._daTeams.DeleteCommand = this.deleteCommandTeams;
+            this._daTeams.InsertCommand = this.insertCommandTeams;
+            this._daTeams.SelectCommand = this.selectCommandTeams;
+            this._daTeams.TableMappings.AddRange(new System.Data.Common.DataTableMapping[] {
                                                                                                         new System.Data.Common.DataTableMapping("Table", "Teams", new System.Data.Common.DataColumnMapping[] {
                                                                                                                                                                                                                  new System.Data.Common.DataColumnMapping("ClubId", "ClubId"),
                                                                                                                                                                                                                  new System.Data.Common.DataColumnMapping("CompetitorId1", "CompetitorId1"),
@@ -1510,17 +1612,18 @@ namespace Allberg.Shooter.Common
                                                                                                                                                                                                                  new System.Data.Common.DataColumnMapping("Name", "Name"),
                                                                                                                                                                                                                  new System.Data.Common.DataColumnMapping("TeamId", "TeamId"),
                                                                                                                                                                                                                  new System.Data.Common.DataColumnMapping("WClass", "WClass")})});
-            _daTeams.UpdateCommand = updateCommandTeams;
+            this._daTeams.UpdateCommand = this.updateCommandTeams;
 
             // Handle fetching identity of new inserted rows.
-            _daTeams.RowUpdated += new OleDbRowUpdatedEventHandler(DATeams_RowUpdated);
+            this._daTeams.RowUpdated += new OleDbRowUpdatedEventHandler(this.DaTeamsRowUpdated);
         }
-        private void DATeams_RowUpdated(object sender, OleDbRowUpdatedEventArgs e)
+
+        private void DaTeamsRowUpdated(object sender, OleDbRowUpdatedEventArgs e)
         {
-            if (e.Status == UpdateStatus.Continue && e.StatementType == StatementType.Insert )
+            if (e.Status == UpdateStatus.Continue && e.StatementType == StatementType.Insert)
             {
                 // Get the Identity column value
-                int identity = Int32.Parse(identityCommandTeams.ExecuteScalar().ToString());
+                int identity = int.Parse(this.identityCommandTeams.ExecuteScalar().ToString());
                 e.Row["TeamId"] = identity;
                 e.Row.AcceptChanges();
             }
@@ -1535,92 +1638,117 @@ namespace Allberg.Shooter.Common
             Trace.WriteLine("CDatabase: UpdateDatabaseFile() " + 
                 " locking \"DatabaseLocker\" on thread \"" +
                 Thread.CurrentThread.Name + "\" ( " +
-                System.Threading.Thread.CurrentThread.ManagedThreadId.ToString() + " )");
+                Thread.CurrentThread.ManagedThreadId + " )");
 
-            lock(_databaseLocker)
+            lock (this.databaseLocker)
             {
                 Trace.WriteLine("CDatabase: UpdateDatabaseFile() " + 
                     " locked \"DatabaseLocker\" on thread \"" +
                     Thread.CurrentThread.Name + "\" ( " +
-                    System.Threading.Thread.CurrentThread.ManagedThreadId.ToString() + " )");
+                    Thread.CurrentThread.ManagedThreadId + " )");
 
                 try
                 {
-                    if (Conn.State != ConnectionState.Open)
-                        Conn.Open();
+                    if (this.Conn.State != ConnectionState.Open)
+                    {
+                        this.Conn.Open();
+                    }
+
                     try
                     {
                         Trace.WriteLine("CDatabase.UpdateDatabaseFile: Updating Clubs");
-                        DAClubs.Update(Database, "Clubs");
+                        this.DAClubs.Update(this.Database, "Clubs");
                     }
-                    catch(System.Data.DBConcurrencyException){}
+                    catch (DBConcurrencyException)
+                    {
+                    }
 
                     try
                     {
                         Trace.WriteLine("CDatabase.UpdateDatabaseFile: Updating Shooters");
-                        _daShooters.Update(Database, "Shooters");
+                        this._daShooters.Update(this.Database, "Shooters");
                     }
-                    catch(System.Data.DBConcurrencyException){}
-                
+                    catch (DBConcurrencyException)
+                    {
+                        
+                    }
+
                     try
                     {
                         Trace.WriteLine("CDatabase.UpdateDatabaseFile: Updating Weapons");
-                        _daWeapons.Update(Database, "Weapons");
+                        this._daWeapons.Update(this.Database, "Weapons");
                     }
-                    catch(System.Data.DBConcurrencyException){}
-                
+                    catch (DBConcurrencyException)
+                    {
+                    }
+
                     try
                     {
                         Trace.WriteLine("CDatabase.UpdateDatabaseFile: Updating Competition");
-                        _daCompetition.Update(Database, "Competition");
+                        this._daCompetition.Update(this.Database, "Competition");
                     }
-                    catch(System.Data.DBConcurrencyException){}
-                
+                    catch (DBConcurrencyException)
+                    {
+                    }
+
                     try
                     {
                         Trace.WriteLine("CDatabase.UpdateDatabaseFile: Updating Patrols");
-                        _daPatrols.Update(Database, "Patrols");
+                        this._daPatrols.Update(this.Database, "Patrols");
                     }
-                    catch(System.Data.DBConcurrencyException){}
-                
+                    catch (System.Data.DBConcurrencyException)
+                    {
+                    }
+
                     try
                     {
                         Trace.WriteLine("CDatabase.UpdateDatabaseFile: Updating Stations");
-                        _daStations.Update(Database, "Stations");
+                        this._daStations.Update(this.Database, "Stations");
                     }
-                    catch(System.Data.DBConcurrencyException){}
-                
+                    catch (DBConcurrencyException)
+                    {
+                    }
+
                     try
                     {
                         Trace.WriteLine("CDatabase.UpdateDatabaseFile: Updating Competitors");
-                        _daCompetitors.Update(Database, "Competitors");
+                        this._daCompetitors.Update(this.Database, "Competitors");
                     }
-                    catch(System.Data.DBConcurrencyException){}
-                
+                    catch (DBConcurrencyException)
+                    {
+                    }
+
                     try
                     {
                         Trace.WriteLine("CDatabase.UpdateDatabaseFile: Updating CompetitorResults");
-                        _daCompetitorResults.Update(Database, "CompetitorResults");
+                        this._daCompetitorResults.Update(this.Database, "CompetitorResults");
                     }
-                    catch(System.Data.DBConcurrencyException){}
+                    catch (DBConcurrencyException)
+                    {
+                        
+                    }
                 
                     try
                     {
                         Trace.WriteLine("CDatabase.UpdateDatabaseFile: Updating Teams");
-                        _daTeams.Update(Database, "Teams");
+                        this._daTeams.Update(this.Database, "Teams");
                     }
-                    catch(System.Data.DBConcurrencyException){}
+                    catch (DBConcurrencyException){}
                 
-                    Database.AcceptChanges();
+                    this.Database.AcceptChanges();
                 }
-                catch(System.InvalidOperationException exc)
+                catch (InvalidOperationException exc)
                 {
                     Trace.WriteLine("Ett fel uppstod vid skrivning till databas:");
                     Trace.WriteLine(exc.ToString());
-                    if (exc.Message.IndexOf("The connection is already Open")>=0)
-                        UpdateDatabaseFile();
+                    if (exc.Message.IndexOf("The connection is already Open") >= 0)
+                    {
+                        this.UpdateDatabaseFile();
+                    }
                     else
+                    {
                         throw;
+                    }
                 }
                 catch(Exception exc)
                 {
@@ -1630,21 +1758,21 @@ namespace Allberg.Shooter.Common
                 }
                 finally
                 {
-                    Conn.Close();
+                    this.Conn.Close();
                     Trace.WriteLine("CDatabase: Leaving UpdateDatabaseFile()");
                 }
 
                 Trace.WriteLine("CDatabase: UpdateDatabaseFile() " + 
                     " unlocking \"DatabaseLocker\" on thread \"" +
                     Thread.CurrentThread.Name + "\" ( " +
-                    System.Threading.Thread.CurrentThread.ManagedThreadId.ToString() + " )");
+                    Thread.CurrentThread.ManagedThreadId + " )");
             }
         }
 
         /// <summary>
         /// Run a backup
         /// </summary>
-        /// <param name="filename"></param>
+        /// <param name="filename">The filename for the backup</param>
         internal void Backup(string filename)
         {
             Trace.WriteLine("CDatabase: Entering Backup(\"" + filename + "\")");
@@ -1652,60 +1780,64 @@ namespace Allberg.Shooter.Common
             Trace.WriteLine("CDatabase: Backup(\"" + filename + "\") " +
                 " locking \"DatabaseLocker\" on thread \"" +
                 Thread.CurrentThread.Name + "\" ( " +
-                System.Threading.Thread.CurrentThread.ManagedThreadId.ToString() + " )");
+                Thread.CurrentThread.ManagedThreadId + " )");
 
-            string partConnectionString = MyInterface.connectionString.Substring(MyInterface.connectionString.IndexOf("Data Source=") + "Data Source=".Length);
+            string partConnectionString = this.MyInterface.connectionString.Substring(this.MyInterface.connectionString.IndexOf("Data Source=") + "Data Source=".Length);
             string currentDb = partConnectionString.Substring(0, partConnectionString.IndexOf(";"));
 
-            lock (_databaseLocker)
+            lock (this.databaseLocker)
             {
                 if (File.Exists(filename))
                 {
                     Trace.WriteLine("CDatabase: file \"" + filename + "\" alredy exist. Deleting.");
                     File.Delete(filename);
                 }
+
                 Trace.WriteLine("CDatabase: copying \"" + currentDb + "\" to \"" + filename + "\"");
-                System.IO.File.Copy(currentDb, filename);
+                File.Copy(currentDb, filename);
             }
 
             Trace.WriteLine("CDatabase: Backup(\"" + filename + "\") " +
                 " unlocking \"DatabaseLocker\" on thread \"" +
                 Thread.CurrentThread.Name + "\" ( " +
-                System.Threading.Thread.CurrentThread.ManagedThreadId.ToString() + " )");
+                Thread.CurrentThread.ManagedThreadId + " )");
         }
         #endregion
 
         #region Get stuff
-        internal Structs.Club[] getClubs()
+
+        /// <summary>
+        /// Get all clubs.
+        /// </summary>
+        /// <returns>
+        /// The <see cref="Structs.Club"/>.
+        /// </returns>
+        internal Structs.Club[] GetClubs()
         {
             Trace.WriteLine("CDatabase: Entering getClubs()");
 
-            ArrayList clubs = new ArrayList();
-            Structs.Club club = new Structs.Club();
+            var clubs = new List<Structs.Club>();
 
-            foreach(DatabaseDataset.ClubsRow row in Database.Clubs.Select("", "Name"))
+            foreach (var dataRow in this.Database.Clubs.Select(string.Empty, "Name"))
             {
-                club = new Structs.Club();
-                club.ClubId = row.ClubId;
-                club.Name = row.Name;
-                club.Country = row.Country;
-                club.Automatic = row.Automatic;
-                club.ToAutomatic = row.ToAutomatic;
-                if (row.IsPlusgiroNull())
-                    club.Plusgiro = "";
-                else
-                    club.Plusgiro = row.Plusgiro;
-
-                if (row.IsBankgiroNull())
-                    club.Bankgiro = "";
-                else
-                    club.Bankgiro = row.Bankgiro;
+                var row = (DatabaseDataset.ClubsRow)dataRow;
+                var club = new Structs.Club
+                {
+                    ClubId = row.ClubId,
+                    Name = row.Name,
+                    Country = row.Country,
+                    Automatic = row.Automatic,
+                    ToAutomatic = row.ToAutomatic,
+                    Plusgiro = row.IsPlusgiroNull() ? string.Empty : row.Plusgiro,
+                    Bankgiro = row.IsBankgiroNull() ? string.Empty : row.Bankgiro
+                };
 
                 clubs.Add(club);
             }
                 
-            return (Structs.Club[])clubs.ToArray(club.GetType());
+            return clubs.ToArray();
         }
+
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Globalization", "CA1303:DoNotPassLiteralsAsLocalizedParameters", MessageId = "Allberg.Shooter.Common.CannotFindIdException.#ctor(System.String)")]
         internal Structs.Club GetClub(string clubId)
         {
@@ -1730,9 +1862,9 @@ namespace Allberg.Shooter.Common
                 club.Country = row.Country;
                 club.Automatic = row.Automatic;
                 club.ToAutomatic = row.ToAutomatic;
-                club.Plusgiro = row.IsPlusgiroNull() ? "" : row.Plusgiro;
+                club.Plusgiro = row.IsPlusgiroNull() ? string.Empty : row.Plusgiro;
 
-                club.Bankgiro = row.IsBankgiroNull() ? "" : row.Bankgiro;
+                club.Bankgiro = row.IsBankgiroNull() ? string.Empty : row.Bankgiro;
 
                 return club;
             }
@@ -1745,7 +1877,7 @@ namespace Allberg.Shooter.Common
             var shooters = new ArrayList();
             var shooter = new Structs.Shooter();
 
-            foreach(DatabaseDataset.ShootersRow row in Database.Shooters.Select("", sorting))
+            foreach(DatabaseDataset.ShootersRow row in Database.Shooters.Select(string.Empty, sorting))
             {
                 // Safety first...
                 if (row.IsArrivedNull())
@@ -1862,7 +1994,7 @@ namespace Allberg.Shooter.Common
             Trace.WriteLine("CDatabase: Entering getShooterHighestId(");
 
             var shooters =
-                Database.Shooters.Select("", "ShooterId desc");
+                Database.Shooters.Select(string.Empty, "ShooterId desc");
             return (int)shooters[0]["ShooterId"];
         }
 
@@ -2140,7 +2272,7 @@ namespace Allberg.Shooter.Common
             ArrayList weapons = new ArrayList();
             Structs.Weapon weapon = new Structs.Weapon();
 
-            foreach(DatabaseDataset.WeaponsRow row in Database.Weapons.Select("", sorting))
+            foreach(DatabaseDataset.WeaponsRow row in Database.Weapons.Select(string.Empty, sorting))
             {
                 weapon = new Structs.Weapon();
                 weapon.Manufacturer = row.Manufacturer;
@@ -2238,7 +2370,7 @@ namespace Allberg.Shooter.Common
             Structs.Patrol patrol = new Structs.Patrol();
 
             DateTime compStart = getCompetitions()[0].StartTime;
-            foreach(DatabaseDataset.PatrolsRow row in Database.Patrols.Select("", "PatrolId"))
+            foreach(DatabaseDataset.PatrolsRow row in Database.Patrols.Select(string.Empty, "PatrolId"))
             {
                 patrol = new Structs.Patrol();
                 patrol.CompetitionId = row.CompetitionId;
@@ -2425,7 +2557,7 @@ namespace Allberg.Shooter.Common
             List<Structs.Station> stations = new List<Structs.Station>();
 
             foreach(DatabaseDataset.StationsRow row in
-                Database.Stations.Select("", "StationNr"))
+                Database.Stations.Select(string.Empty, "StationNr"))
             {
                 if (!row.Distinguish)
                 {
@@ -2449,7 +2581,7 @@ namespace Allberg.Shooter.Common
             List<Structs.Station> stations = new List<Structs.Station>();
 
             foreach (DatabaseDataset.StationsRow row in
-                Database.Stations.Select("", "StationNr"))
+                Database.Stations.Select(string.Empty, "StationNr"))
             {
                 if (row.Distinguish)
                 {
@@ -3081,7 +3213,7 @@ namespace Allberg.Shooter.Common
                 Database.Competitors.Select("CompetitorId=" + 
                     competitor.CompetitorId.ToString()))
             {
-                lock(_databaseLocker)
+                lock(this.databaseLocker)
                 {
                     int oldPatrol = -1;
                     int newPatrol = -1;
@@ -3147,8 +3279,8 @@ namespace Allberg.Shooter.Common
                     finally
                     {
                         // Update patroltypes
-                        checkForPatrolClassUpdate(oldPatrol, updateGui);
-                        checkForPatrolClassUpdate(newPatrol, updateGui);
+                        this.CheckForPatrolClassUpdate(oldPatrol, updateGui);
+                        this.CheckForPatrolClassUpdate(newPatrol, updateGui);
                     }
                 }
             }
@@ -3403,7 +3535,7 @@ namespace Allberg.Shooter.Common
                 " locking \"DatabaseLocker\" on thread \"" +
                 Thread.CurrentThread.Name + "\" ( " +
                 System.Threading.Thread.CurrentThread.ManagedThreadId.ToString() + " )");
-            lock(_databaseLocker)
+            lock(this.databaseLocker)
             {
                 Trace.WriteLine("CDatabase: newClub() " + 
                     " locked \"DatabaseLocker\" on thread \"" +
@@ -3459,7 +3591,7 @@ namespace Allberg.Shooter.Common
                 Thread.CurrentThread.Name + "\" ( " +
                 System.Threading.Thread.CurrentThread.ManagedThreadId.ToString() + " )");
 
-            lock(_databaseLocker)
+            lock(this.databaseLocker)
             {
                 Trace.WriteLine("CDatabase: newShooter() " + 
                     " locked \"DatabaseLocker\" on thread \"" +
@@ -3542,7 +3674,7 @@ namespace Allberg.Shooter.Common
                 Thread.CurrentThread.Name + "\" ( " +
                 System.Threading.Thread.CurrentThread.ManagedThreadId.ToString() + " )");
 
-            lock(_databaseLocker)
+            lock(this.databaseLocker)
             {
                 Trace.WriteLine("CDatabase: newCompetitor() " + 
                     " locked \"DatabaseLocker\" on thread \"" +
@@ -3567,7 +3699,7 @@ namespace Allberg.Shooter.Common
                     System.Threading.Thread.CurrentThread.ManagedThreadId.ToString() + " )");
             }
             if (!row.IsPatrolIdNull())
-                checkForPatrolClassUpdate(row.PatrolId, updateGui);
+                this.CheckForPatrolClassUpdate(row.PatrolId, updateGui);
             if (updateGui)
                 MyInterface.updatedCompetitor(competitor);
         }
@@ -3605,7 +3737,7 @@ namespace Allberg.Shooter.Common
                 Thread.CurrentThread.Name + "\" ( " +
                 System.Threading.Thread.CurrentThread.ManagedThreadId.ToString() + " )");
 
-            lock(_databaseLocker)
+            lock(this.databaseLocker)
             {
                 Trace.WriteLine("CDatabase: newWeapon() " + 
                     " locked \"DatabaseLocker\" on thread \"" +
@@ -3657,7 +3789,7 @@ namespace Allberg.Shooter.Common
                 Thread.CurrentThread.Name + "\" ( " +
                 System.Threading.Thread.CurrentThread.ManagedThreadId.ToString() + " )");
 
-            lock(_databaseLocker)
+            lock(this.databaseLocker)
             {
                 Trace.WriteLine("CDatabase: newCompetition() " + 
                     " locked \"DatabaseLocker\" on thread \"" +
@@ -3689,7 +3821,7 @@ namespace Allberg.Shooter.Common
                 Thread.CurrentThread.Name + "\" ( " +
                 System.Threading.Thread.CurrentThread.ManagedThreadId.ToString() + " )");
 
-            lock(_databaseLocker)
+            lock(this.databaseLocker)
             {
                 Trace.WriteLine("CDatabase: newPatrol() " + 
                     " locked \"DatabaseLocker\" on thread \"" +
@@ -3724,7 +3856,7 @@ namespace Allberg.Shooter.Common
                 Thread.CurrentThread.Name + "\" ( " +
                 System.Threading.Thread.CurrentThread.ManagedThreadId.ToString() + " )");
 
-            lock(_databaseLocker)
+            lock(this.databaseLocker)
             {
                 Trace.WriteLine("CDatabase: getHighestPatrolId() " + 
                     " locked \"DatabaseLocker\" on thread \"" +
@@ -3771,7 +3903,7 @@ namespace Allberg.Shooter.Common
                 Thread.CurrentThread.Name + "\" ( " +
                 System.Threading.Thread.CurrentThread.ManagedThreadId.ToString() + " )");
 
-            lock(_databaseLocker)
+            lock(this.databaseLocker)
             {
                 Trace.WriteLine("CDatabase: newCompetitorResult() " + 
                     " locked \"DatabaseLocker\" on thread \"" +
@@ -3823,7 +3955,7 @@ namespace Allberg.Shooter.Common
                     Thread.CurrentThread.Name + "\" ( " +
                     System.Threading.Thread.CurrentThread.ManagedThreadId.ToString() + " )");
 
-                lock(_databaseLocker)
+                lock(this.databaseLocker)
                 {
                     Trace.WriteLine("CDatabase: newStation() " + 
                         " locked \"DatabaseLocker\" on thread \"" +
@@ -3895,7 +4027,7 @@ namespace Allberg.Shooter.Common
                     Thread.CurrentThread.Name + "\" ( " +
                     System.Threading.Thread.CurrentThread.ManagedThreadId.ToString() + " )");
 
-                lock(_databaseLocker)
+                lock(this.databaseLocker)
                 {
                     Trace.WriteLine("CDatabase: newTeam() " + 
                         " locked \"DatabaseLocker\" on thread \"" +
@@ -3929,7 +4061,7 @@ namespace Allberg.Shooter.Common
                 Thread.CurrentThread.Name + "\" ( " +
                 System.Threading.Thread.CurrentThread.ManagedThreadId.ToString() + " )");
 
-            lock(_databaseLocker)
+            lock(this.databaseLocker)
             {
                 Trace.WriteLine("CDatabase: delClub() " + 
                     " locked \"DatabaseLocker\" on thread \"" +
@@ -3962,7 +4094,7 @@ namespace Allberg.Shooter.Common
                 Thread.CurrentThread.Name + "\" ( " +
                 System.Threading.Thread.CurrentThread.ManagedThreadId.ToString() + " )");
 
-            lock(_databaseLocker)
+            lock(this.databaseLocker)
             {
                 Trace.WriteLine("CDatabase: delShooter() " + 
                     " locked \"DatabaseLocker\" on thread \"" +
@@ -3996,7 +4128,7 @@ namespace Allberg.Shooter.Common
                 Thread.CurrentThread.Name + "\" ( " +
                 System.Threading.Thread.CurrentThread.ManagedThreadId.ToString() + " )");
 
-            lock(_databaseLocker)
+            lock(this.databaseLocker)
             {
                 Trace.WriteLine("CDatabase: delCompetitor() " + 
                     " locked \"DatabaseLocker\" on thread \"" +
@@ -4058,7 +4190,7 @@ namespace Allberg.Shooter.Common
                         }
                         row.Delete();
                         if (patrolId != -1)
-                            checkForPatrolClassUpdate(patrolId, updateGui);
+                            this.CheckForPatrolClassUpdate(patrolId, updateGui);
                     }
                 }
                 Trace.WriteLine("CDatabase: delCompetitor() " + 
@@ -4080,7 +4212,7 @@ namespace Allberg.Shooter.Common
                 Thread.CurrentThread.Name + "\" ( " +
                 System.Threading.Thread.CurrentThread.ManagedThreadId.ToString() + " )");
 
-            lock(_databaseLocker)
+            lock(this.databaseLocker)
             {
                 Trace.WriteLine("CDatabase: delWeapon() " + 
                     " locked \"DatabaseLocker\" on thread \"" +
@@ -4114,7 +4246,7 @@ namespace Allberg.Shooter.Common
                 Thread.CurrentThread.Name + "\" ( " +
                 System.Threading.Thread.CurrentThread.ManagedThreadId.ToString() + " )");
 
-            lock(_databaseLocker)
+            lock(this.databaseLocker)
             {
                 Trace.WriteLine("CDatabase: delCompetition() " + 
                     " locked \"DatabaseLocker\" on thread \"" +
@@ -4149,7 +4281,7 @@ namespace Allberg.Shooter.Common
                 " locking \"DatabaseLocker\" on thread \"" +
                 Thread.CurrentThread.Name + "\" ( " +
                 System.Threading.Thread.CurrentThread.ManagedThreadId.ToString() + " )");
-            lock(_databaseLocker)
+            lock(this.databaseLocker)
             {
                 Trace.WriteLine("CDatabase: delPatrol() " + 
                     " locked \"DatabaseLocker\" on thread \"" +
@@ -4183,7 +4315,7 @@ namespace Allberg.Shooter.Common
                 " locking \"DatabaseLocker\" on thread \"" +
                 Thread.CurrentThread.Name + "\" ( " +
                 System.Threading.Thread.CurrentThread.ManagedThreadId.ToString() + " )");
-            lock(_databaseLocker)
+            lock(this.databaseLocker)
             {
                 Trace.WriteLine("CDatabase: delCompetitorResult() " + 
                     " locked \"DatabaseLocker\" on thread \"" +
@@ -4221,7 +4353,7 @@ namespace Allberg.Shooter.Common
                 " locking \"DatabaseLocker\" on thread \"" +
                 Thread.CurrentThread.Name + "\" ( " +
                 System.Threading.Thread.CurrentThread.ManagedThreadId.ToString() + " )");
-            lock(_databaseLocker)
+            lock(this.databaseLocker)
             {
                 Trace.WriteLine("CDatabase: delStation() " + 
                     " locked \"DatabaseLocker\" on thread \"" +
@@ -4288,7 +4420,7 @@ namespace Allberg.Shooter.Common
                 " locking \"DatabaseLocker\" on thread \"" +
                 Thread.CurrentThread.Name + "\" ( " +
                 System.Threading.Thread.CurrentThread.ManagedThreadId.ToString() + " )");
-            lock(_databaseLocker)
+            lock(this.databaseLocker)
             {
                 Trace.WriteLine("CDatabase: delTeam() " + 
                     " locked \"DatabaseLocker\" on thread \"" +
@@ -4315,45 +4447,39 @@ namespace Allberg.Shooter.Common
         }
         #endregion
 
-
-
-
-
-
-
-
-
-        internal void checkForPatrolClassUpdate(int patrolId, bool updateGui)
+        internal void CheckForPatrolClassUpdate(int patrolId, bool updateGui)
         {
             if (patrolId < 1)
+            {
                 return;
+            }
 
             Structs.Patrol patrol;
 
             Trace.WriteLine("CDatabase: checkForPatrolClassUpdate() " + 
                 " locking \"DatabaseLocker\" on thread \"" +
                 Thread.CurrentThread.Name + "\" ( " +
-                System.Threading.Thread.CurrentThread.ManagedThreadId.ToString() + " )");
+                Thread.CurrentThread.ManagedThreadId + " )");
 
-            lock(_databaseLocker)
+            lock(this.databaseLocker)
             {
                 Trace.WriteLine("CDatabase: checkForPatrolClassUpdate() " + 
                     " locked \"DatabaseLocker\" on thread \"" +
                     Thread.CurrentThread.Name + "\" ( " +
-                    System.Threading.Thread.CurrentThread.ManagedThreadId.ToString() + " )");
+                    Thread.CurrentThread.ManagedThreadId + " )");
 
-                patrol = MyInterface.GetPatrol(patrolId);
-                int count = MyInterface.GetCompetitorsCountPatrol(patrol);
+                patrol = this.MyInterface.GetPatrol(patrolId);
+                int count = this.MyInterface.GetCompetitorsCountPatrol(patrol);
 
-                if ( count == 0 )
+                if (count == 0)
                 {
                     // set patrol class to unknown
                     patrol.PClass = Structs.PatrolClass.Okänd;
-                    MyInterface.UpdatePatrol(patrol);
+                    this.MyInterface.UpdatePatrol(patrol);
                     return;
                 }
 
-                if ( count > 1 )
+                if (count > 1)
                 {
                     // Obviously the change wont matter
                     return;
@@ -4361,19 +4487,18 @@ namespace Allberg.Shooter.Common
 
                 // Ok, there is exacly one competitor in patrol.
                 // Set current patrol class to same as competitors weapon.
-                Structs.Competitor competitor = MyInterface.GetCompetitors(patrol)[0];
-                Structs.Weapon weapon = MyInterface.GetWeapon(competitor.WeaponId);
-                patrol.PClass = MyInterface.ConvertWeaponsClassToPatrolClass(
+                Structs.Competitor competitor = this.MyInterface.GetCompetitors(patrol)[0];
+                Structs.Weapon weapon = this.MyInterface.GetWeapon(competitor.WeaponId);
+                patrol.PClass = this.MyInterface.ConvertWeaponsClassToPatrolClass(
                     weapon.WClass);
 
                 Trace.WriteLine("CDatabase: checkForPatrolClassUpdate() " + 
                     " unlocking \"DatabaseLocker\" on thread \"" +
                     Thread.CurrentThread.Name + "\" ( " +
-                    System.Threading.Thread.CurrentThread.ManagedThreadId.ToString() + " )");
+                    Thread.CurrentThread.ManagedThreadId + " )");
             }
 
-            MyInterface.UpdatePatrol(patrol, updateGui);
+            this.MyInterface.UpdatePatrol(patrol, updateGui);
         }
-
     }
 }

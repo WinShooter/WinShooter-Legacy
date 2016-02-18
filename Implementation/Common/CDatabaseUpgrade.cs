@@ -33,29 +33,20 @@ namespace Allberg.Shooter.Common
     internal class CDatabaseUpgrade
     {
         /// <summary>
+        /// The database connection.
+        /// </summary>
+        private readonly OleDbConnection dbconn;
+
+        /// <summary>
         /// Initializes a new instance of the <see cref="CDatabaseUpgrade"/> class.
         /// </summary>
-        /// <param name="DbConn">
-        /// The db conn.
+        /// <param name="databaseConnection">
+        /// The database connection.
         /// </param>
-        /// <param name="DatabaseClass">
-        /// The database class.
-        /// </param>
-        internal CDatabaseUpgrade(OleDbConnection DbConn, CDatabase DatabaseClass)
+        internal CDatabaseUpgrade(OleDbConnection databaseConnection)
         {
-            this.dbconn = DbConn;
-            this.helper = DatabaseClass;
+            this.dbconn = databaseConnection;
         }
-
-        /// <summary>
-        /// The dbconn.
-        /// </summary>
-        private OleDbConnection dbconn;
-
-        /// <summary>
-        /// The helper.
-        /// </summary>
-        CDatabase helper;
 
         /// <summary>
         /// The upgrade.
